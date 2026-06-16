@@ -1,0 +1,4303 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>课堂档案推理游戏引擎｜侦探调查局版</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --ink-soft: #26344f;
+      --muted: #574c43;
+      --panel: rgba(255, 249, 237, 0.94);
+      --panel-solid: #fff9ed;
+      --line: rgba(70, 61, 56, 0.24);
+      --shadow: 0 18px 42px rgba(12, 18, 33, 0.24);
+      --navy: #17233c;
+      --navy-2: #26344f;
+      --wine: #8c3b4a;
+      --brass: #c79a4b;
+      --parchment: #f4e7c5;
+      --cream: #fff9ed;
+      --brown: #463d38;
+      --teal: #3c8d87;
+      --green: #287a5b;
+      --red: #b64242;
+      --amber: #8d6318;
+      --focus: #c79a4b;
+      --radius: 8px;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(199, 154, 75, 0.23), transparent 28%),
+        radial-gradient(circle at 86% 14%, rgba(60, 141, 135, 0.24), transparent 30%),
+        radial-gradient(circle at 14% 84%, rgba(140, 59, 74, 0.18), transparent 30%),
+        linear-gradient(135deg, #111a30 0%, #1b2a45 46%, #463d38 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -25%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, transparent 24%, rgba(244, 231, 197, 0.15) 39%, transparent 54%),
+        linear-gradient(rgba(244, 231, 197, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 231, 197, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 20% 50%, rgba(255, 249, 237, 0.12), transparent 28%);
+      background-size: 48rem 48rem, 3rem 3rem, 3rem 3rem, 42rem 42rem;
+      animation: driftWash 22s linear infinite;
+      opacity: 0.9;
+    }
+
+    body::after {
+      content: "CASE  FILE  EVIDENCE  01  07  13";
+      position: fixed;
+      inset: auto -10% 6% -10%;
+      z-index: 0;
+      pointer-events: none;
+      color: rgba(244, 231, 197, 0.08);
+      font-weight: 900;
+      font-size: clamp(2.3rem, 9vw, 7rem);
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      transform: rotate(-7deg);
+      animation: caseCodes 30s linear infinite alternate;
+    }
+
+    @keyframes driftWash {
+      from { transform: translate3d(-2%, -2%, 0); }
+      to { transform: translate3d(2%, 2%, 0); }
+    }
+
+    @keyframes caseCodes {
+      from { transform: translateX(-5%) rotate(-7deg); }
+      to { transform: translateX(5%) rotate(-7deg); }
+    }
+
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #app {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+      animation: pageIn 240ms ease;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .single {
+      grid-template-rows: 1fr;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .shell {
+      width: min(1180px, 100%);
+      height: 100%;
+      min-height: 0;
+      min-width: 0;
+      margin: 0 auto;
+      display: grid;
+      gap: 10px;
+    }
+
+    .center-shell {
+      width: min(980px, 100%);
+      height: min(760px, 100%);
+      margin: 0 auto;
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+
+    .topbar,
+    .panel,
+    .modal-card,
+    .toast-card {
+      background: var(--panel);
+      border: 1px solid rgba(199, 154, 75, 0.38);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+    }
+
+    .topbar {
+      min-height: 58px;
+      padding: 9px 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(23, 35, 60, 0.96), rgba(38, 52, 79, 0.94)),
+        repeating-linear-gradient(90deg, rgba(199, 154, 75, 0.18) 0 1px, transparent 1px 14px);
+      border-color: rgba(199, 154, 75, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before {
+      content: "调查局";
+      position: absolute;
+      right: 12px;
+      bottom: -10px;
+      color: rgba(244, 231, 197, 0.12);
+      font-weight: 1000;
+      font-size: 2.7rem;
+      letter-spacing: 0.06em;
+      pointer-events: none;
+    }
+
+    .top-title {
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 3vw, 2.2rem);
+      line-height: 1.14;
+      color: var(--navy);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.05rem, 2vw, 1.45rem);
+      line-height: 1.2;
+      color: var(--navy);
+      letter-spacing: 0;
+    }
+
+    h3 {
+      font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .topbar h1 {
+      color: var(--cream);
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+    }
+
+    .topbar .subtle {
+      color: #f4e7c5;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: clamp(0.78rem, 1.2vw, 0.92rem);
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .panel {
+      min-height: 0;
+      min-width: 0;
+      padding: 12px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(244, 231, 197, 0.9)),
+        repeating-linear-gradient(0deg, rgba(70, 61, 56, 0.04) 0 1px, transparent 1px 22px);
+      position: relative;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(var(--brass), var(--wine));
+      opacity: 0.88;
+      pointer-events: none;
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .actions.end {
+      justify-content: flex-end;
+    }
+
+    button,
+    .file-button {
+      position: relative;
+      min-height: 44px;
+      min-width: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 13px;
+      color: var(--navy);
+      background: #fff9ed;
+      border: 1px solid rgba(70, 61, 56, 0.28);
+      box-shadow: 0 5px 0 rgba(70, 61, 56, 0.16), 0 10px 18px rgba(12, 18, 33, 0.11);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+      overflow-wrap: anywhere;
+      text-align: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    button::after,
+    .file-button::after {
+      content: "";
+      position: absolute;
+      inset: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: width 160ms ease, height 160ms ease, opacity 180ms ease;
+      z-index: 0;
+    }
+
+    button:active:not(:disabled)::after,
+    .file-button:active::after {
+      width: 140%;
+      height: 180%;
+      opacity: 1;
+    }
+
+    button:hover,
+    .file-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 0 rgba(70, 61, 56, 0.16), 0 14px 22px rgba(12, 18, 33, 0.18);
+    }
+
+    button:active,
+    .file-button:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 0 rgba(70, 61, 56, 0.16), 0 5px 10px rgba(12, 18, 33, 0.11);
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible,
+    .file-button:focus-visible,
+    .cell:focus-visible,
+    .clue-card:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #c79a4b, #f4d083);
+      color: #172033;
+      border-color: rgba(70, 61, 56, 0.42);
+    }
+
+    .secondary {
+      background: linear-gradient(135deg, #3c8d87, #6db7ad);
+      color: #fff9ed;
+      border-color: rgba(23, 35, 60, 0.34);
+    }
+
+    .danger {
+      background: #ffe9df;
+      color: #7c2020;
+      border-color: rgba(182, 66, 66, 0.42);
+    }
+
+    .ghost {
+      background: rgba(255, 249, 237, 0.82);
+    }
+
+    .tiny {
+      min-height: 34px;
+      padding: 6px 9px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .icon-button {
+      width: 44px;
+      padding: 0;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      height: 28dvh;
+      max-height: 270px;
+      resize: none;
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(255, 249, 237, 0.94), rgba(255, 249, 237, 0.94)),
+        repeating-linear-gradient(0deg, transparent 0 23px, rgba(70, 61, 56, 0.12) 23px 24px);
+      border: 1px solid rgba(70, 61, 56, 0.3);
+      font: 600 0.9rem/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace;
+      overflow: hidden;
+    }
+
+    .notice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 9px 11px;
+      border-radius: 8px;
+      color: #243044;
+      background: rgba(255, 249, 237, 0.76);
+      border: 1px solid rgba(70, 61, 56, 0.22);
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .notice.success {
+      background: #e7f7ee;
+      color: #164b36;
+      border-color: rgba(40, 122, 91, 0.42);
+    }
+
+    .notice.error {
+      background: #ffe7e4;
+      color: #7c2020;
+      border-color: rgba(182, 66, 66, 0.42);
+    }
+
+    .notice.warn {
+      background: #fff0c9;
+      color: #5a3b0f;
+      border-color: rgba(199, 154, 75, 0.46);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(66, 84, 115, 0.16);
+      color: var(--navy);
+      background: rgba(244, 231, 197, 0.78);
+      font-size: 0.78rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .pill.used {
+      background: #e3ded4;
+      color: #26344f;
+    }
+
+    .pill.partial {
+      background: #fff0c9;
+      color: #5a3b0f;
+    }
+
+    .pill.visible {
+      background: #dff3ef;
+      color: #1d5651;
+    }
+
+    .pill.new {
+      background: #17233c;
+      color: #fff9ed;
+      border-color: rgba(199, 154, 75, 0.58);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      min-height: 0;
+      align-content: start;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: 2px 4px 8px 2px;
+    }
+
+    .item-card {
+      min-height: 0;
+      border-radius: 8px;
+      padding: 11px;
+      background:
+        linear-gradient(135deg, rgba(255, 249, 237, 0.92), rgba(244, 231, 197, 0.78));
+      border: 1px solid rgba(70, 61, 56, 0.22);
+      display: grid;
+      gap: 7px;
+      align-content: start;
+      overflow: visible;
+      position: relative;
+    }
+
+    .item-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 18px;
+      width: 72px;
+      height: 8px;
+      border-radius: 0 0 6px 6px;
+      background: var(--brass);
+      opacity: 0.82;
+      pointer-events: none;
+    }
+
+    .item-card p,
+    .text-card p,
+    .result-cell,
+    .entity-name,
+    .cell {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .item-card h3 {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      font-size: clamp(1rem, 1.4vw, 1.16rem);
+      line-height: 1.24;
+    }
+
+    .case-lobby-page .panel.stack {
+      grid-template-rows: auto minmax(0, 1fr) auto;
+    }
+
+    .case-lobby-page .card-grid {
+      min-height: 0;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .case-lobby-page .item-card {
+      min-height: 150px;
+      gap: 9px;
+      padding: 14px;
+    }
+
+    .case-lobby-page .item-card .subtle,
+    .case-lobby-page .item-card .notice {
+      font-size: clamp(0.9rem, 1.25vw, 1.04rem);
+      line-height: 1.35;
+    }
+
+    .case-lobby-page .item-card button {
+      min-height: 46px;
+      font-size: clamp(0.9rem, 1.2vw, 1.04rem);
+    }
+
+    .validation-page .panel.stack {
+      grid-template-rows: auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .validation-layout {
+      min-height: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .validation-check-pane,
+    .validation-data-pane {
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: 1px 3px 6px 1px;
+      align-content: start;
+    }
+
+    .validation-data-pane .item-card,
+    .validation-data-pane .notice {
+      flex-shrink: 0;
+    }
+
+    .intro-page .panel.stack {
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .intro-page h2 {
+      font-size: clamp(1.34rem, 2.5vw, 1.95rem);
+      line-height: 1.18;
+      overflow-wrap: anywhere;
+    }
+
+    .intro-page .item-card {
+      padding: 15px;
+      gap: 10px;
+    }
+
+    .intro-page .item-card .subtle {
+      color: var(--ink);
+      font-size: clamp(1rem, 1.55vw, 1.2rem);
+      line-height: 1.52;
+    }
+
+    .intro-page .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .intro-page .result-cell {
+      min-height: 74px;
+      padding: 12px;
+    }
+
+    .intro-page .result-label {
+      font-size: clamp(0.9rem, 1.25vw, 1.04rem);
+    }
+
+    .intro-page .result-value {
+      font-size: clamp(1.08rem, 1.55vw, 1.28rem);
+    }
+
+    .intro-page .actions button {
+      min-height: 50px;
+      font-size: clamp(0.98rem, 1.45vw, 1.16rem);
+    }
+
+    .pager {
+      min-height: 44px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .page-label {
+      min-width: 72px;
+      text-align: center;
+      color: var(--ink-soft);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    .validation-list {
+      display: grid;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .validation-report-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .validation-report-head h2 {
+      min-width: 0;
+    }
+
+    .validation-report-toggle,
+    .validation-collapsed-note {
+      display: none;
+    }
+
+    .validation-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      align-items: start;
+      min-height: 38px;
+      padding: 8px 9px;
+      border-radius: 8px;
+      background: rgba(255, 249, 237, 0.82);
+      border: 1px solid rgba(70, 61, 56, 0.18);
+      line-height: 1.35;
+      overflow: hidden;
+    }
+
+    .game-layout {
+      height: 100%;
+      min-height: 0;
+      min-width: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .table-wrap {
+      height: calc(100% - 44px);
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      gap: 8px;
+      overflow: visible;
+    }
+
+    .archive-grid {
+      min-height: 0;
+      height: 100%;
+      display: grid;
+      gap: var(--table-gap, 6px);
+      overflow: visible;
+    }
+
+    .table-cell {
+      min-width: 0;
+      min-height: 0;
+      border-radius: 8px;
+      border: 1px solid rgba(70, 61, 56, 0.22);
+      background: rgba(255, 249, 237, 0.82);
+      padding: var(--table-pad, 7px);
+      display: grid;
+      align-items: center;
+      justify-items: stretch;
+      overflow: hidden;
+      color: var(--navy);
+    }
+
+    .table-cell.header {
+      background: linear-gradient(135deg, rgba(23, 35, 60, 0.96), rgba(38, 52, 79, 0.92));
+      font-weight: 900;
+      text-align: center;
+      color: #fff9ed;
+      font-size: var(--table-header-font, clamp(0.82rem, 1.35vw, 1.06rem));
+      line-height: 1.18;
+    }
+
+    .archive-scroll-mode .table-wrap {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      padding-bottom: 2px;
+    }
+
+    .archive-panel:not(.archive-scroll-mode) .table-wrap {
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding-bottom: 2px;
+    }
+
+    .archive-scroll-mode .table-wrap::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    .archive-scroll-mode .table-wrap::-webkit-scrollbar-track {
+      background: rgba(70, 61, 56, 0.12);
+      border-radius: 999px;
+    }
+
+    .archive-scroll-mode .table-wrap::-webkit-scrollbar-thumb {
+      background: rgba(199, 154, 75, 0.72);
+      border-radius: 999px;
+      border: 2px solid rgba(244, 231, 197, 0.85);
+    }
+
+    .archive-scroll-mode .archive-grid {
+      width: max-content;
+      min-width: 100%;
+      height: max-content;
+      min-height: 100%;
+      align-content: start;
+    }
+
+    .archive-scroll-mode .table-cell.header,
+    .archive-scroll-mode .entity-cell {
+      position: sticky;
+      background-clip: padding-box;
+    }
+
+    .archive-scroll-mode .table-cell.header {
+      top: 0;
+      z-index: 30;
+    }
+
+    .archive-scroll-mode .category-header {
+      top: 0;
+      z-index: 30;
+    }
+
+    .archive-scroll-mode .entity-cell {
+      left: 0;
+      z-index: 40;
+      background:
+        linear-gradient(90deg, rgba(244, 231, 197, 0.98), rgba(255, 249, 237, 0.96));
+    }
+
+    .archive-scroll-mode .table-cell.header.corner-cell {
+      left: 0;
+      top: 0;
+      z-index: 60;
+    }
+
+    .entity-cell {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: var(--table-gap, 8px);
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(244, 231, 197, 0.92), rgba(255, 249, 237, 0.88));
+      border-left: 4px solid var(--brass);
+    }
+
+    .entity-text {
+      min-width: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    .entity-name {
+      font-weight: 900;
+      font-size: var(--entity-name-font, clamp(0.86rem, 1.45vw, 1.08rem));
+      line-height: 1.2;
+    }
+
+    .entity-title {
+      color: var(--muted);
+      font-size: var(--entity-title-font, clamp(0.76rem, 1.15vw, 0.92rem));
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .generated-icon {
+      width: var(--icon-size, clamp(34px, 6vw, 50px));
+      height: var(--icon-size, clamp(34px, 6vw, 50px));
+      flex: 0 0 auto;
+      filter: drop-shadow(0 8px 10px rgba(35, 49, 72, 0.16));
+    }
+
+    .cell {
+      width: 100%;
+      height: 100%;
+      min-height: var(--cell-min-height, 44px);
+      padding: var(--cell-pad, 6px 7px);
+      border-radius: 8px;
+      border: 1px solid rgba(70, 61, 56, 0.28);
+      background: linear-gradient(135deg, rgba(255, 249, 237, 0.96), rgba(244, 231, 197, 0.86));
+      color: var(--navy);
+      font-size: var(--cell-font, clamp(0.84rem, 1.5vw, 1.08rem));
+      font-weight: 800;
+      line-height: 1.22;
+      box-shadow: none;
+    }
+
+    .cell.empty {
+      color: #224f5a;
+      background: repeating-linear-gradient(-45deg, rgba(60, 141, 135, 0.12) 0 8px, rgba(255, 249, 237, 0.88) 8px 16px);
+      border-style: dashed;
+    }
+
+    .cell:hover,
+    .cell:active,
+    .cell:focus-visible {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .cell::after {
+      display: none;
+    }
+
+    .cell.correct {
+      background: #e7f7ee;
+      border-color: rgba(40, 122, 91, 0.56);
+      color: #164b36;
+      cursor: default;
+    }
+
+    .archive-panel {
+      position: relative;
+      overflow: visible;
+      z-index: 4;
+    }
+
+    .answer-cell-wrap {
+      position: relative;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    .answer-cell-wrap.open,
+    .answer-cell-wrap.hover-open,
+    .answer-cell-wrap:focus-within {
+      z-index: 2;
+    }
+
+    .inline-options {
+      position: fixed;
+      left: var(--option-left, 12px);
+      top: var(--option-top, 12px);
+      width: var(--option-width, min(380px, 42vw));
+      min-width: 280px;
+      max-width: 440px;
+      transform: translateY(-4px) scale(0.98);
+      transform-origin: top center;
+      display: grid;
+      gap: 6px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(199, 154, 75, 0.58);
+      background:
+        linear-gradient(180deg, rgba(255, 249, 237, 0.98), rgba(244, 231, 197, 0.96));
+      box-shadow: 0 18px 32px rgba(12, 18, 33, 0.28);
+      z-index: 80;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 140ms ease, transform 140ms ease, visibility 0s linear 160ms;
+    }
+
+    .archive-inline-options {
+      position: absolute;
+      max-height: min(46dvh, calc(100dvh - 24px));
+      overflow: auto;
+      z-index: 35;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+      animation: optionStripIn 130ms ease both;
+    }
+
+    .answer-cell-wrap.align-left .inline-options {
+      left: var(--option-left, 12px);
+      right: auto;
+      transform: translateY(-4px) scale(0.98);
+      transform-origin: top center;
+    }
+
+    .answer-cell-wrap.align-right .inline-options {
+      left: var(--option-left, 12px);
+      right: auto;
+      transform: translateY(-4px) scale(0.98);
+      transform-origin: top center;
+    }
+
+    .answer-cell-wrap.hover-open .inline-options,
+    .answer-cell-wrap:focus-within .inline-options,
+    .answer-cell-wrap.open .inline-options,
+    .inline-options:hover {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+      animation: optionStripIn 130ms ease both;
+    }
+
+    .inline-options.error {
+      border-color: rgba(182, 66, 66, 0.66);
+      animation: shake 260ms ease;
+    }
+
+    .inline-options-title {
+      color: var(--navy);
+      font-size: clamp(0.86rem, 1.2vw, 1rem);
+      font-weight: 900;
+      line-height: 1.26;
+      overflow-wrap: anywhere;
+    }
+
+    .inline-option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+      gap: 6px;
+    }
+
+    .inline-option {
+      min-height: 48px;
+      padding: 9px 10px;
+      text-align: left;
+      font-size: var(--option-font, var(--cell-font, 0.96rem));
+      line-height: 1.22;
+      border-left: 4px solid var(--teal);
+      box-shadow: 0 4px 0 rgba(70, 61, 56, 0.14), 0 8px 14px rgba(12, 18, 33, 0.08);
+    }
+
+    .inline-error {
+      color: #7c2020;
+      font-size: clamp(0.84rem, 1.1vw, 0.98rem);
+      font-weight: 900;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    @keyframes optionStripIn {
+      from { opacity: 0; transform: translateY(-4px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .answer-cell-wrap.align-left .inline-options,
+    .answer-cell-wrap.align-right .inline-options {
+      animation-name: optionStripInEdge;
+    }
+
+    @keyframes optionStripInEdge {
+      from { opacity: 0; transform: translateY(-4px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .identity-hidden .entity-name {
+      color: #26344f;
+      letter-spacing: 0;
+    }
+
+    .cell.flash-correct {
+      animation: correctFlash 620ms ease;
+    }
+
+    @keyframes correctFlash {
+      0% { box-shadow: inset 0 0 0 0 rgba(31, 157, 102, 0); }
+      35% { box-shadow: inset 0 0 0 4px rgba(40, 122, 91, 0.62), 0 0 0 6px rgba(40, 122, 91, 0.14); }
+      100% { box-shadow: inset 0 0 0 0 rgba(31, 157, 102, 0); }
+    }
+
+    .highlight-row,
+    .highlight-col,
+    .highlight-cell,
+    .hint-highlight {
+      box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.85), 0 8px 22px rgba(154, 106, 0, 0.18);
+    }
+
+    .clue-wrap {
+      height: calc(100% - 34px);
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      gap: 4px;
+    }
+
+    .clue-panel .section-head {
+      min-height: 30px;
+      margin-bottom: 4px;
+      align-items: center;
+    }
+
+    .clue-panel .section-head h2 {
+      font-size: clamp(0.98rem, 1.35vw, 1.16rem);
+      line-height: 1.08;
+    }
+
+    .clue-panel .actions {
+      gap: 5px;
+    }
+
+    .clue-panel .pill {
+      padding: 4px 8px;
+      font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+      line-height: 1.1;
+    }
+
+    .clue-scroll {
+      min-height: 0;
+      height: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      overscroll-behavior-y: none;
+      touch-action: pan-x;
+      cursor: grab;
+      padding: 0 2px 0;
+      scrollbar-gutter: stable;
+    }
+
+    .clue-scroll.dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .clue-scroll::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .clue-scroll::-webkit-scrollbar-track {
+      background: rgba(70, 61, 56, 0.12);
+      border-radius: 999px;
+    }
+
+    .clue-scroll::-webkit-scrollbar-thumb {
+      background: rgba(60, 141, 135, 0.72);
+      border-radius: 999px;
+      border: 2px solid rgba(244, 231, 197, 0.85);
+    }
+
+    .clue-grid {
+      min-height: 0;
+      height: calc(100% - 10px);
+      min-height: calc(100% - 10px);
+      min-width: 100%;
+      display: flex;
+      gap: var(--clue-gap, 8px);
+      align-items: stretch;
+      user-select: none;
+    }
+
+    .clue-card {
+      min-height: 0;
+      height: 100%;
+      flex: 0 0 var(--clue-card-basis, calc((100% - 32px) / 5));
+      width: var(--clue-card-basis, calc((100% - 32px) / 5));
+      border-radius: 8px;
+      padding: 4px 6px;
+      border: 1px solid rgba(70, 61, 56, 0.24);
+      background:
+        linear-gradient(160deg, rgba(255, 249, 237, 0.95), rgba(244, 231, 197, 0.82));
+      color: var(--ink);
+      box-shadow: 0 8px 18px rgba(56, 73, 105, 0.08);
+      cursor: pointer;
+      display: grid;
+      grid-template-rows: 1fr;
+      gap: 0;
+      text-align: left;
+      font-weight: 700;
+      animation: clueIn 260ms ease both;
+      position: relative;
+      overflow: visible;
+    }
+
+    .clue-card::after {
+      content: "";
+      position: absolute;
+      inset: 8px 8px auto auto;
+      width: 34px;
+      height: 34px;
+      border: 2px solid rgba(140, 59, 74, 0.28);
+      border-radius: 50%;
+      transform: rotate(-16deg);
+      pointer-events: none;
+    }
+
+    .clue-card.used {
+      background: rgba(227, 222, 212, 0.96);
+      color: #26344f;
+      opacity: 0.78;
+      filter: saturate(0.72);
+    }
+
+    .clue-card.partial {
+      background: rgba(255, 240, 201, 0.96);
+      border-color: rgba(199, 154, 75, 0.5);
+    }
+
+    .clue-card.new {
+      animation: clueIn 520ms ease both, clueGlow 1100ms ease;
+    }
+
+    @keyframes clueIn {
+      from { opacity: 0; transform: translateY(10px) rotateX(8deg); }
+      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+
+    @keyframes clueGlow {
+      0%, 100% { box-shadow: 0 8px 18px rgba(56, 73, 105, 0.08); }
+      40% { box-shadow: 0 0 0 4px rgba(199, 154, 75, 0.5), 0 16px 28px rgba(23, 35, 60, 0.22); }
+    }
+
+    .clue-text {
+      font-size: clamp(0.78rem, 1vw, 0.94rem);
+      line-height: 1.18;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .clue-extra {
+      color: var(--muted);
+      font-size: clamp(0.72rem, 0.9vw, 0.84rem);
+      line-height: 1.18;
+      overflow-wrap: anywhere;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .archive-panel:not(.archive-scroll-mode) .table-wrap {
+        overflow: visible;
+      }
+
+      .inline-options {
+        position: absolute;
+        left: var(--option-left, 50%);
+        top: var(--option-top, -6px);
+        transform: scale(0.98);
+        transform-origin: top center;
+      }
+
+      .clue-text {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: clamp(1rem, 1.35vw, 1.18rem);
+        line-height: 1.22;
+      }
+    }
+
+    .modal-layer,
+    .toast-layer {
+      position: fixed;
+      z-index: 20;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+      background: rgba(12, 18, 33, 0.42);
+    }
+
+    .modal-layer.open,
+    .toast-layer.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(720px, 100%);
+      max-height: min(680px, 92dvh);
+      overflow: hidden;
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      animation: modalIn 180ms ease both;
+      background:
+        linear-gradient(180deg, rgba(255, 249, 237, 0.98), rgba(244, 231, 197, 0.94));
+      border-color: rgba(199, 154, 75, 0.56);
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .option-button {
+      min-height: 58px;
+      display: grid;
+      gap: 3px;
+      align-content: center;
+      text-align: left;
+      background: linear-gradient(135deg, rgba(255, 249, 237, 0.98), rgba(244, 231, 197, 0.9));
+      border-left: 4px solid var(--teal);
+    }
+
+    .option-note {
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .option-button[disabled] .option-note {
+      color: #64748b;
+    }
+
+    .shake {
+      animation: shake 260ms ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(7px); }
+      75% { transform: translateX(-4px); }
+    }
+
+    .toast-layer {
+      z-index: 18;
+      background: transparent;
+      align-items: start;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .toast-card {
+      width: min(640px, 100%);
+      margin-top: 10px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: start;
+      pointer-events: auto;
+      animation: toastIn 240ms ease both;
+      border-color: rgba(199, 154, 75, 0.5);
+      background:
+        linear-gradient(135deg, rgba(23, 35, 60, 0.96), rgba(38, 52, 79, 0.94));
+      color: #fff9ed;
+    }
+
+    .toast-card .subtle {
+      color: #fff9ed;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .completion-stamp {
+      width: min(170px, 46vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto;
+      color: #14573c;
+      background: #e7f7ee;
+      border: 7px double rgba(40, 122, 91, 0.72);
+      font-size: clamp(1.15rem, 4vw, 1.8rem);
+      font-weight: 1000;
+      transform: rotate(-8deg);
+      animation: stampIn 520ms cubic-bezier(.2, 1.2, .3, 1) both;
+    }
+
+    @keyframes stampIn {
+      0% { opacity: 0; transform: scale(1.5) rotate(-8deg); }
+      70% { opacity: 1; transform: scale(0.92) rotate(-8deg); }
+      100% { transform: scale(1) rotate(-8deg); }
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .result-cell {
+      border-radius: 8px;
+      border: 1px solid rgba(70, 61, 56, 0.2);
+      background: rgba(255, 249, 237, 0.84);
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      min-height: 62px;
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .result-value {
+      color: var(--ink);
+      font-weight: 900;
+      font-size: 0.92rem;
+      line-height: 1.25;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      #app {
+        padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+      }
+
+      .topbar,
+      .section-head,
+      .modal-head,
+      .toast-card {
+        grid-template-columns: 1fr;
+      }
+
+      .actions.end,
+      .actions {
+        justify-content: stretch;
+      }
+
+      .actions > button,
+      .actions > .file-button {
+        flex: 1 1 140px;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      textarea {
+        height: 20dvh;
+        min-height: 120px;
+      }
+
+      .panel {
+        padding: 9px;
+      }
+
+      .entity-cell {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .entity-cell .tiny {
+        grid-column: 1 / -1;
+        min-height: 34px;
+      }
+
+      .card-grid,
+      .option-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-lobby-page .card-grid {
+        gap: 12px;
+        padding-right: 6px;
+      }
+
+      .case-lobby-page .item-card {
+        min-height: auto;
+        padding: 14px;
+      }
+
+      .case-lobby-page .item-card h3 {
+        font-size: clamp(1.12rem, 4.2vw, 1.34rem);
+      }
+
+      .case-lobby-page .item-card .subtle,
+      .case-lobby-page .item-card .notice {
+        font-size: clamp(0.98rem, 3.4vw, 1.12rem);
+      }
+
+      .case-lobby-page .item-card button {
+        min-height: 50px;
+        font-size: clamp(1rem, 3.4vw, 1.16rem);
+      }
+
+      .intro-page h2 {
+        font-size: clamp(1.42rem, 5vw, 1.78rem);
+      }
+
+      .intro-page .item-card .subtle {
+        font-size: clamp(1.05rem, 3.8vw, 1.24rem);
+      }
+
+      .intro-page .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .intro-page .result-label {
+        font-size: clamp(0.92rem, 3.2vw, 1.06rem);
+      }
+
+      .intro-page .result-value {
+        font-size: clamp(1.08rem, 3.7vw, 1.28rem);
+      }
+
+      .table-cell {
+        padding: 5px;
+      }
+
+      .game-page .topbar {
+        min-height: 0;
+        padding: 6px 8px;
+        gap: 5px;
+      }
+
+      .game-page .topbar h1 {
+        font-size: clamp(1.28rem, 4.8vw, 1.72rem);
+        line-height: 1.08;
+      }
+
+      .game-page .topbar .subtle {
+        font-size: clamp(0.78rem, 2.6vw, 0.95rem);
+        line-height: 1.18;
+      }
+
+      .game-page .topbar .actions.end {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        justify-content: stretch;
+      }
+
+      .game-page .topbar .actions.end button {
+        min-height: 34px;
+        padding: 5px 6px;
+        line-height: 1.08;
+        flex: 0 1 auto;
+      }
+
+      .clue-panel .section-head {
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: 24px;
+        margin-bottom: 2px;
+        gap: 4px;
+      }
+
+      .clue-panel .section-head h2 {
+        font-size: clamp(0.92rem, 3.1vw, 1.08rem);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .clue-panel .actions.end {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 3px;
+      }
+
+      .clue-panel .pill {
+        padding: 2px 5px;
+        font-size: clamp(0.62rem, 2.25vw, 0.76rem);
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .clue-wrap {
+        height: calc(100% - 26px);
+      }
+    }
+
+    @media (max-width: 1024px), (pointer: coarse) {
+      .game-layout {
+        grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+      }
+
+      .validation-page .panel.stack,
+      .case-lobby-page .panel.stack,
+      .intro-page .panel.stack {
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .validation-page .two-col {
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .validation-check-pane,
+      .validation-data-pane {
+        min-height: 0;
+        overflow: auto;
+        padding-bottom: 8px;
+      }
+
+      .case-lobby-page .card-grid {
+        min-height: 0;
+        grid-auto-rows: minmax(clamp(214px, 28dvh, 300px), max-content);
+        overflow: auto;
+      }
+
+      .case-lobby-page .item-card {
+        min-height: clamp(214px, 28dvh, 300px);
+        padding: 13px;
+      }
+
+      .case-lobby-page .item-card .subtle,
+      .case-lobby-page .item-card .notice {
+        line-height: 1.32;
+      }
+
+      .intro-page .panel.stack {
+        grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+      }
+
+      .intro-page .panel.stack > .item-card {
+        min-height: 0;
+        overflow: auto;
+        overscroll-behavior: contain;
+      }
+
+      .intro-page .result-grid {
+        min-height: 0;
+      }
+
+      .intro-page .actions {
+        align-self: end;
+      }
+
+      .archive-scroll-mode .archive-grid {
+        gap: var(--table-gap, 5px);
+      }
+
+      .archive-scroll-mode .table-cell {
+        overflow: hidden;
+      }
+
+      .archive-scroll-mode .entity-cell {
+        grid-template-columns: auto minmax(0, 1fr);
+        align-content: center;
+      }
+
+      .archive-scroll-mode .table-cell.header {
+        font-size: max(var(--table-header-font, 1rem), 0.96rem);
+        line-height: 1.08;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+
+      .archive-scroll-mode .entity-name {
+        font-size: max(var(--entity-name-font, 1rem), 0.96rem);
+      }
+
+      .archive-scroll-mode .entity-title {
+        font-size: max(var(--entity-title-font, 0.9rem), 0.82rem);
+      }
+
+      .archive-scroll-mode .cell {
+        font-size: max(var(--cell-font, 1rem), 0.96rem);
+      }
+
+      .inline-options {
+        width: var(--option-width, min(420px, calc(100vw - 16px)));
+        min-width: min(280px, calc(100vw - 16px));
+        max-width: calc(100vw - 16px);
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .archive-inline-options {
+        min-width: min(180px, calc(100vw - 16px));
+        max-width: calc(100vw - 16px);
+      }
+
+      .inline-options-title {
+        font-size: clamp(1rem, 2.9vw, 1.16rem);
+      }
+
+      .inline-option-grid {
+        grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+      }
+
+      .inline-option {
+        min-height: 52px;
+        padding: 10px 12px;
+        font-size: max(var(--option-font, 1.04rem), 1.02rem);
+      }
+
+      .answer-cell-wrap.open .inline-options {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .clue-text {
+        font-size: clamp(0.82rem, 1.8vw, 0.98rem);
+        line-height: 1.18;
+      }
+
+      .clue-extra {
+        font-size: clamp(0.74rem, 1.5vw, 0.86rem);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .answer-cell-wrap:not(.open):hover .inline-options {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        animation: none;
+      }
+
+      .answer-cell-wrap.open .inline-options {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .game-layout {
+        grid-template-rows: minmax(0, 20fr) minmax(0, 9fr);
+      }
+
+      .validation-page .panel.stack {
+        grid-template-rows: auto auto;
+        align-content: start;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .validation-page .two-col.validation-layout {
+        display: block;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+      }
+
+      .validation-check-pane,
+      .validation-data-pane {
+        position: relative;
+        z-index: auto;
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .validation-check-pane {
+        margin-bottom: 12px;
+      }
+
+      .validation-report-head {
+        align-items: center;
+      }
+
+      .validation-report-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+        min-height: 42px;
+        white-space: nowrap;
+      }
+
+      .validation-collapsed-note {
+        display: block;
+        margin: 0;
+      }
+
+      .validation-check-pane.validation-collapsed .validation-list,
+      .validation-check-pane.validation-collapsed .pager {
+        display: none;
+      }
+
+      .validation-data-pane .actions {
+        align-items: stretch;
+      }
+
+      .validation-data-pane .actions button {
+        flex: 1 1 160px;
+      }
+    }
+
+    @media (max-height: 620px) {
+      .topbar {
+        min-height: 48px;
+      }
+
+      .panel {
+        padding: 8px;
+      }
+
+      .notice,
+      button,
+      .file-button {
+        min-height: 40px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+      }
+
+      .cell {
+        min-height: 38px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      body::before,
+      body::after,
+      #bgCanvas {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <main id="app" aria-live="polite">
+    <section class="page single">
+      <div class="center-shell">
+        <div class="panel stack">
+          <h1>请上传游戏资料包</h1>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="modalLayer" class="modal-layer" role="dialog" aria-modal="true" aria-hidden="true"></div>
+  <div id="toastLayer" class="toast-layer" aria-live="polite" aria-hidden="true"></div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const STORAGE_PREFIX = "classArchiveEngine.";
+      const STORE = {
+        package: STORAGE_PREFIX + "package",
+        packageHash: STORAGE_PREFIX + "packageHash",
+        progress: STORAGE_PREFIX + "progress.",
+        sound: STORAGE_PREFIX + "soundEnabled"
+      };
+      const SHAPES = ["circle", "rounded-square", "hexagon", "shield", "ticket", "blob"];
+      const PATTERNS = ["plain", "dots", "stripes", "rings", "waves", "grid", "rays", "bubbles", "sparkles", "checker", "diagonal"];
+      const WRONG_MESSAGES = [
+        "证据不吻合，请重新检查线索。",
+        "证据不吻合，这项结果暂时无法成立。",
+        "证据不吻合，请回到证据卡重新核对。"
+      ];
+      const FALLBACK_PALETTES = [
+        ["#F4E7C5", "#C79A4B", "#17233C"],
+        ["#3C8D87", "#F4E7C5", "#17233C"],
+        ["#8C3B4A", "#F4E7C5", "#FFF9ED"],
+        ["#C79A4B", "#26344F", "#17233C"],
+        ["#FFF9ED", "#8C3B4A", "#17233C"],
+        ["#26344F", "#C79A4B", "#FFF9ED"],
+        ["#287A5B", "#F4E7C5", "#17233C"],
+        ["#B64242", "#F4E7C5", "#FFF9ED"]
+      ];
+
+      const app = document.getElementById("app");
+      const modalLayer = document.getElementById("modalLayer");
+      const toastLayer = document.getElementById("toastLayer");
+      const bgCanvas = document.getElementById("bgCanvas");
+
+      let packageData = null;
+      let packageHash = "";
+      let validation = null;
+      let currentCaseId = "";
+      let currentCase = null;
+      let progress = null;
+      let view = "data";
+      let parseError = "";
+      let dataInputText = "";
+      let validationPage = 0;
+      let validationReportExpanded = false;
+      let casePage = 0;
+      let narrativePage = 0;
+      let tableEntityPage = 0;
+      let tableCategoryPage = 0;
+      let cluePage = 0;
+      let optionPage = 0;
+      let resultPage = 0;
+      let summaryPage = 0;
+      let entityDetailPage = 0;
+      let selectedCell = null;
+      let lastFocused = null;
+      let inlineCloseTimer = 0;
+      let activeInlineHoverHolder = null;
+      const inlineHoverTimers = new WeakMap();
+      const memoryProgressStore = {};
+      let highlight = { cells: new Set(), entities: new Set(), categories: new Set(), timer: 0 };
+      let newClueIds = new Set();
+      let toastTimer = 0;
+      let timerHandle = 0;
+      let audio = { ctx: null, ok: false, enabled: true };
+
+      const blankTemplate = {
+        schemaVersion: "1.0",
+        packageId: "",
+        packageTitle: "",
+        subject: "",
+        level: "",
+        contentLanguage: "",
+        description: "",
+        settings: {
+          defaultDifficulty: "",
+          timerEnabled: false,
+          timeLimitSeconds: 0,
+          maxHints: 3,
+          soundEnabled: true
+        },
+        cases: [
+          {
+            id: "",
+            title: "",
+            story: "",
+            goal: "",
+            difficulty: "",
+            narrative: {
+              theme: "",
+              opening: "",
+              problem: "",
+              mission: "",
+              completion: ""
+            },
+            storyEvents: [],
+            entityType: "",
+            entityLabel: "",
+            entities: [],
+            categories: [],
+            solution: {},
+            clues: [],
+            knowledgeSummary: []
+          }
+        ],
+        audit: {
+          sourceSummary: "",
+          usedItems: [],
+          excludedItems: [],
+          warnings: [],
+          validationPassed: true
+        }
+      };
+
+      document.addEventListener("pointerdown", unlockAudio, { once: true, passive: true });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (modalLayer.classList.contains("open")) closeModal();
+          else if (selectedCell && view === "game") closeInlineOptions();
+          if (toastLayer.classList.contains("open")) closeToast();
+        }
+      });
+      document.addEventListener("click", (event) => {
+        if (view === "game" && selectedCell && !event.target.closest(".answer-cell-wrap") && !event.target.closest(".archive-inline-options")) {
+          closeInlineOptions();
+        }
+      });
+      document.addEventListener("mouseover", handleInlineMouseOver, true);
+      document.addEventListener("mouseout", handleInlineMouseOut, true);
+      window.addEventListener("resize", () => {
+        fitPagesToViewport();
+        if (view === "game") renderGame();
+      });
+      document.addEventListener("visibilitychange", () => {
+        particles.paused = document.hidden;
+      });
+
+      // 本地储存：读取上次资料和音效设置。
+      try {
+        audio.enabled = localStorage.getItem(STORE.sound) !== "false";
+        const savedPackage = localStorage.getItem(STORE.package);
+        const savedHash = localStorage.getItem(STORE.packageHash);
+        if (savedPackage) {
+          packageData = JSON.parse(savedPackage);
+          packageHash = savedHash || stableHash(savedPackage);
+          validation = validatePackage(packageData);
+        }
+      } catch {
+        packageData = null;
+        packageHash = "";
+        validation = null;
+      }
+
+      renderDataLobby();
+
+      function createEl(tag, className, text) {
+        const el = document.createElement(tag);
+        if (className) el.className = className;
+        if (text !== undefined && text !== null) el.textContent = String(text);
+        return el;
+      }
+
+      function button(text, className, onClick, attrs = {}) {
+        const btn = createEl("button", className || "", text);
+        btn.type = "button";
+        if (onClick) btn.addEventListener("click", (event) => {
+          playSound("click");
+          onClick(event);
+        });
+        Object.entries(attrs).forEach(([key, value]) => {
+          if (key === "disabled") btn.disabled = Boolean(value);
+          else if (key === "ariaLabel") btn.setAttribute("aria-label", value);
+          else btn.setAttribute(key, value);
+        });
+        return btn;
+      }
+
+      function clearNode(node) {
+        node.replaceChildren();
+      }
+
+      function setPage(page) {
+        view = page;
+        clearInterval(timerHandle);
+        timerHandle = 0;
+      }
+
+      function renderTopbar(title, subtitle, actions) {
+        const top = createEl("header", "topbar");
+        const titleBox = createEl("div", "top-title");
+        titleBox.append(createEl("h1", "", title || "课堂档案推理游戏引擎"));
+        if (subtitle) titleBox.append(createEl("p", "subtle", subtitle));
+        const actionBox = createEl("div", "actions end");
+        (actions || []).forEach((node) => actionBox.append(node));
+        top.append(titleBox, actionBox);
+        return top;
+      }
+
+      function renderDataLobby(message) {
+        setPage("data");
+        const page = createEl("section", "page single");
+        const shell = createEl("div", "center-shell");
+        const panel = createEl("div", "panel stack");
+
+        panel.append(createEl("span", "pill new", "侦探调查局入口"));
+        panel.append(createEl("h1", "", "请上传游戏资料包"));
+        panel.append(createEl("p", "subtle", "导入案件资料包后，系统会先生成案件资料鉴定报告。"));
+        if (message) panel.append(createEl("div", "notice warn", message));
+        if (parseError) panel.append(createEl("div", "notice error", parseError));
+
+        const two = createEl("div", "two-col");
+        const left = createEl("div", "stack");
+        const right = createEl("div", "stack");
+
+        const fileInput = createEl("input");
+        fileInput.type = "file";
+        fileInput.accept = ".json,application/json";
+        fileInput.id = "jsonFileInput";
+        fileInput.addEventListener("change", handleFileImport);
+        const fileLabel = createEl("label", "file-button primary", "导入案件资料");
+        fileLabel.setAttribute("for", "jsonFileInput");
+        fileLabel.setAttribute("tabindex", "0");
+        fileLabel.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            fileInput.click();
+          }
+        });
+
+        left.append(fileInput, fileLabel);
+        left.append(button("继续上次调查", "secondary", continueSavedPackage, { disabled: !packageData || !validation }));
+        left.append(button("下载空白 JSON 模板", "ghost", downloadBlankTemplate));
+        left.append(button("移除当前资料包", "danger", removeCurrentPackage, { disabled: !packageData }));
+
+        const paste = createEl("textarea");
+        paste.value = dataInputText;
+        paste.placeholder = "在这里粘贴 JSON 案件资料包";
+        paste.setAttribute("aria-label", "粘贴 JSON 游戏资料包");
+        paste.addEventListener("input", () => {
+          dataInputText = paste.value;
+        });
+        right.append(paste);
+        right.append(button("读取调查资料", "primary", () => importText(paste.value)));
+
+        two.append(left, right);
+        panel.append(two);
+
+        const foot = createEl("div", "notice");
+        foot.append(createEl("span", "", "资料导入后会先进入“案件资料鉴定报告”，检查通过后才可开始调查。"));
+        panel.append(foot);
+
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function handleFileImport(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        unlockAudio();
+        const reader = new FileReader();
+        reader.onload = () => importText(String(reader.result || ""));
+        reader.onerror = () => {
+          parseError = "文件读取失败，请重新选择 JSON 文件。";
+          renderDataLobby();
+        };
+        reader.readAsText(file, "utf-8");
+      }
+
+      function importText(text) {
+        parseError = "";
+        if (!String(text || "").trim()) {
+          parseError = "JSON 内容为空，请上传或粘贴资料包。";
+          renderDataLobby();
+          return;
+        }
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (error) {
+          parseError = "JSON 语法错误：" + error.message;
+          renderDataLobby();
+          return;
+        }
+        clearAllProgress();
+        packageData = data;
+        const serialized = JSON.stringify(data);
+        packageHash = stableHash(serialized);
+        validation = validatePackage(data);
+        try {
+          localStorage.setItem(STORE.package, serialized);
+          localStorage.setItem(STORE.packageHash, packageHash);
+        } catch {
+          validation.warnings.push("浏览器本地储存不可用，本次游戏仍可继续。");
+        }
+        validationPage = 0;
+        validationReportExpanded = false;
+        renderValidation();
+      }
+
+      function continueSavedPackage() {
+        parseError = "";
+        if (!packageData || !validation) {
+          renderDataLobby("没有可继续使用的资料包。");
+          return;
+        }
+        renderValidation();
+      }
+
+      function removeCurrentPackage() {
+        packageData = null;
+        packageHash = "";
+        validation = null;
+        currentCaseId = "";
+        currentCase = null;
+        progress = null;
+        validationReportExpanded = false;
+        clearAllProgress();
+        try {
+          localStorage.removeItem(STORE.package);
+          localStorage.removeItem(STORE.packageHash);
+        } catch {}
+        renderDataLobby("当前资料包已移除。");
+      }
+
+      function downloadBlankTemplate() {
+        const blob = new Blob([JSON.stringify(blankTemplate, null, 2)], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = createEl("a");
+        link.href = url;
+        link.download = "空白游戏资料包模板.json";
+        document.body.append(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      // 资料验证：只检查结构、引用、格式和线索依赖，不判断课程知识正确性。
+      function validatePackage(data) {
+        const errors = [];
+        const warnings = [];
+        const checks = [];
+        const ok = (label) => checks.push({ ok: true, text: label });
+        const fail = (label) => {
+          errors.push(label);
+          checks.push({ ok: false, text: label });
+        };
+        const warn = (label) => {
+          warnings.push(label);
+          checks.push({ ok: true, warn: true, text: label });
+        };
+
+        if (!data || typeof data !== "object" || Array.isArray(data)) {
+          fail("资料包必须是 JSON 对象。");
+          return { errors, warnings, checks };
+        }
+        data.schemaVersion === "1.0" ? ok("schemaVersion 受到支持。") : fail("schemaVersion 必须为 1.0。");
+        Array.isArray(data.cases) && data.cases.length > 0 ? ok("至少包含一宗案件。") : fail("必须至少包含一宗案件。");
+
+        (Array.isArray(data.cases) ? data.cases : []).forEach((caseItem, index) => {
+          const label = caseItem && caseItem.title ? caseItem.title : "第" + (index + 1) + "宗案件";
+          if (!caseItem || typeof caseItem !== "object") {
+            fail(label + "必须是对象。");
+            return;
+          }
+          caseItem.id ? ok(label + "拥有案件 ID。") : fail(label + "缺少案件 ID。");
+          caseItem.entityType && caseItem.entityLabel ? ok(label + "拥有 entityType 和 entityLabel。") : fail(label + "必须提供 entityType 和 entityLabel。");
+
+          const entities = Array.isArray(caseItem.entities) ? caseItem.entities : [];
+          const categories = Array.isArray(caseItem.categories) ? caseItem.categories : [];
+          const clues = Array.isArray(caseItem.clues) ? caseItem.clues : [];
+          const storyEvents = Array.isArray(caseItem.storyEvents) ? caseItem.storyEvents : [];
+          const solution = caseItem.solution && typeof caseItem.solution === "object" ? caseItem.solution : {};
+          const totalCells = entities.length * categories.length;
+
+          entities.length >= 3 ? ok(label + "至少包含 3 个档案对象。") : fail(label + "至少需要 3 个档案对象。");
+          categories.length >= 2 ? ok(label + "至少包含 2 个配对类别。") : fail(label + "至少需要 2 个配对类别。");
+
+          const entityIds = new Set();
+          entities.forEach((entity, entityIndex) => {
+            if (!entity || typeof entity !== "object") {
+              fail(label + "的第" + (entityIndex + 1) + "个档案对象必须是对象。");
+              return;
+            }
+            if (!entity.id) fail(label + "有档案对象缺少 ID。");
+            else if (entityIds.has(entity.id)) fail(label + "档案对象 ID 重复：" + entity.id);
+            else entityIds.add(entity.id);
+            const iconIssues = validateIconSpec(entity.iconSpec);
+            if (iconIssues.length) warn(label + "的图标参数将使用后备生成：" + iconIssues.join("、"));
+          });
+          if (entityIds.size === entities.length && entities.length) ok(label + "档案对象 ID 唯一。");
+
+          const categoryIds = new Set();
+          const optionIds = new Set();
+          const optionsByCategory = new Map();
+          categories.forEach((category, categoryIndex) => {
+            if (!category || typeof category !== "object") {
+              fail(label + "的第" + (categoryIndex + 1) + "个类别必须是对象。");
+              return;
+            }
+            if (!category.id) fail(label + "有类别缺少 ID。");
+            else if (categoryIds.has(category.id)) fail(label + "类别 ID 重复：" + category.id);
+            else categoryIds.add(category.id);
+            const options = Array.isArray(category.options) ? category.options : [];
+            optionsByCategory.set(category.id, new Set(options.map((option) => option && option.id).filter(Boolean)));
+            options.length === entities.length ? ok(label + "中类别“" + safeLabel(category.label, category.id) + "”的选项数量正确。") : fail(label + "中类别“" + safeLabel(category.label, category.id) + "”的选项数量必须与档案对象数量一致。");
+            options.forEach((option) => {
+              if (!option || !option.id) fail(label + "有选项缺少 ID。");
+              else if (optionIds.has(option.id)) fail(label + "选项 ID 重复：" + option.id);
+              else optionIds.add(option.id);
+            });
+          });
+          if (categoryIds.size === categories.length && categories.length) ok(label + "类别 ID 唯一。");
+          if (optionIds.size && !hasDuplicateOptions(categories)) ok(label + "选项 ID 唯一。");
+
+          entities.forEach((entity) => {
+            if (!entity || !entity.id) return;
+            const row = solution[entity.id];
+            if (!row || typeof row !== "object") {
+              fail(label + "的 solution 缺少档案对象答案：" + entity.id);
+              return;
+            }
+            categories.forEach((category) => {
+              if (!category || !category.id) return;
+              const optionId = row[category.id];
+              if (!optionId) fail(label + "的 " + entity.id + "::" + category.id + " 缺少答案。");
+              else if (!optionsByCategory.get(category.id) || !optionsByCategory.get(category.id).has(optionId)) {
+                fail(label + "的 solution 引用了不存在的选项：" + entity.id + "::" + category.id + " → " + optionId);
+              }
+            });
+          });
+
+          categories.forEach((category) => {
+            if (!category || !category.id) return;
+            const used = new Map();
+            entities.forEach((entity) => {
+              const optionId = solution[entity.id] && solution[entity.id][category.id];
+              if (!optionId) return;
+              used.set(optionId, (used.get(optionId) || 0) + 1);
+            });
+            const repeated = [...used.entries()].filter((entry) => entry[1] !== 1);
+            repeated.length ? fail(label + "中类别“" + safeLabel(category.label, category.id) + "”的 solution 选项必须各使用一次。") : ok(label + "中类别“" + safeLabel(category.label, category.id) + "”的选项各使用一次。");
+          });
+
+          const validCells = new Set();
+          entities.forEach((entity) => categories.forEach((category) => validCells.add(cellId(entity.id, category.id))));
+
+          const clueIds = new Set();
+          clues.forEach((clue) => {
+            if (!clue || !clue.id) fail(label + "有线索缺少 ID。");
+            else if (clueIds.has(clue.id)) fail(label + "线索 ID 重复：" + clue.id);
+            else clueIds.add(clue.id);
+            ["relatedCells", "completeAfter", "unlockAfter"].forEach((field) => {
+              const list = Array.isArray(clue && clue[field]) ? clue[field] : [];
+              list.forEach((id) => {
+                if (!validCells.has(id)) fail(label + "的线索引用了不存在的格子：" + id);
+              });
+            });
+            if (clue && !clue.initial && (!Array.isArray(clue.unlockAfter) || clue.unlockAfter.length === 0)) {
+              fail(label + "有非初始线索缺少 unlockAfter，无法自然出现：" + safeLabel(clue.text, clue.id));
+            }
+            if (clue && clue.completeMode && !["all", "any"].includes(clue.completeMode)) fail(label + "线索 completeMode 只支持 all 或 any。");
+            if (clue && clue.unlockMode && !["all", "any"].includes(clue.unlockMode)) fail(label + "线索 unlockMode 只支持 all 或 any。");
+          });
+          clueIds.size === clues.length && clues.length ? ok(label + "线索 ID 唯一。") : null;
+          clues.some((clue) => clue && clue.initial === true) ? ok(label + "至少有一条初始线索。") : fail(label + "必须至少有一条 initial 为 true 的初始线索。");
+
+          const eventIds = new Set();
+          storyEvents.forEach((eventItem) => {
+            if (!eventItem || !eventItem.id) fail(label + "有剧情事件缺少 ID。");
+            else if (eventIds.has(eventItem.id)) fail(label + "剧情事件 ID 重复：" + eventItem.id);
+            else eventIds.add(eventItem.id);
+            const trigger = Number(eventItem && eventItem.triggerAfterCorrectCells);
+            Number.isInteger(trigger) && trigger > 0 && trigger <= totalCells ? ok(label + "剧情事件触发数量有效。") : fail(label + "剧情事件 triggerAfterCorrectCells 必须大于 0 且不超过总格子数。");
+          });
+          if (eventIds.size === storyEvents.length) ok(label + "剧情事件 ID 唯一。");
+        });
+
+        if (!errors.length) checks.unshift({ ok: true, text: "资料检查完成，可以开始调查。" });
+        return { errors, warnings, checks };
+      }
+
+      function hasDuplicateOptions(categories) {
+        const seen = new Set();
+        for (const category of categories) {
+          for (const option of (category.options || [])) {
+            if (!option || !option.id) continue;
+            if (seen.has(option.id)) return true;
+            seen.add(option.id);
+          }
+        }
+        return false;
+      }
+
+      function validateIconSpec(spec) {
+        if (!spec || typeof spec !== "object") return ["缺少 iconSpec"];
+        const issues = [];
+        if (spec.mode && spec.mode !== "generated") issues.push("mode 不受支持");
+        if (spec.shape && !SHAPES.includes(spec.shape)) issues.push("shape 不受支持");
+        if (spec.pattern && !PATTERNS.includes(spec.pattern)) issues.push("pattern 不受支持");
+        ["primaryColor", "secondaryColor", "accentColor"].forEach((key) => {
+          if (spec[key] && !isHexColor(spec[key])) issues.push(key + " 不是 HEX 颜色");
+        });
+        return issues;
+      }
+
+      function renderValidation() {
+        setPage("validation");
+        const page = createEl("section", "page validation-page");
+        const title = packageData && packageData.packageTitle ? packageData.packageTitle : "资料检查";
+        page.append(renderTopbar(title, "导入后必须先检查资料结构，检查通过后才可开始调查。", [
+          button("更换资料包", "ghost", () => renderDataLobby()),
+          button("移除资料包", "danger", removeCurrentPackage)
+        ]));
+
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        const status = createEl("div", validation && !validation.errors.length ? "notice success" : "notice error");
+        status.textContent = validation && !validation.errors.length ? "✓ 案件资料验证完成，可以开始调查。" : "⚠ 案件资料存在问题，请修正资料包后重新导入。";
+        panel.append(status);
+
+        const lists = createEl("div", "two-col validation-layout");
+        const left = createEl("div", "stack validation-check-pane");
+        const mobileValidation = window.matchMedia("(max-width: 760px)").matches;
+        const showValidationReport = !mobileValidation || validationReportExpanded;
+        if (mobileValidation && !validationReportExpanded) left.classList.add("validation-collapsed");
+        const reportHead = createEl("div", "validation-report-head");
+        reportHead.append(createEl("h2", "", "案件资料鉴定报告"));
+        const reportToggle = button(validationReportExpanded ? "收起报告" : "展开报告", "tiny ghost validation-report-toggle", () => {
+          validationReportExpanded = !validationReportExpanded;
+          renderValidation();
+        });
+        reportToggle.setAttribute("aria-expanded", String(showValidationReport));
+        reportHead.append(reportToggle);
+        left.append(reportHead);
+        const items = validation ? validation.checks : [];
+        const pageSize = 8;
+        const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+        validationPage = clamp(validationPage, 0, totalPages - 1);
+        const list = createEl("div", "validation-list");
+        items.slice(validationPage * pageSize, validationPage * pageSize + pageSize).forEach((item) => {
+          const row = createEl("div", "validation-item");
+          row.append(createEl("span", item.warn ? "pill partial" : item.ok ? "pill visible" : "pill", item.warn ? "! 提醒" : item.ok ? "✓ 通过" : "× 错误"));
+          row.append(createEl("span", "", item.text));
+          list.append(row);
+        });
+        if (showValidationReport) {
+          left.append(list, renderPager(validationPage, totalPages, "项", (next) => {
+            validationPage = next;
+            renderValidation();
+          }));
+        } else {
+          left.append(createEl("p", "subtle validation-collapsed-note", "报告已收起，可先查看资料档案和操作按钮。"));
+        }
+
+        const right = createEl("div", "stack validation-data-pane");
+        right.append(createEl("h2", "", "资料档案"));
+        const desc = createEl("div", "item-card");
+        desc.append(labeledText("资料包", packageData && packageData.packageTitle ? packageData.packageTitle : "未命名资料包"));
+        desc.append(labeledText("描述", packageData && packageData.description ? packageData.description : "未填写"));
+        desc.append(labeledText("案件数量", packageData && Array.isArray(packageData.cases) ? String(packageData.cases.length) : "0"));
+        const note = createEl("div", "notice");
+        note.textContent = "课程知识是否准确、答案是否唯一，需要由生成 JSON 的 AI 和教师在资料整理阶段确认。";
+        right.append(desc, note);
+
+        const startActions = createEl("div", "actions");
+        startActions.append(button("进入案件大厅", "primary", () => renderCaseLobby(), { disabled: !validation || validation.errors.length > 0 }));
+        startActions.append(button("下载空白 JSON 模板", "ghost", downloadBlankTemplate));
+        right.append(startActions);
+        lists.append(left, right);
+        panel.append(lists);
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function labeledText(label, value) {
+        const box = createEl("div", "result-cell");
+        box.append(createEl("span", "result-label", label));
+        box.append(createEl("span", "result-value", value || ""));
+        return box;
+      }
+
+      function renderCaseLobby() {
+        setPage("cases");
+        const cases = packageData && Array.isArray(packageData.cases) ? packageData.cases : [];
+        const page = createEl("section", "page case-lobby-page");
+        page.append(renderTopbar(packageData && packageData.packageTitle ? packageData.packageTitle : "案件大厅", "待调查案件柜：请选择一宗案件查看简报。", [
+          soundToggle(),
+          button("案件验证", "ghost", () => renderValidation()),
+          button("更换资料", "ghost", () => renderDataLobby())
+        ]));
+
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        panel.append(createEl("h2", "", "案件档案墙"));
+
+        const perPage = getCardPageSize();
+        const totalPages = Math.max(1, Math.ceil(cases.length / perPage));
+        casePage = clamp(casePage, 0, totalPages - 1);
+        const grid = createEl("div", "card-grid");
+        cases.slice(casePage * perPage, casePage * perPage + perPage).forEach((caseItem) => {
+          const card = createEl("article", "item-card");
+          card.append(createEl("span", "pill new", "案件编号：" + (caseItem.id || "未编号")));
+          card.append(createEl("h3", "", caseItem.title || "未命名案件"));
+          if (caseItem.difficulty) card.append(createEl("span", "pill", "难度：" + caseItem.difficulty));
+          card.append(createEl("p", "subtle", caseItem.goal || caseItem.story || "未填写案件目标。"));
+          const saved = loadProgress(caseItem.id);
+          const done = saved && saved.completed;
+          const cells = getTotalCells(caseItem);
+          const count = saved ? saved.correctCells.length : 0;
+          card.append(createEl("div", done ? "notice success" : "notice", done ? "已完成" : "档案完成度：" + count + "/" + cells));
+          card.append(button(done ? "查看结案档案" : count ? "继续调查" : "查看案件简报", "primary", () => openCaseIntro(caseItem.id)));
+          grid.append(card);
+        });
+        panel.append(grid, renderPager(casePage, totalPages, "页", (next) => {
+          casePage = next;
+          renderCaseLobby();
+        }));
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function openCaseIntro(id) {
+        currentCaseId = id;
+        currentCase = findCase(id);
+        narrativePage = 0;
+        playSound("openCase");
+        renderCaseIntro();
+      }
+
+      function renderCaseIntro() {
+        setPage("intro");
+        if (!currentCase) {
+          renderCaseLobby();
+          return;
+        }
+        const entityLabel = getEntityLabel(currentCase);
+        const page = createEl("section", "page intro-page");
+        page.append(renderTopbar(currentCase.title || "案件介绍", "机密案件简报：" + entityLabel + "档案将在调查页中生成。", [
+          soundToggle(),
+          button("返回案件大厅", "ghost", renderCaseLobby)
+        ]));
+
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        const pieces = getNarrativePieces(currentCase);
+        const totalPages = Math.max(1, pieces.length);
+        narrativePage = clamp(narrativePage, 0, totalPages - 1);
+        const piece = pieces[narrativePage];
+        const intro = createEl("div", "item-card");
+        intro.append(createEl("span", "pill new", "机密 / 待调查"));
+        intro.append(createEl("span", "pill", piece.label));
+        intro.append(createEl("p", "subtle", piece.text || "未填写"));
+
+        const meta = createEl("div", "result-grid");
+        meta.append(labeledText(entityLabel + "数量", String((currentCase.entities || []).length)));
+        meta.append(labeledText("配对类别", String((currentCase.categories || []).length)));
+        meta.append(labeledText("线索数量", String((currentCase.clues || []).length)));
+        meta.append(labeledText("总格子数", String(getTotalCells(currentCase))));
+
+        const actions = createEl("div", "actions");
+        actions.append(button(loadProgress(currentCase.id) ? "继续调查" : "开始调查", "primary", startCase));
+        actions.append(button("重新调查", "danger", () => {
+          resetCaseProgress(currentCase.id);
+          startCase();
+        }));
+        actions.append(button("返回案件大厅", "ghost", renderCaseLobby));
+
+        panel.append(createEl("h2", "", currentCase.title || "案件介绍"), meta, intro, renderPager(narrativePage, totalPages, "段", (next) => {
+          narrativePage = next;
+          renderCaseIntro();
+        }), actions);
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function getNarrativePieces(caseItem) {
+        const narrative = caseItem.narrative && typeof caseItem.narrative === "object" ? caseItem.narrative : null;
+        const pieces = [];
+        if (narrative) {
+          if (narrative.opening) pieces.push({ label: "开场", text: narrative.opening });
+          if (narrative.problem) pieces.push({ label: "发生的问题", text: narrative.problem });
+          if (narrative.mission) pieces.push({ label: "调查任务", text: narrative.mission });
+          if (!pieces.length && narrative.theme) pieces.push({ label: "主题", text: narrative.theme });
+        }
+        if (!pieces.length) {
+          if (caseItem.story) pieces.push({ label: "开场", text: caseItem.story });
+          if (caseItem.goal) pieces.push({ label: "调查任务", text: caseItem.goal });
+        }
+        return pieces.length ? pieces : [{ label: "案件介绍", text: caseItem.title || "" }];
+      }
+
+      function startCase() {
+        if (!currentCase) return;
+        progress = loadProgress(currentCase.id) || createProgress(currentCase);
+        ensureProgressState(currentCase, progress);
+        currentCaseId = currentCase.id;
+        saveProgress();
+        cluePage = Number(progress.cluePage || 0);
+        selectedCell = null;
+        renderGame();
+      }
+
+      function createProgress(caseItem) {
+        const clueStatus = {};
+        (caseItem.clues || []).forEach((clue) => {
+          clueStatus[clue.id] = clue.initial === true ? "visible" : "hidden";
+        });
+        return {
+          caseId: caseItem.id,
+          correctCells: [],
+          clueStatus,
+          storyEventsShown: [],
+          errors: 0,
+          hints: 0,
+          startTime: Date.now(),
+          completed: false,
+          completedAt: 0,
+          soundEnabled: audio.enabled,
+          cluePage: 0,
+          clueScrollLeft: 0,
+          categoryOrder: [],
+          optionOrderByCategory: {},
+          revealedEntities: []
+        };
+      }
+
+      // 随机顺序和名称揭示状态只补字段，不改动 JSON 原始数据。
+      function ensureProgressState(caseItem, state) {
+        if (!caseItem || !state) return;
+        state.correctCells = Array.isArray(state.correctCells) ? state.correctCells : [];
+        state.clueStatus = state.clueStatus || {};
+        (caseItem.clues || []).forEach((clue) => {
+          if (!state.clueStatus[clue.id]) state.clueStatus[clue.id] = clue.initial === true ? "visible" : "hidden";
+        });
+        state.storyEventsShown = Array.isArray(state.storyEventsShown) ? state.storyEventsShown : [];
+        state.revealedEntities = Array.isArray(state.revealedEntities) ? state.revealedEntities : [];
+        state.cluePage = Number.isFinite(Number(state.cluePage)) ? Number(state.cluePage) : 0;
+        state.clueScrollLeft = Number.isFinite(Number(state.clueScrollLeft)) ? Number(state.clueScrollLeft) : 0;
+
+        const settings = getEngineSettings(caseItem);
+        const categories = Array.isArray(caseItem.categories) ? caseItem.categories : [];
+        const categoryIds = categories.map((category) => category.id).filter(Boolean);
+        if (settings.randomizeCategoryOrder) {
+          state.categoryOrder = isSameIdList(state.categoryOrder, categoryIds) ? state.categoryOrder.slice() : shuffleCopy(categoryIds);
+        } else {
+          state.categoryOrder = categoryIds.slice();
+        }
+
+        const orderMap = state.optionOrderByCategory && typeof state.optionOrderByCategory === "object" ? state.optionOrderByCategory : {};
+        categories.forEach((category) => {
+          const optionIds = (Array.isArray(category.options) ? category.options : []).map((option) => option.id).filter(Boolean);
+          if (settings.randomizeOptionOrder) {
+            orderMap[category.id] = isSameIdList(orderMap[category.id], optionIds) ? orderMap[category.id].slice() : shuffleCopy(optionIds);
+          } else {
+            orderMap[category.id] = optionIds.slice();
+          }
+        });
+        state.optionOrderByCategory = orderMap;
+        updateEntityRevealState();
+      }
+
+      function getEngineSettings(caseItem) {
+        const packageSettings = packageData && packageData.settings && typeof packageData.settings === "object" ? packageData.settings : {};
+        const caseSettings = caseItem && caseItem.settings && typeof caseItem.settings === "object" ? caseItem.settings : {};
+        const merged = Object.assign({}, packageSettings, caseSettings);
+        const nameReveal = merged.nameReveal && typeof merged.nameReveal === "object" ? merged.nameReveal : {};
+        return {
+          randomizeOptionOrder: merged.randomizeOptionOrder !== false,
+          randomizeCategoryOrder: merged.randomizeCategoryOrder === true,
+          shuffleMode: merged.shuffleMode || "perCase",
+          nameReveal: {
+            enabled: nameReveal.enabled !== false,
+            threshold: Number.isFinite(Number(nameReveal.threshold)) ? Number(nameReveal.threshold) : 0.66,
+            comparison: nameReveal.comparison || "gte",
+            mode: nameReveal.mode || "perEntity",
+            autoReveal: nameReveal.autoReveal !== false
+          }
+        };
+      }
+
+      function isSameIdList(saved, source) {
+        if (!Array.isArray(saved) || saved.length !== source.length) return false;
+        const set = new Set(source);
+        return saved.every((id) => set.has(id)) && new Set(saved).size === set.size;
+      }
+
+      function shuffleCopy(list) {
+        const copy = list.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      function renderGame() {
+        setPage("game");
+        if (!currentCase || !progress) {
+          renderCaseLobby();
+          return;
+        }
+        const page = createEl("section", "page game-page");
+        page.append(renderTopbar(currentCase.title || "调查中", getGameSubtitle(), [
+          button("使用提示", "secondary", useHint, { disabled: progress.completed }),
+          soundToggle(),
+          button("案件大厅", "ghost", () => {
+            saveProgress();
+            renderCaseLobby();
+          })
+        ]));
+
+        const shell = createEl("div", "shell");
+        const layout = createEl("div", "game-layout");
+        layout.append(renderArchiveTable(), renderClueArea());
+        shell.append(layout);
+        page.append(shell);
+        app.replaceChildren(page);
+        requestAnimationFrame(() => {
+          fitArchiveViewport();
+          positionInlinePanels();
+        });
+
+        checkStalledClues();
+        startTimer();
+      }
+
+      function refreshGameView(parts = { archive: true, clues: true }) {
+        if (view !== "game" || !currentCase || !progress) return;
+        const layout = app.querySelector(".game-layout");
+        if (!layout) {
+          renderGame();
+          return;
+        }
+        const archive = layout.children[0];
+        const clues = layout.children[1];
+        if (parts.clues) captureClueScroll();
+        if (parts.archive && archive) archive.replaceWith(renderArchiveTable());
+        if (parts.clues && clues) clues.replaceWith(renderClueArea());
+        updateGameTopbar();
+        requestAnimationFrame(() => {
+          fitArchiveViewport();
+          positionInlinePanels();
+        });
+        checkStalledClues();
+      }
+
+      function updateGameTopbar() {
+        const top = app.querySelector(".topbar .subtle");
+        if (top) top.textContent = getGameSubtitle();
+      }
+
+      function captureClueScroll() {
+        if (!progress) return;
+        if (Number(progress.clueScrollLeft) < 0) return;
+        const scroll = app.querySelector(".clue-scroll");
+        if (!scroll) return;
+        progress.clueScrollLeft = scroll.scrollLeft;
+        progress.cluePage = getCluePageFromScroll(scroll);
+      }
+
+      function getCluePageFromScroll(scroll) {
+        const width = Math.max(1, scroll.clientWidth);
+        return Math.max(0, Math.round(scroll.scrollLeft / width));
+      }
+
+      function isCompactArchiveMode() {
+        return window.innerWidth <= 1024 || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+      }
+
+      function isDesktopHoverMode() {
+        if (!window.matchMedia) return window.innerWidth > 760;
+        return window.matchMedia("(hover: hover) and (pointer: fine)").matches
+          || window.matchMedia("(hover: hover) and (any-pointer: fine)").matches
+          || window.matchMedia("(any-hover: hover) and (any-pointer: fine)").matches;
+      }
+
+      function canUseInlineHoverEvent(event) {
+        if (event && event.pointerType) return event.pointerType === "mouse";
+        if (event && event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) return false;
+        if (event && event.type && event.type.indexOf("mouse") === 0) return isDesktopHoverMode() || window.innerWidth > 760;
+        return isDesktopHoverMode();
+      }
+
+      function openInlineHover(holder, forceMouse = false) {
+        if (!holder || selectedCell) return;
+        if (!forceMouse && !isDesktopHoverMode()) return;
+        cancelInlineHoverClose(holder);
+        holder.classList.add("hover-open");
+        const existing = getInlineOptionsPanel(holder.dataset.cellId);
+        if (existing && !existing.classList.contains("error")) {
+          requestAnimationFrame(positionInlinePanels);
+          return;
+        }
+        showInlineOptions(holder.dataset.entityId, holder.dataset.categoryId, "");
+        requestAnimationFrame(positionInlinePanels);
+      }
+
+      function cancelInlineHoverClose(holder) {
+        if (!holder) return;
+        const timer = inlineHoverTimers.get(holder);
+        if (!timer) return;
+        clearTimeout(timer);
+        inlineHoverTimers.delete(holder);
+      }
+
+      function getHoverableAnswerHolder(target) {
+        if (!target || !target.closest) return null;
+        const holder = target.closest(".answer-cell-wrap");
+        if (!holder || !holder.dataset.entityId || !holder.dataset.categoryId) return null;
+        if (holder.querySelector(".cell.correct")) return null;
+        return holder;
+      }
+
+      function handleInlineMouseOver(event) {
+        if (view !== "game" || !canUseInlineHoverEvent(event)) return;
+        const holder = getHoverableAnswerHolder(event.target);
+        if (!holder) return;
+        if (activeInlineHoverHolder === holder) {
+          openInlineHover(holder, true);
+          return;
+        }
+        if (activeInlineHoverHolder && activeInlineHoverHolder !== holder) {
+          scheduleInlineHoverClose(activeInlineHoverHolder, 80);
+        }
+        activeInlineHoverHolder = holder;
+        openInlineHover(holder, true);
+      }
+
+      function handleInlineMouseOut(event) {
+        if (view !== "game" || !canUseInlineHoverEvent(event)) return;
+        const holder = getHoverableAnswerHolder(event.target);
+        if (!holder) return;
+        if (event.relatedTarget && holder.contains(event.relatedTarget)) return;
+        const panel = getInlineOptionsPanel(holder.dataset.cellId);
+        if (event.relatedTarget && panel && panel.contains(event.relatedTarget)) return;
+        scheduleInlineHoverClose(holder);
+        if (activeInlineHoverHolder === holder) activeInlineHoverHolder = null;
+      }
+
+      function scheduleInlineHoverClose(holder, delay = 160) {
+        if (!holder) return;
+        const previous = inlineHoverTimers.get(holder);
+        if (previous) clearTimeout(previous);
+        const timer = window.setTimeout(() => {
+          inlineHoverTimers.delete(holder);
+          const panel = getInlineOptionsPanel();
+          if (holder.matches(":focus-within")) return;
+          if (panel && panel.dataset.panelCell === holder.dataset.cellId && (panel.matches(":hover") || panel.contains(document.activeElement))) return;
+          holder.classList.remove("hover-open");
+          if (!selectedCell || selectedCell.entityId !== holder.dataset.entityId || selectedCell.categoryId !== holder.dataset.categoryId) {
+            removeInlineOptions(holder.dataset.cellId);
+          }
+        }, delay);
+        inlineHoverTimers.set(holder, timer);
+      }
+
+      function getInlineOptionsPanel(targetCellId) {
+        const panel = app.querySelector(".archive-inline-options");
+        if (!panel) return null;
+        if (targetCellId && panel.dataset.panelCell !== targetCellId) return null;
+        return panel;
+      }
+
+      function findAnswerHolder(entityId, categoryId) {
+        const id = cellId(entityId, categoryId);
+        return [...app.querySelectorAll(".answer-cell-wrap")].find((node) => node.dataset.cellId === id) || null;
+      }
+
+      function removeInlineOptions(targetCellId) {
+        const panel = getInlineOptionsPanel();
+        if (!panel) return;
+        if (targetCellId && panel.dataset.panelCell !== targetCellId) return;
+        panel.remove();
+      }
+
+      function showInlineOptions(entityId, categoryId, errorMessage = "") {
+        if (!entityId || !categoryId) return;
+        const archivePanel = app.querySelector(".archive-panel");
+        const holder = findAnswerHolder(entityId, categoryId);
+        const entity = getEntity(entityId);
+        const category = getCategory(categoryId);
+        if (!archivePanel || !holder || !entity || !category) return;
+        const targetCellId = cellId(entityId, categoryId);
+        const existing = getInlineOptionsPanel(targetCellId);
+        if (existing && !errorMessage && !existing.classList.contains("error")) {
+          requestAnimationFrame(positionInlinePanels);
+          return existing;
+        }
+        removeInlineOptions();
+        const panel = renderInlineOptions(entity, category, errorMessage);
+        panel.classList.add("archive-inline-options");
+        panel.dataset.panelCell = targetCellId;
+        panel.addEventListener("mouseenter", () => {
+          cancelInlineHoverClose(holder);
+          holder.classList.add("hover-open");
+        });
+        panel.addEventListener("mouseleave", () => scheduleInlineHoverClose(holder));
+        archivePanel.append(panel);
+        requestAnimationFrame(positionInlinePanels);
+      }
+
+      function fitArchiveViewport() {
+        if (!isCompactArchiveMode()) return;
+        const panel = app.querySelector(".archive-scroll-mode");
+        const wrap = panel && panel.querySelector(".table-wrap");
+        const grid = panel && panel.querySelector(".archive-grid");
+        if (!wrap || !grid || !currentCase) return;
+        const entities = currentCase.entities || [];
+        const categories = getOrderedCategories();
+        const gap = Math.max(3, Math.min(8, Math.round(parseFloat(getComputedStyle(grid).gap) || 5)));
+        const wrapWidth = Math.max(260, wrap.clientWidth);
+        const wrapHeight = Math.max(220, wrap.clientHeight);
+        const entityCol = clamp(Math.round(wrapWidth * 0.32), window.innerWidth < 520 ? 176 : 188, window.innerWidth < 520 ? 220 : 238);
+        const answerCol = Math.max(window.innerWidth < 520 ? 108 : 120, Math.floor((wrapWidth - entityCol - gap * 4) / 4) + 16);
+        const headerRow = clamp(Math.round(wrapHeight * 0.1), window.innerWidth < 520 ? 46 : 42, window.innerWidth < 520 ? 56 : 54);
+        const entityRow = Math.max(window.innerWidth < 520 ? 104 : 98, Math.floor((wrapHeight - headerRow - gap * 4) / 4) + 14);
+        const rowFont = clamp(entityRow / 104, 0.86, 1.08);
+        grid.style.setProperty("--table-gap", gap + "px");
+        grid.style.setProperty("--table-pad", Math.max(4, Math.round(6 * rowFont)) + "px");
+        grid.style.setProperty("--cell-pad", Math.max(4, Math.round(5 * rowFont)) + "px " + Math.max(5, Math.round(7 * rowFont)) + "px");
+        grid.style.setProperty("--cell-min-height", Math.max(46, entityRow - 14) + "px");
+        grid.style.setProperty("--icon-size", clamp(Math.round(entityRow * 0.42), 28, 46) + "px");
+        grid.style.setProperty("--table-header-font", clamp(headerRow / 52, 0.96, 1.16).toFixed(2) + "rem");
+        grid.style.setProperty("--entity-name-font", clamp(rowFont * 1.04, 0.96, 1.14).toFixed(2) + "rem");
+        grid.style.setProperty("--entity-title-font", clamp(rowFont * 0.9, 0.82, 1).toFixed(2) + "rem");
+        grid.style.setProperty("--cell-font", clamp(rowFont * 1.04, 0.96, 1.14).toFixed(2) + "rem");
+        grid.style.setProperty("--option-font", clamp(rowFont * 1.08, 1, 1.18).toFixed(2) + "rem");
+        grid.style.gridTemplateColumns = entityCol + "px repeat(" + categories.length + ", " + answerCol + "px)";
+        grid.style.gridTemplateRows = headerRow + "px repeat(" + entities.length + ", " + entityRow + "px)";
+      }
+
+      function getGameSubtitle() {
+        const total = getTotalCells(currentCase);
+        const done = progress.correctCells.length;
+        const percent = total ? Math.round(done / total * 100) : 0;
+        return "档案完成度：" + done + "/" + total + "；调查进度：" + percent + "%；错误：" + progress.errors + "；提示：" + progress.hints + "；用时：" + formatElapsed();
+      }
+
+      function positionInlinePanels() {
+        const panels = app.querySelectorAll(".inline-options");
+        if (!panels.length) return;
+        panels.forEach((panel) => {
+          const holder = panel.classList.contains("archive-inline-options")
+            ? [...app.querySelectorAll(".answer-cell-wrap")].find((node) => node.dataset.cellId === panel.dataset.panelCell)
+            : panel.closest(".answer-cell-wrap");
+          if (!holder) return;
+          const rect = holder.getBoundingClientRect();
+          const desktopInline = isDesktopHoverMode();
+          const archivePanel = panel.closest(".archive-panel");
+          const archiveRect = archivePanel ? archivePanel.getBoundingClientRect() : { left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight };
+          const tableWrap = archivePanel && archivePanel.querySelector(".table-wrap");
+          const tableRect = tableWrap ? tableWrap.getBoundingClientRect() : archiveRect;
+          const stickyEntity = archivePanel && archivePanel.querySelector(".entity-cell");
+          const stickyRect = isCompactArchiveMode() && stickyEntity ? stickyEntity.getBoundingClientRect() : null;
+          const sideInset = 8;
+          const minLeftViewport = isCompactArchiveMode() ? Math.min(window.innerWidth - 180, (stickyRect ? stickyRect.right : archiveRect.left) + sideInset) : sideInset;
+          const maxRightViewport = Math.min(window.innerWidth - sideInset, archiveRect.right - sideInset);
+          const desiredWidth = window.innerWidth < 780
+            ? Math.min(window.innerWidth - minLeftViewport - sideInset, 360)
+            : Math.min(440, Math.max(280, Math.min(380, window.innerWidth * 0.42)));
+          const minWidth = isCompactArchiveMode() ? Math.min(220, Math.max(180, maxRightViewport - minLeftViewport)) : 220;
+          const width = Math.max(minWidth, Math.min(desiredWidth, Math.max(minWidth, maxRightViewport - minLeftViewport)));
+          panel.style.setProperty("--option-width", width + "px");
+          const panelHeight = Math.max(96, Math.round(panel.getBoundingClientRect().height || panel.offsetHeight || 120));
+          let left = rect.left + rect.width / 2 - width / 2;
+          let top = rect.top - panelHeight - 6;
+          if (panel.classList.contains("archive-inline-options")) {
+            const minTopViewport = tableRect.top + 4;
+            const maxTopViewport = Math.max(minTopViewport, archiveRect.bottom - panelHeight - 8);
+            left = clamp(left, minLeftViewport, Math.max(minLeftViewport, maxRightViewport - width));
+            top = clamp(top, minTopViewport, maxTopViewport);
+            left -= archiveRect.left;
+            top -= archiveRect.top;
+          } else if (desktopInline) {
+            left = clamp(rect.width / 2 - width / 2, 8 - rect.left, Math.max(8 - rect.left, window.innerWidth - width - 8 - rect.left));
+            top = rect.top - panelHeight - 6 >= 8 ? -panelHeight - 6 : rect.height + 6;
+            top = clamp(top, 8 - rect.top, Math.max(8 - rect.top, window.innerHeight - panelHeight - 8 - rect.top));
+          } else {
+            const fallbackTop = rect.bottom + 6;
+            left = clamp(left, 8, Math.max(8, window.innerWidth - width - 8));
+            top = clamp(top >= 8 ? top : fallbackTop, 8, Math.max(8, window.innerHeight - panelHeight - 8));
+          }
+          panel.style.setProperty("--option-left", left + "px");
+          panel.style.setProperty("--option-top", top + "px");
+        });
+      }
+
+      function startTimer() {
+        clearInterval(timerHandle);
+        timerHandle = window.setInterval(() => {
+          if (view === "game" && currentCase && progress && !progress.completed) {
+            const top = app.querySelector(".topbar .subtle");
+            if (top) {
+              top.textContent = getGameSubtitle();
+            }
+          }
+        }, 1000);
+      }
+
+      function renderArchiveTable() {
+        const compactArchive = isCompactArchiveMode();
+        const panel = createEl("div", compactArchive ? "panel archive-panel archive-scroll-mode" : "panel archive-panel");
+        const entityLabel = getEntityLabel(currentCase);
+        const head = createEl("div", "section-head");
+        head.append(createEl("h2", "", "调查记录板：" + entityLabel + "档案"));
+        head.append(createEl("div", "actions end"));
+
+        const tableWrap = createEl("div", "table-wrap");
+        tableWrap.addEventListener("scroll", () => requestAnimationFrame(positionInlinePanels));
+        const entities = currentCase.entities || [];
+        const categories = getOrderedCategories();
+        const scale = getArchiveScale(compactArchive ? Math.min(4, entities.length) : entities.length, compactArchive ? Math.min(4, categories.length) : categories.length);
+
+        const grid = createEl("div", "archive-grid");
+        applyArchiveScale(grid, scale);
+        if (compactArchive) {
+          grid.style.gridTemplateColumns = "var(--entity-col-viewport, 120px) repeat(" + categories.length + ", var(--answer-col-viewport, 82px))";
+          grid.style.gridTemplateRows = "var(--header-row-viewport, 40px) repeat(" + entities.length + ", var(--entity-row-viewport, 68px))";
+        } else {
+          grid.style.gridTemplateColumns = "minmax(var(--entity-col-min), 0.95fr) repeat(" + categories.length + ", minmax(var(--answer-col-min), 1fr))";
+          grid.style.gridTemplateRows = "minmax(var(--header-row-min), auto) repeat(" + entities.length + ", minmax(var(--cell-min-height), 1fr))";
+        }
+        const firstHeader = createEl("div", "table-cell header", entityLabel);
+        firstHeader.classList.add("corner-cell");
+        grid.append(firstHeader);
+        categories.forEach((category) => {
+          const header = createEl("div", "table-cell header", category.label || "");
+          header.classList.add("category-header");
+          if (highlight.categories.has(category.id)) header.classList.add("highlight-col");
+          grid.append(header);
+        });
+        entities.forEach((entity, entityIndex) => {
+          const revealed = isEntityNameRevealed(entity.id);
+          const displayName = getEntityDisplayName(entity, entityIndex);
+          const entityCell = createEl("div", "table-cell entity-cell");
+          entityCell.classList.add("row-header");
+          entityCell.dataset.entityId = entity.id;
+          if (!revealed) entityCell.classList.add("identity-hidden");
+          if (highlight.entities.has(entity.id)) entityCell.classList.add("highlight-row");
+          entityCell.append(makeIcon(entity, currentCase));
+          const text = createEl("div", "entity-text");
+          text.append(createEl("div", "entity-name", displayName));
+          text.append(createEl("div", "entity-title", revealed ? (entity.title || entity.description || "身份已确认") : getEntityRevealProgressText(entity.id)));
+          entityCell.append(text);
+          grid.append(entityCell);
+          categories.forEach((category, categoryIndex) => {
+            const cell = renderAnswerCell(entity, category, entityIndex, categoryIndex);
+            grid.append(cell);
+          });
+        });
+
+        tableWrap.append(grid);
+        panel.append(head, tableWrap);
+        if (selectedCell) {
+          const selectedEntity = getEntity(selectedCell.entityId);
+          const selectedCategory = getCategory(selectedCell.categoryId);
+          if (selectedEntity && selectedCategory) {
+            const activePanel = renderInlineOptions(selectedEntity, selectedCategory, selectedCell.errorMessage || "");
+            activePanel.classList.add("archive-inline-options");
+            activePanel.dataset.panelCell = cellId(selectedCell.entityId, selectedCell.categoryId);
+            panel.append(activePanel);
+          }
+        }
+        return panel;
+      }
+
+      function renderAnswerCell(entity, category, entityIndex, categoryIndex) {
+        const holder = createEl("div", "table-cell answer-cell-wrap");
+        const id = cellId(entity.id, category.id);
+        holder.dataset.cellId = id;
+        holder.dataset.entityId = entity.id;
+        holder.dataset.categoryId = category.id;
+        const isOpen = selectedCell && selectedCell.entityId === entity.id && selectedCell.categoryId === category.id;
+        if (isOpen) holder.classList.add("open");
+        if (categoryIndex <= 1) holder.classList.add("align-left");
+        if (categoryIndex >= Math.max(0, getOrderedCategories().length - 2)) holder.classList.add("align-right");
+        if (highlight.cells.has(id)) holder.classList.add("highlight-cell");
+        if (highlight.entities.has(entity.id)) holder.classList.add("highlight-row");
+        if (highlight.categories.has(category.id)) holder.classList.add("highlight-col");
+        const correct = progress.correctCells.includes(id);
+        const label = correct ? "✓ " + getOptionLabel(category.id, currentCase.solution[entity.id][category.id]) : "";
+        const ariaText = correct ? label : "点击调查";
+        let activationInput = "";
+        const cellButton = button(label, correct ? "cell correct" : "cell empty", (event) => {
+          event.stopPropagation();
+          if (correct) return;
+          if (activationInput === "mouse" || activationInput === "keyboard") return;
+          if (activationInput === "touch" || activationInput === "pen" || isCompactArchiveMode()) openOptionModal(entity.id, category.id);
+        }, { disabled: correct, ariaLabel: getEntityDisplayName(entity, entityIndex) + "，" + (category.label || "") + "，" + ariaText });
+        cellButton.addEventListener("pointerdown", (event) => {
+          activationInput = event.pointerType || "";
+        });
+        cellButton.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") activationInput = "keyboard";
+        });
+        if (!correct) {
+          holder.addEventListener("pointerenter", (event) => {
+            if (canUseInlineHoverEvent(event)) openInlineHover(holder, event.pointerType === "mouse");
+          });
+          holder.addEventListener("pointerleave", (event) => {
+            if (canUseInlineHoverEvent(event)) scheduleInlineHoverClose(holder);
+          });
+          holder.addEventListener("focusin", () => openInlineHover(holder));
+          holder.addEventListener("focusout", (event) => {
+            if (!holder.contains(event.relatedTarget)) scheduleInlineHoverClose(holder, 120);
+          });
+        }
+        if (correct) cellButton.setAttribute("aria-pressed", "true");
+        holder.append(cellButton);
+        return holder;
+      }
+
+      function renderInlineOptions(entity, category, errorMessage) {
+        const panel = createEl("div", errorMessage ? "inline-options error" : "inline-options");
+        panel.dataset.panelCell = cellId(entity.id, category.id);
+        panel.addEventListener("click", (event) => event.stopPropagation());
+        panel.append(createEl("div", "inline-options-title", "选择“" + (category.label || "") + "”的调查结果"));
+        if (errorMessage) panel.append(createEl("div", "inline-error", "× " + errorMessage));
+        const grid = createEl("div", "inline-option-grid");
+        getOrderedOptions(category).forEach((option) => {
+          const disabled = isOptionUsedInCategory(category.id, option.id);
+          const optBtn = button(option.label || "", "inline-option", (event) => {
+            event.stopPropagation();
+            verifyAnswer(entity.id, category.id, option.id);
+          }, { disabled });
+          optBtn.dataset.categoryId = category.id;
+          optBtn.dataset.optionId = option.id;
+          grid.append(optBtn);
+        });
+        panel.append(grid);
+        return panel;
+      }
+
+      function refreshAnswerCell(entityId, categoryId) {
+        const targetId = cellId(entityId, categoryId);
+        const holder = [...app.querySelectorAll(".answer-cell-wrap")].find((node) => node.dataset.cellId === targetId);
+        if (!holder) return;
+        const entity = getEntity(entityId);
+        const category = getCategory(categoryId);
+        if (!entity || !category) return;
+        const entityIndex = (currentCase.entities || []).findIndex((item) => item.id === entityId);
+        const categoryIndex = getOrderedCategories().findIndex((item) => item.id === categoryId);
+        holder.replaceWith(renderAnswerCell(entity, category, Math.max(0, entityIndex), Math.max(0, categoryIndex)));
+        requestAnimationFrame(positionInlinePanels);
+      }
+
+      function refreshAnswerCellsForCategory(categoryId) {
+        (currentCase.entities || []).forEach((entity) => refreshAnswerCell(entity.id, categoryId));
+      }
+
+      function updateEntityIdentityDisplay(entityId) {
+        const node = [...app.querySelectorAll(".entity-cell")].find((cell) => cell.dataset.entityId === entityId);
+        const entity = getEntity(entityId);
+        if (!node || !entity) return;
+        const entityIndex = (currentCase.entities || []).findIndex((item) => item.id === entityId);
+        const revealed = isEntityNameRevealed(entityId);
+        node.classList.toggle("identity-hidden", !revealed);
+        const name = node.querySelector(".entity-name");
+        const title = node.querySelector(".entity-title");
+        if (name) name.textContent = getEntityDisplayName(entity, Math.max(0, entityIndex));
+        if (title) title.textContent = revealed ? (entity.title || entity.description || "身份已确认") : getEntityRevealProgressText(entityId);
+      }
+
+      function renderClueArea() {
+        const panel = createEl("div", "panel clue-panel");
+        const head = createEl("div", "section-head");
+        head.append(createEl("h2", "", "证据桌"));
+        const stats = createEl("div", "actions end");
+        stats.append(createEl("span", "pill", "剩余提示：" + Math.max(0, getMaxHints() - progress.hints)));
+        head.append(stats);
+        const wrap = createEl("div", "clue-wrap");
+        const clues = getDisplayClues();
+        const perPage = getCluePageSize();
+        const totalPages = Math.max(1, Math.ceil(clues.length / perPage));
+        cluePage = clamp(cluePage, 0, totalPages - 1);
+        if (progress) progress.cluePage = cluePage;
+        const pageStatus = createEl("span", "pill");
+        pageStatus.dataset.clueScrollPage = "true";
+        pageStatus.textContent = "第" + (cluePage + 1) + "/" + totalPages + "组";
+        stats.append(pageStatus);
+        const scroll = createEl("div", "clue-scroll");
+        const grid = createEl("div", "clue-grid");
+        const visibleCount = Math.min(5, Math.max(1, clues.length || 1));
+        const gap = window.innerWidth < 700 ? 4 : 8;
+        grid.style.setProperty("--clue-gap", gap + "px");
+        grid.style.setProperty("--clue-card-basis", "calc((100% - " + ((visibleCount - 1) * gap) + "px) / " + visibleCount + ")");
+        clues.forEach((clue) => grid.append(renderClueCard(clue)));
+        if (!clues.length) grid.append(createEl("div", "notice warn", "当前没有可显示的线索。"));
+        scroll.append(grid);
+        bindClueScroll(scroll, totalPages);
+        restoreClueScroll(scroll, totalPages);
+        wrap.append(scroll);
+        panel.append(head, wrap);
+        return panel;
+      }
+
+      function setCluePage(next, totalPages) {
+        cluePage = clamp(next, 0, Math.max(0, totalPages - 1));
+        if (progress) {
+          progress.cluePage = cluePage;
+          progress.clueScrollLeft = -1;
+          saveProgress();
+        }
+        refreshGameView({ archive: false, clues: true });
+      }
+
+      function bindClueScroll(scroll, totalPages) {
+        let startX = 0;
+        let startLeft = 0;
+        let tracking = false;
+        let moved = false;
+        let saveTimer = 0;
+        scroll.addEventListener("pointerdown", (event) => {
+          if (event.button !== undefined && event.button !== 0) return;
+          tracking = true;
+          moved = false;
+          startX = event.clientX;
+          startLeft = scroll.scrollLeft;
+          scroll.classList.add("dragging");
+          if (scroll.setPointerCapture) scroll.setPointerCapture(event.pointerId);
+        });
+        scroll.addEventListener("pointermove", (event) => {
+          if (!tracking) return;
+          const delta = event.clientX - startX;
+          if (Math.abs(delta) > 3) moved = true;
+          if (moved) {
+            scroll.scrollLeft = startLeft - delta;
+            event.preventDefault();
+          }
+        });
+        scroll.addEventListener("pointerup", (event) => {
+          if (!tracking) return;
+          tracking = false;
+          scroll.classList.remove("dragging");
+          saveClueScrollPosition(scroll, totalPages);
+          if (moved) {
+            scroll.dataset.dragged = "true";
+            window.setTimeout(() => delete scroll.dataset.dragged, 80);
+          }
+        });
+        scroll.addEventListener("pointercancel", () => {
+          tracking = false;
+          scroll.classList.remove("dragging");
+        });
+        scroll.addEventListener("click", (event) => {
+          if (scroll.dataset.dragged === "true") {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }, true);
+        scroll.addEventListener("scroll", () => {
+          updateClueScrollIndicator(scroll, totalPages);
+          clearTimeout(saveTimer);
+          saveTimer = window.setTimeout(() => saveClueScrollPosition(scroll, totalPages), 180);
+        });
+      }
+
+      function restoreClueScroll(scroll, totalPages) {
+        window.requestAnimationFrame(() => {
+          const savedLeft = progress && Number.isFinite(Number(progress.clueScrollLeft)) ? Number(progress.clueScrollLeft) : 0;
+          scroll.scrollLeft = savedLeft >= 0 ? savedLeft : cluePage * scroll.clientWidth;
+          updateClueScrollIndicator(scroll, totalPages);
+        });
+      }
+
+      function saveClueScrollPosition(scroll, totalPages) {
+        if (!progress) return;
+        progress.clueScrollLeft = scroll.scrollLeft;
+        progress.cluePage = clamp(getCluePageFromScroll(scroll), 0, Math.max(0, totalPages - 1));
+        cluePage = progress.cluePage;
+        updateClueScrollIndicator(scroll, totalPages);
+        saveProgress();
+      }
+
+      function updateClueScrollIndicator(scroll, totalPages) {
+        const page = clamp(getCluePageFromScroll(scroll), 0, Math.max(0, totalPages - 1));
+        cluePage = page;
+        const label = app.querySelector("[data-clue-scroll-page='true']");
+        if (label) label.textContent = "第" + (page + 1) + "/" + totalPages + "组";
+      }
+
+      function getDisplayClues() {
+        const rank = { used: 0, partial: 1, visible: 2 };
+        return (currentCase.clues || [])
+          .filter((clue) => progress.clueStatus[clue.id] !== "hidden")
+          .sort((a, b) => {
+            const sa = progress.clueStatus[a.id] || "hidden";
+            const sb = progress.clueStatus[b.id] || "hidden";
+            if (rank[sa] !== rank[sb]) return rank[sa] - rank[sb];
+            return Number(a.priority || 0) - Number(b.priority || 0);
+          });
+      }
+
+      function setCluePageForClue(clueId) {
+        const clues = getDisplayClues();
+        const index = clues.findIndex((clue) => clue.id === clueId);
+        if (index < 0) return;
+        cluePage = Math.floor(index / getCluePageSize());
+        if (progress) {
+          progress.cluePage = cluePage;
+          progress.clueScrollLeft = -1;
+        }
+      }
+
+      function renderClueCard(clue) {
+        const status = progress.clueStatus[clue.id] || "hidden";
+        const card = createEl("button", "clue-card " + status + (newClueIds.has(clue.id) ? " new" : ""));
+        card.type = "button";
+        card.addEventListener("click", () => {
+          playSound("click");
+          focusRelatedCells(clue);
+        });
+        card.append(createEl("span", "clue-text", clue.text || ""));
+        return card;
+      }
+
+      function focusRelatedCells(clue) {
+        clearTimeout(highlight.timer);
+        highlight.cells = new Set(Array.isArray(clue.relatedCells) ? clue.relatedCells : []);
+        highlight.entities = new Set();
+        highlight.categories = new Set();
+        highlight.cells.forEach((id) => {
+          const parts = splitCellId(id);
+          if (parts) {
+            highlight.entities.add(parts.entityId);
+            highlight.categories.add(parts.categoryId);
+          }
+        });
+        highlight.timer = window.setTimeout(() => {
+          highlight.cells.clear();
+          highlight.entities.clear();
+          highlight.categories.clear();
+          if (view === "game") refreshGameView();
+        }, 2800);
+        playSound("clue");
+        refreshGameView();
+      }
+
+      function openOptionModal(entityId, categoryId) {
+        const previous = selectedCell ? { entityId: selectedCell.entityId, categoryId: selectedCell.categoryId } : null;
+        selectedCell = { entityId, categoryId, errorMessage: "" };
+        optionPage = 0;
+        lastFocused = document.activeElement;
+        playSound("openOption");
+        if (previous) refreshAnswerCell(previous.entityId, previous.categoryId);
+        refreshAnswerCell(entityId, categoryId);
+        showInlineOptions(entityId, categoryId, "");
+      }
+
+      // 答案验证：正确后填入并锁定，错误时不写入格子。
+      function verifyAnswer(entityId, categoryId, optionId) {
+        const expected = currentCase.solution && currentCase.solution[entityId] && currentCase.solution[entityId][categoryId];
+        if (expected === optionId) {
+          const id = cellId(entityId, categoryId);
+          if (!progress.correctCells.includes(id)) progress.correctCells.push(id);
+          updateEntityRevealState();
+          updateClueStates();
+          checkStoryEvents();
+          selectedCell = null;
+          removeInlineOptions();
+          saveProgress();
+          playSound("success");
+          refreshAnswerCellsForCategory(categoryId);
+          updateEntityIdentityDisplay(entityId);
+          refreshGameView({ archive: false, clues: true });
+          updateGameTopbar();
+          flashCell(id);
+          if (progress.correctCells.length >= getTotalCells(currentCase)) completeCase();
+        } else {
+          progress.errors += 1;
+          saveProgress();
+          playSound("error");
+          selectedCell = { entityId, categoryId, errorMessage: "证据不吻合，请重新检查线索" };
+          refreshAnswerCell(entityId, categoryId);
+          showInlineOptions(entityId, categoryId, selectedCell.errorMessage);
+          updateGameTopbar();
+        }
+      }
+
+      function flashCell(id) {
+        requestAnimationFrame(() => {
+          const holder = [...app.querySelectorAll(".answer-cell-wrap")].find((node) => node.dataset.cellId === id);
+          const node = holder && holder.querySelector(".cell.correct");
+          if (!node) return;
+          const original = node.textContent;
+          node.textContent = "✓ 证据吻合";
+          node.classList.add("flash-correct");
+          setTimeout(() => {
+            node.textContent = original;
+            node.classList.remove("flash-correct");
+          }, 700);
+        });
+      }
+
+      // 线索状态：根据 completeAfter 和 unlockAfter 更新 visible、partial、used。
+      function updateClueStates() {
+        const correct = new Set(progress.correctCells);
+        let changed = false;
+        (currentCase.clues || []).forEach((clue) => {
+          const status = progress.clueStatus[clue.id] || "hidden";
+          if (status === "visible" || status === "partial") {
+            const list = Array.isArray(clue.completeAfter) ? clue.completeAfter : [];
+            if (list.length) {
+              const count = list.filter((id) => correct.has(id)).length;
+              const complete = matchCells(list, correct, clue.completeMode || "all");
+              if (complete && status !== "used") {
+                progress.clueStatus[clue.id] = "used";
+                changed = true;
+                playSound("clueUsed");
+              } else if (count > 0 && !complete && status !== "partial") {
+                progress.clueStatus[clue.id] = "partial";
+                changed = true;
+              }
+            }
+          }
+        });
+        (currentCase.clues || []).forEach((clue) => {
+          const status = progress.clueStatus[clue.id] || "hidden";
+          if (status === "hidden") {
+            const list = Array.isArray(clue.unlockAfter) ? clue.unlockAfter : [];
+            if (list.length && matchCells(list, correct, clue.unlockMode || "all")) {
+              progress.clueStatus[clue.id] = "visible";
+              newClueIds.add(clue.id);
+              setCluePageForClue(clue.id);
+              changed = true;
+              playSound("newClue");
+              window.setTimeout(() => {
+                newClueIds.delete(clue.id);
+                if (view === "game") refreshGameView({ archive: false, clues: true });
+              }, 1800);
+            }
+          }
+        });
+        if (changed) saveProgress();
+      }
+
+      function matchCells(list, correct, mode) {
+        if (!list.length) return false;
+        return mode === "any" ? list.some((id) => correct.has(id)) : list.every((id) => correct.has(id));
+      }
+
+      function getClueProgressText(clue) {
+        const list = Array.isArray(clue.completeAfter) ? clue.completeAfter : [];
+        const count = list.filter((id) => progress.correctCells.includes(id)).length;
+        return "进度 " + count + "/" + list.length + " 项";
+      }
+
+      // 剧情事件触发：只显示一次，不改变答案或线索。
+      function checkStoryEvents() {
+        const count = progress.correctCells.length;
+        (currentCase.storyEvents || []).forEach((eventItem) => {
+          if (progress.storyEventsShown.includes(eventItem.id)) return;
+          if (count >= Number(eventItem.triggerAfterCorrectCells)) {
+            progress.storyEventsShown.push(eventItem.id);
+            saveProgress();
+            showStoryToast(eventItem.text || "");
+          }
+        });
+      }
+
+      function showStoryToast(text) {
+        if (!text) return;
+        clearTimeout(toastTimer);
+        toastLayer.setAttribute("aria-hidden", "false");
+        toastLayer.classList.add("open");
+        clearNode(toastLayer);
+        const card = createEl("div", "toast-card");
+        const body = createEl("div", "stack");
+        body.append(createEl("span", "pill new", "剧情进展"));
+        body.append(createEl("p", "subtle", text));
+        card.append(body, button("关闭", "tiny ghost", closeToast));
+        toastLayer.append(card);
+        playSound("story");
+        toastTimer = window.setTimeout(closeToast, 5600);
+      }
+
+      function closeToast() {
+        clearTimeout(toastTimer);
+        toastLayer.classList.remove("open");
+        toastLayer.setAttribute("aria-hidden", "true");
+        clearNode(toastLayer);
+      }
+
+      function checkStalledClues() {
+        if (!currentCase || !progress || progress.completed) return;
+        if (progress.correctCells.length >= getTotalCells(currentCase)) return;
+        const statuses = Object.values(progress.clueStatus || {});
+        const hasActive = statuses.includes("visible") || statuses.includes("partial");
+        const correct = new Set(progress.correctCells);
+        const canUnlock = (currentCase.clues || []).some((clue) => {
+          if (progress.clueStatus[clue.id] !== "hidden") return false;
+          const list = Array.isArray(clue.unlockAfter) ? clue.unlockAfter : [];
+          return list.some((id) => !correct.has(id));
+        });
+        if (!hasActive && !canUnlock) {
+          showStoryToast("当前资料的线索流程无法继续，请教师检查资料包。");
+        }
+      }
+
+      function useHint() {
+        if (!currentCase || !progress) return;
+        const maxHints = getMaxHints();
+        if (progress.hints >= maxHints) {
+          showStoryToast("提示次数已用完。");
+          return;
+        }
+        const clue = getDisplayClues().find((item) => (progress.clueStatus[item.id] === "visible" || progress.clueStatus[item.id] === "partial") && Array.isArray(item.relatedCells) && item.relatedCells.length);
+        if (!clue) {
+          showStoryToast("当前没有可用于高亮的线索。");
+          return;
+        }
+        progress.hints += 1;
+        saveProgress();
+        focusRelatedCells(clue);
+      }
+
+      function completeCase() {
+        progress.completed = true;
+        progress.completedAt = Date.now();
+        saveProgress();
+        playSound("complete");
+        window.setTimeout(renderCompletion, 520);
+      }
+
+      function renderCompletion() {
+        setPage("completion");
+        closeToast();
+        const page = createEl("section", "page");
+        page.append(renderTopbar("结案报告", currentCase.title || "", [
+          soundToggle(),
+          button("案件大厅", "ghost", renderCaseLobby)
+        ]));
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        panel.append(createEl("div", "completion-stamp", "调查完成"));
+        const stats = createEl("div", "result-grid");
+        stats.append(labeledText("完成时间", formatDuration((progress.completedAt || Date.now()) - progress.startTime)));
+        stats.append(labeledText("错误次数", String(progress.errors)));
+        stats.append(labeledText("提示次数", String(progress.hints)));
+        stats.append(labeledText("最终星级", getStarLevel()));
+        panel.append(stats);
+
+        const completionText = currentCase.narrative && currentCase.narrative.completion ? currentCase.narrative.completion : "";
+        if (completionText) panel.append(createEl("div", "notice success", completionText));
+
+        panel.append(renderResultPage());
+
+        const summary = normalizeSummary(currentCase.knowledgeSummary);
+        if (summary.length) {
+          const summaryTotal = Math.max(1, summary.length);
+          summaryPage = clamp(summaryPage, 0, summaryTotal - 1);
+          const summaryCard = createEl("div", "item-card");
+          summaryCard.append(createEl("span", "pill", "知识总结 " + (summaryPage + 1) + "/" + summaryTotal));
+          summaryCard.append(createEl("p", "subtle", summary[summaryPage]));
+          panel.append(summaryCard, renderPager(summaryPage, summaryTotal, "条", (next) => {
+            summaryPage = next;
+            renderCompletion();
+          }));
+        }
+
+        const actions = createEl("div", "actions");
+        const nextCase = getNextCase();
+        actions.append(button("下一宗案件", "primary", () => openCaseIntro(nextCase.id), { disabled: !nextCase }));
+        actions.append(button("返回案件大厅", "ghost", renderCaseLobby));
+        actions.append(button("重新调查", "danger", () => {
+          resetCaseProgress(currentCase.id);
+          startCase();
+        }));
+        panel.append(actions);
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function renderResultPage() {
+        const holder = createEl("div", "stack");
+        holder.append(createEl("h2", "", "完整档案结果"));
+        const rows = [];
+        (currentCase.entities || []).forEach((entity) => {
+          getOrderedCategories().forEach((category) => {
+            rows.push({ entity, category, label: getOptionLabel(category.id, currentCase.solution[entity.id][category.id]) });
+          });
+        });
+        const perPage = getResultPageSize();
+        const totalPages = Math.max(1, Math.ceil(rows.length / perPage));
+        resultPage = clamp(resultPage, 0, totalPages - 1);
+        const grid = createEl("div", "result-grid");
+        rows.slice(resultPage * perPage, resultPage * perPage + perPage).forEach((row) => {
+          grid.append(labeledText((row.entity.name || row.entity.id) + " / " + (row.category.label || ""), row.label));
+        });
+        holder.append(grid, renderPager(resultPage, totalPages, "页", (next) => {
+          resultPage = next;
+          renderCompletion();
+        }));
+        return holder;
+      }
+
+      function openEntityDetail(entityId) {
+        const entity = getEntity(entityId);
+        if (!entity) return;
+        entityDetailPage = 0;
+        lastFocused = document.activeElement;
+        renderEntityModal(entity);
+      }
+
+      function renderEntityModal(entity) {
+        modalLayer.setAttribute("aria-hidden", "false");
+        modalLayer.classList.add("open");
+        clearNode(modalLayer);
+        const card = createEl("div", "modal-card");
+        const head = createEl("div", "modal-head");
+        const title = createEl("div", "stack");
+        const top = createEl("div", "actions");
+        top.append(makeIcon(entity, currentCase));
+        const titleText = createEl("div", "stack");
+        const entityIndex = (currentCase.entities || []).findIndex((item) => item.id === entity.id);
+        const revealed = isEntityNameRevealed(entity.id);
+        titleText.append(createEl("h2", "", getEntityDisplayName(entity, Math.max(0, entityIndex))));
+        if (revealed && entity.title) titleText.append(createEl("p", "subtle", entity.title));
+        if (!revealed) titleText.append(createEl("p", "subtle", getEntityRevealProgressText(entity.id)));
+        top.append(titleText);
+        title.append(top);
+        if (entity.description) title.append(createEl("p", "subtle", entity.description));
+        head.append(title, button("关闭", "icon-button ghost", closeModal, { ariaLabel: "关闭资料面板" }));
+        card.append(head);
+        const records = Array.isArray(entity.records) ? entity.records : [];
+        if (records.length) {
+          const totalPages = records.length;
+          entityDetailPage = clamp(entityDetailPage, 0, totalPages - 1);
+          const record = records[entityDetailPage];
+          const box = createEl("div", "item-card");
+          box.append(createEl("span", "pill", record.label || "资料"));
+          box.append(createEl("p", "subtle", record.text || ""));
+          card.append(box, renderPager(entityDetailPage, totalPages, "条", (next) => {
+            entityDetailPage = next;
+            renderEntityModal(entity);
+          }));
+        } else {
+          card.append(createEl("div", "notice", "这份资料包没有为该档案对象提供额外记录。"));
+        }
+        modalLayer.append(card);
+        trapFocus(card);
+      }
+
+      function closeModal() {
+        modalLayer.classList.remove("open");
+        modalLayer.setAttribute("aria-hidden", "true");
+        clearNode(modalLayer);
+        const focusTarget = lastFocused;
+        selectedCell = null;
+        if (focusTarget && typeof focusTarget.focus === "function") window.setTimeout(() => focusTarget.focus({ preventScroll: true }), 0);
+      }
+
+      function closeInlineOptions() {
+        const previous = selectedCell ? { entityId: selectedCell.entityId, categoryId: selectedCell.categoryId } : null;
+        selectedCell = null;
+        removeInlineOptions();
+        const focusTarget = lastFocused;
+        if (view === "game" && previous) refreshAnswerCell(previous.entityId, previous.categoryId);
+        if (focusTarget && typeof focusTarget.focus === "function") {
+          window.setTimeout(() => focusTarget.focus({ preventScroll: true }), 0);
+        }
+      }
+
+      function trapFocus(container) {
+        const focusable = [...container.querySelectorAll("button, [href], input, textarea, select, [tabindex]:not([tabindex='-1'])")].filter((node) => !node.disabled);
+        if (focusable.length) focusable[0].focus();
+        container.addEventListener("keydown", (event) => {
+          if (event.key !== "Tab" || focusable.length < 2) return;
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        });
+      }
+
+      // 档案生成：表格、类别和选项全部由 JSON 动态生成。
+      function getArchiveScale(entityCount, categoryCount) {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const colPressure = (categoryCount + 1) / (w < 520 ? 5.25 : w < 760 ? 6.05 : 7.25);
+        const rowPressure = (entityCount + 1) / (h < 620 ? 6.1 : h < 780 ? 6.8 : 7.35);
+        return clamp(1 / Math.max(1, colPressure, rowPressure), 0.68, 1);
+      }
+
+      function applyArchiveScale(grid, scale) {
+        const narrow = window.innerWidth < 520;
+        grid.style.setProperty("--table-gap", Math.round(2 + 4 * scale) + "px");
+        grid.style.setProperty("--table-pad", Math.round(4 + 5 * scale) + "px");
+        grid.style.setProperty("--cell-pad", Math.round(4 + 4 * scale) + "px " + Math.round(5 + 4 * scale) + "px");
+        grid.style.setProperty("--cell-min-height", Math.max(96, Math.round(72 + 24 * scale)) + "px");
+        grid.style.setProperty("--icon-size", Math.round((narrow ? 30 : 34) + 22 * scale) + "px");
+        grid.style.setProperty("--table-header-font", (0.68 + 0.3 * scale).toFixed(2) + "rem");
+        grid.style.setProperty("--entity-name-font", (0.72 + 0.28 * scale).toFixed(2) + "rem");
+        grid.style.setProperty("--entity-title-font", (0.62 + 0.22 * scale).toFixed(2) + "rem");
+        grid.style.setProperty("--cell-font", (0.68 + 0.32 * scale).toFixed(2) + "rem");
+        grid.style.setProperty("--option-font", (0.72 + 0.32 * scale).toFixed(2) + "rem");
+        grid.style.setProperty("--entity-col-min", narrow ? Math.round(74 + 26 * scale) + "px" : Math.round(190 + 60 * scale) + "px");
+        grid.style.setProperty("--answer-col-min", narrow ? Math.round(54 + 18 * scale) + "px" : Math.round(82 + 26 * scale) + "px");
+        grid.style.setProperty("--header-row-min", Math.round(44 + 18 * scale) + "px");
+      }
+
+      function isEntityNameRevealed(entityId) {
+        if (!currentCase || !progress || progress.completed) return true;
+        if (Array.isArray(progress.revealedEntities) && progress.revealedEntities.includes(entityId)) return true;
+        return shouldRevealEntityName(entityId);
+      }
+
+      function getEntityRevealProgressText(entityId) {
+        const categories = currentCase && currentCase.categories ? currentCase.categories : [];
+        const confirmed = categories.filter((category) => progress && progress.correctCells.includes(cellId(entityId, category.id))).length;
+        return "身份待确认：" + confirmed + "/" + categories.length + "项";
+      }
+
+      function shouldRevealEntityName(entityId) {
+        if (!currentCase || !progress) return false;
+        const settings = getEngineSettings(currentCase).nameReveal;
+        if (!settings.enabled || !settings.autoReveal) return true;
+        const categories = currentCase.categories || [];
+        if (!categories.length) return true;
+        const confirmed = categories.filter((category) => progress.correctCells.includes(cellId(entityId, category.id))).length;
+        const required = Math.max(1, Math.ceil(categories.length * settings.threshold));
+        return settings.comparison === "gt" ? confirmed > required : confirmed >= required;
+      }
+
+      function updateEntityRevealState() {
+        if (!currentCase || !progress) return;
+        const revealed = new Set(Array.isArray(progress.revealedEntities) ? progress.revealedEntities : []);
+        (currentCase.entities || []).forEach((entity) => {
+          if (shouldRevealEntityName(entity.id)) revealed.add(entity.id);
+        });
+        progress.revealedEntities = [...revealed];
+      }
+
+      function getEntityDisplayName(entity, index) {
+        if (isEntityNameRevealed(entity.id)) return entity.name || entity.id;
+        return getEntityLabel(currentCase) + "档案 " + String(index + 1).padStart(2, "0");
+      }
+
+      function getCardPageSize() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        if (w < 520) return 1;
+        if (w < 700 || h < 650) return 2;
+        if (w < 1100) return h < 850 ? 2 : 3;
+        return 6;
+      }
+
+      function getCluePageSize() {
+        return 5;
+      }
+
+      function getOptionPageSize() {
+        const w = window.innerWidth;
+        return w < 620 ? 4 : w < 920 ? 6 : 8;
+      }
+
+      function getResultPageSize() {
+        const w = window.innerWidth;
+        return w < 620 ? 4 : w < 1000 ? 6 : 8;
+      }
+
+      function renderPager(pageIndex, totalPages, unit, onChange) {
+        const pager = createEl("div", "pager");
+        const prev = button("上一" + unit, "tiny ghost", () => onChange(pageIndex - 1), { disabled: pageIndex <= 0 });
+        const label = createEl("span", "page-label", "第" + (pageIndex + 1) + "/" + totalPages + unit);
+        const next = button("下一" + unit, "tiny ghost", () => onChange(pageIndex + 1), { disabled: pageIndex >= totalPages - 1 });
+        pager.append(prev, label, next);
+        return pager;
+      }
+
+      // 自动图标生成：使用内嵌 SVG，不依赖图片或网络。
+      function makeIcon(entity, caseItem) {
+        const spec = normalizeIconSpec(entity, caseItem);
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 100 100");
+        svg.setAttribute("class", "generated-icon");
+        svg.setAttribute("aria-hidden", "true");
+        const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+        const clip = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+        const clipId = "clip-" + stableHash(entity.id + spec.shape).slice(0, 8);
+        clip.setAttribute("id", clipId);
+        clip.append(shapeNode(spec.shape));
+        defs.append(clip);
+        svg.append(defs);
+
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.setAttribute("clip-path", "url(#" + clipId + ")");
+        const base = shapeNode(spec.shape);
+        base.setAttribute("fill", spec.primaryColor);
+        group.append(base);
+        appendPattern(group, spec.pattern, spec.secondaryColor);
+        svg.append(group);
+
+        const outline = shapeNode(spec.shape);
+        outline.setAttribute("fill", "none");
+        outline.setAttribute("stroke", spec.accentColor);
+        outline.setAttribute("stroke-width", "4");
+        outline.setAttribute("opacity", "0.9");
+        svg.append(outline);
+        appendDetectiveBadge(svg, spec);
+
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", "50");
+        text.setAttribute("y", "57");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.setAttribute("font-size", spec.symbol.length > 1 ? "31" : "38");
+        text.setAttribute("font-weight", "900");
+        text.setAttribute("fill", chooseReadableColor(spec.primaryColor, spec.accentColor));
+        text.textContent = spec.symbol;
+        svg.append(text);
+        return svg;
+      }
+
+      // 自动图标生成：叠加侦探徽章与证物牌细节，不改变 iconSpec 字段含义。
+      function appendDetectiveBadge(svg, spec) {
+        const mk = (tag) => document.createElementNS("http://www.w3.org/2000/svg", tag);
+        const band = mk("rect");
+        band.setAttribute("x", "18");
+        band.setAttribute("y", "66");
+        band.setAttribute("width", "64");
+        band.setAttribute("height", "13");
+        band.setAttribute("rx", "4");
+        band.setAttribute("fill", spec.secondaryColor);
+        band.setAttribute("opacity", "0.38");
+        svg.append(band);
+
+        const lens = mk("circle");
+        lens.setAttribute("cx", "73");
+        lens.setAttribute("cy", "25");
+        lens.setAttribute("r", "9");
+        lens.setAttribute("fill", "none");
+        lens.setAttribute("stroke", spec.accentColor);
+        lens.setAttribute("stroke-width", "4");
+        lens.setAttribute("opacity", "0.78");
+        svg.append(lens);
+
+        const handle = mk("line");
+        handle.setAttribute("x1", "80");
+        handle.setAttribute("y1", "32");
+        handle.setAttribute("x2", "90");
+        handle.setAttribute("y2", "42");
+        handle.setAttribute("stroke", spec.accentColor);
+        handle.setAttribute("stroke-width", "4");
+        handle.setAttribute("stroke-linecap", "round");
+        handle.setAttribute("opacity", "0.78");
+        svg.append(handle);
+      }
+
+      function normalizeIconSpec(entity, caseItem) {
+        const raw = entity.iconSpec || {};
+        const valid = raw.mode === "generated" && SHAPES.includes(raw.shape) && PATTERNS.includes(raw.pattern) && isHexColor(raw.primaryColor) && isHexColor(raw.secondaryColor) && isHexColor(raw.accentColor);
+        if (valid) {
+          return {
+            symbol: getIconSymbol(raw.symbol, entity),
+            shape: raw.shape,
+            pattern: raw.pattern,
+            primaryColor: raw.primaryColor,
+            secondaryColor: raw.secondaryColor,
+            accentColor: raw.accentColor
+          };
+        }
+        const index = Math.abs(hashNumber((caseItem.id || "") + "::" + (entity.id || entity.name || "")));
+        const palette = FALLBACK_PALETTES[index % FALLBACK_PALETTES.length];
+        return {
+          symbol: getIconSymbol(raw.symbol, entity),
+          shape: SHAPES[index % SHAPES.length],
+          pattern: PATTERNS[index % PATTERNS.length],
+          primaryColor: palette[0],
+          secondaryColor: palette[1],
+          accentColor: palette[2]
+        };
+      }
+
+      function getIconSymbol(symbol, entity) {
+        const src = String(symbol || entity.name || entity.id || "?").trim();
+        return Array.from(src).slice(0, 2).join("") || "?";
+      }
+
+      function shapeNode(shape) {
+        if (shape === "circle") {
+          const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          c.setAttribute("cx", "50"); c.setAttribute("cy", "50"); c.setAttribute("r", "45");
+          return c;
+        }
+        if (shape === "hexagon") {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+          p.setAttribute("points", "50 4,90 27,90 73,50 96,10 73,10 27");
+          return p;
+        }
+        if (shape === "shield") {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("d", "M18 12 H82 V44 C82 70 63 86 50 94 C37 86 18 70 18 44 Z");
+          return p;
+        }
+        if (shape === "ticket") {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("d", "M12 22 Q12 12 22 12 H78 Q88 12 88 22 V34 Q76 38 76 50 Q76 62 88 66 V78 Q88 88 78 88 H22 Q12 88 12 78 V66 Q24 62 24 50 Q24 38 12 34 Z");
+          return p;
+        }
+        if (shape === "blob") {
+          const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          p.setAttribute("d", "M48 6 C64 4 83 15 90 31 C98 49 85 68 73 82 C60 98 38 94 24 84 C8 72 5 52 12 35 C18 19 30 9 48 6 Z");
+          return p;
+        }
+        const r = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        r.setAttribute("x", "8"); r.setAttribute("y", "8"); r.setAttribute("width", "84"); r.setAttribute("height", "84"); r.setAttribute("rx", "18");
+        return r;
+      }
+
+      function appendPattern(group, pattern, color) {
+        const mk = (tag) => document.createElementNS("http://www.w3.org/2000/svg", tag);
+        if (pattern === "plain") return;
+        if (pattern === "dots" || pattern === "bubbles" || pattern === "sparkles") {
+          for (let i = 0; i < 10; i++) {
+            const c = mk("circle");
+            c.setAttribute("cx", String(12 + (i * 19) % 76));
+            c.setAttribute("cy", String(14 + (i * 31) % 72));
+            c.setAttribute("r", pattern === "bubbles" ? "6" : "3");
+            c.setAttribute("fill", pattern === "bubbles" ? "none" : color);
+            c.setAttribute("stroke", color);
+            c.setAttribute("opacity", pattern === "sparkles" ? "0.38" : "0.42");
+            group.append(c);
+          }
+          if (pattern === "sparkles") {
+            for (let i = 0; i < 5; i++) {
+              const t = mk("text");
+              t.setAttribute("x", String(18 + (i * 23) % 68));
+              t.setAttribute("y", String(26 + (i * 29) % 58));
+              t.setAttribute("fill", color);
+              t.setAttribute("font-size", "12");
+              t.setAttribute("font-weight", "900");
+              t.textContent = "+";
+              group.append(t);
+            }
+          }
+          return;
+        }
+        if (pattern === "stripes" || pattern === "diagonal") {
+          for (let i = -80; i < 160; i += 16) {
+            const line = mk("line");
+            line.setAttribute("x1", String(i));
+            line.setAttribute("y1", pattern === "diagonal" ? "100" : "0");
+            line.setAttribute("x2", String(i + (pattern === "diagonal" ? 80 : 0)));
+            line.setAttribute("y2", pattern === "diagonal" ? "0" : "100");
+            line.setAttribute("stroke", color);
+            line.setAttribute("stroke-width", "6");
+            line.setAttribute("opacity", "0.28");
+            group.append(line);
+          }
+          return;
+        }
+        if (pattern === "rings") {
+          for (let r = 18; r < 72; r += 16) {
+            const c = mk("circle");
+            c.setAttribute("cx", "50");
+            c.setAttribute("cy", "50");
+            c.setAttribute("r", String(r));
+            c.setAttribute("fill", "none");
+            c.setAttribute("stroke", color);
+            c.setAttribute("stroke-width", "5");
+            c.setAttribute("opacity", "0.28");
+            group.append(c);
+          }
+          return;
+        }
+        if (pattern === "waves") {
+          for (let y = 16; y < 96; y += 18) {
+            const p = mk("path");
+            p.setAttribute("d", "M0 " + y + " C18 " + (y - 11) + " 32 " + (y + 11) + " 50 " + y + " S82 " + (y - 11) + " 104 " + y);
+            p.setAttribute("fill", "none");
+            p.setAttribute("stroke", color);
+            p.setAttribute("stroke-width", "5");
+            p.setAttribute("opacity", "0.32");
+            group.append(p);
+          }
+          return;
+        }
+        if (pattern === "grid" || pattern === "checker") {
+          for (let i = 0; i <= 100; i += 20) {
+            const v = mk("line");
+            v.setAttribute("x1", String(i)); v.setAttribute("y1", "0"); v.setAttribute("x2", String(i)); v.setAttribute("y2", "100");
+            v.setAttribute("stroke", color); v.setAttribute("stroke-width", "3"); v.setAttribute("opacity", "0.22");
+            const h = mk("line");
+            h.setAttribute("x1", "0"); h.setAttribute("y1", String(i)); h.setAttribute("x2", "100"); h.setAttribute("y2", String(i));
+            h.setAttribute("stroke", color); h.setAttribute("stroke-width", "3"); h.setAttribute("opacity", "0.22");
+            group.append(v, h);
+          }
+          if (pattern === "checker") {
+            for (let x = 0; x < 100; x += 20) {
+              for (let y = 0; y < 100; y += 20) {
+                if ((x + y) % 40 === 0) {
+                  const r = mk("rect");
+                  r.setAttribute("x", String(x)); r.setAttribute("y", String(y)); r.setAttribute("width", "20"); r.setAttribute("height", "20");
+                  r.setAttribute("fill", color); r.setAttribute("opacity", "0.2");
+                  group.append(r);
+                }
+              }
+            }
+          }
+          return;
+        }
+        if (pattern === "rays") {
+          for (let a = 0; a < 360; a += 30) {
+            const p = mk("path");
+            p.setAttribute("d", "M50 50 L50 0 L62 0 Z");
+            p.setAttribute("fill", color);
+            p.setAttribute("opacity", "0.22");
+            p.setAttribute("transform", "rotate(" + a + " 50 50)");
+            group.append(p);
+          }
+        }
+      }
+
+      function chooseReadableColor(bg, preferred) {
+        if (contrastRatio(bg, preferred) >= 4.5) return preferred;
+        return contrastRatio(bg, "#172033") >= contrastRatio(bg, "#FFFFFF") ? "#172033" : "#FFFFFF";
+      }
+
+      function contrastRatio(a, b) {
+        const l1 = luminance(a);
+        const l2 = luminance(b);
+        const high = Math.max(l1, l2);
+        const low = Math.min(l1, l2);
+        return (high + 0.05) / (low + 0.05);
+      }
+
+      function luminance(hex) {
+        const rgb = hexToRgb(hex);
+        if (!rgb) return 0;
+        const vals = [rgb.r, rgb.g, rgb.b].map((v) => {
+          const s = v / 255;
+          return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+        });
+        return vals[0] * 0.2126 + vals[1] * 0.7152 + vals[2] * 0.0722;
+      }
+
+      function hexToRgb(hex) {
+        const m = /^#([0-9a-f]{6})$/i.exec(String(hex || ""));
+        if (!m) return null;
+        const n = parseInt(m[1], 16);
+        return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+      }
+
+      function isHexColor(value) {
+        return /^#[0-9a-f]{6}$/i.test(String(value || ""));
+      }
+
+      function soundToggle() {
+        return button(audio.enabled ? "音效开" : "音效关", "ghost", () => {
+          audio.enabled = !audio.enabled;
+          if (progress) progress.soundEnabled = audio.enabled;
+          try {
+            localStorage.setItem(STORE.sound, String(audio.enabled));
+          } catch {}
+          saveProgress();
+          if (view === "game") renderGame();
+          else if (view === "cases") renderCaseLobby();
+          else if (view === "intro") renderCaseIntro();
+          else if (view === "completion") renderCompletion();
+        }, { ariaLabel: "切换音效" });
+      }
+
+      function unlockAudio() {
+        if (audio.ctx || !audio.enabled) return;
+        try {
+          const AudioCtor = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtor) return;
+          audio.ctx = new AudioCtor();
+          audio.ok = true;
+        } catch {
+          audio.ok = false;
+        }
+      }
+
+      function playSound(type) {
+        if (!audio.enabled) return;
+        unlockAudio();
+        if (!audio.ok || !audio.ctx) return;
+        try {
+          const now = audio.ctx.currentTime;
+          const sequence = {
+            click: [[320, 0.028, 0.032], [210, 0.022, 0.018]],
+            openCase: [[240, 0.055, 0.028], [360, 0.06, 0.03], [460, 0.045, 0.02]],
+            openOption: [[480, 0.04, 0.03], [610, 0.055, 0.026]],
+            success: [[420, 0.06, 0.04], [640, 0.08, 0.04], [820, 0.11, 0.034]],
+            error: [[180, 0.075, 0.048], [130, 0.065, 0.036]],
+            newClue: [[580, 0.07, 0.035], [760, 0.09, 0.034], [920, 0.08, 0.026]],
+            clue: [[430, 0.045, 0.026]],
+            clueUsed: [[260, 0.055, 0.032], [520, 0.075, 0.028]],
+            story: [[360, 0.06, 0.03], [590, 0.08, 0.03]],
+            complete: [[360, 0.08, 0.04], [520, 0.1, 0.04], [700, 0.12, 0.035], [900, 0.16, 0.03]]
+          }[type] || [[440, 0.04, 0.026]];
+          sequence.forEach(([freq, duration, gain], index) => {
+            const osc = audio.ctx.createOscillator();
+            const amp = audio.ctx.createGain();
+            osc.type = type === "error" ? "triangle" : type === "click" || type === "clueUsed" ? "square" : "sine";
+            osc.frequency.setValueAtTime(freq, now + index * 0.08);
+            amp.gain.setValueAtTime(0.0001, now + index * 0.08);
+            amp.gain.exponentialRampToValueAtTime(gain, now + index * 0.08 + 0.01);
+            amp.gain.exponentialRampToValueAtTime(0.0001, now + index * 0.08 + duration);
+            osc.connect(amp).connect(audio.ctx.destination);
+            osc.start(now + index * 0.08);
+            osc.stop(now + index * 0.08 + duration + 0.02);
+          });
+        } catch {}
+      }
+
+      function clearAllProgress() {
+        Object.keys(memoryProgressStore).forEach((key) => delete memoryProgressStore[key]);
+        try {
+          Object.keys(localStorage).forEach((key) => {
+            if (key.startsWith(STORE.progress)) localStorage.removeItem(key);
+          });
+        } catch {}
+      }
+
+      function resetCaseProgress(caseId) {
+        delete memoryProgressStore[progressKey(caseId)];
+        try {
+          localStorage.removeItem(progressKey(caseId));
+        } catch {}
+        if (currentCase && currentCase.id === caseId) progress = createProgress(currentCase);
+      }
+
+      function loadProgress(caseId) {
+        try {
+          const raw = localStorage.getItem(progressKey(caseId));
+          if (!raw) return memoryProgressStore[progressKey(caseId)] || null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || parsed.caseId !== caseId) return null;
+          parsed.correctCells = Array.isArray(parsed.correctCells) ? parsed.correctCells : [];
+          parsed.clueStatus = parsed.clueStatus || {};
+          parsed.storyEventsShown = Array.isArray(parsed.storyEventsShown) ? parsed.storyEventsShown : [];
+          parsed.revealedEntities = Array.isArray(parsed.revealedEntities) ? parsed.revealedEntities : [];
+          parsed.categoryOrder = Array.isArray(parsed.categoryOrder) ? parsed.categoryOrder : [];
+          parsed.optionOrderByCategory = parsed.optionOrderByCategory && typeof parsed.optionOrderByCategory === "object" ? parsed.optionOrderByCategory : {};
+          parsed.cluePage = Number(parsed.cluePage || 0);
+          parsed.clueScrollLeft = Number(parsed.clueScrollLeft || 0);
+          parsed.errors = Number(parsed.errors || 0);
+          parsed.hints = Number(parsed.hints || 0);
+          parsed.startTime = Number(parsed.startTime || Date.now());
+          return parsed;
+        } catch {
+          return memoryProgressStore[progressKey(caseId)] || null;
+        }
+      }
+
+      function saveProgress() {
+        if (!progress || !currentCase) return;
+        memoryProgressStore[progressKey(currentCase.id)] = progress;
+        try {
+          localStorage.setItem(progressKey(currentCase.id), JSON.stringify(progress));
+        } catch {}
+      }
+
+      function progressKey(caseId) {
+        return STORE.progress + packageHash + "." + caseId;
+      }
+
+      function findCase(id) {
+        return (packageData && Array.isArray(packageData.cases) ? packageData.cases : []).find((item) => item.id === id) || null;
+      }
+
+      function getEntityLabel(caseItem) {
+        return caseItem && caseItem.entityLabel ? caseItem.entityLabel : "档案对象";
+      }
+
+      function getTotalCells(caseItem) {
+        return ((caseItem.entities || []).length) * ((caseItem.categories || []).length);
+      }
+
+      function cellId(entityId, categoryId) {
+        return entityId + "::" + categoryId;
+      }
+
+      function splitCellId(id) {
+        const parts = String(id || "").split("::");
+        if (parts.length !== 2) return null;
+        return { entityId: parts[0], categoryId: parts[1] };
+      }
+
+      function getEntity(id) {
+        return (currentCase.entities || []).find((entity) => entity.id === id);
+      }
+
+      function getCategory(id) {
+        return (currentCase.categories || []).find((category) => category.id === id);
+      }
+
+      function getOrderedCategories() {
+        const categories = currentCase && Array.isArray(currentCase.categories) ? currentCase.categories : [];
+        if (!progress || !Array.isArray(progress.categoryOrder) || !progress.categoryOrder.length) return categories.slice();
+        const byId = new Map(categories.map((category) => [category.id, category]));
+        const ordered = progress.categoryOrder.map((id) => byId.get(id)).filter(Boolean);
+        categories.forEach((category) => {
+          if (!ordered.includes(category)) ordered.push(category);
+        });
+        return ordered;
+      }
+
+      function getOrderedOptions(category) {
+        const options = Array.isArray(category && category.options) ? category.options : [];
+        const order = progress && progress.optionOrderByCategory ? progress.optionOrderByCategory[category.id] : null;
+        if (!Array.isArray(order) || !order.length) return options.slice();
+        const byId = new Map(options.map((option) => [option.id, option]));
+        const ordered = order.map((id) => byId.get(id)).filter(Boolean);
+        options.forEach((option) => {
+          if (!ordered.includes(option)) ordered.push(option);
+        });
+        return ordered;
+      }
+
+      function getOptionLabel(categoryId, optionId) {
+        const category = getCategory(categoryId);
+        const option = category && (category.options || []).find((item) => item.id === optionId);
+        return option ? (option.label || "") : "";
+      }
+
+      function getCellAnswerLabel(id) {
+        const parts = splitCellId(id);
+        if (!parts) return "";
+        const answer = currentCase.solution && currentCase.solution[parts.entityId] && currentCase.solution[parts.entityId][parts.categoryId];
+        return getOptionLabel(parts.categoryId, answer);
+      }
+
+      function isOptionUsedInCategory(categoryId, optionId) {
+        return progress.correctCells.some((id) => {
+          const parts = splitCellId(id);
+          if (!parts || parts.categoryId !== categoryId) return false;
+          const answer = currentCase.solution[parts.entityId] && currentCase.solution[parts.entityId][categoryId];
+          return answer === optionId;
+        });
+      }
+
+      function getMaxHints() {
+        const value = packageData && packageData.settings ? Number(packageData.settings.maxHints) : 3;
+        return Number.isFinite(value) && value >= 0 ? value : 3;
+      }
+
+      function getNextCase() {
+        const cases = packageData && Array.isArray(packageData.cases) ? packageData.cases : [];
+        const index = cases.findIndex((item) => item.id === currentCase.id);
+        return index >= 0 && index < cases.length - 1 ? cases[index + 1] : null;
+      }
+
+      function normalizeSummary(summary) {
+        if (!Array.isArray(summary)) return [];
+        return summary.map((item) => {
+          if (typeof item === "string") return item;
+          if (item && typeof item === "object") return Object.values(item).map((value) => String(value || "")).filter(Boolean).join("：");
+          return "";
+        }).filter(Boolean);
+      }
+
+      function getStarLevel() {
+        const errors = progress.errors;
+        const hints = progress.hints;
+        const elapsed = (progress.completedAt || Date.now()) - progress.startTime;
+        const limit = packageData && packageData.settings && packageData.settings.timeLimitSeconds ? Number(packageData.settings.timeLimitSeconds) * 1000 : 0;
+        if (errors <= 2 && hints <= 1 && (!limit || elapsed <= limit)) return "三星";
+        if (errors <= 5 && hints <= Math.max(2, getMaxHints())) return "二星";
+        return "一星";
+      }
+
+      function formatElapsed() {
+        if (!progress) return "00:00";
+        return formatDuration(Date.now() - progress.startTime);
+      }
+
+      function formatDuration(ms) {
+        const total = Math.max(0, Math.floor(ms / 1000));
+        const min = Math.floor(total / 60);
+        const sec = total % 60;
+        return String(min).padStart(2, "0") + ":" + String(sec).padStart(2, "0");
+      }
+
+      function safeLabel(label, fallback) {
+        return String(label || fallback || "未命名");
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function stableHash(text) {
+        return Math.abs(hashNumber(text)).toString(36);
+      }
+
+      function hashNumber(text) {
+        let hash = 2166136261;
+        const src = String(text || "");
+        for (let i = 0; i < src.length; i++) {
+          hash ^= src.charCodeAt(i);
+          hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+        }
+        return hash | 0;
+      }
+
+      function fitPagesToViewport() {
+        cluePage = Math.max(0, cluePage);
+      }
+
+      const particles = {
+        ctx: bgCanvas.getContext("2d"),
+        items: [],
+        paused: false,
+        reduced: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      };
+
+      function startBackground() {
+        if (!particles.ctx || particles.reduced) return;
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+        requestAnimationFrame(drawBackground);
+      }
+
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        bgCanvas.width = Math.floor(window.innerWidth * dpr);
+        bgCanvas.height = Math.floor(window.innerHeight * dpr);
+        bgCanvas.style.width = window.innerWidth + "px";
+        bgCanvas.style.height = window.innerHeight + "px";
+        particles.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const count = Math.min(58, Math.max(20, Math.floor((window.innerWidth * window.innerHeight) / 38000)));
+        particles.items = Array.from({ length: count }, (_, index) => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: 1.4 + Math.random() * 6,
+          w: 16 + Math.random() * 24,
+          h: 10 + Math.random() * 18,
+          s: 0.12 + Math.random() * 0.3,
+          a: Math.random() * Math.PI * 2,
+          type: index % 5 === 0 ? "paper" : index % 5 === 1 ? "route" : "dust",
+          c: ["rgba(244,231,197,0.34)", "rgba(199,154,75,0.28)", "rgba(60,141,135,0.24)", "rgba(255,249,237,0.2)", "rgba(140,59,74,0.18)"][index % 5]
+        }));
+      }
+
+      function drawBackground() {
+        if (!particles.ctx || particles.reduced) return;
+        if (!particles.paused) {
+          const ctx = particles.ctx;
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          particles.items.forEach((p) => {
+            p.a += 0.006;
+            p.x += Math.cos(p.a) * p.s;
+            p.y += Math.sin(p.a * 0.8) * p.s;
+            if (p.x < -20) p.x = window.innerWidth + 20;
+            if (p.x > window.innerWidth + 20) p.x = -20;
+            if (p.y < -20) p.y = window.innerHeight + 20;
+            if (p.y > window.innerHeight + 20) p.y = -20;
+            if (p.type === "paper") {
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate(Math.sin(p.a) * 0.25);
+              ctx.fillStyle = "rgba(244,231,197,0.16)";
+              ctx.strokeStyle = "rgba(199,154,75,0.2)";
+              ctx.lineWidth = 1;
+              ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+              ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+              ctx.restore();
+            } else if (p.type === "route") {
+              ctx.beginPath();
+              ctx.setLineDash([4, 7]);
+              ctx.moveTo(p.x - 18, p.y + 8);
+              ctx.lineTo(p.x, p.y - 8);
+              ctx.lineTo(p.x + 18, p.y + 7);
+              ctx.strokeStyle = p.c;
+              ctx.lineWidth = 1.4;
+              ctx.stroke();
+              ctx.setLineDash([]);
+            } else {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+              ctx.fillStyle = p.c;
+              ctx.fill();
+            }
+          });
+        }
+        requestAnimationFrame(drawBackground);
+      }
+
+      startBackground();
+    })();
+  </script>
+</body>
+</html>
