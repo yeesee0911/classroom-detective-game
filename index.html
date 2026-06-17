@@ -564,22 +564,29 @@
 
     .validation-page .panel.stack {
       grid-template-rows: auto minmax(0, 1fr);
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
     }
 
     .validation-layout {
       min-height: 0;
-      height: 100%;
-      overflow: hidden;
+      height: auto;
+      overflow: visible;
+      align-content: start;
+      gap: 12px;
     }
 
     .validation-check-pane,
     .validation-data-pane {
       min-height: 0;
-      overflow: auto;
+      overflow: visible;
       overscroll-behavior: contain;
-      padding: 1px 3px 6px 1px;
+      padding: 10px;
       align-content: start;
+      border-radius: 10px;
+      border: 1px solid rgba(70, 61, 56, 0.2);
+      background: rgba(255, 249, 237, 0.58);
     }
 
     .validation-data-pane .item-card,
@@ -588,7 +595,7 @@
     }
 
     .intro-page .panel.stack {
-      gap: 12px;
+      gap: 8px;
       overflow: hidden;
     }
 
@@ -599,32 +606,32 @@
     }
 
     .intro-page .item-card {
-      padding: 15px;
-      gap: 10px;
+      padding: 9px;
+      gap: 6px;
     }
 
     .intro-page .item-card .subtle {
       color: var(--ink);
-      font-size: clamp(1rem, 1.55vw, 1.2rem);
-      line-height: 1.52;
+      font-size: clamp(1.16rem, 1.85vw, 1.42rem);
+      line-height: 1.42;
     }
 
     .intro-page .result-grid {
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
+      gap: 6px;
     }
 
     .intro-page .result-cell {
       min-height: 74px;
-      padding: 12px;
+      padding: 7px;
     }
 
     .intro-page .result-label {
-      font-size: clamp(0.9rem, 1.25vw, 1.04rem);
+      font-size: clamp(1rem, 1.35vw, 1.14rem);
     }
 
     .intro-page .result-value {
-      font-size: clamp(1.08rem, 1.55vw, 1.28rem);
+      font-size: clamp(1.2rem, 1.7vw, 1.42rem);
     }
 
     .intro-page .actions button {
@@ -651,8 +658,11 @@
 
     .validation-list {
       display: grid;
-      gap: 8px;
+      gap: 5px;
       min-height: 0;
+      max-height: min(40dvh, 360px);
+      overflow: auto;
+      overscroll-behavior: contain;
     }
 
     .validation-report-head {
@@ -665,9 +675,16 @@
 
     .validation-report-head h2 {
       min-width: 0;
+      font-size: clamp(1rem, 1.35vw, 1.18rem);
     }
 
-    .validation-report-toggle,
+    .validation-report-toggle {
+      display: inline-flex;
+      flex: 0 0 auto;
+      min-height: 36px;
+      white-space: nowrap;
+    }
+
     .validation-collapsed-note {
       display: none;
     }
@@ -675,15 +692,24 @@
     .validation-item {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 8px;
+      gap: 6px;
       align-items: start;
-      min-height: 38px;
-      padding: 8px 9px;
+      min-height: 30px;
+      padding: 5px 7px;
       border-radius: 8px;
       background: rgba(255, 249, 237, 0.82);
       border: 1px solid rgba(70, 61, 56, 0.18);
-      line-height: 1.35;
+      line-height: 1.24;
+      font-size: clamp(0.78rem, 1.05vw, 0.92rem);
       overflow: hidden;
+    }
+
+    .validation-data-pane {
+      font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    }
+
+    .validation-data-pane .result-value {
+      font-size: clamp(1.05rem, 1.45vw, 1.26rem);
     }
 
     .game-layout {
@@ -709,7 +735,8 @@
       display: grid;
       grid-template-rows: 1fr;
       gap: 8px;
-      overflow: visible;
+      overflow: auto;
+      overscroll-behavior: contain;
     }
 
     .archive-grid {
@@ -888,7 +915,7 @@
 
     .archive-panel {
       position: relative;
-      overflow: visible;
+      overflow: hidden;
       z-index: 4;
     }
 
@@ -1174,7 +1201,7 @@
     }
 
     .clue-text {
-      font-size: clamp(0.78rem, 1vw, 0.94rem);
+      font-size: clamp(0.86rem, 1.12vw, 1.04rem);
       line-height: 1.18;
       overflow-wrap: anywhere;
       word-break: break-word;
@@ -1189,7 +1216,8 @@
 
     @media (hover: hover) and (pointer: fine) {
       .archive-panel:not(.archive-scroll-mode) .table-wrap {
-        overflow: visible;
+        overflow: auto;
+        overscroll-behavior: contain;
       }
 
       .inline-options {
@@ -1205,7 +1233,7 @@
         display: grid;
         place-items: center;
         text-align: center;
-        font-size: clamp(1rem, 1.35vw, 1.18rem);
+        font-size: clamp(1.08rem, 1.45vw, 1.28rem);
         line-height: 1.22;
       }
     }
@@ -1374,6 +1402,222 @@
       font-weight: 900;
       font-size: 0.92rem;
       line-height: 1.25;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .source-choice-card {
+      width: min(520px, calc(100vw - 24px));
+    }
+
+    .source-choice-card .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .github-library-page .panel.stack {
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+    }
+
+    .library-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(120px, 0.35fr) minmax(120px, 0.35fr);
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .library-controls input,
+    .library-controls select {
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid rgba(70, 61, 56, 0.28);
+      background: rgba(255, 249, 237, 0.94);
+      color: var(--ink);
+      padding: 8px 10px;
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .course-grid {
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+      padding-right: 2px;
+    }
+
+    .course-card {
+      min-height: 0;
+      align-content: start;
+      overflow: visible;
+    }
+
+    .course-card h3,
+    .course-card p {
+      overflow-wrap: anywhere;
+    }
+
+    .validation-page .panel.stack {
+      justify-content: start;
+      align-content: start;
+    }
+
+    .validation-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      justify-items: center;
+    }
+
+    .validation-check-pane,
+    .validation-data-pane {
+      width: min(860px, 100%);
+    }
+
+    .validation-check-pane.validation-collapsed .validation-list {
+      display: none;
+    }
+
+    .validation-list {
+      max-height: min(36dvh, 360px);
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .validation-data-pane {
+      text-align: center;
+    }
+
+    .validation-data-pane .actions {
+      justify-content: center;
+    }
+
+    .validation-start-button {
+      width: min(520px, 100%);
+      min-height: 62px;
+      font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+      font-weight: 1000;
+    }
+
+    .intro-meta-compact {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .intro-meta-compact .result-cell {
+      min-height: 48px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .intro-card-labels {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .intro-card-labels .pill {
+      min-height: 28px;
+      padding: 3px 7px;
+      font-size: clamp(0.9rem, 1.25vw, 1.08rem);
+      line-height: 1.08;
+    }
+
+    .intro-narrative-text {
+      font-size: clamp(1.2rem, 1.9vw, 1.48rem) !important;
+      line-height: 1.42 !important;
+    }
+
+    .intro-pager .page-label {
+      min-width: 84px;
+    }
+
+    .failure-card {
+      width: min(560px, 100%);
+      justify-self: center;
+      text-align: center;
+      border-color: rgba(182, 66, 66, 0.42);
+      background: linear-gradient(180deg, rgba(255, 249, 237, 0.98), rgba(255, 233, 223, 0.96));
+    }
+
+    .failure-title {
+      color: #7c2020;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 1000;
+      line-height: 1;
+    }
+
+    .completion-hero {
+      display: grid;
+      grid-template-columns: minmax(106px, 0.22fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .completion-hero .completion-stamp {
+      margin: 0;
+      justify-self: center;
+      align-self: center;
+      width: clamp(92px, 11vw, 116px);
+      font-size: clamp(0.9rem, 1.5vw, 1.18rem);
+      border-width: 5px;
+    }
+
+    .completion-section {
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding-right: 2px;
+    }
+
+    .completion-section .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      align-items: start;
+    }
+
+    .completion-section .result-cell {
+      min-height: auto;
+      padding: 6px;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .summary-line {
+      margin: 0;
+      padding: 5px 7px;
+      border-radius: 8px;
+      background: rgba(255, 249, 237, 0.82);
+      border: 1px solid rgba(70, 61, 56, 0.18);
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.26;
+      overflow-wrap: anywhere;
+    }
+
+    .completion-page .panel.stack {
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 3fr) auto;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .inline-option.wrong-flash {
+      animation: optionWrongFlash 620ms ease;
+    }
+
+    @keyframes optionWrongFlash {
+      0%, 100% { background: #fff9ed; color: var(--navy); }
+      28%, 72% { background: #ffe1df; color: #7c2020; border-color: rgba(182, 66, 66, 0.75); }
     }
 
     .hidden {
@@ -1552,6 +1796,11 @@
         overflow: hidden;
       }
 
+      .validation-page .panel.stack {
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
       .validation-page .two-col {
         min-height: 0;
         overflow: hidden;
@@ -1560,7 +1809,7 @@
       .validation-check-pane,
       .validation-data-pane {
         min-height: 0;
-        overflow: auto;
+        overflow: visible;
         padding-bottom: 8px;
       }
 
@@ -1664,7 +1913,7 @@
       }
 
       .clue-text {
-        font-size: clamp(0.82rem, 1.8vw, 0.98rem);
+        font-size: clamp(0.9rem, 1.9vw, 1.06rem);
         line-height: 1.18;
       }
 
@@ -1691,6 +1940,62 @@
     @media (max-width: 760px) {
       .game-layout {
         grid-template-rows: minmax(0, 20fr) minmax(0, 9fr);
+      }
+
+      .source-choice-card {
+        width: 100%;
+      }
+
+      .library-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-page .topbar {
+        min-height: 0;
+        padding: 6px 8px;
+        gap: 5px;
+      }
+
+      .intro-page .topbar .subtle {
+        line-height: 1.12;
+      }
+
+      .intro-page .topbar .actions.end {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .intro-page .topbar .actions.end button {
+        min-height: 34px;
+        padding: 5px 6px;
+        line-height: 1.08;
+      }
+
+      .intro-meta-compact {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4px;
+      }
+
+      .intro-meta-compact .result-cell {
+        min-height: 38px;
+        padding: 5px 3px;
+      }
+
+      .intro-meta-compact .result-label {
+        font-size: clamp(0.58rem, 2vw, 0.72rem);
+      }
+
+      .intro-meta-compact .result-value {
+        font-size: clamp(0.82rem, 2.8vw, 1rem);
+      }
+
+      .completion-hero {
+        grid-template-columns: 1fr;
       }
 
       .validation-page .panel.stack {
@@ -1812,9 +2117,18 @@
       const STORE = {
         package: STORAGE_PREFIX + "package",
         packageHash: STORAGE_PREFIX + "packageHash",
+        packageSource: STORAGE_PREFIX + "packageSource",
         progress: STORAGE_PREFIX + "progress.",
         sound: STORAGE_PREFIX + "soundEnabled"
       };
+      const GITHUB_LIBRARY_CONFIG = {
+        owner: "yeesee0911",
+        repo: "classroom-detective-game",
+        branch: "main",
+        folder: "game-data"
+      };
+      const MAX_ACTIVE_CLUES = 3;
+      const HIGHLIGHT_DURATION = 3360;
       const SHAPES = ["circle", "rounded-square", "hexagon", "shield", "ticket", "blob"];
       const PATTERNS = ["plain", "dots", "stripes", "rings", "waves", "grid", "rays", "bubbles", "sparkles", "checker", "diagonal"];
       const WRONG_MESSAGES = [
@@ -1840,6 +2154,7 @@
 
       let packageData = null;
       let packageHash = "";
+      let packageSource = { source: "local" };
       let validation = null;
       let currentCaseId = "";
       let currentCase = null;
@@ -1849,6 +2164,7 @@
       let dataInputText = "";
       let validationPage = 0;
       let validationReportExpanded = false;
+      let githubLibrary = { loading: false, error: "", items: [], filterText: "", subject: "", level: "", notice: "" };
       let casePage = 0;
       let narrativePage = 0;
       let tableEntityPage = 0;
@@ -1946,14 +2262,17 @@
         audio.enabled = localStorage.getItem(STORE.sound) !== "false";
         const savedPackage = localStorage.getItem(STORE.package);
         const savedHash = localStorage.getItem(STORE.packageHash);
+        const savedSource = localStorage.getItem(STORE.packageSource);
         if (savedPackage) {
           packageData = JSON.parse(savedPackage);
           packageHash = savedHash || stableHash(savedPackage);
+          packageSource = savedSource ? JSON.parse(savedSource) : { source: "local" };
           validation = validatePackage(packageData);
         }
       } catch {
         packageData = null;
         packageHash = "";
+        packageSource = { source: "local" };
         validation = null;
       }
 
@@ -2004,6 +2323,7 @@
 
       function renderDataLobby(message) {
         setPage("data");
+        const safeMessage = typeof message === "string" ? message : "";
         const page = createEl("section", "page single");
         const shell = createEl("div", "center-shell");
         const panel = createEl("div", "panel stack");
@@ -2011,7 +2331,7 @@
         panel.append(createEl("span", "pill new", "侦探调查局入口"));
         panel.append(createEl("h1", "", "请上传游戏资料包"));
         panel.append(createEl("p", "subtle", "导入案件资料包后，系统会先生成案件资料鉴定报告。"));
-        if (message) panel.append(createEl("div", "notice warn", message));
+        if (safeMessage) panel.append(createEl("div", "notice warn", safeMessage));
         if (parseError) panel.append(createEl("div", "notice error", parseError));
 
         const two = createEl("div", "two-col");
@@ -2023,15 +2343,7 @@
         fileInput.accept = ".json,application/json";
         fileInput.id = "jsonFileInput";
         fileInput.addEventListener("change", handleFileImport);
-        const fileLabel = createEl("label", "file-button primary", "导入案件资料");
-        fileLabel.setAttribute("for", "jsonFileInput");
-        fileLabel.setAttribute("tabindex", "0");
-        fileLabel.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            fileInput.click();
-          }
-        });
+        const fileLabel = button("导入案件资料", "primary", openSourceChooser);
 
         left.append(fileInput, fileLabel);
         left.append(button("继续上次调查", "secondary", continueSavedPackage, { disabled: !packageData || !validation }));
@@ -2060,12 +2372,233 @@
         app.replaceChildren(page);
       }
 
+      function openSourceChooser() {
+        lastFocused = document.activeElement;
+        modalLayer.setAttribute("aria-hidden", "false");
+        modalLayer.classList.add("open");
+        clearNode(modalLayer);
+        const card = createEl("div", "modal-card source-choice-card");
+        const head = createEl("div", "modal-head");
+        const title = createEl("div", "stack");
+        title.append(createEl("h2", "", "选择资料来源"));
+        title.append(createEl("p", "subtle", "可以上传本地 JSON，也可以从 GitHub 课程库读取。"));
+        head.append(title, button("关闭", "icon-button ghost", closeModal, { ariaLabel: "关闭资料来源选择" }));
+        const actions = createEl("div", "actions");
+        actions.append(button("从本地设备上传", "primary", () => {
+          closeModal();
+          openLocalFilePicker();
+        }));
+        actions.append(button("从GitHub课程库选择", "secondary", () => {
+          closeModal();
+          renderGithubLibrary(true);
+        }));
+        actions.append(button("取消", "ghost", closeModal));
+        card.append(head, actions);
+        modalLayer.append(card);
+        trapFocus(card);
+      }
+
+      function openLocalFilePicker() {
+        const input = document.getElementById("jsonFileInput");
+        if (input) {
+          input.value = "";
+          input.click();
+        }
+      }
+
+      function githubContentsUrl() {
+        const cfg = GITHUB_LIBRARY_CONFIG;
+        return "https://api.github.com/repos/" + encodeURIComponent(cfg.owner) + "/" + encodeURIComponent(cfg.repo) + "/contents/" + encodeURIComponent(cfg.folder) + "?ref=" + encodeURIComponent(cfg.branch);
+      }
+
+      function renderGithubLibrary(forceReload = false) {
+        setPage("githubLibrary");
+        if (forceReload) {
+          githubLibrary.loading = true;
+          githubLibrary.error = "";
+          githubLibrary.notice = "";
+          githubLibrary.items = [];
+          fetchGithubLibrary();
+        }
+        const page = createEl("section", "page github-library-page");
+        page.append(renderTopbar("GitHub课程库", "从 game-data 文件夹选择课程 JSON。", [
+          button("返回", "ghost", () => renderDataLobby()),
+          button("重新读取课程库", "secondary", () => renderGithubLibrary(true))
+        ]));
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        if (githubLibrary.notice) panel.append(createEl("div", "notice", githubLibrary.notice));
+        if (githubLibrary.error) {
+          panel.append(renderGithubErrorActions());
+        } else {
+          const controls = createEl("div", "library-controls");
+          const search = createEl("input");
+          search.type = "search";
+          search.placeholder = "搜索课程关键词";
+          search.value = githubLibrary.filterText || "";
+          search.addEventListener("input", () => {
+            githubLibrary.filterText = search.value;
+            renderGithubLibrary(false);
+          });
+          controls.append(search, makeLibrarySelect("subject", "全部科目", getLibraryFacetValues("subject")), makeLibrarySelect("level", "全部年级", getLibraryFacetValues("level")));
+          panel.append(controls);
+
+          if (githubLibrary.loading) panel.append(createEl("div", "notice", "正在读取GitHub课程库……"));
+          const grid = createEl("div", "course-grid");
+          getFilteredGithubItems().forEach((item) => grid.append(renderCourseCard(item)));
+          if (!grid.children.length && !githubLibrary.loading) grid.append(createEl("div", "notice warn", "没有找到符合条件的课程。"));
+          panel.append(grid);
+        }
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function renderGithubErrorActions() {
+        const box = createEl("div", "item-card stack");
+        box.append(createEl("div", "notice error", "暂时无法读取GitHub课程库，请重试或改用本地JSON上传。"));
+        const actions = createEl("div", "actions");
+        actions.append(button("重试", "primary", () => renderGithubLibrary(true)));
+        actions.append(button("从本地设备上传", "secondary", () => {
+          renderDataLobby();
+          requestAnimationFrame(openLocalFilePicker);
+        }));
+        actions.append(button("关闭", "ghost", () => renderDataLobby()));
+        box.append(actions);
+        return box;
+      }
+
+      async function fetchGithubLibrary() {
+        try {
+          const response = await fetch(githubContentsUrl(), { cache: "no-store" });
+          if (!response.ok) throw new Error("GitHub API " + response.status);
+          const data = await response.json();
+          if (!Array.isArray(data)) throw new Error("GitHub目录结构无效");
+          const files = data
+            .filter((item) => item && item.type === "file" && /\.json$/i.test(item.name || "") && item.download_url)
+            .map((item, index) => ({
+              index,
+              name: item.name,
+              path: item.path,
+              download_url: item.download_url,
+              loading: true,
+              error: "",
+              meta: { packageTitle: item.name, subject: "", level: "", description: "" }
+            }));
+          githubLibrary.items = files;
+          githubLibrary.loading = false;
+          githubLibrary.error = "";
+          if (view === "githubLibrary") renderGithubLibrary(false);
+          files.forEach((item) => fetchGithubCourseMeta(item));
+        } catch (error) {
+          githubLibrary.loading = false;
+          githubLibrary.error = error && error.message ? error.message : "GitHub读取失败";
+          if (view === "githubLibrary") renderGithubLibrary(false);
+        }
+      }
+
+      async function fetchGithubCourseMeta(item) {
+        try {
+          const response = await fetch(item.download_url, { cache: "no-store" });
+          if (!response.ok) throw new Error("读取失败");
+          const data = await response.json();
+          item.meta = {
+            packageTitle: data.packageTitle || data.title || item.name,
+            subject: data.subject || "",
+            level: data.level || "",
+            description: data.description || ""
+          };
+          item.loading = false;
+        } catch (error) {
+          item.loading = false;
+          item.error = "无法预览课程信息";
+        }
+        if (view === "githubLibrary") renderGithubLibrary(false);
+      }
+
+      function makeLibrarySelect(field, label, values) {
+        const select = createEl("select");
+        select.setAttribute("aria-label", label);
+        select.append(createEl("option", "", label));
+        values.forEach((value) => {
+          const option = createEl("option", "", value);
+          option.value = value;
+          if (githubLibrary[field] === value) option.selected = true;
+          select.append(option);
+        });
+        select.addEventListener("change", () => {
+          githubLibrary[field] = select.value;
+          renderGithubLibrary(false);
+        });
+        return select;
+      }
+
+      function getLibraryFacetValues(field) {
+        return [...new Set(githubLibrary.items.map((item) => item.meta && item.meta[field]).filter(Boolean))].sort((a, b) => String(a).localeCompare(String(b), "zh-Hans-CN"));
+      }
+
+      function getFilteredGithubItems() {
+        const keyword = String(githubLibrary.filterText || "").trim().toLowerCase();
+        return githubLibrary.items.filter((item) => {
+          const meta = item.meta || {};
+          if (githubLibrary.subject && meta.subject !== githubLibrary.subject) return false;
+          if (githubLibrary.level && meta.level !== githubLibrary.level) return false;
+          if (!keyword) return true;
+          return [item.name, meta.packageTitle, meta.subject, meta.level, meta.description].some((value) => String(value || "").toLowerCase().includes(keyword));
+        });
+      }
+
+      function renderCourseCard(item) {
+        const meta = item.meta || {};
+        const card = createEl("article", "item-card course-card");
+        card.append(createEl("span", "pill", item.name || ""));
+        card.append(createEl("h3", "", meta.packageTitle || item.name || "未命名课程"));
+        if (meta.subject) card.append(createEl("span", "pill visible", "科目：" + meta.subject));
+        if (meta.level) card.append(createEl("span", "pill partial", "年级：" + meta.level));
+        card.append(createEl("p", "subtle", meta.description || (item.loading ? "正在读取课程信息……" : item.error || "暂无课程描述。")));
+        card.append(button(item.loading ? "正在读取" : "载入课程", "primary", () => loadGithubCourse(item), { disabled: item.loading }));
+        return card;
+      }
+
+      async function loadGithubCourse(item) {
+        if (!item || !item.download_url) return;
+        githubLibrary.notice = "正在读取课程资料……";
+        renderGithubLibrary(false);
+        try {
+          const response = await fetch(item.download_url, { cache: "no-store" });
+          if (!response.ok) throw new Error("课程读取失败：" + response.status);
+          const text = await response.text();
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (error) {
+            throw new Error("JSON格式错误：" + error.message);
+          }
+          importPackageData(data, text, {
+            source: "github",
+            githubFileName: item.name || "",
+            githubPath: item.path || "",
+            packageId: data.packageId || "",
+            packageTitle: data.packageTitle || item.name || ""
+          }, true);
+        } catch (error) {
+          githubLibrary.notice = "";
+          githubLibrary.error = error && error.message ? error.message : "GitHub课程读取失败";
+          renderGithubLibrary(false);
+        }
+      }
+
       function handleFileImport(event) {
         const file = event.target.files && event.target.files[0];
         if (!file) return;
+        if (!/\.json$/i.test(file.name || "")) {
+          parseError = "请选择 .json 格式的资料包。";
+          renderDataLobby();
+          return;
+        }
         unlockAudio();
         const reader = new FileReader();
-        reader.onload = () => importText(String(reader.result || ""));
+        reader.onload = () => importText(String(reader.result || ""), { source: "local" });
         reader.onerror = () => {
           parseError = "文件读取失败，请重新选择 JSON 文件。";
           renderDataLobby();
@@ -2073,7 +2606,7 @@
         reader.readAsText(file, "utf-8");
       }
 
-      function importText(text) {
+      function importText(text, sourceMeta = { source: "local" }) {
         parseError = "";
         if (!String(text || "").trim()) {
           parseError = "JSON 内容为空，请上传或粘贴资料包。";
@@ -2088,20 +2621,33 @@
           renderDataLobby();
           return;
         }
+        importPackageData(data, String(text || ""), Object.assign({ source: "local" }, sourceMeta || {}));
+      }
+
+      function importPackageData(data, serializedText, sourceMeta, autoEnterLobby = false) {
         clearAllProgress();
         packageData = data;
-        const serialized = JSON.stringify(data);
+        const serialized = serializedText || JSON.stringify(data);
         packageHash = stableHash(serialized);
+        packageSource = Object.assign({
+          source: "local",
+          githubFileName: "",
+          githubPath: "",
+          packageId: data && data.packageId ? data.packageId : "",
+          packageTitle: data && data.packageTitle ? data.packageTitle : ""
+        }, sourceMeta || {});
         validation = validatePackage(data);
         try {
           localStorage.setItem(STORE.package, serialized);
           localStorage.setItem(STORE.packageHash, packageHash);
+          localStorage.setItem(STORE.packageSource, JSON.stringify(packageSource));
         } catch {
           validation.warnings.push("浏览器本地储存不可用，本次游戏仍可继续。");
         }
         validationPage = 0;
         validationReportExpanded = false;
-        renderValidation();
+        if (autoEnterLobby && validation && !validation.errors.length) renderCaseLobby();
+        else renderValidation();
       }
 
       function continueSavedPackage() {
@@ -2125,6 +2671,7 @@
         try {
           localStorage.removeItem(STORE.package);
           localStorage.removeItem(STORE.packageHash);
+          localStorage.removeItem(STORE.packageSource);
         } catch {}
         renderDataLobby("当前资料包已移除。");
       }
@@ -2325,11 +2872,10 @@
         status.textContent = validation && !validation.errors.length ? "✓ 案件资料验证完成，可以开始调查。" : "⚠ 案件资料存在问题，请修正资料包后重新导入。";
         panel.append(status);
 
-        const lists = createEl("div", "two-col validation-layout");
+        const lists = createEl("div", "validation-layout");
         const left = createEl("div", "stack validation-check-pane");
-        const mobileValidation = window.matchMedia("(max-width: 760px)").matches;
-        const showValidationReport = !mobileValidation || validationReportExpanded;
-        if (mobileValidation && !validationReportExpanded) left.classList.add("validation-collapsed");
+        const showValidationReport = validationReportExpanded === true;
+        if (!showValidationReport) left.classList.add("validation-collapsed");
         const reportHead = createEl("div", "validation-report-head");
         reportHead.append(createEl("h2", "", "案件资料鉴定报告"));
         const reportToggle = button(validationReportExpanded ? "收起报告" : "展开报告", "tiny ghost validation-report-toggle", () => {
@@ -2339,24 +2885,19 @@
         reportToggle.setAttribute("aria-expanded", String(showValidationReport));
         reportHead.append(reportToggle);
         left.append(reportHead);
-        const items = validation ? validation.checks : [];
-        const pageSize = 8;
-        const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
-        validationPage = clamp(validationPage, 0, totalPages - 1);
+        const items = (validation ? validation.checks : []).map((item, index) => Object.assign({ index }, item)).sort((a, b) => {
+          const rank = (item) => item.ok ? item.warn ? 1 : 2 : 0;
+          return rank(a) - rank(b) || a.index - b.index;
+        });
         const list = createEl("div", "validation-list");
-        items.slice(validationPage * pageSize, validationPage * pageSize + pageSize).forEach((item) => {
+        items.forEach((item) => {
           const row = createEl("div", "validation-item");
           row.append(createEl("span", item.warn ? "pill partial" : item.ok ? "pill visible" : "pill", item.warn ? "! 提醒" : item.ok ? "✓ 通过" : "× 错误"));
           row.append(createEl("span", "", item.text));
           list.append(row);
         });
         if (showValidationReport) {
-          left.append(list, renderPager(validationPage, totalPages, "项", (next) => {
-            validationPage = next;
-            renderValidation();
-          }));
-        } else {
-          left.append(createEl("p", "subtle validation-collapsed-note", "报告已收起，可先查看资料档案和操作按钮。"));
+          left.append(list);
         }
 
         const right = createEl("div", "stack validation-data-pane");
@@ -2370,8 +2911,7 @@
         right.append(desc, note);
 
         const startActions = createEl("div", "actions");
-        startActions.append(button("进入案件大厅", "primary", () => renderCaseLobby(), { disabled: !validation || validation.errors.length > 0 }));
-        startActions.append(button("下载空白 JSON 模板", "ghost", downloadBlankTemplate));
+        startActions.append(button("进入案件大厅", "primary validation-start-button", () => renderCaseLobby(), { disabled: !validation || validation.errors.length > 0 }));
         right.append(startActions);
         lists.append(left, right);
         panel.append(lists);
@@ -2416,7 +2956,7 @@
           const cells = getTotalCells(caseItem);
           const count = saved ? saved.correctCells.length : 0;
           card.append(createEl("div", done ? "notice success" : "notice", done ? "已完成" : "档案完成度：" + count + "/" + cells));
-          card.append(button(done ? "查看结案档案" : count ? "继续调查" : "查看案件简报", "primary", () => openCaseIntro(caseItem.id)));
+          card.append(button(done ? "查看结案报告" : count ? "继续调查" : "查看案件简报", "primary", () => done ? openCompletionReport(caseItem.id) : openCaseIntro(caseItem.id)));
           grid.append(card);
         });
         panel.append(grid, renderPager(casePage, totalPages, "页", (next) => {
@@ -2434,6 +2974,22 @@
         narrativePage = 0;
         playSound("openCase");
         renderCaseIntro();
+      }
+
+      function openCompletionReport(id) {
+        currentCaseId = id;
+        currentCase = findCase(id);
+        if (!currentCase) {
+          renderCaseLobby();
+          return;
+        }
+        progress = loadProgress(id) || createProgress(currentCase);
+        ensureProgressState(currentCase, progress);
+        if (!progress.completed) {
+          renderCaseIntro();
+          return;
+        }
+        renderCompletion();
       }
 
       function renderCaseIntro() {
@@ -2455,32 +3011,59 @@
         const totalPages = Math.max(1, pieces.length);
         narrativePage = clamp(narrativePage, 0, totalPages - 1);
         const piece = pieces[narrativePage];
-        const intro = createEl("div", "item-card");
-        intro.append(createEl("span", "pill new", "机密 / 待调查"));
-        intro.append(createEl("span", "pill", piece.label));
-        intro.append(createEl("p", "subtle", piece.text || "未填写"));
+        const intro = createEl("div", "item-card intro-narrative-card");
+        const labels = createEl("div", "intro-card-labels");
+        labels.append(createEl("span", "pill new", "机密 / 待调查"));
+        labels.append(createEl("span", "pill intro-narrative-label", piece.label));
+        intro.append(labels);
+        intro.append(createEl("p", "subtle intro-narrative-text", piece.text || "未填写"));
 
-        const meta = createEl("div", "result-grid");
+        const meta = createEl("div", "result-grid intro-meta-compact");
         meta.append(labeledText(entityLabel + "数量", String((currentCase.entities || []).length)));
         meta.append(labeledText("配对类别", String((currentCase.categories || []).length)));
         meta.append(labeledText("线索数量", String((currentCase.clues || []).length)));
         meta.append(labeledText("总格子数", String(getTotalCells(currentCase))));
 
         const actions = createEl("div", "actions");
-        actions.append(button(loadProgress(currentCase.id) ? "继续调查" : "开始调查", "primary", startCase));
-        actions.append(button("重新调查", "danger", () => {
-          resetCaseProgress(currentCase.id);
-          startCase();
-        }));
-        actions.append(button("返回案件大厅", "ghost", renderCaseLobby));
+        const savedProgress = loadProgress(currentCase.id);
+        if (savedProgress) {
+          actions.append(button("继续调查", "primary", startCase));
+          actions.append(button("重新调查", "danger", () => {
+            resetCaseProgress(currentCase.id);
+            progress = null;
+            renderCaseIntro();
+          }));
+        } else {
+          actions.append(button("开始调查", "primary", startCase));
+        }
 
-        panel.append(createEl("h2", "", currentCase.title || "案件介绍"), meta, intro, renderPager(narrativePage, totalPages, "段", (next) => {
-          narrativePage = next;
-          renderCaseIntro();
-        }), actions);
+        panel.append(createEl("h2", "", currentCase.title || "案件介绍"), meta, intro, renderNarrativePager(totalPages), actions);
         shell.append(panel);
         page.append(shell);
         app.replaceChildren(page);
+      }
+
+      function renderNarrativePager(totalPages) {
+        const pager = renderPager(narrativePage, totalPages, "段", (next) => {
+          narrativePage = next;
+          updateNarrativeContent();
+        });
+        pager.classList.add("intro-pager");
+        return pager;
+      }
+
+      function updateNarrativeContent() {
+        if (view !== "intro" || !currentCase) return;
+        const pieces = getNarrativePieces(currentCase);
+        const totalPages = Math.max(1, pieces.length);
+        narrativePage = clamp(narrativePage, 0, totalPages - 1);
+        const piece = pieces[narrativePage];
+        const label = app.querySelector(".intro-narrative-label");
+        const text = app.querySelector(".intro-narrative-text");
+        const pager = app.querySelector(".intro-pager");
+        if (label) label.textContent = piece.label;
+        if (text) text.textContent = piece.text || "未填写";
+        if (pager) pager.replaceWith(renderNarrativePager(totalPages));
       }
 
       function getNarrativePieces(caseItem) {
@@ -2513,9 +3096,9 @@
       function createProgress(caseItem) {
         const clueStatus = {};
         (caseItem.clues || []).forEach((clue) => {
-          clueStatus[clue.id] = clue.initial === true ? "visible" : "hidden";
+          clueStatus[clue.id] = "hidden";
         });
-        return {
+        const state = {
           caseId: caseItem.id,
           correctCells: [],
           clueStatus,
@@ -2525,6 +3108,8 @@
           startTime: Date.now(),
           completed: false,
           completedAt: 0,
+          failed: false,
+          failedAt: 0,
           soundEnabled: audio.enabled,
           cluePage: 0,
           clueScrollLeft: 0,
@@ -2532,6 +3117,8 @@
           optionOrderByCategory: {},
           revealedEntities: []
         };
+        normalizeClueActivity(caseItem, state);
+        return state;
       }
 
       // 随机顺序和名称揭示状态只补字段，不改动 JSON 原始数据。
@@ -2546,6 +3133,8 @@
         state.revealedEntities = Array.isArray(state.revealedEntities) ? state.revealedEntities : [];
         state.cluePage = Number.isFinite(Number(state.cluePage)) ? Number(state.cluePage) : 0;
         state.clueScrollLeft = Number.isFinite(Number(state.clueScrollLeft)) ? Number(state.clueScrollLeft) : 0;
+        state.failed = state.failed === true;
+        state.failedAt = Number(state.failedAt || 0);
 
         const settings = getEngineSettings(caseItem);
         const categories = Array.isArray(caseItem.categories) ? caseItem.categories : [];
@@ -2566,6 +3155,7 @@
           }
         });
         state.optionOrderByCategory = orderMap;
+        normalizeClueActivity(caseItem, state);
         updateEntityRevealState();
       }
 
@@ -2609,9 +3199,13 @@
           renderCaseLobby();
           return;
         }
+        if (progress.failed) {
+          renderFailure();
+          return;
+        }
         const page = createEl("section", "page game-page");
         page.append(renderTopbar(currentCase.title || "调查中", getGameSubtitle(), [
-          button("使用提示", "secondary", useHint, { disabled: progress.completed }),
+          button("提示", "secondary", useHint, { disabled: progress.completed || progress.failed }),
           soundToggle(),
           button("案件大厅", "ghost", () => {
             saveProgress();
@@ -2820,7 +3414,10 @@
         const gap = Math.max(3, Math.min(8, Math.round(parseFloat(getComputedStyle(grid).gap) || 5)));
         const wrapWidth = Math.max(260, wrap.clientWidth);
         const wrapHeight = Math.max(220, wrap.clientHeight);
-        const entityCol = clamp(Math.round(wrapWidth * 0.32), window.innerWidth < 520 ? 176 : 188, window.innerWidth < 520 ? 220 : 238);
+        const compactNarrow = window.innerWidth < 900;
+        const entityCol = compactNarrow
+          ? clamp(Math.round(wrapWidth * 0.243), window.innerWidth < 520 ? 140 : 153, window.innerWidth < 520 ? 184 : 198)
+          : clamp(Math.round(wrapWidth * 0.27), 170, 220);
         const answerCol = Math.max(window.innerWidth < 520 ? 108 : 120, Math.floor((wrapWidth - entityCol - gap * 4) / 4) + 16);
         const headerRow = clamp(Math.round(wrapHeight * 0.1), window.innerWidth < 520 ? 46 : 42, window.innerWidth < 520 ? 56 : 54);
         const entityRow = Math.max(window.innerWidth < 520 ? 104 : 98, Math.floor((wrapHeight - headerRow - gap * 4) / 4) + 14);
@@ -2829,7 +3426,7 @@
         grid.style.setProperty("--table-pad", Math.max(4, Math.round(6 * rowFont)) + "px");
         grid.style.setProperty("--cell-pad", Math.max(4, Math.round(5 * rowFont)) + "px " + Math.max(5, Math.round(7 * rowFont)) + "px");
         grid.style.setProperty("--cell-min-height", Math.max(46, entityRow - 14) + "px");
-        grid.style.setProperty("--icon-size", clamp(Math.round(entityRow * 0.42), 28, 46) + "px");
+        grid.style.setProperty("--icon-size", clamp(Math.round(entityRow * (compactNarrow ? 0.36 : 0.42)), 26, compactNarrow ? 40 : 46) + "px");
         grid.style.setProperty("--table-header-font", clamp(headerRow / 52, 0.96, 1.16).toFixed(2) + "rem");
         grid.style.setProperty("--entity-name-font", clamp(rowFont * 1.04, 0.96, 1.14).toFixed(2) + "rem");
         grid.style.setProperty("--entity-title-font", clamp(rowFont * 0.9, 0.82, 1).toFixed(2) + "rem");
@@ -2950,7 +3547,9 @@
           entityCell.append(makeIcon(entity, currentCase));
           const text = createEl("div", "entity-text");
           text.append(createEl("div", "entity-name", displayName));
-          text.append(createEl("div", "entity-title", revealed ? (entity.title || entity.description || "身份已确认") : getEntityRevealProgressText(entity.id)));
+          if (revealed && (entity.title || entity.description)) {
+            text.append(createEl("div", "entity-title", entity.title || entity.description));
+          }
           entityCell.append(text);
           grid.append(entityCell);
           categories.forEach((category, categoryIndex) => {
@@ -3066,9 +3665,18 @@
         const revealed = isEntityNameRevealed(entityId);
         node.classList.toggle("identity-hidden", !revealed);
         const name = node.querySelector(".entity-name");
-        const title = node.querySelector(".entity-title");
+        let title = node.querySelector(".entity-title");
         if (name) name.textContent = getEntityDisplayName(entity, Math.max(0, entityIndex));
-        if (title) title.textContent = revealed ? (entity.title || entity.description || "身份已确认") : getEntityRevealProgressText(entityId);
+        const titleText = revealed ? (entity.title || entity.description || "") : "";
+        if (titleText && !title) {
+          const text = node.querySelector(".entity-text");
+          title = createEl("div", "entity-title");
+          if (text) text.append(title);
+        }
+        if (title) {
+          if (titleText) title.textContent = titleText;
+          else title.remove();
+        }
       }
 
       function renderClueArea() {
@@ -3090,7 +3698,7 @@
         stats.append(pageStatus);
         const scroll = createEl("div", "clue-scroll");
         const grid = createEl("div", "clue-grid");
-        const visibleCount = Math.min(5, Math.max(1, clues.length || 1));
+        const visibleCount = Math.min(3, Math.max(1, clues.length || 1));
         const gap = window.innerWidth < 700 ? 4 : 8;
         grid.style.setProperty("--clue-gap", gap + "px");
         grid.style.setProperty("--clue-card-basis", "calc((100% - " + ((visibleCount - 1) * gap) + "px) / " + visibleCount + ")");
@@ -3190,15 +3798,28 @@
       }
 
       function getDisplayClues() {
-        const rank = { used: 0, partial: 1, visible: 2 };
         return (currentCase.clues || [])
           .filter((clue) => progress.clueStatus[clue.id] !== "hidden")
-          .sort((a, b) => {
-            const sa = progress.clueStatus[a.id] || "hidden";
-            const sb = progress.clueStatus[b.id] || "hidden";
-            if (rank[sa] !== rank[sb]) return rank[sa] - rank[sb];
-            return Number(a.priority || 0) - Number(b.priority || 0);
-          });
+          .sort(compareDisplayClues);
+      }
+
+      function compareDisplayClues(a, b) {
+        const statusRank = { used: 0, partial: 1, visible: 1 };
+        const sa = progress.clueStatus[a.id] || "hidden";
+        const sb = progress.clueStatus[b.id] || "hidden";
+        if (statusRank[sa] !== statusRank[sb]) return statusRank[sa] - statusRank[sb];
+        return compareCluePriority(a, b);
+      }
+
+      function compareCluePriority(a, b) {
+        const pa = Number.isFinite(Number(a.priority)) ? Number(a.priority) : 0;
+        const pb = Number.isFinite(Number(b.priority)) ? Number(b.priority) : 0;
+        if (pa !== pb) return pa - pb;
+        return getClueIndex(a.id) - getClueIndex(b.id);
+      }
+
+      function getClueIndex(id) {
+        return (currentCase && currentCase.clues ? currentCase.clues : []).findIndex((clue) => clue.id === id);
       }
 
       function setCluePageForClue(clueId) {
@@ -3214,12 +3835,7 @@
 
       function renderClueCard(clue) {
         const status = progress.clueStatus[clue.id] || "hidden";
-        const card = createEl("button", "clue-card " + status + (newClueIds.has(clue.id) ? " new" : ""));
-        card.type = "button";
-        card.addEventListener("click", () => {
-          playSound("click");
-          focusRelatedCells(clue);
-        });
+        const card = createEl("article", "clue-card " + status + (newClueIds.has(clue.id) ? " new" : ""));
         card.append(createEl("span", "clue-text", clue.text || ""));
         return card;
       }
@@ -3241,12 +3857,13 @@
           highlight.entities.clear();
           highlight.categories.clear();
           if (view === "game") refreshGameView();
-        }, 2800);
+        }, HIGHLIGHT_DURATION);
         playSound("clue");
         refreshGameView();
       }
 
       function openOptionModal(entityId, categoryId) {
+        if (!progress || progress.failed || progress.completed) return;
         const previous = selectedCell ? { entityId: selectedCell.entityId, categoryId: selectedCell.categoryId } : null;
         selectedCell = { entityId, categoryId, errorMessage: "" };
         optionPage = 0;
@@ -3259,6 +3876,7 @@
 
       // 答案验证：正确后填入并锁定，错误时不写入格子。
       function verifyAnswer(entityId, categoryId, optionId) {
+        if (!progress || progress.failed || progress.completed) return;
         const expected = currentCase.solution && currentCase.solution[entityId] && currentCase.solution[entityId][categoryId];
         if (expected === optionId) {
           const id = cellId(entityId, categoryId);
@@ -3280,6 +3898,11 @@
           progress.errors += 1;
           saveProgress();
           playSound("error");
+          flashWrongOption(categoryId, optionId);
+          if (progress.errors >= getFailureLimit()) {
+            failCase();
+            return;
+          }
           selectedCell = { entityId, categoryId, errorMessage: "证据不吻合，请重新检查线索" };
           refreshAnswerCell(entityId, categoryId);
           showInlineOptions(entityId, categoryId, selectedCell.errorMessage);
@@ -3299,6 +3922,15 @@
             node.textContent = original;
             node.classList.remove("flash-correct");
           }, 700);
+        });
+      }
+
+      function flashWrongOption(categoryId, optionId) {
+        requestAnimationFrame(() => {
+          const node = [...app.querySelectorAll(".inline-option")].find((btn) => btn.dataset.categoryId === categoryId && btn.dataset.optionId === optionId);
+          if (!node) return;
+          node.classList.add("wrong-flash");
+          window.setTimeout(() => node.classList.remove("wrong-flash"), 680);
         });
       }
 
@@ -3324,24 +3956,64 @@
             }
           }
         });
-        (currentCase.clues || []).forEach((clue) => {
-          const status = progress.clueStatus[clue.id] || "hidden";
-          if (status === "hidden") {
-            const list = Array.isArray(clue.unlockAfter) ? clue.unlockAfter : [];
-            if (list.length && matchCells(list, correct, clue.unlockMode || "all")) {
-              progress.clueStatus[clue.id] = "visible";
-              newClueIds.add(clue.id);
-              setCluePageForClue(clue.id);
-              changed = true;
-              playSound("newClue");
-              window.setTimeout(() => {
-                newClueIds.delete(clue.id);
-                if (view === "game") refreshGameView({ archive: false, clues: true });
-              }, 1800);
-            }
+        if (normalizeClueActivity(currentCase, progress)) changed = true;
+        if (changed) saveProgress();
+      }
+
+      function normalizeClueActivity(caseItem, state) {
+        if (!caseItem || !state || !state.clueStatus) return false;
+        const clues = caseItem.clues || [];
+        const correct = new Set(state.correctCells || []);
+        let changed = false;
+        const active = clues.filter((clue) => {
+          const status = state.clueStatus[clue.id] || "hidden";
+          return status === "visible" || status === "partial";
+        }).sort(compareCluePriority);
+        while (active.length > MAX_ACTIVE_CLUES) {
+          const clue = active.pop();
+          if (!clue) break;
+          state.clueStatus[clue.id] = "hidden";
+          changed = true;
+        }
+        const activeCount = () => clues.filter((clue) => {
+          const status = state.clueStatus[clue.id] || "hidden";
+          return status === "visible" || status === "partial";
+        }).length;
+        const candidates = clues
+          .filter((clue) => (state.clueStatus[clue.id] || "hidden") === "hidden" && isClueUnlocked(clue, correct))
+          .sort(compareCluePriority);
+        candidates.forEach((clue) => {
+          if (activeCount() >= MAX_ACTIVE_CLUES) return;
+          state.clueStatus[clue.id] = getUnlockedClueDisplayStatus(clue, correct);
+          const liveUpdate = state === progress && view === "game";
+          if (liveUpdate) {
+            newClueIds.add(clue.id);
+            setCluePageForClue(clue.id);
+          }
+          changed = true;
+          if (liveUpdate) {
+            playSound("newClue");
+            window.setTimeout(() => {
+              newClueIds.delete(clue.id);
+              if (view === "game") refreshGameView({ archive: false, clues: true });
+            }, 1800);
           }
         });
-        if (changed) saveProgress();
+        return changed;
+      }
+
+      function getUnlockedClueDisplayStatus(clue, correct) {
+        const list = Array.isArray(clue.completeAfter) ? clue.completeAfter : [];
+        if (!list.length) return "visible";
+        const complete = matchCells(list, correct, clue.completeMode || "all");
+        if (complete) return "used";
+        return list.some((id) => correct.has(id)) ? "partial" : "visible";
+      }
+
+      function isClueUnlocked(clue, correct) {
+        if (clue.initial === true) return true;
+        const list = Array.isArray(clue.unlockAfter) ? clue.unlockAfter : [];
+        return list.length && matchCells(list, correct, clue.unlockMode || "all");
       }
 
       function matchCells(list, correct, mode) {
@@ -3358,7 +4030,7 @@
       // 剧情事件触发：只显示一次，不改变答案或线索。
       function checkStoryEvents() {
         const count = progress.correctCells.length;
-        (currentCase.storyEvents || []).forEach((eventItem) => {
+        (currentCase.storyEvents || []).slice().sort((a, b) => Number(a.triggerAfterCorrectCells || 0) - Number(b.triggerAfterCorrectCells || 0)).forEach((eventItem) => {
           if (progress.storyEventsShown.includes(eventItem.id)) return;
           if (count >= Number(eventItem.triggerAfterCorrectCells)) {
             progress.storyEventsShown.push(eventItem.id);
@@ -3392,7 +4064,7 @@
       }
 
       function checkStalledClues() {
-        if (!currentCase || !progress || progress.completed) return;
+        if (!currentCase || !progress || progress.completed || progress.failed) return;
         if (progress.correctCells.length >= getTotalCells(currentCase)) return;
         const statuses = Object.values(progress.clueStatus || {});
         const hasActive = statuses.includes("visible") || statuses.includes("partial");
@@ -3408,7 +4080,7 @@
       }
 
       function useHint() {
-        if (!currentCase || !progress) return;
+        if (!currentCase || !progress || progress.failed || progress.completed) return;
         const maxHints = getMaxHints();
         if (progress.hints >= maxHints) {
           showStoryToast("提示次数已用完。");
@@ -3424,7 +4096,42 @@
         focusRelatedCells(clue);
       }
 
+      function getFailureLimit() {
+        return Math.max(1, Math.ceil(getTotalCells(currentCase) * 3 / 4));
+      }
+
+      function failCase() {
+        progress.failed = true;
+        progress.failedAt = Date.now();
+        selectedCell = null;
+        removeInlineOptions();
+        saveProgress();
+        renderFailure();
+      }
+
+      function renderFailure() {
+        setPage("failure");
+        closeToast();
+        const page = createEl("section", "page");
+        page.append(renderTopbar(currentCase && currentCase.title ? currentCase.title : "调查失败", "错误次数达到本案限制。", [
+          soundToggle()
+        ]));
+        const shell = createEl("div", "center-shell");
+        const card = createEl("div", "panel stack failure-card");
+        card.append(createEl("div", "failure-title", "游戏失败"));
+        card.append(createEl("p", "subtle", "请回到案件简报，重新整理线索后再开始调查。"));
+        card.append(button("重新调查", "primary", () => {
+          if (currentCase) resetCaseProgress(currentCase.id);
+          progress = null;
+          renderCaseIntro();
+        }));
+        shell.append(card);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
       function completeCase() {
+        if (progress.failed) return;
         progress.completed = true;
         progress.completedAt = Date.now();
         saveProgress();
@@ -3435,37 +4142,35 @@
       function renderCompletion() {
         setPage("completion");
         closeToast();
-        const page = createEl("section", "page");
+        const page = createEl("section", "page completion-page");
         page.append(renderTopbar("结案报告", currentCase.title || "", [
           soundToggle(),
           button("案件大厅", "ghost", renderCaseLobby)
         ]));
         const shell = createEl("div", "shell");
         const panel = createEl("div", "panel stack");
-        panel.append(createEl("div", "completion-stamp", "调查完成"));
+        const hero = createEl("div", "completion-hero");
+        hero.append(createEl("div", "completion-stamp", "调查完成"));
         const stats = createEl("div", "result-grid");
         stats.append(labeledText("完成时间", formatDuration((progress.completedAt || Date.now()) - progress.startTime)));
         stats.append(labeledText("错误次数", String(progress.errors)));
         stats.append(labeledText("提示次数", String(progress.hints)));
         stats.append(labeledText("最终星级", getStarLevel()));
-        panel.append(stats);
-
         const completionText = currentCase.narrative && currentCase.narrative.completion ? currentCase.narrative.completion : "";
-        if (completionText) panel.append(createEl("div", "notice success", completionText));
+        if (completionText) stats.append(labeledText("结案说明", completionText));
+        hero.append(stats);
+        panel.append(hero);
 
         panel.append(renderResultPage());
 
         const summary = normalizeSummary(currentCase.knowledgeSummary);
         if (summary.length) {
-          const summaryTotal = Math.max(1, summary.length);
-          summaryPage = clamp(summaryPage, 0, summaryTotal - 1);
-          const summaryCard = createEl("div", "item-card");
-          summaryCard.append(createEl("span", "pill", "知识总结 " + (summaryPage + 1) + "/" + summaryTotal));
-          summaryCard.append(createEl("p", "subtle", summary[summaryPage]));
-          panel.append(summaryCard, renderPager(summaryPage, summaryTotal, "条", (next) => {
-            summaryPage = next;
-            renderCompletion();
-          }));
+          const summaryCard = createEl("div", "item-card completion-section");
+          summaryCard.append(createEl("h2", "", "课程重点知识"));
+          const list = createEl("div", "summary-list");
+          summary.forEach((line) => list.append(createEl("p", "summary-line", line)));
+          summaryCard.append(list);
+          panel.append(summaryCard);
         }
 
         const actions = createEl("div", "actions");
@@ -3483,7 +4188,7 @@
       }
 
       function renderResultPage() {
-        const holder = createEl("div", "stack");
+        const holder = createEl("div", "stack completion-section");
         holder.append(createEl("h2", "", "完整档案结果"));
         const rows = [];
         (currentCase.entities || []).forEach((entity) => {
@@ -3491,17 +4196,11 @@
             rows.push({ entity, category, label: getOptionLabel(category.id, currentCase.solution[entity.id][category.id]) });
           });
         });
-        const perPage = getResultPageSize();
-        const totalPages = Math.max(1, Math.ceil(rows.length / perPage));
-        resultPage = clamp(resultPage, 0, totalPages - 1);
         const grid = createEl("div", "result-grid");
-        rows.slice(resultPage * perPage, resultPage * perPage + perPage).forEach((row) => {
+        rows.forEach((row) => {
           grid.append(labeledText((row.entity.name || row.entity.id) + " / " + (row.category.label || ""), row.label));
         });
-        holder.append(grid, renderPager(resultPage, totalPages, "页", (next) => {
-          resultPage = next;
-          renderCompletion();
-        }));
+        holder.append(grid);
         return holder;
       }
 
@@ -3527,7 +4226,6 @@
         const revealed = isEntityNameRevealed(entity.id);
         titleText.append(createEl("h2", "", getEntityDisplayName(entity, Math.max(0, entityIndex))));
         if (revealed && entity.title) titleText.append(createEl("p", "subtle", entity.title));
-        if (!revealed) titleText.append(createEl("p", "subtle", getEntityRevealProgressText(entity.id)));
         top.append(titleText);
         title.append(top);
         if (entity.description) title.append(createEl("p", "subtle", entity.description));
@@ -3610,7 +4308,7 @@
         grid.style.setProperty("--entity-title-font", (0.62 + 0.22 * scale).toFixed(2) + "rem");
         grid.style.setProperty("--cell-font", (0.68 + 0.32 * scale).toFixed(2) + "rem");
         grid.style.setProperty("--option-font", (0.72 + 0.32 * scale).toFixed(2) + "rem");
-        grid.style.setProperty("--entity-col-min", narrow ? Math.round(74 + 26 * scale) + "px" : Math.round(190 + 60 * scale) + "px");
+        grid.style.setProperty("--entity-col-min", narrow ? Math.round(82 + 24 * scale) + "px" : Math.round(160 + 44 * scale) + "px");
         grid.style.setProperty("--answer-col-min", narrow ? Math.round(54 + 18 * scale) + "px" : Math.round(82 + 26 * scale) + "px");
         grid.style.setProperty("--header-row-min", Math.round(44 + 18 * scale) + "px");
       }
@@ -3622,9 +4320,7 @@
       }
 
       function getEntityRevealProgressText(entityId) {
-        const categories = currentCase && currentCase.categories ? currentCase.categories : [];
-        const confirmed = categories.filter((category) => progress && progress.correctCells.includes(cellId(entityId, category.id))).length;
-        return "身份待确认：" + confirmed + "/" + categories.length + "项";
+        return "";
       }
 
       function shouldRevealEntityName(entityId) {
@@ -3662,7 +4358,7 @@
       }
 
       function getCluePageSize() {
-        return 5;
+        return 3;
       }
 
       function getOptionPageSize() {
@@ -4055,6 +4751,8 @@
           parsed.clueScrollLeft = Number(parsed.clueScrollLeft || 0);
           parsed.errors = Number(parsed.errors || 0);
           parsed.hints = Number(parsed.hints || 0);
+          parsed.failed = parsed.failed === true;
+          parsed.failedAt = Number(parsed.failedAt || 0);
           parsed.startTime = Number(parsed.startTime || Date.now());
           return parsed;
         } catch {
