@@ -582,7 +582,8 @@
     }
 
     .validation-page .panel.stack {
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      align-content: start;
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
@@ -605,7 +606,8 @@
       align-content: start;
       border-radius: 10px;
       border: 1px solid rgba(70, 61, 56, 0.2);
-      background: rgba(255, 249, 237, 0.58);
+      background: #fff9ed;
+      contain: paint;
     }
 
     .validation-data-pane .item-card,
@@ -685,23 +687,27 @@
     }
 
     .validation-report-body {
-      display: grid;
-      grid-template-rows: 1fr;
-      opacity: 1;
+      display: block;
       min-height: 0;
+      max-height: 2200px;
       overflow: hidden;
-      transition: grid-template-rows 220ms ease, opacity 180ms ease, margin-top 180ms ease;
+      visibility: visible;
+      transition: max-height 220ms ease, margin-top 180ms ease;
       margin-top: 7px;
+      border-radius: 8px;
+      background: #fff9ed;
+      contain: paint;
     }
 
     .validation-report-body-inner {
       min-height: 0;
-      overflow: visible;
+      overflow: hidden;
+      background: #fff9ed;
     }
 
     .validation-check-pane.validation-collapsed .validation-report-body {
-      grid-template-rows: 0fr;
-      opacity: 0;
+      max-height: 0;
+      visibility: hidden;
       margin-top: 0;
       pointer-events: none;
     }
@@ -738,11 +744,11 @@
       min-height: 24px;
       padding: 3px 6px;
       border-radius: 8px;
-      background: rgba(255, 249, 237, 0.82);
+      background: #fff9ed;
       border: 1px solid rgba(70, 61, 56, 0.18);
       line-height: 1.16;
       font-size: clamp(0.72rem, 0.95vw, 0.84rem);
-      overflow: visible;
+      overflow: hidden;
     }
 
     .validation-item .pill {
@@ -1530,8 +1536,8 @@
       width: min(860px, 100%);
     }
 
-    .validation-check-pane.validation-collapsed .validation-list {
-      display: none;
+    .validation-check-pane.validation-collapsed .validation-report-body {
+      max-height: 0;
     }
 
     .validation-list {
@@ -1605,7 +1611,7 @@
 
     .completion-hero {
       display: grid;
-      grid-template-columns: minmax(88px, 0.16fr) minmax(0, 1fr);
+      grid-template-columns: minmax(74px, 96px) minmax(0, 1fr);
       gap: 8px;
       align-items: center;
       min-height: 0;
@@ -1621,29 +1627,46 @@
       border-width: 4px;
     }
 
-    .completion-hero .result-grid {
+    .completion-hero-main {
       height: 100%;
       min-height: 0;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      align-items: stretch;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      align-content: stretch;
+      overflow: hidden;
       gap: 6px;
     }
 
-    .completion-hero .result-cell {
+    .completion-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       min-height: 0;
-      padding: 5px 6px;
-      overflow: hidden;
+      gap: 6px;
     }
 
-    .completion-hero .result-label {
+    .completion-hero-main .result-cell {
+      min-height: 0;
+      padding: 4px 6px;
+      overflow: hidden;
+      align-content: center;
+    }
+
+    .completion-hero-main .result-label {
       font-size: clamp(0.72rem, 0.95vw, 0.84rem);
       line-height: 1.08;
     }
 
-    .completion-hero .result-value {
+    .completion-hero-main .result-value {
       font-size: clamp(0.84rem, 1.1vw, 1rem);
       line-height: 1.16;
       overflow-wrap: anywhere;
+    }
+
+    .completion-note-cell {
+      min-height: 0;
+      height: 100%;
+      padding: 4px 6px;
+      overflow: hidden;
     }
 
     .completion-section {
@@ -2076,7 +2099,7 @@
         grid-template-columns: 1fr;
       }
 
-      .completion-hero .result-grid {
+      .completion-stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -2099,7 +2122,7 @@
       .validation-data-pane {
         position: relative;
         z-index: auto;
-        overflow: visible;
+        overflow: hidden;
         padding-bottom: 0;
       }
 
@@ -2123,9 +2146,8 @@
         margin: 0;
       }
 
-      .validation-check-pane.validation-collapsed .validation-list,
-      .validation-check-pane.validation-collapsed .pager {
-        display: none;
+      .validation-check-pane.validation-collapsed .validation-report-body {
+        max-height: 0;
       }
 
       .validation-data-pane .actions {
@@ -3067,7 +3089,7 @@
           const cells = getTotalCells(caseItem);
           const count = saved ? saved.correctCells.length : 0;
           card.append(createEl("div", done ? "notice success" : "notice", done ? "已完成" : "档案完成度：" + count + "/" + cells));
-          card.append(button(done ? "查看结案报告" : count ? "继续调查" : "查看案件简报", "primary", () => done ? openCompletionReport(caseItem.id) : openCaseIntro(caseItem.id)));
+          card.append(renderCaseLobbyCardActions(caseItem, done, count));
           grid.append(card);
         });
         panel.append(grid, renderPager(casePage, totalPages, "页", (next) => {
@@ -3121,8 +3143,19 @@
         const cells = getTotalCells(caseItem);
         const count = saved ? saved.correctCells.length : 0;
         card.append(createEl("div", done ? "notice success" : "notice", done ? "已完成" : "档案完成度：" + count + "/" + cells));
-        card.append(button(done ? "查看结案报告" : count ? "继续调查" : "查看案件简报", "primary", () => done ? openCompletionReport(caseItem.id) : openCaseIntro(caseItem.id)));
+        card.append(renderCaseLobbyCardActions(caseItem, done, count));
         return card;
+      }
+
+      function renderCaseLobbyCardActions(caseItem, done, count) {
+        const actions = createEl("div", "actions");
+        if (done) {
+          actions.append(button("查看案件简报", "ghost", () => openCaseIntro(caseItem.id)));
+          actions.append(button("查看结案报告", "primary", () => openCompletionReport(caseItem.id)));
+        } else {
+          actions.append(button(count ? "继续调查" : "查看案件简报", "primary", () => openCaseIntro(caseItem.id)));
+        }
+        return actions;
       }
 
       function openCaseIntro(id) {
@@ -4315,7 +4348,8 @@
         const panel = createEl("div", "panel stack");
         const hero = createEl("div", "completion-hero");
         hero.append(createEl("div", "completion-stamp", "调查完成"));
-        const stats = createEl("div", "result-grid");
+        const heroMain = createEl("div", "completion-hero-main");
+        const stats = createEl("div", "completion-stats-grid");
         stats.append(labeledText("完成时间", formatDuration((progress.completedAt || Date.now()) - progress.startTime)));
         stats.append(labeledText("错误次数", String(progress.errors)));
         stats.append(labeledText("提示次数", String(progress.hints)));
@@ -4323,7 +4357,11 @@
         const completionText = currentCase.narrative && currentCase.narrative.completion ? currentCase.narrative.completion : "";
         if (completionText) stats.append(labeledText("结案说明", completionText));
         if (completionText && stats.lastElementChild) stats.lastElementChild.classList.add("completion-note-cell");
-        hero.append(stats);
+        const completionNote = completionText ? stats.lastElementChild : null;
+        if (completionNote) completionNote.remove();
+        heroMain.append(stats);
+        if (completionNote) heroMain.append(completionNote);
+        hero.append(heroMain);
         panel.append(hero);
 
         panel.append(renderResultPage());
