@@ -3217,7 +3217,7 @@
         const actions = createEl("div", "actions");
         const savedProgress = loadProgress(currentCase.id);
         if (savedProgress) {
-          actions.append(button("继续调查", "primary", startCase));
+          actions.append(button("继续调查", "primary", savedProgress.completed ? () => openCompletionReport(currentCase.id) : startCase));
           actions.append(button("重新调查", "danger", () => {
             resetCaseProgress(currentCase.id);
             progress = null;
