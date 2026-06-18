@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>课堂档案推理游戏引擎｜侦探调查局版</title>
   <style>
+    @font-face {
+      font-family: "GameRounded";
+      src:
+        url("https://yeesee0911.github.io/classroom-detective-game/fonts/game-rounded.woff2") format("woff2"),
+        url("https://raw.githubusercontent.com/yeesee0911/classroom-detective-game/main/fonts/game-rounded.woff2") format("woff2");
+      font-display: swap;
+    }
+
     :root {
       --ink: #172033;
       --ink-soft: #26344f;
@@ -26,7 +34,7 @@
       --amber: #8d6318;
       --focus: #c79a4b;
       --radius: 8px;
-      --game-font-rounded: "YouYuan", "幼圆", "Yuanti SC", system-ui, sans-serif;
+      --game-font-rounded: "GameRounded", "YouYuan", "幼圆", "Yuanti SC", system-ui, sans-serif;
       font-family: var(--game-font-rounded);
     }
 
@@ -3267,7 +3275,22 @@
             else if (entityIds.has(entity.id)) fail(label + "档案对象 ID 重复：" + entity.id);
             else entityIds.add(entity.id);
             const iconIssues = validateIconSpec(entity.iconSpec);
-            if (iconIssues.length) warn(label + "的图标参数将使用后备生成：" + iconIssues.join("、"));
+            iconIssues.forEach((issue) => fail(label + "的档案对象 " + safeLabel(entity.id, "未命名对象") + " 的 " + issue + "。"));
+            if (entity.records !== undefined) {
+              if (!Array.isArray(entity.records)) {
+                fail(label + "的档案对象 " + safeLabel(entity.id, "未命名对象") + " 的 records 必须是数组。");
+              } else {
+                entity.records.forEach((record, recordIndex) => {
+                  const path = "records[" + recordIndex + "]";
+                  if (!record || typeof record !== "object") {
+                    fail(label + "的档案对象 " + safeLabel(entity.id, "未命名对象") + " 的 " + path + " 必须是对象。");
+                    return;
+                  }
+                  if (!isNonEmptyString(record.label)) fail(label + "的档案对象 " + safeLabel(entity.id, "未命名对象") + " 的 " + path + ".label 不能为空。");
+                  if (!isNonEmptyString(record.text)) fail(label + "的档案对象 " + safeLabel(entity.id, "未命名对象") + " 的 " + path + ".text 不能为空。");
+                });
+              }
+            }
           });
           if (entityIds.size === entities.length && entities.length) ok(label + "档案对象 ID 唯一。");
 
@@ -3282,13 +3305,17 @@
             if (!category.id) fail(label + "有类别缺少 ID。");
             else if (categoryIds.has(category.id)) fail(label + "类别 ID 重复：" + category.id);
             else categoryIds.add(category.id);
+            if (!isNonEmptyString(category.label)) fail(label + "的类别 " + safeLabel(category.id, "未命名类别") + " 缺少 label。");
             const options = Array.isArray(category.options) ? category.options : [];
             optionsByCategory.set(category.id, new Set(options.map((option) => option && option.id).filter(Boolean)));
             options.length === entities.length ? ok(label + "中类别“" + safeLabel(category.label, category.id) + "”的选项数量正确。") : fail(label + "中类别“" + safeLabel(category.label, category.id) + "”的选项数量必须与档案对象数量一致。");
             options.forEach((option) => {
               if (!option || !option.id) fail(label + "有选项缺少 ID。");
-              else if (optionIds.has(option.id)) fail(label + "选项 ID 重复：" + option.id);
-              else optionIds.add(option.id);
+              else {
+                if (optionIds.has(option.id)) fail(label + "选项 ID 重复：" + option.id);
+                else optionIds.add(option.id);
+                if (!isNonEmptyString(option.label)) fail(label + "的选项 " + option.id + " 缺少 label。");
+              }
             });
           });
           if (categoryIds.size === categories.length && categories.length) ok(label + "类别 ID 唯一。");
@@ -3376,13 +3403,17 @@
       function validateIconSpec(spec) {
         if (!spec || typeof spec !== "object") return ["缺少 iconSpec"];
         const issues = [];
-        if (spec.mode && spec.mode !== "generated") issues.push("mode 不受支持");
-        if (spec.shape && !SHAPES.includes(spec.shape)) issues.push("shape 不受支持");
-        if (spec.pattern && !PATTERNS.includes(spec.pattern)) issues.push("pattern 不受支持");
+        if (spec.mode !== "generated") issues.push("iconSpec.mode 缺失或不受支持");
+        if (!SHAPES.includes(spec.shape)) issues.push("iconSpec.shape 缺失或不受支持");
+        if (!PATTERNS.includes(spec.pattern)) issues.push("iconSpec.pattern 缺失或不受支持");
         ["primaryColor", "secondaryColor", "accentColor"].forEach((key) => {
-          if (spec[key] && !isHexColor(spec[key])) issues.push(key + " 不是 HEX 颜色");
+          if (!isHexColor(spec[key])) issues.push("iconSpec." + key + " 缺失或不是 HEX 颜色");
         });
         return issues;
+      }
+
+      function isNonEmptyString(value) {
+        return typeof value === "string" && value.trim().length > 0;
       }
 
       function renderValidation() {
