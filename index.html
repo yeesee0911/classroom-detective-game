@@ -2629,7 +2629,8 @@
         level: "",
         contentLanguage: "",
         description: "",
-        packageStory: "",
+        openingStory: "",
+        endingStory: "",
         settings: {
           defaultDifficulty: "",
           timerEnabled: false,
@@ -3101,7 +3102,7 @@
         }
         validationPage = 0;
         validationReportExpanded = false;
-        if (autoEnterLobby && validation && !validation.errors.length) renderPackageStory();
+        if (autoEnterLobby && validation && !validation.errors.length) renderOpeningStory();
         else renderValidation();
       }
 
@@ -3164,10 +3165,10 @@
         }
         data.schemaVersion === "1.0" ? ok("schemaVersion 受到支持。") : fail("schemaVersion 必须为 1.0。");
         Array.isArray(data.cases) && data.cases.length > 0 ? ok("至少包含一宗案件。") : fail("必须至少包含一宗案件。");
-        if (data.packageStory === undefined || typeof data.packageStory === "string") {
-          ok("packageStory 总剧情字段受到支持。");
-        } else {
-          fail("packageStory 必须是字符串。");
+        data.openingStory === undefined || typeof data.openingStory === "string" ? ok("openingStory 开场故事字段受到支持。") : fail("openingStory 必须是字符串。");
+        data.endingStory === undefined || typeof data.endingStory === "string" ? ok("endingStory 尾声剧情字段受到支持。") : fail("endingStory 必须是字符串。");
+        if (data.packageStory !== undefined) {
+          typeof data.packageStory === "string" ? warn("packageStory 是旧版总剧情字段，建议改用 openingStory。") : fail("packageStory 必须是字符串。");
         }
 
         (Array.isArray(data.cases) ? data.cases : []).forEach((caseItem, index) => {
@@ -3373,7 +3374,7 @@
         right.append(desc, note);
 
         const startActions = createEl("div", "actions");
-        startActions.append(button("进入案件大厅", "primary validation-start-button", () => renderPackageStory(), { disabled: !validation || validation.errors.length > 0 }));
+        startActions.append(button("进入案件", "primary validation-start-button", () => renderOpeningStory(), { disabled: !validation || validation.errors.length > 0 }));
         right.append(startActions);
         lists.append(left, right);
         panel.append(lists);
@@ -3397,14 +3398,14 @@
         return box;
       }
 
-      function renderPackageStory() {
+      function renderOpeningStory() {
         if (!packageData || !validation || validation.errors.length) {
           renderValidation();
           return;
         }
-        setPage("packageStory");
-        const page = createEl("section", "page package-story-page");
-        page.append(renderTopbar(packageData.packageTitle || "剧情档案", "进入档案墙前，请先阅读本资料包的调查背景。", [
+        setPage("openingStory");
+        const page = createEl("section", "page package-story-page opening-story-page");
+        page.append(renderTopbar(packageData.packageTitle || "开场故事", "进入档案墙前，请先阅读本资料包的开场故事。", [
           soundToggle(),
           button("资料验证", "ghost", () => renderValidation()),
           button("更换资料", "ghost", () => renderDataLobby())
@@ -3412,7 +3413,7 @@
 
         const shell = createEl("div", "shell");
         const panel = createEl("div", "panel stack");
-        panel.append(createEl("h2", "", packageData.packageTitle || "剧情档案"));
+        panel.append(createEl("h2", "", "开场故事"));
 
         const meta = createEl("div", "result-grid intro-meta-compact");
         meta.append(labeledText("科目", packageData.subject || "未填写"));
@@ -3423,10 +3424,10 @@
         const storyCard = createEl("div", "item-card package-story-card");
         const labels = createEl("div", "intro-card-labels");
         labels.append(createEl("span", "pill new", "调查局档案"));
-        labels.append(createEl("span", "pill visible", "总剧情"));
+        labels.append(createEl("span", "pill visible", "开场故事"));
         storyCard.append(labels);
 
-        const storyPieces = getPackageStoryPieces();
+        const storyPieces = getOpeningStoryPieces();
         if (storyPieces.length === 1) {
           storyCard.append(createEl("p", "subtle package-story-text", storyPieces[0].text));
         } else {
@@ -3450,20 +3451,22 @@
         app.replaceChildren(page);
       }
 
-      function getPackageStoryPieces() {
-        const story = packageData && typeof packageData.packageStory === "string" ? packageData.packageStory.trim() : "";
-        if (story) return [{ label: "总剧情", text: story }];
+      function renderPackageStory() {
+        renderOpeningStory();
+      }
+
+      function getOpeningStoryPieces() {
+        const opening = packageData && typeof packageData.openingStory === "string" ? packageData.openingStory.trim() : "";
+        if (opening) return [{ label: "开场故事", text: opening }];
+        const legacy = packageData && typeof packageData.packageStory === "string" ? packageData.packageStory.trim() : "";
+        if (legacy) return [{ label: "开场故事", text: legacy }];
         const pieces = [];
         (packageData && Array.isArray(packageData.cases) ? packageData.cases : []).forEach((caseItem, index) => {
           if (!caseItem || typeof caseItem !== "object") return;
           const texts = [];
           if (caseItem.story) texts.push(caseItem.story);
           const narrative = caseItem.narrative && typeof caseItem.narrative === "object" ? caseItem.narrative : null;
-          if (narrative) {
-            ["opening", "problem", "mission"].forEach((key) => {
-              if (narrative[key]) texts.push(narrative[key]);
-            });
-          }
+          if (narrative && narrative.opening) texts.push(narrative.opening);
           if (!texts.length && caseItem.goal) texts.push(caseItem.goal);
           if (texts.length) {
             pieces.push({
@@ -3472,7 +3475,49 @@
             });
           }
         });
-        return pieces.length ? pieces : [{ label: "总剧情", text: "资料包已载入，请进入档案墙选择案件。" }];
+        return pieces.length ? pieces : [{ label: "开场故事", text: "资料包已载入，请进入档案墙选择案件。" }];
+      }
+
+      function renderEndingStory() {
+        if (!packageData || !validation) {
+          renderValidation();
+          return;
+        }
+        setPage("endingStory");
+        const page = createEl("section", "page package-story-page ending-story-page");
+        page.append(renderTopbar(packageData.packageTitle || "尾声剧情", "所有案件已处理完毕，请阅读尾声剧情。", [
+          soundToggle(),
+          button("资料验证", "ghost", () => renderValidation())
+        ]));
+
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        panel.append(createEl("h2", "", "尾声剧情"));
+
+        const meta = createEl("div", "result-grid intro-meta-compact");
+        meta.append(labeledText("科目", packageData.subject || "未填写"));
+        meta.append(labeledText("年级", packageData.level || "未填写"));
+        meta.append(labeledText("案件数量", packageData && Array.isArray(packageData.cases) ? String(packageData.cases.length) : "0"));
+        meta.append(labeledText("完成状态", "全部案件已处理"));
+
+        const storyCard = createEl("div", "item-card package-story-card");
+        const labels = createEl("div", "intro-card-labels");
+        labels.append(createEl("span", "pill new", "调查局归档"));
+        labels.append(createEl("span", "pill visible", "尾声剧情"));
+        storyCard.append(labels);
+        storyCard.append(createEl("p", "subtle package-story-text", getEndingStoryText()));
+
+        const actions = createEl("div", "actions");
+        actions.append(button("进入资料验证", "primary package-story-start", () => renderValidation()));
+        panel.append(meta, storyCard, actions);
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function getEndingStoryText() {
+        const ending = packageData && typeof packageData.endingStory === "string" ? packageData.endingStory.trim() : "";
+        return ending || "所有案件已经处理完毕，调查资料已归档。你可以回到资料验证页检查资料包，或更换新的课程资料继续调查。";
       }
 
       function renderCaseLobby() {
@@ -4817,7 +4862,11 @@
 
         const actions = createEl("div", "actions");
         const nextCase = getNextCase();
-        actions.append(button("下一宗案件", "primary", () => openCaseIntro(nextCase.id), { disabled: !nextCase }));
+        if (isPackageCompleted()) {
+          actions.append(button("进入尾声剧情", "primary", () => renderEndingStory()));
+        } else {
+          actions.append(button("下一宗案件", "primary", () => openCaseIntro(nextCase.id), { disabled: !nextCase }));
+        }
         actions.append(button("返回案件大厅", "ghost", renderCaseLobby));
         actions.append(button("重新调查", "danger", () => {
           resetCaseProgress(currentCase.id);
@@ -5311,7 +5360,8 @@
           saveProgress();
           if (view === "game") renderGame();
           else if (view === "cases") renderCaseLobby();
-          else if (view === "packageStory") renderPackageStory();
+          else if (view === "openingStory" || view === "packageStory") renderOpeningStory();
+          else if (view === "endingStory") renderEndingStory();
           else if (view === "intro") renderCaseIntro();
           else if (view === "completion") renderCompletion();
         }, { ariaLabel: "切换音效" });
@@ -5500,6 +5550,14 @@
         const cases = packageData && Array.isArray(packageData.cases) ? packageData.cases : [];
         const index = cases.findIndex((item) => item.id === currentCase.id);
         return index >= 0 && index < cases.length - 1 ? cases[index + 1] : null;
+      }
+
+      function isPackageCompleted() {
+        const cases = packageData && Array.isArray(packageData.cases) ? packageData.cases : [];
+        return cases.length > 0 && cases.every((caseItem) => {
+          const saved = caseItem && caseItem.id ? loadProgress(caseItem.id) : null;
+          return saved && saved.completed === true;
+        });
       }
 
       function normalizeSummary(summary) {
