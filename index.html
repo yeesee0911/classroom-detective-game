@@ -34,7 +34,7 @@
       --amber: #8d6318;
       --focus: #c79a4b;
       --radius: 8px;
-      --game-font-rounded: "GameRounded", "YouYuan", "幼圆", "Yuanti SC", system-ui, sans-serif;
+      --game-font-rounded: "GameRounded", system-ui, sans-serif;
       font-family: var(--game-font-rounded);
     }
 
@@ -3147,7 +3147,7 @@
             githubPath: item.path || "",
             packageId: data.packageId || "",
             packageTitle: data.packageTitle || item.name || ""
-          }, true);
+          });
         } catch (error) {
           githubLibrary.notice = "";
           githubLibrary.error = error && error.message ? error.message : "GitHub课程读取失败";
