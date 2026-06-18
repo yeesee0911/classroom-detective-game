@@ -607,6 +607,8 @@
     }
 
     .validation-page .panel.stack {
+      width: min(1180px, 100%);
+      margin-inline: auto;
       grid-template-rows: auto auto;
       height: 100%;
       max-height: 100%;
@@ -712,6 +714,8 @@
     }
 
     .package-story-page .panel.stack {
+      width: min(1120px, 100%);
+      margin-inline: auto;
       gap: 10px;
       grid-auto-rows: max-content;
       align-content: start;
@@ -741,6 +745,18 @@
       display: grid;
       gap: 10px;
       min-height: 0;
+    }
+
+    .package-story-page .intro-meta-compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-self: stretch;
+    }
+
+    .package-story-page .intro-description-cell {
+      grid-column: 1 / -1;
+      min-height: 58px;
+      justify-items: center;
+      text-align: center;
     }
 
     .package-story-page .actions {
@@ -1782,6 +1798,14 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
+    .package-story-page .intro-meta-compact {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .package-story-page .intro-description-cell {
+      grid-column: 1 / -1;
+    }
+
     .intro-meta-compact .result-cell {
       min-height: 48px;
       padding: 5px;
@@ -2373,6 +2397,14 @@
       .intro-meta-compact {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 4px;
+      }
+
+      .package-story-page .intro-meta-compact {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .package-story-page .intro-description-cell {
+        grid-column: 1 / -1;
       }
 
       .intro-meta-compact .result-cell {
@@ -3553,7 +3585,9 @@
         meta.append(labeledText("科目", packageData.subject || "未填写"));
         meta.append(labeledText("年级", packageData.level || "未填写"));
         meta.append(labeledText("案件数量", packageData && Array.isArray(packageData.cases) ? String(packageData.cases.length) : "0"));
-        meta.append(labeledText("资料说明", packageData.description || "未填写"));
+        const descriptionCell = labeledText("资料说明", packageData.description || "未填写");
+        descriptionCell.classList.add("intro-description-cell");
+        meta.append(descriptionCell);
 
         const storyCard = createEl("div", "item-card package-story-card");
         const labels = createEl("div", "intro-card-labels");
