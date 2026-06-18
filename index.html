@@ -2836,9 +2836,45 @@
       }
 
       function setPage(page) {
+        if (view === "game" && page !== "game") {
+          pauseCaseTimer();
+        }
         view = page;
         clearInterval(timerHandle);
         timerHandle = 0;
+      }
+
+      function ensureProgressTiming(state) {
+        if (!state) return;
+        state.elapsedMs = Number.isFinite(Number(state.elapsedMs)) ? Math.max(0, Number(state.elapsedMs)) : 0;
+        state.activeStartedAt = Number.isFinite(Number(state.activeStartedAt)) ? Math.max(0, Number(state.activeStartedAt)) : 0;
+      }
+
+      function resumeCaseTimer() {
+        if (!currentCase || !progress || progress.completed || progress.failed) return;
+        ensureProgressTiming(progress);
+        if (!progress.activeStartedAt) {
+          progress.activeStartedAt = Date.now();
+          saveProgress();
+        }
+      }
+
+      function pauseCaseTimer() {
+        if (!progress) return;
+        ensureProgressTiming(progress);
+        const startedAt = Number(progress.activeStartedAt || 0);
+        if (startedAt > 0) {
+          progress.elapsedMs = Number(progress.elapsedMs || 0) + Math.max(0, Date.now() - startedAt);
+          progress.activeStartedAt = 0;
+          saveProgress();
+        }
+      }
+
+      function getElapsedMs(state = progress) {
+        if (!state) return 0;
+        ensureProgressTiming(state);
+        const active = state.activeStartedAt ? Math.max(0, Date.now() - state.activeStartedAt) : 0;
+        return Number(state.elapsedMs || 0) + active;
       }
 
       function renderTopbar(title, subtitle, actions) {
@@ -3861,6 +3897,8 @@
           errors: 0,
           hints: 0,
           startTime: Date.now(),
+          elapsedMs: 0,
+          activeStartedAt: 0,
           completed: false,
           completedAt: 0,
           failed: false,
@@ -3888,8 +3926,12 @@
         state.revealedEntities = Array.isArray(state.revealedEntities) ? state.revealedEntities : [];
         state.cluePage = Number.isFinite(Number(state.cluePage)) ? Number(state.cluePage) : 0;
         state.clueScrollLeft = Number.isFinite(Number(state.clueScrollLeft)) ? Number(state.clueScrollLeft) : 0;
+        state.completed = state.completed === true;
+        state.completedAt = Number(state.completedAt || 0);
         state.failed = state.failed === true;
         state.failedAt = Number(state.failedAt || 0);
+        ensureProgressTiming(state);
+        if (state.completed || state.failed) state.activeStartedAt = 0;
 
         const settings = getEngineSettings(caseItem);
         const categories = Array.isArray(caseItem.categories) ? caseItem.categories : [];
@@ -3980,6 +4022,7 @@
         });
 
         checkStalledClues();
+        resumeCaseTimer();
         startTimer();
       }
 
@@ -4264,7 +4307,7 @@
       function startTimer() {
         clearInterval(timerHandle);
         timerHandle = window.setInterval(() => {
-          if (view === "game" && currentCase && progress && !progress.completed) {
+          if (view === "game" && currentCase && progress && !progress.completed && !progress.failed) {
             const top = app.querySelector(".topbar .subtle");
             if (top) {
               top.textContent = getGameSubtitle();
@@ -4880,6 +4923,7 @@
       }
 
       function failCase() {
+        pauseCaseTimer();
         progress.failed = true;
         progress.failedAt = Date.now();
         selectedCell = null;
@@ -4911,6 +4955,7 @@
 
       function completeCase() {
         if (progress.failed) return;
+        pauseCaseTimer();
         progress.completed = true;
         progress.completedAt = Date.now();
         saveProgress();
@@ -4932,7 +4977,7 @@
         hero.append(createEl("div", "completion-stamp", "调查完成"));
         const heroMain = createEl("div", "completion-hero-main");
         const stats = createEl("div", "completion-stats-grid");
-        stats.append(labeledText("完成时间", formatDuration((progress.completedAt || Date.now()) - progress.startTime)));
+        stats.append(labeledText("完成时间", formatDuration(getElapsedMs())));
         stats.append(labeledText("错误次数", String(progress.errors)));
         stats.append(labeledText("提示次数", String(progress.hints)));
         stats.append(labeledText("最终星级", getStarLevel()));
@@ -5527,28 +5572,35 @@
         if (currentCase && currentCase.id === caseId) progress = createProgress(currentCase);
       }
 
+      function normalizeStoredProgress(parsed, caseId) {
+        if (!parsed || parsed.caseId !== caseId) return null;
+        parsed.correctCells = Array.isArray(parsed.correctCells) ? parsed.correctCells : [];
+        parsed.clueStatus = parsed.clueStatus || {};
+        parsed.storyEventsShown = Array.isArray(parsed.storyEventsShown) ? parsed.storyEventsShown : [];
+        parsed.revealedEntities = Array.isArray(parsed.revealedEntities) ? parsed.revealedEntities : [];
+        parsed.categoryOrder = Array.isArray(parsed.categoryOrder) ? parsed.categoryOrder : [];
+        parsed.optionOrderByCategory = parsed.optionOrderByCategory && typeof parsed.optionOrderByCategory === "object" ? parsed.optionOrderByCategory : {};
+        parsed.cluePage = Number(parsed.cluePage || 0);
+        parsed.clueScrollLeft = Number(parsed.clueScrollLeft || 0);
+        parsed.errors = Number(parsed.errors || 0);
+        parsed.hints = Number(parsed.hints || 0);
+        parsed.completed = parsed.completed === true;
+        parsed.completedAt = Number(parsed.completedAt || 0);
+        parsed.failed = parsed.failed === true;
+        parsed.failedAt = Number(parsed.failedAt || 0);
+        parsed.startTime = Number(parsed.startTime || Date.now());
+        parsed.elapsedMs = Number.isFinite(Number(parsed.elapsedMs)) ? Math.max(0, Number(parsed.elapsedMs)) : 0;
+        parsed.activeStartedAt = 0;
+        return parsed;
+      }
+
       function loadProgress(caseId) {
         try {
           const raw = localStorage.getItem(progressKey(caseId));
-          if (!raw) return memoryProgressStore[progressKey(caseId)] || null;
-          const parsed = JSON.parse(raw);
-          if (!parsed || parsed.caseId !== caseId) return null;
-          parsed.correctCells = Array.isArray(parsed.correctCells) ? parsed.correctCells : [];
-          parsed.clueStatus = parsed.clueStatus || {};
-          parsed.storyEventsShown = Array.isArray(parsed.storyEventsShown) ? parsed.storyEventsShown : [];
-          parsed.revealedEntities = Array.isArray(parsed.revealedEntities) ? parsed.revealedEntities : [];
-          parsed.categoryOrder = Array.isArray(parsed.categoryOrder) ? parsed.categoryOrder : [];
-          parsed.optionOrderByCategory = parsed.optionOrderByCategory && typeof parsed.optionOrderByCategory === "object" ? parsed.optionOrderByCategory : {};
-          parsed.cluePage = Number(parsed.cluePage || 0);
-          parsed.clueScrollLeft = Number(parsed.clueScrollLeft || 0);
-          parsed.errors = Number(parsed.errors || 0);
-          parsed.hints = Number(parsed.hints || 0);
-          parsed.failed = parsed.failed === true;
-          parsed.failedAt = Number(parsed.failedAt || 0);
-          parsed.startTime = Number(parsed.startTime || Date.now());
-          return parsed;
+          if (!raw) return normalizeStoredProgress(memoryProgressStore[progressKey(caseId)], caseId);
+          return normalizeStoredProgress(JSON.parse(raw), caseId);
         } catch {
-          return memoryProgressStore[progressKey(caseId)] || null;
+          return normalizeStoredProgress(memoryProgressStore[progressKey(caseId)], caseId);
         }
       }
 
@@ -5670,7 +5722,7 @@
       function getStarLevel() {
         const errors = progress.errors;
         const hints = progress.hints;
-        const elapsed = (progress.completedAt || Date.now()) - progress.startTime;
+        const elapsed = getElapsedMs();
         const limit = packageData && packageData.settings && packageData.settings.timeLimitSeconds ? Number(packageData.settings.timeLimitSeconds) * 1000 : 0;
         if (errors <= 2 && hints <= 1 && (!limit || elapsed <= limit)) return "三星";
         if (errors <= 5 && hints <= Math.max(2, getMaxHints())) return "二星";
@@ -5679,7 +5731,7 @@
 
       function formatElapsed() {
         if (!progress) return "00:00";
-        return formatDuration(Date.now() - progress.startTime);
+        return formatDuration(getElapsedMs());
       }
 
       function formatDuration(ms) {
