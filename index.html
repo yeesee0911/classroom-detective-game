@@ -2621,6 +2621,11 @@
       let timerHandle = 0;
       let audio = { ctx: null, ok: false, enabled: true };
 
+      // 注意：这是 HTML 引擎实际读取并下载的空白模板。
+      // category 必须使用 label，不要使用 title。
+      // option 必须使用 label，不要使用 text。
+      // 档案对象补充资料必须使用 records[].label / records[].text。
+      // iconSpec 必须使用 primaryColor / secondaryColor / accentColor，不要使用 colors 数组。
       const blankTemplate = {
         schemaVersion: "1.0",
         packageId: "",
@@ -2652,13 +2657,75 @@
               mission: "",
               completion: ""
             },
-            storyEvents: [],
+            storyEvents: [
+              {
+                id: "",
+                triggerAfterCorrectCells: 1,
+                text: ""
+              }
+            ],
             entityType: "",
             entityLabel: "",
-            entities: [],
-            categories: [],
-            solution: {},
-            clues: [],
+            entities: [
+              {
+                id: "entity_001",
+                name: "",
+                title: "",
+                description: "",
+                records: [
+                  {
+                    label: "",
+                    text: ""
+                  }
+                ],
+                iconSpec: {
+                  mode: "generated",
+                  symbol: "01",
+                  shape: "circle",
+                  pattern: "dots",
+                  primaryColor: "#F4E7C5",
+                  secondaryColor: "#C79A4B",
+                  accentColor: "#17233C"
+                }
+              }
+            ],
+            categories: [
+              {
+                id: "category_001",
+                label: "",
+                options: [
+                  {
+                    id: "option_001",
+                    label: "",
+                    note: ""
+                  }
+                ]
+              }
+            ],
+            solution: {
+              entity_001: {
+                category_001: "option_001"
+              }
+            },
+            clues: [
+              {
+                id: "",
+                text: "",
+                type: "direct",
+                initial: true,
+                priority: 1,
+                relatedCells: [
+                  "entity_001::category_001"
+                ],
+                completeAfter: [
+                  "entity_001::category_001"
+                ],
+                completeMode: "all",
+                unlockAfter: [],
+                unlockMode: "any",
+                explanation: ""
+              }
+            ],
             knowledgeSummary: []
           }
         ],
