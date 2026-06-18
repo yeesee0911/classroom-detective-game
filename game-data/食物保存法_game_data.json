@@ -1,0 +1,2434 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "y6_sc_food_preservation_001",
+  "packageTitle": "Year 6 科学：食物保存匿名档案推理",
+  "subject": "科学",
+  "level": "Year 6",
+  "contentLanguage": "华文",
+  "description": "根据《单元八：食物保存技术》资料制作，涵盖十二种食物保存技术、微生物抑制原理、资料例子及食物保存的六项重要性。",
+  "settings": {
+    "defaultDifficulty": "medium",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 3,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "温度与水分区的失配档案",
+      "story": "保鲜星的第一座粮仓失去标签，四份处理记录被打乱。小科学调查员安安必须在计时门关闭前恢复档案。",
+      "goal": "根据处理方式、微生物变化、关键条件和资料例子，完成四份匿名档案。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "利用温度与水分保存食物",
+        "opening": "保鲜星的时光粮仓负责延长食物的食用期限。清晨，第一储藏区只剩四份编号档案。",
+        "problem": "处理步骤、微生物记录、环境条件和食物例子全部错位，仓门将在下一班运输车到达前锁定。",
+        "mission": "小科学调查员安安接受任务，沿着温度与水分线索恢复每份档案，并取得第一枚保鲜钥匙。",
+        "completion": "四份档案恢复完成，第一储藏区重新运作。远处的密封区却传来新的资料警报。"
+      },
+      "storyEvents": [
+        {
+          "id": "story_event_c1_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "第一排资料归位，粮仓的温度仪重新亮起。"
+        },
+        {
+          "id": "story_event_c1_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "半数档案完成核对，第一枚保鲜钥匙开始充能。"
+        },
+        {
+          "id": "story_event_c1_003",
+          "triggerAfterCorrectCells": 12,
+          "text": "仓门倒计时放慢，只剩最后几项记录需要确认。"
+        }
+      ],
+      "entityType": "anonymous_food_preservation_method",
+      "entityLabel": "匿名保存法档案",
+      "entities": [
+        {
+          "id": "entity_c1_001",
+          "name": "煮沸",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#1D4ED8",
+            "secondaryColor": "#DBEAFE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案01"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c1_002",
+          "name": "干藏",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#6D28D9",
+            "secondaryColor": "#EDE9FE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案02"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c1_003",
+          "name": "冷藏",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#0F766E",
+            "secondaryColor": "#CCFBF1",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案03"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c1_004",
+          "name": "冷冻",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#B45309",
+            "secondaryColor": "#FEF3C7",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案04"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_c1_action",
+          "label": "处理方式",
+          "options": [
+            {
+              "id": "option_c1_action_001",
+              "label": "以高温处理食物",
+              "note": ""
+            },
+            {
+              "id": "option_c1_action_002",
+              "label": "用晒干、烘干或风干除去食物中的水分",
+              "note": ""
+            },
+            {
+              "id": "option_c1_action_003",
+              "label": "把食物存放在低温环境",
+              "note": ""
+            },
+            {
+              "id": "option_c1_action_004",
+              "label": "把食物存放在0℃以下的环境",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c1_microbe",
+          "label": "对微生物的影响",
+          "options": [
+            {
+              "id": "option_c1_microbe_001",
+              "label": "杀灭大部分微生物",
+              "note": ""
+            },
+            {
+              "id": "option_c1_microbe_002",
+              "label": "微生物无法在缺水环境下生长",
+              "note": ""
+            },
+            {
+              "id": "option_c1_microbe_003",
+              "label": "低温减缓微生物的生长",
+              "note": ""
+            },
+            {
+              "id": "option_c1_microbe_004",
+              "label": "微生物在太低温环境下变得不活跃",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c1_condition",
+          "label": "关键条件",
+          "options": [
+            {
+              "id": "option_c1_condition_001",
+              "label": "处理温度较高",
+              "note": ""
+            },
+            {
+              "id": "option_c1_condition_002",
+              "label": "食物中的水分被除去",
+              "note": ""
+            },
+            {
+              "id": "option_c1_condition_003",
+              "label": "设备内温度大约3℃至5℃",
+              "note": ""
+            },
+            {
+              "id": "option_c1_condition_004",
+              "label": "设备温度低于冰点，一般约-18℃",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c1_examples",
+          "label": "资料例子",
+          "options": [
+            {
+              "id": "option_c1_examples_001",
+              "label": "蔬菜、鱼类、蛋、肉类",
+              "note": ""
+            },
+            {
+              "id": "option_c1_examples_002",
+              "label": "鱿鱼、江鱼仔、虾米、辣椒干",
+              "note": ""
+            },
+            {
+              "id": "option_c1_examples_003",
+              "label": "水果、蔬菜、牛奶、酸奶",
+              "note": ""
+            },
+            {
+              "id": "option_c1_examples_004",
+              "label": "肉类、鱼、虾",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_c1_001": {
+          "category_c1_action": "option_c1_action_001",
+          "category_c1_microbe": "option_c1_microbe_001",
+          "category_c1_condition": "option_c1_condition_001",
+          "category_c1_examples": "option_c1_examples_001"
+        },
+        "entity_c1_002": {
+          "category_c1_action": "option_c1_action_002",
+          "category_c1_microbe": "option_c1_microbe_002",
+          "category_c1_condition": "option_c1_condition_002",
+          "category_c1_examples": "option_c1_examples_002"
+        },
+        "entity_c1_003": {
+          "category_c1_action": "option_c1_action_003",
+          "category_c1_microbe": "option_c1_microbe_003",
+          "category_c1_condition": "option_c1_condition_003",
+          "category_c1_examples": "option_c1_examples_003"
+        },
+        "entity_c1_004": {
+          "category_c1_action": "option_c1_action_004",
+          "category_c1_microbe": "option_c1_microbe_004",
+          "category_c1_condition": "option_c1_condition_004",
+          "category_c1_examples": "option_c1_examples_004"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_c1_001",
+          "text": "直接记录：对象档案02的“处理方式”是“用晒干、烘干或风干除去食物中的水分”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_c1_002::category_c1_action"
+          ],
+          "completeAfter": [
+            "entity_c1_002::category_c1_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_002",
+          "text": "特征记录：对象档案04出现“设备温度低于冰点，一般约-18℃”这项资料。",
+          "type": "feature",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_c1_004::category_c1_condition"
+          ],
+          "completeAfter": [
+            "entity_c1_004::category_c1_condition"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_003",
+          "text": "排除记录：对象档案01的“对微生物的影响”不是“微生物无法在缺水环境下生长”，核对后对应“杀灭大部分微生物”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_c1_001::category_c1_microbe"
+          ],
+          "completeAfter": [
+            "entity_c1_001::category_c1_microbe"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "先排除不符合的选项，再确认目标属性。"
+        },
+        {
+          "id": "clue_c1_004",
+          "text": "直接记录：对象档案03的“资料例子”是“水果、蔬菜、牛奶、酸奶”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_c1_003::category_c1_examples"
+          ],
+          "completeAfter": [
+            "entity_c1_003::category_c1_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_002::category_c1_action",
+            "entity_c1_004::category_c1_condition",
+            "entity_c1_001::category_c1_microbe"
+          ],
+          "unlockMode": "any",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_005",
+          "text": "关系记录：对象档案04已确认“设备温度低于冰点，一般约-18℃”，同一份档案的“处理方式”是“把食物存放在0℃以下的环境”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_c1_004::category_c1_condition",
+            "entity_c1_004::category_c1_action"
+          ],
+          "completeAfter": [
+            "entity_c1_004::category_c1_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_004::category_c1_condition"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c1_006",
+          "text": "交叉核验：结合对象档案01已确认的多项资料，剩余“资料例子”对应“蔬菜、鱼类、蛋、肉类”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_c1_001::category_c1_microbe",
+            "entity_c1_001::category_c1_action",
+            "entity_c1_001::category_c1_condition",
+            "entity_c1_001::category_c1_examples"
+          ],
+          "completeAfter": [
+            "entity_c1_001::category_c1_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_001::category_c1_microbe",
+            "entity_c1_001::category_c1_action",
+            "entity_c1_001::category_c1_condition"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c1_007",
+          "text": "特征记录：对象档案02出现“鱿鱼、江鱼仔、虾米、辣椒干”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_c1_002::category_c1_examples"
+          ],
+          "completeAfter": [
+            "entity_c1_002::category_c1_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_002::category_c1_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_008",
+          "text": "关系记录：对象档案03已确认“水果、蔬菜、牛奶、酸奶”，同一份档案的“对微生物的影响”是“低温减缓微生物的生长”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_c1_003::category_c1_examples",
+            "entity_c1_003::category_c1_microbe"
+          ],
+          "completeAfter": [
+            "entity_c1_003::category_c1_microbe"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_003::category_c1_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c1_009",
+          "text": "关系记录：对象档案01已确认“杀灭大部分微生物”，同一份档案的“处理方式”是“以高温处理食物”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_c1_001::category_c1_microbe",
+            "entity_c1_001::category_c1_action"
+          ],
+          "completeAfter": [
+            "entity_c1_001::category_c1_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_001::category_c1_microbe"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c1_010",
+          "text": "交叉核验：结合对象档案04已确认的多项资料，剩余“资料例子”对应“肉类、鱼、虾”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_c1_004::category_c1_condition",
+            "entity_c1_004::category_c1_action",
+            "entity_c1_004::category_c1_microbe",
+            "entity_c1_004::category_c1_examples"
+          ],
+          "completeAfter": [
+            "entity_c1_004::category_c1_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_004::category_c1_condition",
+            "entity_c1_004::category_c1_action",
+            "entity_c1_004::category_c1_microbe"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c1_011",
+          "text": "关系记录：对象档案02已确认“用晒干、烘干或风干除去食物中的水分”，同一份档案的“对微生物的影响”是“微生物无法在缺水环境下生长”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_c1_002::category_c1_action",
+            "entity_c1_002::category_c1_microbe"
+          ],
+          "completeAfter": [
+            "entity_c1_002::category_c1_microbe"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_002::category_c1_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c1_012",
+          "text": "特征记录：对象档案03出现“把食物存放在低温环境”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_c1_003::category_c1_action"
+          ],
+          "completeAfter": [
+            "entity_c1_003::category_c1_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_003::category_c1_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_013",
+          "text": "特征记录：对象档案01出现“处理温度较高”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_c1_001::category_c1_condition"
+          ],
+          "completeAfter": [
+            "entity_c1_001::category_c1_condition"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_001::category_c1_microbe"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c1_014",
+          "text": "交叉核验：结合对象档案02已确认的多项资料，剩余“关键条件”对应“食物中的水分被除去”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_c1_002::category_c1_action",
+            "entity_c1_002::category_c1_examples",
+            "entity_c1_002::category_c1_microbe",
+            "entity_c1_002::category_c1_condition"
+          ],
+          "completeAfter": [
+            "entity_c1_002::category_c1_condition"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_002::category_c1_action",
+            "entity_c1_002::category_c1_examples",
+            "entity_c1_002::category_c1_microbe"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c1_015",
+          "text": "关系记录：对象档案04已确认“设备温度低于冰点，一般约-18℃”，同一份档案的“对微生物的影响”是“微生物在太低温环境下变得不活跃”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_c1_004::category_c1_condition",
+            "entity_c1_004::category_c1_microbe"
+          ],
+          "completeAfter": [
+            "entity_c1_004::category_c1_microbe"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_004::category_c1_condition"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c1_016",
+          "text": "交叉核验：结合对象档案03已确认的多项资料，剩余“关键条件”对应“设备内温度大约3℃至5℃”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_c1_003::category_c1_examples",
+            "entity_c1_003::category_c1_microbe",
+            "entity_c1_003::category_c1_action",
+            "entity_c1_003::category_c1_condition"
+          ],
+          "completeAfter": [
+            "entity_c1_003::category_c1_condition"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c1_003::category_c1_examples",
+            "entity_c1_003::category_c1_microbe",
+            "entity_c1_003::category_c1_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        }
+      ],
+      "knowledgeSummary": [
+        "煮沸：以高温杀灭大部分微生物；例子包括蔬菜、鱼类、蛋和肉类。",
+        "干藏：用晒干、烘干或风干除去水分，使微生物无法在缺水环境下生长。",
+        "冷藏：低温减缓微生物生长；资料补充说明设备内温度大约3℃至5℃。",
+        "冷冻：食物存放在0℃以下，微生物在太低温环境下变得不活跃；设备一般约-18℃。"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "密封与浸泡区的四重密码",
+      "story": "第二储藏区的空气、浸泡、温度和盐分记录混在一起，紧急食物列车无法确认处理档案。",
+      "goal": "根据处理动作、关键条件或结果及资料例子，恢复四份匿名保存档案。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "利用空气、溶液、温度与盐分保存食物",
+        "opening": "安安带着第一枚钥匙进入密封区，四个资料柜同时弹出没有名称的记录卡。",
+        "problem": "包装、浸泡、温度处理和盐分资料互相错位，列车装货系统因此暂停。",
+        "mission": "安安必须从动作、条件和食物例子中找出正确组合，在发车灯转红前恢复所有档案。",
+        "completion": "四份记录重新配对，装货系统恢复。第三储藏区的保护膜警报却突然响起。"
+      },
+      "storyEvents": [
+        {
+          "id": "story_event_c2_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "第一组记录通过核验，装货带重新启动。"
+        },
+        {
+          "id": "story_event_c2_002",
+          "triggerAfterCorrectCells": 6,
+          "text": "资料柜开放第二层，更多匿名记录可以继续检查。"
+        },
+        {
+          "id": "story_event_c2_003",
+          "triggerAfterCorrectCells": 9,
+          "text": "发车灯暂时保持绿色，案件只剩最后三格。"
+        }
+      ],
+      "entityType": "anonymous_food_preservation_method",
+      "entityLabel": "匿名保存法档案",
+      "entities": [
+        {
+          "id": "entity_c2_001",
+          "name": "真空包装",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#1D4ED8",
+            "secondaryColor": "#DBEAFE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案01"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c2_002",
+          "name": "腌渍",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#6D28D9",
+            "secondaryColor": "#EDE9FE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案02"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c2_003",
+          "name": "巴氏杀菌法",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#0F766E",
+            "secondaryColor": "#CCFBF1",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案03"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c2_004",
+          "name": "盐腌",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#B45309",
+            "secondaryColor": "#FEF3C7",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案04"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_c2_action",
+          "label": "处理动作",
+          "options": [
+            {
+              "id": "option_c2_action_001",
+              "label": "把食物装进包装袋后抽出袋里的空气",
+              "note": ""
+            },
+            {
+              "id": "option_c2_action_002",
+              "label": "把食物浸泡在糖水、盐水或醋里",
+              "note": ""
+            },
+            {
+              "id": "option_c2_action_003",
+              "label": "把食物加热至大约60℃至82℃后快速冷却",
+              "note": ""
+            },
+            {
+              "id": "option_c2_action_004",
+              "label": "在食物里放入大量的盐",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c2_key",
+          "label": "关键条件或结果",
+          "options": [
+            {
+              "id": "option_c2_key_001",
+              "label": "形成没有空气的环境",
+              "note": ""
+            },
+            {
+              "id": "option_c2_key_002",
+              "label": "形成太酸、太甜或太咸的环境",
+              "note": ""
+            },
+            {
+              "id": "option_c2_key_003",
+              "label": "经过约60℃至82℃的温度处理并快速冷却",
+              "note": ""
+            },
+            {
+              "id": "option_c2_key_004",
+              "label": "使食物中的水分渗透出来",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c2_examples",
+          "label": "资料例子",
+          "options": [
+            {
+              "id": "option_c2_examples_001",
+              "label": "米、茶叶、香肠、花生",
+              "note": ""
+            },
+            {
+              "id": "option_c2_examples_002",
+              "label": "姜、黄瓜、蒜头、芒果、辣椒",
+              "note": ""
+            },
+            {
+              "id": "option_c2_examples_003",
+              "label": "牛奶、葡萄酒、果汁",
+              "note": ""
+            },
+            {
+              "id": "option_c2_examples_004",
+              "label": "咸蛋、咸鱼、咸菜",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_c2_001": {
+          "category_c2_action": "option_c2_action_001",
+          "category_c2_key": "option_c2_key_001",
+          "category_c2_examples": "option_c2_examples_001"
+        },
+        "entity_c2_002": {
+          "category_c2_action": "option_c2_action_002",
+          "category_c2_key": "option_c2_key_002",
+          "category_c2_examples": "option_c2_examples_002"
+        },
+        "entity_c2_003": {
+          "category_c2_action": "option_c2_action_003",
+          "category_c2_key": "option_c2_key_003",
+          "category_c2_examples": "option_c2_examples_003"
+        },
+        "entity_c2_004": {
+          "category_c2_action": "option_c2_action_004",
+          "category_c2_key": "option_c2_key_004",
+          "category_c2_examples": "option_c2_examples_004"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_c2_001",
+          "text": "直接记录：对象档案03的“关键条件或结果”是“经过约60℃至82℃的温度处理并快速冷却”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_c2_003::category_c2_key"
+          ],
+          "completeAfter": [
+            "entity_c2_003::category_c2_key"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c2_002",
+          "text": "特征记录：对象档案01出现“把食物装进包装袋后抽出袋里的空气”这项资料。",
+          "type": "feature",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_c2_001::category_c2_action"
+          ],
+          "completeAfter": [
+            "entity_c2_001::category_c2_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c2_003",
+          "text": "排除记录：对象档案04的“处理动作”不是“把食物装进包装袋后抽出袋里的空气”，核对后对应“在食物里放入大量的盐”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_c2_004::category_c2_action"
+          ],
+          "completeAfter": [
+            "entity_c2_004::category_c2_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "先排除不符合的选项，再确认目标属性。"
+        },
+        {
+          "id": "clue_c2_004",
+          "text": "直接记录：对象档案02的“资料例子”是“姜、黄瓜、蒜头、芒果、辣椒”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_c2_002::category_c2_examples"
+          ],
+          "completeAfter": [
+            "entity_c2_002::category_c2_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_003::category_c2_key",
+            "entity_c2_001::category_c2_action",
+            "entity_c2_004::category_c2_action"
+          ],
+          "unlockMode": "any",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c2_005",
+          "text": "关系记录：对象档案04已确认“在食物里放入大量的盐”，同一份档案的“资料例子”是“咸蛋、咸鱼、咸菜”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_c2_004::category_c2_action",
+            "entity_c2_004::category_c2_examples"
+          ],
+          "completeAfter": [
+            "entity_c2_004::category_c2_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_004::category_c2_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c2_006",
+          "text": "交叉核验：结合对象档案02已确认的多项资料，剩余“关键条件或结果”对应“形成太酸、太甜或太咸的环境”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_c2_002::category_c2_examples",
+            "entity_c2_002::category_c2_action",
+            "entity_c2_002::category_c2_key"
+          ],
+          "completeAfter": [
+            "entity_c2_002::category_c2_key"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_002::category_c2_examples",
+            "entity_c2_002::category_c2_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c2_007",
+          "text": "关系记录：对象档案01已确认“把食物装进包装袋后抽出袋里的空气”，同一份档案的“关键条件或结果”是“形成没有空气的环境”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_c2_001::category_c2_action",
+            "entity_c2_001::category_c2_key"
+          ],
+          "completeAfter": [
+            "entity_c2_001::category_c2_key"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_001::category_c2_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c2_008",
+          "text": "交叉核验：结合对象档案04已确认的多项资料，剩余“关键条件或结果”对应“使食物中的水分渗透出来”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_c2_004::category_c2_action",
+            "entity_c2_004::category_c2_examples",
+            "entity_c2_004::category_c2_key"
+          ],
+          "completeAfter": [
+            "entity_c2_004::category_c2_key"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_004::category_c2_action",
+            "entity_c2_004::category_c2_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c2_009",
+          "text": "特征记录：对象档案03出现“牛奶、葡萄酒、果汁”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_c2_003::category_c2_examples"
+          ],
+          "completeAfter": [
+            "entity_c2_003::category_c2_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_003::category_c2_key"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c2_010",
+          "text": "交叉核验：结合对象档案01已确认的多项资料，剩余“资料例子”对应“米、茶叶、香肠、花生”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_c2_001::category_c2_action",
+            "entity_c2_001::category_c2_key",
+            "entity_c2_001::category_c2_examples"
+          ],
+          "completeAfter": [
+            "entity_c2_001::category_c2_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_001::category_c2_action",
+            "entity_c2_001::category_c2_key"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c2_011",
+          "text": "关系记录：对象档案02已确认“姜、黄瓜、蒜头、芒果、辣椒”，同一份档案的“处理动作”是“把食物浸泡在糖水、盐水或醋里”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_c2_002::category_c2_examples",
+            "entity_c2_002::category_c2_action"
+          ],
+          "completeAfter": [
+            "entity_c2_002::category_c2_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_002::category_c2_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c2_012",
+          "text": "交叉核验：结合对象档案03已确认的多项资料，剩余“处理动作”对应“把食物加热至大约60℃至82℃后快速冷却”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_c2_003::category_c2_key",
+            "entity_c2_003::category_c2_examples",
+            "entity_c2_003::category_c2_action"
+          ],
+          "completeAfter": [
+            "entity_c2_003::category_c2_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c2_003::category_c2_key",
+            "entity_c2_003::category_c2_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        }
+      ],
+      "knowledgeSummary": [
+        "真空包装：装袋后抽出空气，使微生物无法在没有空气的环境里生存。",
+        "腌渍：把食物浸泡在糖水、盐水或醋里，使环境太酸、太甜或太咸。",
+        "巴氏杀菌法：把食物加热至大约60℃至82℃，然后快速冷却。",
+        "盐腌：在食物里放入大量盐，使食物中的水分渗透出来。"
+      ]
+    },
+    {
+      "id": "case_003",
+      "title": "保护层与压力舱的封存记录",
+      "story": "第三储藏区的脱水、保护层、密封和压力记录被资料风暴拆散，第二枚钥匙被锁在结案柜中。",
+      "goal": "根据处理方式、保存作用、补充说明和资料例子，完成四份匿名技术档案。",
+      "difficulty": "hard",
+      "narrative": {
+        "theme": "利用脱水、保护层、密封与高压力保存食物",
+        "opening": "第三储藏区连接保护膜实验台和常温压力舱，所有档案原本由第二枚钥匙管理。",
+        "problem": "一场资料风暴把处理方式、保存作用、补充说明和例子拆散，结案柜随即上锁。",
+        "mission": "安安要交叉核验四类记录，让每份匿名档案达到揭示条件，再完成剩余资料。",
+        "completion": "结案柜成功开启，第二枚钥匙到手。主控制室仍显示六份价值报告尚未归档。"
+      },
+      "storyEvents": [
+        {
+          "id": "story_event_c3_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "保护膜实验台恢复电力，资料风暴开始减弱。"
+        },
+        {
+          "id": "story_event_c3_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "一半技术档案完成，结案柜出现第二道光环。"
+        },
+        {
+          "id": "story_event_c3_003",
+          "triggerAfterCorrectCells": 12,
+          "text": "压力舱解除锁定，第二枚钥匙即将释放。"
+        }
+      ],
+      "entityType": "anonymous_food_preservation_technology",
+      "entityLabel": "匿名技术档案",
+      "entities": [
+        {
+          "id": "entity_c3_001",
+          "name": "熏制",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#1D4ED8",
+            "secondaryColor": "#DBEAFE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案01"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c3_002",
+          "name": "上蜡",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#6D28D9",
+            "secondaryColor": "#EDE9FE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案02"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c3_003",
+          "name": "罐装或装瓶",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#0F766E",
+            "secondaryColor": "#CCFBF1",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案03"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c3_004",
+          "name": "高压处理技术（HPP）",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#B45309",
+            "secondaryColor": "#FEF3C7",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案04"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_c3_action",
+          "label": "处理方式",
+          "options": [
+            {
+              "id": "option_c3_action_001",
+              "label": "用烟把食物熏至脱水",
+              "note": ""
+            },
+            {
+              "id": "option_c3_action_002",
+              "label": "在食物表层涂上一层蜡，形成保护膜",
+              "note": ""
+            },
+            {
+              "id": "option_c3_action_003",
+              "label": "把煮熟的食物装进罐子或瓶子，抽出空气后密封",
+              "note": ""
+            },
+            {
+              "id": "option_c3_action_004",
+              "label": "在常温下利用超高压力处理食物",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c3_effect",
+          "label": "主要保存作用",
+          "options": [
+            {
+              "id": "option_c3_effect_001",
+              "label": "使微生物无法在没有水的环境下生长",
+              "note": ""
+            },
+            {
+              "id": "option_c3_effect_002",
+              "label": "隔绝空气，防止微生物侵入食物内部",
+              "note": ""
+            },
+            {
+              "id": "option_c3_effect_003",
+              "label": "密封后再次高温加热进行消毒",
+              "note": ""
+            },
+            {
+              "id": "option_c3_effect_004",
+              "label": "杀灭食物中的微生物并延长保存时间",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c3_extra",
+          "label": "补充说明",
+          "options": [
+            {
+              "id": "option_c3_extra_001",
+              "label": "食物表面的烟含有能防止微生物生长的成分",
+              "note": ""
+            },
+            {
+              "id": "option_c3_extra_002",
+              "label": "有些水果为了长期储存和长途运输会涂食用蜡",
+              "note": ""
+            },
+            {
+              "id": "option_c3_extra_003",
+              "label": "一般会添加防腐剂使食物更耐久",
+              "note": ""
+            },
+            {
+              "id": "option_c3_extra_004",
+              "label": "能保持食物原有的营养价值和味道",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c3_examples",
+          "label": "资料例子",
+          "options": [
+            {
+              "id": "option_c3_examples_001",
+              "label": "鱼、肉类、香蕉",
+              "note": ""
+            },
+            {
+              "id": "option_c3_examples_002",
+              "label": "番茄、苹果、茄子",
+              "note": ""
+            },
+            {
+              "id": "option_c3_examples_003",
+              "label": "酱油、果酱、罐头食品",
+              "note": ""
+            },
+            {
+              "id": "option_c3_examples_004",
+              "label": "肉类、乳酪、果酱、果汁",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_c3_001": {
+          "category_c3_action": "option_c3_action_001",
+          "category_c3_effect": "option_c3_effect_001",
+          "category_c3_extra": "option_c3_extra_001",
+          "category_c3_examples": "option_c3_examples_001"
+        },
+        "entity_c3_002": {
+          "category_c3_action": "option_c3_action_002",
+          "category_c3_effect": "option_c3_effect_002",
+          "category_c3_extra": "option_c3_extra_002",
+          "category_c3_examples": "option_c3_examples_002"
+        },
+        "entity_c3_003": {
+          "category_c3_action": "option_c3_action_003",
+          "category_c3_effect": "option_c3_effect_003",
+          "category_c3_extra": "option_c3_extra_003",
+          "category_c3_examples": "option_c3_examples_003"
+        },
+        "entity_c3_004": {
+          "category_c3_action": "option_c3_action_004",
+          "category_c3_effect": "option_c3_effect_004",
+          "category_c3_extra": "option_c3_extra_004",
+          "category_c3_examples": "option_c3_examples_004"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_c3_001",
+          "text": "直接记录：对象档案02的“处理方式”是“在食物表层涂上一层蜡，形成保护膜”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_c3_002::category_c3_action"
+          ],
+          "completeAfter": [
+            "entity_c3_002::category_c3_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_002",
+          "text": "特征记录：对象档案04出现“能保持食物原有的营养价值和味道”这项资料。",
+          "type": "feature",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_c3_004::category_c3_extra"
+          ],
+          "completeAfter": [
+            "entity_c3_004::category_c3_extra"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_003",
+          "text": "排除记录：对象档案01的“主要保存作用”不是“隔绝空气，防止微生物侵入食物内部”，核对后对应“使微生物无法在没有水的环境下生长”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_c3_001::category_c3_effect"
+          ],
+          "completeAfter": [
+            "entity_c3_001::category_c3_effect"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "先排除不符合的选项，再确认目标属性。"
+        },
+        {
+          "id": "clue_c3_004",
+          "text": "直接记录：对象档案03的“主要保存作用”是“密封后再次高温加热进行消毒”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_c3_003::category_c3_effect"
+          ],
+          "completeAfter": [
+            "entity_c3_003::category_c3_effect"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_002::category_c3_action",
+            "entity_c3_004::category_c3_extra",
+            "entity_c3_001::category_c3_effect"
+          ],
+          "unlockMode": "any",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_005",
+          "text": "关系记录：对象档案04已确认“能保持食物原有的营养价值和味道”，同一份档案的“主要保存作用”是“杀灭食物中的微生物并延长保存时间”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_c3_004::category_c3_extra",
+            "entity_c3_004::category_c3_effect"
+          ],
+          "completeAfter": [
+            "entity_c3_004::category_c3_effect"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_004::category_c3_extra"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c3_006",
+          "text": "交叉核验：结合对象档案01已确认的多项资料，剩余“资料例子”对应“鱼、肉类、香蕉”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_c3_001::category_c3_effect",
+            "entity_c3_001::category_c3_action",
+            "entity_c3_001::category_c3_extra",
+            "entity_c3_001::category_c3_examples"
+          ],
+          "completeAfter": [
+            "entity_c3_001::category_c3_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_001::category_c3_effect",
+            "entity_c3_001::category_c3_action",
+            "entity_c3_001::category_c3_extra"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c3_007",
+          "text": "特征记录：对象档案02出现“有些水果为了长期储存和长途运输会涂食用蜡”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_c3_002::category_c3_extra"
+          ],
+          "completeAfter": [
+            "entity_c3_002::category_c3_extra"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_002::category_c3_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_008",
+          "text": "关系记录：对象档案03已确认“密封后再次高温加热进行消毒”，同一份档案的“处理方式”是“把煮熟的食物装进罐子或瓶子，抽出空气后密封”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_c3_003::category_c3_effect",
+            "entity_c3_003::category_c3_action"
+          ],
+          "completeAfter": [
+            "entity_c3_003::category_c3_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_003::category_c3_effect"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c3_009",
+          "text": "关系记录：对象档案01已确认“使微生物无法在没有水的环境下生长”，同一份档案的“处理方式”是“用烟把食物熏至脱水”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_c3_001::category_c3_effect",
+            "entity_c3_001::category_c3_action"
+          ],
+          "completeAfter": [
+            "entity_c3_001::category_c3_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_001::category_c3_effect"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c3_010",
+          "text": "交叉核验：结合对象档案04已确认的多项资料，剩余“资料例子”对应“肉类、乳酪、果酱、果汁”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_c3_004::category_c3_extra",
+            "entity_c3_004::category_c3_effect",
+            "entity_c3_004::category_c3_action",
+            "entity_c3_004::category_c3_examples"
+          ],
+          "completeAfter": [
+            "entity_c3_004::category_c3_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_004::category_c3_extra",
+            "entity_c3_004::category_c3_effect",
+            "entity_c3_004::category_c3_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c3_011",
+          "text": "关系记录：对象档案02已确认“在食物表层涂上一层蜡，形成保护膜”，同一份档案的“主要保存作用”是“隔绝空气，防止微生物侵入食物内部”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_c3_002::category_c3_action",
+            "entity_c3_002::category_c3_effect"
+          ],
+          "completeAfter": [
+            "entity_c3_002::category_c3_effect"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_002::category_c3_action"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c3_012",
+          "text": "特征记录：对象档案03出现“一般会添加防腐剂使食物更耐久”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_c3_003::category_c3_extra"
+          ],
+          "completeAfter": [
+            "entity_c3_003::category_c3_extra"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_003::category_c3_effect"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_013",
+          "text": "特征记录：对象档案01出现“食物表面的烟含有能防止微生物生长的成分”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_c3_001::category_c3_extra"
+          ],
+          "completeAfter": [
+            "entity_c3_001::category_c3_extra"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_001::category_c3_effect"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c3_014",
+          "text": "交叉核验：结合对象档案02已确认的多项资料，剩余“资料例子”对应“番茄、苹果、茄子”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_c3_002::category_c3_action",
+            "entity_c3_002::category_c3_extra",
+            "entity_c3_002::category_c3_effect",
+            "entity_c3_002::category_c3_examples"
+          ],
+          "completeAfter": [
+            "entity_c3_002::category_c3_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_002::category_c3_action",
+            "entity_c3_002::category_c3_extra",
+            "entity_c3_002::category_c3_effect"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c3_015",
+          "text": "关系记录：对象档案04已确认“能保持食物原有的营养价值和味道”，同一份档案的“处理方式”是“在常温下利用超高压力处理食物”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_c3_004::category_c3_extra",
+            "entity_c3_004::category_c3_action"
+          ],
+          "completeAfter": [
+            "entity_c3_004::category_c3_action"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_004::category_c3_extra"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c3_016",
+          "text": "交叉核验：结合对象档案03已确认的多项资料，剩余“资料例子”对应“酱油、果酱、罐头食品”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_c3_003::category_c3_effect",
+            "entity_c3_003::category_c3_action",
+            "entity_c3_003::category_c3_extra",
+            "entity_c3_003::category_c3_examples"
+          ],
+          "completeAfter": [
+            "entity_c3_003::category_c3_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c3_003::category_c3_effect",
+            "entity_c3_003::category_c3_action",
+            "entity_c3_003::category_c3_extra"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        }
+      ],
+      "knowledgeSummary": [
+        "熏制：用烟把食物熏至脱水；烟中也含有能防止微生物生长的成分。",
+        "上蜡：在食物表层形成蜡质保护膜，隔绝空气并防止微生物侵入。",
+        "罐装或装瓶：熟食密封后再次高温加热消毒，一般会添加防腐剂。",
+        "高压处理技术（HPP）：常温下利用超高压力杀灭微生物，并保持原有营养价值和味道。"
+      ]
+    },
+    {
+      "id": "case_004",
+      "title": "主控制室的六份价值报告",
+      "story": "所有保存技术已恢复，但主控制室仍无法说明粮仓为何重要，六份价值报告必须在运输倒计时结束前归位。",
+      "goal": "根据主要作用、相关情境和资料例子，完成六份匿名重要性档案。",
+      "difficulty": "hard",
+      "narrative": {
+        "theme": "食物保存的重要性",
+        "opening": "安安带着两枚钥匙抵达主控制室，屏幕上出现六份没有标题的价值报告。",
+        "problem": "报告的作用、使用情境和例子全部分离，运输系统无法决定哪些食物应优先安排。",
+        "mission": "安安要在最后倒计时内完成六份匿名报告，让粮仓重新说明保存食物的价值。",
+        "completion": "六份报告全部归档，运输系统顺利启动。角落里却留下了一张没有编号的空白记录，等待下一次调查。"
+      },
+      "storyEvents": [
+        {
+          "id": "story_event_c4_001",
+          "triggerAfterCorrectCells": 5,
+          "text": "第一批价值报告恢复，运输路线重新显示。"
+        },
+        {
+          "id": "story_event_c4_002",
+          "triggerAfterCorrectCells": 9,
+          "text": "半数报告通过核验，主控制室开始解除倒计时限制。"
+        },
+        {
+          "id": "story_event_c4_003",
+          "triggerAfterCorrectCells": 14,
+          "text": "运输系统进入最后检查，只剩少量资料尚未归位。"
+        }
+      ],
+      "entityType": "anonymous_food_preservation_importance",
+      "entityLabel": "匿名重要性档案",
+      "entities": [
+        {
+          "id": "entity_c4_001",
+          "name": "提供季节性食物",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#1D4ED8",
+            "secondaryColor": "#DBEAFE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案01"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c4_002",
+          "name": "使食物更持久保持新鲜",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#6D28D9",
+            "secondaryColor": "#EDE9FE",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案02"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c4_003",
+          "name": "便于储存",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#0F766E",
+            "secondaryColor": "#CCFBF1",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案03"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c4_004",
+          "name": "避免浪费食物",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#B45309",
+            "secondaryColor": "#FEF3C7",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案04"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c4_005",
+          "name": "便于运输",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#BE123C",
+            "secondaryColor": "#FFE4E6",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案05"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        },
+        {
+          "id": "entity_c4_006",
+          "name": "提供即食品和自热食品",
+          "title": "待确认档案",
+          "description": "身份尚未确认。请根据逐步出现的调查记录完成属性配对。",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "06",
+            "shape": "blob",
+            "pattern": "rays",
+            "primaryColor": "#374151",
+            "secondaryColor": "#F3F4F6",
+            "accentColor": "#FFFFFF"
+          },
+          "records": [
+            {
+              "label": "档案代号",
+              "text": "对象档案06"
+            },
+            {
+              "label": "调查状态",
+              "text": "身份未确认"
+            }
+          ]
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_c4_function",
+          "label": "主要作用",
+          "options": [
+            {
+              "id": "option_c4_function_001",
+              "label": "让人们长年品尝一些季节性的食物",
+              "note": ""
+            },
+            {
+              "id": "option_c4_function_002",
+              "label": "延长食物的保存时间，方便储存备用",
+              "note": ""
+            },
+            {
+              "id": "option_c4_function_003",
+              "label": "方便人们存放，并能节省空间",
+              "note": ""
+            },
+            {
+              "id": "option_c4_function_004",
+              "label": "产品过剩时保存，使食物不那么快变质",
+              "note": ""
+            },
+            {
+              "id": "option_c4_function_005",
+              "label": "把食物分销到各地，并可运输救援食物",
+              "note": ""
+            },
+            {
+              "id": "option_c4_function_006",
+              "label": "紧急时能在短时间内获取食物",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c4_context",
+          "label": "相关情境",
+          "options": [
+            {
+              "id": "option_c4_context_001",
+              "label": "想在不同季节品尝季节性食物",
+              "note": ""
+            },
+            {
+              "id": "option_c4_context_002",
+              "label": "储存起来备用，以应对不时之需",
+              "note": ""
+            },
+            {
+              "id": "option_c4_context_003",
+              "label": "需要减少食物占用的储存空间",
+              "note": ""
+            },
+            {
+              "id": "option_c4_context_004",
+              "label": "海产或农产品等产品过剩",
+              "note": ""
+            },
+            {
+              "id": "option_c4_context_005",
+              "label": "跨地区分销或发生天灾",
+              "note": ""
+            },
+            {
+              "id": "option_c4_context_006",
+              "label": "紧急情况，需要容易准备和方便携带",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_c4_examples",
+          "label": "资料例子",
+          "options": [
+            {
+              "id": "option_c4_examples_001",
+              "label": "榴莲、山竹",
+              "note": ""
+            },
+            {
+              "id": "option_c4_examples_002",
+              "label": "干粮；保存时间可长达三年",
+              "note": ""
+            },
+            {
+              "id": "option_c4_examples_003",
+              "label": "节省储存空间",
+              "note": ""
+            },
+            {
+              "id": "option_c4_examples_004",
+              "label": "凤梨汁、凤梨干、凤梨酱、凤梨罐头",
+              "note": ""
+            },
+            {
+              "id": "option_c4_examples_005",
+              "label": "分发给有需要的人；进口蔬菜与菇类",
+              "note": ""
+            },
+            {
+              "id": "option_c4_examples_006",
+              "label": "即食品；自热食品",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_c4_001": {
+          "category_c4_function": "option_c4_function_001",
+          "category_c4_context": "option_c4_context_001",
+          "category_c4_examples": "option_c4_examples_001"
+        },
+        "entity_c4_002": {
+          "category_c4_function": "option_c4_function_002",
+          "category_c4_context": "option_c4_context_002",
+          "category_c4_examples": "option_c4_examples_002"
+        },
+        "entity_c4_003": {
+          "category_c4_function": "option_c4_function_003",
+          "category_c4_context": "option_c4_context_003",
+          "category_c4_examples": "option_c4_examples_003"
+        },
+        "entity_c4_004": {
+          "category_c4_function": "option_c4_function_004",
+          "category_c4_context": "option_c4_context_004",
+          "category_c4_examples": "option_c4_examples_004"
+        },
+        "entity_c4_005": {
+          "category_c4_function": "option_c4_function_005",
+          "category_c4_context": "option_c4_context_005",
+          "category_c4_examples": "option_c4_examples_005"
+        },
+        "entity_c4_006": {
+          "category_c4_function": "option_c4_function_006",
+          "category_c4_context": "option_c4_context_006",
+          "category_c4_examples": "option_c4_examples_006"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_c4_001",
+          "text": "直接记录：对象档案02的“主要作用”是“延长食物的保存时间，方便储存备用”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_c4_002::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_002::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c4_002",
+          "text": "排除记录：对象档案04的“相关情境”不是“想在不同季节品尝季节性食物”，核对后对应“海产或农产品等产品过剩”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_c4_004::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_004::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "先排除不符合的选项，再确认目标属性。"
+        },
+        {
+          "id": "clue_c4_003",
+          "text": "特征记录：对象档案06出现“即食品；自热食品”这项资料。",
+          "type": "feature",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_c4_006::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_006::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c4_004",
+          "text": "直接记录：对象档案01的“相关情境”是“想在不同季节品尝季节性食物”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_c4_001::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_001::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_004::category_c4_context",
+            "entity_c4_006::category_c4_examples"
+          ],
+          "unlockMode": "any",
+          "explanation": "直接确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c4_005",
+          "text": "交叉核验：结合对象档案02已确认的多项资料，剩余“资料例子”对应“干粮；保存时间可长达三年”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_002::category_c4_context",
+            "entity_c4_002::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_002::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_002::category_c4_context"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_006",
+          "text": "特征记录：对象档案03出现“节省储存空间”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_c4_003::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_003::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_004::category_c4_context",
+            "entity_c4_006::category_c4_examples"
+          ],
+          "unlockMode": "any",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c4_007",
+          "text": "关系记录：对象档案05已确认“延长食物的保存时间，方便储存备用”，同一份档案的“主要作用”是“把食物分销到各地，并可运输救援食物”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_004::category_c4_context",
+            "entity_c4_006::category_c4_examples",
+            "entity_c4_005::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_005::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_002::category_c4_function",
+            "entity_c4_004::category_c4_context",
+            "entity_c4_006::category_c4_examples"
+          ],
+          "unlockMode": "any",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c4_008",
+          "text": "交叉核验：结合对象档案04已确认的多项资料，剩余“主要作用”对应“产品过剩时保存，使食物不那么快变质”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_c4_004::category_c4_context",
+            "entity_c4_004::category_c4_examples",
+            "entity_c4_004::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_004::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_004::category_c4_context",
+            "entity_c4_004::category_c4_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_009",
+          "text": "关系记录：对象档案04已确认“海产或农产品等产品过剩”，同一份档案的“资料例子”是“凤梨汁、凤梨干、凤梨酱、凤梨罐头”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_c4_004::category_c4_context",
+            "entity_c4_004::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_004::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_004::category_c4_context"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c4_010",
+          "text": "交叉核验：结合对象档案06已确认的多项资料，剩余“主要作用”对应“紧急时能在短时间内获取食物”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_c4_006::category_c4_examples",
+            "entity_c4_006::category_c4_context",
+            "entity_c4_006::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_006::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_006::category_c4_examples",
+            "entity_c4_006::category_c4_context"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_011",
+          "text": "关系记录：对象档案06已确认“即食品；自热食品”，同一份档案的“相关情境”是“紧急情况，需要容易准备和方便携带”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_c4_006::category_c4_examples",
+            "entity_c4_006::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_006::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_006::category_c4_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c4_012",
+          "text": "交叉核验：结合对象档案01已确认的多项资料，剩余“资料例子”对应“榴莲、山竹”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_c4_001::category_c4_context",
+            "entity_c4_001::category_c4_function",
+            "entity_c4_001::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_001::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_001::category_c4_context",
+            "entity_c4_001::category_c4_function"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_013",
+          "text": "关系记录：对象档案01已确认“想在不同季节品尝季节性食物”，同一份档案的“主要作用”是“让人们长年品尝一些季节性的食物”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_c4_001::category_c4_context",
+            "entity_c4_001::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_001::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_001::category_c4_context"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c4_014",
+          "text": "交叉核验：结合对象档案05已确认的多项资料，剩余“相关情境”对应“跨地区分销或发生天灾”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_c4_005::category_c4_function",
+            "entity_c4_005::category_c4_examples",
+            "entity_c4_005::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_005::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_005::category_c4_function",
+            "entity_c4_005::category_c4_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_015",
+          "text": "特征记录：对象档案05出现“分发给有需要的人；进口蔬菜与菇类”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_c4_005::category_c4_examples"
+          ],
+          "completeAfter": [
+            "entity_c4_005::category_c4_examples"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_005::category_c4_function"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        },
+        {
+          "id": "clue_c4_016",
+          "text": "交叉核验：结合对象档案03已确认的多项资料，剩余“相关情境”对应“需要减少食物占用的储存空间”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_c4_003::category_c4_examples",
+            "entity_c4_003::category_c4_function",
+            "entity_c4_003::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_003::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_003::category_c4_examples",
+            "entity_c4_003::category_c4_function"
+          ],
+          "unlockMode": "all",
+          "explanation": "综合多项已确认资料，完成剩余属性。"
+        },
+        {
+          "id": "clue_c4_017",
+          "text": "关系记录：对象档案03已确认“节省储存空间”，同一份档案的“主要作用”是“方便人们存放，并能节省空间”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_c4_003::category_c4_examples",
+            "entity_c4_003::category_c4_function"
+          ],
+          "completeAfter": [
+            "entity_c4_003::category_c4_function"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_003::category_c4_examples"
+          ],
+          "unlockMode": "all",
+          "explanation": "把同一份匿名档案的两项属性连接起来。"
+        },
+        {
+          "id": "clue_c4_018",
+          "text": "特征记录：对象档案02出现“储存起来备用，以应对不时之需”这项资料。",
+          "type": "feature",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "entity_c4_002::category_c4_context"
+          ],
+          "completeAfter": [
+            "entity_c4_002::category_c4_context"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_c4_002::category_c4_function"
+          ],
+          "unlockMode": "all",
+          "explanation": "利用资料特征确认一项匿名档案属性。"
+        }
+      ],
+      "knowledgeSummary": [
+        "提供季节性食物：让人们长年品尝榴莲、山竹等季节性食物。",
+        "使食物更持久保持新鲜：延长保存时间，方便储存备用；干粮可保存长达三年。",
+        "便于储存：经过保存处理的食物方便存放，并能节省空间。",
+        "避免浪费食物：产品过剩时可加工保存，例如凤梨汁、凤梨干、凤梨酱和凤梨罐头。",
+        "便于运输：食物可分销各地，也可在天灾时把救援食物送到灾区。",
+        "提供即食品和自热食品：紧急时能快速获取，容易准备并方便携带。"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "课程资料为Year 6科学单元八《食物保存技术》，内容包括人类通过抑制微生物生长来延长食物食用期限、十二种保存技术及例子、同一种食物可用不同方法保存，以及食物保存的六项重要性。",
+    "usedItems": [
+      "总原则：人类通过抑制微生物的生长来延长食物的食用期限。",
+      "煮沸、干藏、冷藏、冷冻的处理方式、微生物影响、条件和例子。",
+      "真空包装、腌渍、巴氏杀菌法、盐腌的处理方式、关键条件和例子。",
+      "熏制、上蜡、罐装或装瓶的处理方式、保存作用、补充说明和例子。",
+      "第3页科学揭秘中的高压处理技术（HPP）：常温超高压力、杀灭微生物、延长保存时间、保持营养与味道，以及适用食物。",
+      "一种食物可以用不同的保存法保存。",
+      "食物保存六项重要性：提供季节性食物、使食物更持久保持新鲜、便于储存、避免浪费食物、便于运输、提供即食品和自热食品。"
+    ],
+    "excludedItems": [
+      "第1页表格中的冷藏温度写成4℃-18℃，与同页红色补充说明的冷藏室约3℃至5℃不一致；为避免矛盾，4℃-18℃未作为游戏答案。",
+      "第4页辣椒可用不同保存法的示意图没有完整列出各制品名称，因此只保留‘一种食物可以用不同保存法保存’这项课程结论，不把图片细节设为答案。",
+      "姓名、日期、正课、功课、缺席及没带资料等页首行政栏不属于课程知识，未纳入游戏。"
+    ],
+    "warnings": [
+      "剧情中的保鲜星、时光粮仓、调查员安安、保鲜钥匙、运输倒计时和资料风暴均为原创情境，不属于课程知识。",
+      "第一案与第三案各有4个类别，名称揭示门槛为完成3项；第二案与第四案各有3个类别，名称揭示门槛为完成2项。",
+      "所有名称揭示前的标题、描述、记录、图标符号、剧情事件、线索说明和option.note均使用匿名表达；名称仅保存在entity.name。",
+      "图标只使用引擎支持的generated模式、编号符号、形状、纹理与HEX颜色，不作为答案线索。",
+      "第3页高压处理技术来自页面下方科学揭秘框，已作为课程扩展内容纳入第三案；教师可按课堂进度决定是否使用该案。",
+      "冷藏答案采用同页较明确的红色补充说明‘约3℃至5℃’；建议教师在使用前确认原讲义中的4℃-18℃是否为排版错误。",
+      "本资料包没有加入资料外的日常属性；仅新增原创剧情包装与匿名档案流程。",
+      "已检查每个类别选项数量、solution一对一使用、ID引用、初始线索、解锁可达性、66%名称揭示、后期剩余属性及最终唯一解。"
+    ],
+    "validationPassed": true
+  }
+}
