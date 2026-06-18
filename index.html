@@ -26,20 +26,8 @@
       --amber: #8d6318;
       --focus: #c79a4b;
       --radius: 8px;
-      --app-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-family: var(--app-font-family);
-    }
-
-    :root.font-windows {
-      --app-font-family: "YouYuan", "幼圆", "Microsoft YaHei", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
-    }
-
-    :root.font-apple {
-      --app-font-family: "Yuanti SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-    }
-
-    :root.font-android {
-      --app-font-family: system-ui, "Noto Sans CJK SC", "Noto Sans SC", "Roboto", sans-serif;
+      --game-font-rounded: "YouYuan", "幼圆", "Yuanti SC", system-ui, sans-serif;
+      font-family: var(--game-font-rounded);
     }
 
     * {
@@ -2512,26 +2500,6 @@
     (() => {
       "use strict";
 
-      function applyDeviceFontClass() {
-        const root = document.documentElement;
-        const ua = (navigator.userAgent || "").toLowerCase();
-        const platform = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "").toLowerCase();
-        const isIPadOS = platform === "macintel" && navigator.maxTouchPoints > 1;
-        const isWindows = platform.includes("win") || ua.includes("windows");
-        const isApple = isIPadOS || platform.includes("mac") || platform.includes("iphone") || platform.includes("ipad") || platform.includes("ipod") || /iphone|ipad|ipod/.test(ua);
-        const isAndroid = platform.includes("android") || ua.includes("android");
-        root.classList.remove("font-windows", "font-apple", "font-android");
-        if (isWindows) {
-          root.classList.add("font-windows");
-        } else if (isApple) {
-          root.classList.add("font-apple");
-        } else if (isAndroid) {
-          root.classList.add("font-android");
-        }
-      }
-
-      applyDeviceFontClass();
-
       const STORAGE_PREFIX = "classArchiveEngine.";
       const STORE = {
         package: STORAGE_PREFIX + "package",
@@ -3856,24 +3824,28 @@
 
       function scheduleInlineHoverClose(holder, delay = 160) {
         if (!holder) return;
+        const targetCellId = holder.dataset.cellId;
+        const targetEntityId = holder.dataset.entityId;
+        const targetCategoryId = holder.dataset.categoryId;
         const previous = inlineHoverTimers.get(holder);
         if (previous) clearTimeout(previous);
         const timer = window.setTimeout(() => {
           inlineHoverTimers.delete(holder);
-          const panel = getInlineOptionsPanel();
-          const isCurrentPanel = panel && panel.dataset.panelCell === holder.dataset.cellId;
+          const currentHolder = targetCellId ? [...app.querySelectorAll(".answer-cell-wrap")].find((node) => node.dataset.cellId === targetCellId) : holder;
+          const panel = getInlineOptionsPanel(targetCellId);
+          const isCurrentPanel = !!panel;
           const isErrorPanel = isCurrentPanel && panel.classList.contains("error");
-          if (!isErrorPanel && holder.matches(":focus-within")) return;
+          if (!isErrorPanel && currentHolder && currentHolder.matches(":focus-within")) return;
           if (isCurrentPanel && (panel.matches(":hover") || (!isErrorPanel && panel.contains(document.activeElement)))) return;
-          holder.classList.remove("hover-open");
-          if (isErrorPanel && selectedCell && selectedCell.entityId === holder.dataset.entityId && selectedCell.categoryId === holder.dataset.categoryId) {
+          if (currentHolder) currentHolder.classList.remove("hover-open");
+          if (isErrorPanel && selectedCell && selectedCell.entityId === targetEntityId && selectedCell.categoryId === targetCategoryId) {
             selectedCell = null;
-            removeInlineOptions(holder.dataset.cellId);
-            refreshAnswerCell(holder.dataset.entityId, holder.dataset.categoryId);
+            removeInlineOptions(targetCellId);
+            refreshAnswerCell(targetEntityId, targetCategoryId);
             return;
           }
-          if (!selectedCell || selectedCell.entityId !== holder.dataset.entityId || selectedCell.categoryId !== holder.dataset.categoryId) {
-            removeInlineOptions(holder.dataset.cellId);
+          if (!selectedCell || selectedCell.entityId !== targetEntityId || selectedCell.categoryId !== targetCategoryId) {
+            removeInlineOptions(targetCellId);
           }
         }, delay);
         inlineHoverTimers.set(holder, timer);
