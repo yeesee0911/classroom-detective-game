@@ -1,0 +1,333 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "food_drinks_y3_module6",
+  "packageTitle": "Food and Drinks Detective Files",
+  "subject": "English",
+  "level": "Year 3",
+  "contentLanguage": "en-zh",
+  "description": "Year 3 English Module 6 Food and Drinks vocabulary investigation package.",
+  "openingStory": "在食物档案馆里，几份重要的食物资料突然失去了标签。小侦探接到任务，要利用线索重新整理档案，找回正确资料，才能让学习地图恢复运作。带上记录板，进入档案墙开始调查吧！",
+  "endingStory": "所有遗失的档案都成功归位，食物档案馆重新恢复运作。你完成了调查任务，成为“初级档案侦探”。新的学习区域正在远方亮起灯光，等待下一次冒险。",
+  "settings": {
+    "defaultDifficulty": "easy",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 3,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "失踪的食物标签",
+      "story": "几份食物档案失去了对应资料。",
+      "goal": "找出每个匿名档案对应的正确属性。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "档案整理",
+        "opening": "主角来到档案墙前。",
+        "problem": "几份资料标签混乱。",
+        "mission": "根据线索完成配对。",
+        "completion": "档案恢复整齐排列。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "一排档案灯缓缓亮起。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "资料柜发出完成提示音。"
+        }
+      ],
+      "entityType": "food",
+      "entityLabel": "Food Files",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "onions",
+          "title": "未知档案01",
+          "description": "等待确认的食物档案",
+          "records": [
+            {
+              "label": "记录",
+              "text": "来自失去标签的资料柜"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#F4E7C5",
+            "secondaryColor": "#C79A4B",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "carrots",
+          "title": "未知档案02",
+          "description": "等待确认的食物档案",
+          "records": [
+            {
+              "label": "记录",
+              "text": "来自失去标签的资料柜"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "hexagon",
+            "pattern": "grid",
+            "primaryColor": "#FFD9A8",
+            "secondaryColor": "#D97706",
+            "accentColor": "#1F2937"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "pineapple",
+          "title": "未知档案03",
+          "description": "等待确认的食物档案",
+          "records": [
+            {
+              "label": "记录",
+              "text": "来自失去标签的资料柜"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#FEF08A",
+            "secondaryColor": "#CA8A04",
+            "accentColor": "#111827"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "chicken",
+          "title": "未知档案04",
+          "description": "等待确认的食物档案",
+          "records": [
+            {
+              "label": "记录",
+              "text": "来自失去标签的资料柜"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "blob",
+            "pattern": "rings",
+            "primaryColor": "#FECACA",
+            "secondaryColor": "#DC2626",
+            "accentColor": "#1F2937"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "中文名称",
+          "options": [
+            {
+              "id": "option_001",
+              "label": "洋葱",
+              "note": ""
+            },
+            {
+              "id": "option_002",
+              "label": "萝卜",
+              "note": ""
+            },
+            {
+              "id": "option_003",
+              "label": "黄梨",
+              "note": ""
+            },
+            {
+              "id": "option_004",
+              "label": "鸡肉",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "词汇长度",
+          "options": [
+            {
+              "id": "option_005",
+              "label": "5个字母",
+              "note": ""
+            },
+            {
+              "id": "option_006",
+              "label": "6个字母",
+              "note": ""
+            },
+            {
+              "id": "option_007",
+              "label": "7个字母",
+              "note": ""
+            },
+            {
+              "id": "option_008",
+              "label": "9个字母",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "开头字母",
+          "options": [
+            {
+              "id": "option_009",
+              "label": "O",
+              "note": ""
+            },
+            {
+              "id": "option_010",
+              "label": "C",
+              "note": ""
+            },
+            {
+              "id": "option_011",
+              "label": "P",
+              "note": ""
+            },
+            {
+              "id": "option_012",
+              "label": "另一个C",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001",
+          "category_002": "option_006",
+          "category_003": "option_009"
+        },
+        "entity_002": {
+          "category_001": "option_002",
+          "category_002": "option_007",
+          "category_003": "option_010"
+        },
+        "entity_003": {
+          "category_001": "option_003",
+          "category_002": "option_008",
+          "category_003": "option_011"
+        },
+        "entity_004": {
+          "category_001": "option_004",
+          "category_002": "option_005",
+          "category_003": "option_012"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象01的中文名称是洋葱。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "确认一个配对。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象03对应最长的英文单词。",
+          "type": "feature",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "利用长度判断。"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象04不是黄梨。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除错误选项。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象02和萝卜档案属于同一份资料。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "解锁后确认。"
+        }
+      ],
+      "knowledgeSummary": [
+        "onions = 洋葱",
+        "carrots = 萝卜",
+        "pineapple = 黄梨",
+        "chicken = 鸡肉",
+        "词汇来自 Year 3 Module 6 Food, Please!"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "Year 3 English Food and Drinks vocabulary list.",
+    "usedItems": [
+      "onions",
+      "carrots",
+      "pineapple",
+      "chicken",
+      "洋葱",
+      "萝卜",
+      "黄梨",
+      "鸡肉"
+    ],
+    "excludedItems": [
+      "其余词汇未使用，因为单一案件已足够完成活动。"
+    ],
+    "warnings": [
+      "词汇长度与开头字母属于辅助常识属性扩展。"
+    ],
+    "validationPassed": true
+  }
+}
