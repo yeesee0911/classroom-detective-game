@@ -703,6 +703,49 @@
       overflow: hidden;
     }
 
+    .package-story-page .panel.stack {
+      gap: 10px;
+      grid-auto-rows: max-content;
+      align-content: start;
+      overflow-y: auto;
+      overflow-x: hidden;
+      justify-items: stretch;
+      padding-bottom: clamp(18px, 4dvh, 42px);
+    }
+
+    .package-story-page .package-story-card {
+      min-height: 0;
+      padding: clamp(14px, 2vw, 22px);
+      gap: 12px;
+      align-self: start;
+      overflow: visible;
+    }
+
+    .package-story-page .package-story-text {
+      color: var(--ink);
+      font-size: clamp(1.24rem, 2.05vw, 1.62rem);
+      line-height: 1.46;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .package-story-page .package-story-list {
+      display: grid;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .package-story-page .actions {
+      justify-content: center;
+    }
+
+    .package-story-page .package-story-start {
+      width: min(560px, 100%);
+      min-height: 58px;
+      font-size: clamp(1.1rem, 2vw, 1.42rem);
+      font-weight: 1000;
+    }
+
     .intro-page h2 {
       font-size: clamp(1.34rem, 2.5vw, 1.95rem);
       line-height: 1.18;
@@ -1756,6 +1799,11 @@
       line-height: 1.42 !important;
     }
 
+    .package-story-page .intro-narrative-text {
+      font-size: clamp(1.26rem, 2.08vw, 1.62rem) !important;
+      line-height: 1.46 !important;
+    }
+
     .intro-pager .page-label {
       min-width: 84px;
     }
@@ -2581,6 +2629,7 @@
         level: "",
         contentLanguage: "",
         description: "",
+        packageStory: "",
         settings: {
           defaultDifficulty: "",
           timerEnabled: false,
@@ -3052,7 +3101,7 @@
         }
         validationPage = 0;
         validationReportExpanded = false;
-        if (autoEnterLobby && validation && !validation.errors.length) renderCaseLobby();
+        if (autoEnterLobby && validation && !validation.errors.length) renderPackageStory();
         else renderValidation();
       }
 
@@ -3115,6 +3164,11 @@
         }
         data.schemaVersion === "1.0" ? ok("schemaVersion 受到支持。") : fail("schemaVersion 必须为 1.0。");
         Array.isArray(data.cases) && data.cases.length > 0 ? ok("至少包含一宗案件。") : fail("必须至少包含一宗案件。");
+        if (data.packageStory === undefined || typeof data.packageStory === "string") {
+          ok("packageStory 总剧情字段受到支持。");
+        } else {
+          fail("packageStory 必须是字符串。");
+        }
 
         (Array.isArray(data.cases) ? data.cases : []).forEach((caseItem, index) => {
           const label = caseItem && caseItem.title ? caseItem.title : "第" + (index + 1) + "宗案件";
@@ -3319,7 +3373,7 @@
         right.append(desc, note);
 
         const startActions = createEl("div", "actions");
-        startActions.append(button("进入案件大厅", "primary validation-start-button", () => renderCaseLobby(), { disabled: !validation || validation.errors.length > 0 }));
+        startActions.append(button("进入案件大厅", "primary validation-start-button", () => renderPackageStory(), { disabled: !validation || validation.errors.length > 0 }));
         right.append(startActions);
         lists.append(left, right);
         panel.append(lists);
@@ -3341,6 +3395,84 @@
         box.append(createEl("span", "result-label", label));
         box.append(createEl("span", "result-value", value || ""));
         return box;
+      }
+
+      function renderPackageStory() {
+        if (!packageData || !validation || validation.errors.length) {
+          renderValidation();
+          return;
+        }
+        setPage("packageStory");
+        const page = createEl("section", "page package-story-page");
+        page.append(renderTopbar(packageData.packageTitle || "剧情档案", "进入档案墙前，请先阅读本资料包的调查背景。", [
+          soundToggle(),
+          button("资料验证", "ghost", () => renderValidation()),
+          button("更换资料", "ghost", () => renderDataLobby())
+        ]));
+
+        const shell = createEl("div", "shell");
+        const panel = createEl("div", "panel stack");
+        panel.append(createEl("h2", "", packageData.packageTitle || "剧情档案"));
+
+        const meta = createEl("div", "result-grid intro-meta-compact");
+        meta.append(labeledText("科目", packageData.subject || "未填写"));
+        meta.append(labeledText("年级", packageData.level || "未填写"));
+        meta.append(labeledText("案件数量", packageData && Array.isArray(packageData.cases) ? String(packageData.cases.length) : "0"));
+        meta.append(labeledText("资料说明", packageData.description || "未填写"));
+
+        const storyCard = createEl("div", "item-card package-story-card");
+        const labels = createEl("div", "intro-card-labels");
+        labels.append(createEl("span", "pill new", "调查局档案"));
+        labels.append(createEl("span", "pill visible", "总剧情"));
+        storyCard.append(labels);
+
+        const storyPieces = getPackageStoryPieces();
+        if (storyPieces.length === 1) {
+          storyCard.append(createEl("p", "subtle package-story-text", storyPieces[0].text));
+        } else {
+          const list = createEl("div", "package-story-list");
+          storyPieces.forEach((piece) => {
+            const item = createEl("div", "item-card intro-narrative-card");
+            const itemLabels = createEl("div", "intro-card-labels");
+            itemLabels.append(createEl("span", "pill intro-narrative-label", piece.label));
+            item.append(itemLabels);
+            item.append(createEl("p", "subtle intro-narrative-text", piece.text || "未填写"));
+            list.append(item);
+          });
+          storyCard.append(list);
+        }
+
+        const actions = createEl("div", "actions");
+        actions.append(button("进入档案墙", "primary package-story-start", () => renderCaseLobby()));
+        panel.append(meta, storyCard, actions);
+        shell.append(panel);
+        page.append(shell);
+        app.replaceChildren(page);
+      }
+
+      function getPackageStoryPieces() {
+        const story = packageData && typeof packageData.packageStory === "string" ? packageData.packageStory.trim() : "";
+        if (story) return [{ label: "总剧情", text: story }];
+        const pieces = [];
+        (packageData && Array.isArray(packageData.cases) ? packageData.cases : []).forEach((caseItem, index) => {
+          if (!caseItem || typeof caseItem !== "object") return;
+          const texts = [];
+          if (caseItem.story) texts.push(caseItem.story);
+          const narrative = caseItem.narrative && typeof caseItem.narrative === "object" ? caseItem.narrative : null;
+          if (narrative) {
+            ["opening", "problem", "mission"].forEach((key) => {
+              if (narrative[key]) texts.push(narrative[key]);
+            });
+          }
+          if (!texts.length && caseItem.goal) texts.push(caseItem.goal);
+          if (texts.length) {
+            pieces.push({
+              label: caseItem.title || "第" + (index + 1) + "宗案件",
+              text: texts.join("\n\n")
+            });
+          }
+        });
+        return pieces.length ? pieces : [{ label: "总剧情", text: "资料包已载入，请进入档案墙选择案件。" }];
       }
 
       function renderCaseLobby() {
@@ -5179,6 +5311,7 @@
           saveProgress();
           if (view === "game") renderGame();
           else if (view === "cases") renderCaseLobby();
+          else if (view === "packageStory") renderPackageStory();
           else if (view === "intro") renderCaseIntro();
           else if (view === "completion") renderCompletion();
         }, { ariaLabel: "切换音效" });
