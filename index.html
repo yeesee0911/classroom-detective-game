@@ -26,7 +26,20 @@
       --amber: #8d6318;
       --focus: #c79a4b;
       --radius: 8px;
-      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --app-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--app-font-family);
+    }
+
+    :root.font-windows {
+      --app-font-family: "YouYuan", "幼圆", "Microsoft YaHei", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
+    }
+
+    :root.font-apple {
+      --app-font-family: "Yuanti SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    }
+
+    :root.font-android {
+      --app-font-family: system-ui, "Noto Sans CJK SC", "Noto Sans SC", "Roboto", sans-serif;
     }
 
     * {
@@ -542,24 +555,40 @@
 
     .case-lobby-page .card-grid {
       min-height: 0;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      grid-auto-rows: max-content;
+      align-items: start;
+      gap: 12px;
     }
 
     .case-lobby-page .item-card {
-      min-height: 150px;
-      gap: 9px;
-      padding: 14px;
+      min-height: max-content;
+      height: auto;
+      gap: 10px;
+      padding: 15px;
+      overflow: visible;
+    }
+
+    .case-lobby-page .item-card h3 {
+      font-size: clamp(1.22rem, 1.9vw, 1.58rem);
+      line-height: 1.22;
+    }
+
+    .case-lobby-page .item-card .pill {
+      font-size: clamp(0.92rem, 1.25vw, 1.08rem);
+      line-height: 1.18;
     }
 
     .case-lobby-page .item-card .subtle,
     .case-lobby-page .item-card .notice {
-      font-size: clamp(0.9rem, 1.25vw, 1.04rem);
-      line-height: 1.35;
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      line-height: 1.38;
     }
 
     .case-lobby-page .item-card button {
-      min-height: 46px;
-      font-size: clamp(0.9rem, 1.2vw, 1.04rem);
+      min-height: 48px;
+      font-size: clamp(1rem, 1.35vw, 1.16rem);
+      line-height: 1.18;
     }
 
     .case-lobby-grid,
@@ -583,36 +612,102 @@
 
     .validation-page .panel.stack {
       grid-template-rows: auto auto;
+      height: 100%;
+      max-height: 100%;
       align-content: start;
+      justify-items: center;
+      padding-bottom: clamp(28px, 5dvh, 56px);
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
+      scrollbar-gutter: stable;
     }
 
     .validation-layout {
-      min-height: 0;
+      width: min(1120px, calc(100% - 16px));
+      justify-self: center;
+      margin-inline: auto;
+      box-sizing: border-box;
+      min-height: max-content;
       height: auto;
       overflow: visible;
       align-content: start;
       gap: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .validation-check-pane,
     .validation-data-pane {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       min-height: 0;
-      overflow: visible;
+      overflow: hidden;
       overscroll-behavior: contain;
       padding: 9px;
       align-content: start;
       border-radius: 10px;
       border: 1px solid rgba(70, 61, 56, 0.2);
       background: #fff9ed;
-      contain: paint;
+      contain: layout paint;
+    }
+
+    .validation-data-pane {
+      overflow: visible;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-content: start;
+      gap: 10px;
     }
 
     .validation-data-pane .item-card,
     .validation-data-pane .notice {
+      flex: 0 0 auto;
       flex-shrink: 0;
+    }
+
+    .validation-data-pane .actions {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex: 0 0 auto;
+      padding: 8px 0;
+    }
+
+    .validation-data-pane .item-card {
+      width: 100%;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: stretch;
+      align-content: start;
+      height: auto;
+      min-height: auto;
+      flex: 0 0 auto;
+      overflow: visible;
+    }
+
+    .validation-data-pane .result-cell {
+      width: 100%;
+      min-width: 0;
+      height: auto;
+      min-height: auto;
+      box-sizing: border-box;
+      justify-items: center;
+      align-content: start;
+      text-align: center;
+      padding: 8px 10px;
+      overflow: visible;
+    }
+
+    .validation-data-pane .result-label,
+    .validation-data-pane .result-value {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      line-height: 1.22;
     }
 
     .intro-page .panel.stack {
@@ -689,14 +784,16 @@
     .validation-report-body {
       display: block;
       min-height: 0;
-      max-height: 2200px;
-      overflow: hidden;
+      max-height: min(34dvh, 330px);
+      overflow-x: hidden;
+      overflow-y: auto;
       visibility: visible;
       transition: max-height 220ms ease, margin-top 180ms ease;
       margin-top: 7px;
       border-radius: 8px;
       background: #fff9ed;
-      contain: paint;
+      contain: layout paint;
+      overscroll-behavior: contain;
     }
 
     .validation-report-body-inner {
@@ -716,19 +813,30 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 6px;
       min-width: 0;
+      min-height: 0;
+      padding: 0;
+      line-height: 1.05;
     }
 
     .validation-report-head h2 {
       min-width: 0;
       font-size: clamp(1rem, 1.35vw, 1.18rem);
+      line-height: 1.08;
+      margin: 0;
     }
 
     .validation-report-toggle {
-      display: inline-flex;
+      display: inline-grid;
+      place-items: center;
       flex: 0 0 auto;
-      min-height: 36px;
+      min-height: 30px;
+      min-width: 0;
+      padding: 5px 10px;
+      font-size: clamp(0.72rem, 0.95vw, 0.84rem);
+      line-height: 1;
+      text-align: center;
       white-space: nowrap;
     }
 
@@ -739,22 +847,22 @@
     .validation-item {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 5px;
+      gap: 4px;
       align-items: start;
       min-height: 24px;
-      padding: 3px 6px;
+      padding: 2px 5px;
       border-radius: 8px;
       background: #fff9ed;
       border: 1px solid rgba(70, 61, 56, 0.18);
-      line-height: 1.16;
-      font-size: clamp(0.72rem, 0.95vw, 0.84rem);
+      line-height: 1.12;
+      font-size: clamp(0.68rem, 0.88vw, 0.8rem);
       overflow: hidden;
     }
 
     .validation-item .pill {
-      min-height: 22px;
-      padding: 2px 6px;
-      font-size: clamp(0.66rem, 0.85vw, 0.76rem);
+      min-height: 20px;
+      padding: 1px 5px;
+      font-size: clamp(0.6rem, 0.78vw, 0.7rem);
       line-height: 1.05;
     }
 
@@ -764,6 +872,8 @@
 
     .validation-data-pane .result-value {
       font-size: clamp(1.05rem, 1.45vw, 1.26rem);
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .game-layout {
@@ -1007,9 +1117,9 @@
       position: fixed;
       left: var(--option-left, 12px);
       top: var(--option-top, 12px);
-      width: var(--option-width, min(380px, 42vw));
-      min-width: 280px;
-      max-width: 440px;
+      width: var(--option-width, min(560px, calc(100vw - 16px)));
+      min-width: min(280px, calc(100vw - 16px));
+      max-width: min(620px, calc(100vw - 16px));
       transform: translateY(-4px) scale(0.98);
       transform-origin: top center;
       display: grid;
@@ -1071,7 +1181,7 @@
 
     .inline-options-title {
       color: var(--navy);
-      font-size: clamp(0.86rem, 1.2vw, 1rem);
+      font-size: clamp(1rem, 1.38vw, 1.18rem);
       font-weight: 900;
       line-height: 1.26;
       overflow-wrap: anywhere;
@@ -1079,18 +1189,19 @@
 
     .inline-option-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
       gap: 6px;
     }
 
     .inline-option {
-      min-height: 48px;
-      padding: 9px 10px;
+      min-height: 46px;
+      padding: 8px 12px;
       text-align: left;
-      font-size: var(--option-font, var(--cell-font, 0.96rem));
-      line-height: 1.22;
+      font-size: max(var(--option-font, var(--cell-font, 1rem)), 1.18rem);
+      line-height: 1.16;
       border-left: 4px solid var(--teal);
       box-shadow: 0 4px 0 rgba(70, 61, 56, 0.14), 0 8px 14px rgba(12, 18, 33, 0.08);
+      min-width: 0;
     }
 
     .inline-error {
@@ -1217,7 +1328,7 @@
       flex: 0 0 var(--clue-card-basis, calc((100% - 32px) / 5));
       width: var(--clue-card-basis, calc((100% - 32px) / 5));
       border-radius: 8px;
-      padding: 4px 6px;
+      padding: 5px 7px;
       border: 1px solid rgba(70, 61, 56, 0.24);
       background:
         linear-gradient(160deg, rgba(255, 249, 237, 0.95), rgba(244, 231, 197, 0.82));
@@ -1231,7 +1342,7 @@
       font-weight: 700;
       animation: clueIn 260ms ease both;
       position: relative;
-      overflow: visible;
+      overflow: hidden;
     }
 
     .clue-card.used {
@@ -1261,10 +1372,39 @@
     }
 
     .clue-text {
-      font-size: clamp(0.86rem, 1.12vw, 1.04rem);
-      line-height: 1.18;
+      min-height: 0;
+      font-size: clamp(1.12rem, 1.5vw, 1.36rem);
+      line-height: 1.2;
       overflow-wrap: anywhere;
       word-break: break-word;
+    }
+
+    .clue-card.clue-short .clue-text {
+      font-size: clamp(1.24rem, 1.72vw, 1.54rem);
+      line-height: 1.22;
+    }
+
+    .clue-card.clue-medium .clue-text {
+      font-size: clamp(1.08rem, 1.42vw, 1.3rem);
+      line-height: 1.18;
+    }
+
+    .clue-card.clue-long {
+      padding: 4px 6px;
+    }
+
+    .clue-card.clue-long .clue-text {
+      font-size: clamp(0.92rem, 1.12vw, 1.08rem);
+      line-height: 1.13;
+    }
+
+    .clue-card.clue-xlong {
+      padding: 3px 5px;
+    }
+
+    .clue-card.clue-xlong .clue-text {
+      font-size: clamp(0.68rem, 0.86vw, 0.84rem);
+      line-height: 1.04;
     }
 
     .clue-extra {
@@ -1293,8 +1433,26 @@
         display: grid;
         place-items: center;
         text-align: center;
-        font-size: clamp(1.08rem, 1.45vw, 1.28rem);
+        font-size: clamp(1.28rem, 1.42vw, 1.54rem);
         line-height: 1.22;
+      }
+
+      .clue-card.clue-short .clue-text {
+        font-size: clamp(1.38rem, 1.58vw, 1.66rem);
+      }
+
+      .clue-card.clue-medium .clue-text {
+        font-size: clamp(1.2rem, 1.3vw, 1.4rem);
+      }
+
+      .clue-card.clue-long .clue-text {
+        font-size: clamp(1rem, 1.02vw, 1.12rem);
+        line-height: 1.12;
+      }
+
+      .clue-card.clue-xlong .clue-text {
+        font-size: clamp(0.72rem, 0.72vw, 0.82rem);
+        line-height: 1.04;
       }
     }
 
@@ -1504,36 +1662,54 @@
       overscroll-behavior: contain;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-auto-rows: max-content;
+      align-items: start;
       gap: 10px;
       padding-right: 2px;
     }
 
     .course-card {
       min-height: 0;
+      height: auto;
       align-content: start;
-      overflow: visible;
+      overflow: hidden;
     }
 
     .course-card h3,
     .course-card p {
       overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .course-card .pill {
+      max-width: 100%;
+      white-space: normal;
+    }
+
+    .course-card button {
+      width: 100%;
     }
 
     .validation-page .panel.stack {
       justify-content: start;
       align-content: start;
+      justify-items: center;
     }
 
     .validation-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      align-items: start;
-      justify-items: center;
+      width: min(1120px, calc(100% - 16px));
+      justify-self: center;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: stretch;
     }
 
     .validation-check-pane,
     .validation-data-pane {
-      width: min(860px, 100%);
+      width: 100%;
+      max-width: 100%;
     }
 
     .validation-check-pane.validation-collapsed .validation-report-body {
@@ -1552,11 +1728,13 @@
 
     .validation-data-pane .actions {
       justify-content: center;
+      width: 100%;
     }
 
     .validation-start-button {
-      width: min(520px, 100%);
+      width: min(560px, 100%);
       min-height: 62px;
+      flex: 0 0 auto;
       font-size: clamp(1.08rem, 2.2vw, 1.45rem);
       font-weight: 1000;
     }
@@ -1778,25 +1956,32 @@
       .case-lobby-page .card-grid {
         gap: 12px;
         padding-right: 6px;
+        grid-template-columns: 1fr;
+        grid-auto-rows: max-content;
+        align-items: start;
       }
 
       .case-lobby-page .item-card {
-        min-height: auto;
+        min-height: max-content;
+        height: auto;
         padding: 14px;
+        gap: 10px;
       }
 
       .case-lobby-page .item-card h3 {
-        font-size: clamp(1.12rem, 4.2vw, 1.34rem);
+        font-size: clamp(1.28rem, 4.8vw, 1.56rem);
+        line-height: 1.2;
       }
 
       .case-lobby-page .item-card .subtle,
       .case-lobby-page .item-card .notice {
-        font-size: clamp(0.98rem, 3.4vw, 1.12rem);
+        font-size: clamp(1.06rem, 3.7vw, 1.24rem);
+        line-height: 1.34;
       }
 
       .case-lobby-page .item-card button {
         min-height: 50px;
-        font-size: clamp(1rem, 3.4vw, 1.16rem);
+        font-size: clamp(1.06rem, 3.55vw, 1.24rem);
       }
 
       .intro-page h2 {
@@ -1902,6 +2087,12 @@
         overflow-x: hidden;
       }
 
+      .validation-page .validation-layout {
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+      }
+
       .validation-page .two-col {
         min-height: 0;
         overflow: hidden;
@@ -1910,24 +2101,39 @@
       .validation-check-pane,
       .validation-data-pane {
         min-height: 0;
-        overflow: visible;
         padding-bottom: 8px;
+      }
+
+      .validation-check-pane {
+        overflow: hidden;
+      }
+
+      .validation-data-pane {
+        overflow: visible;
+      }
+
+      .validation-report-body {
+        max-height: min(36dvh, 330px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
       }
 
       .case-lobby-page .card-grid {
         min-height: 0;
-        grid-auto-rows: minmax(clamp(214px, 28dvh, 300px), max-content);
+        grid-auto-rows: max-content;
         overflow: auto;
+        align-items: start;
       }
 
       .case-lobby-page .item-card {
-        min-height: clamp(214px, 28dvh, 300px);
+        min-height: max-content;
+        height: auto;
         padding: 13px;
       }
 
       .case-lobby-page .item-card .subtle,
       .case-lobby-page .item-card .notice {
-        line-height: 1.32;
+        line-height: 1.36;
       }
 
       .intro-page .panel.stack {
@@ -1994,17 +2200,18 @@
       }
 
       .inline-options-title {
-        font-size: clamp(1rem, 2.9vw, 1.16rem);
+        font-size: clamp(1.08rem, 3.1vw, 1.24rem);
       }
 
       .inline-option-grid {
-        grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(132px, 100%), 1fr));
       }
 
       .inline-option {
-        min-height: 52px;
-        padding: 10px 12px;
-        font-size: max(var(--option-font, 1.04rem), 1.02rem);
+        min-height: 50px;
+        padding: 9px 12px;
+        font-size: max(var(--option-font, 1.16rem), 1.22rem);
+        line-height: 1.16;
       }
 
       .answer-cell-wrap.open .inline-options {
@@ -2014,8 +2221,26 @@
       }
 
       .clue-text {
-        font-size: clamp(0.9rem, 1.9vw, 1.06rem);
-        line-height: 1.18;
+        font-size: clamp(1.1rem, 2.55vw, 1.32rem);
+        line-height: 1.16;
+      }
+
+      .clue-card.clue-short .clue-text {
+        font-size: clamp(1.2rem, 2.95vw, 1.46rem);
+      }
+
+      .clue-card.clue-medium .clue-text {
+        font-size: clamp(1.06rem, 2.42vw, 1.26rem);
+      }
+
+      .clue-card.clue-long .clue-text {
+        font-size: clamp(0.9rem, 2.02vw, 1.06rem);
+        line-height: 1.1;
+      }
+
+      .clue-card.clue-xlong .clue-text {
+        font-size: clamp(0.64rem, 1.5vw, 0.78rem);
+        line-height: 1.04;
       }
 
       .clue-extra {
@@ -2051,8 +2276,32 @@
         grid-template-columns: 1fr;
       }
 
+      .github-library-page .panel.stack {
+        grid-template-rows: auto auto minmax(0, 1fr);
+        overflow: hidden;
+      }
+
       .course-grid {
         grid-template-columns: 1fr;
+        grid-auto-rows: max-content;
+        align-items: start;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 4px;
+      }
+
+      .course-card {
+        height: auto;
+        min-height: max-content;
+        overflow: hidden;
+      }
+
+      .course-card h3,
+      .course-card p,
+      .course-card .pill {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       .intro-page .topbar {
@@ -2106,9 +2355,12 @@
       .validation-page .panel.stack {
         grid-template-rows: auto auto;
         align-content: start;
+        justify-items: center;
+        padding-bottom: clamp(28px, 5dvh, 56px);
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
+        scrollbar-gutter: stable;
       }
 
       .validation-page .two-col.validation-layout {
@@ -2118,12 +2370,28 @@
         overflow: visible;
       }
 
+      .validation-page .validation-layout {
+        width: min(1120px, calc(100% - 16px));
+        margin-inline: auto;
+        display: block;
+        height: auto;
+        min-height: max-content;
+        overflow: visible;
+      }
+
       .validation-check-pane,
       .validation-data-pane {
         position: relative;
         z-index: auto;
-        overflow: hidden;
         padding-bottom: 0;
+      }
+
+      .validation-check-pane {
+        overflow: hidden;
+      }
+
+      .validation-data-pane {
+        overflow: visible;
       }
 
       .validation-check-pane {
@@ -2132,12 +2400,19 @@
 
       .validation-report-head {
         align-items: center;
+        gap: 5px;
+        line-height: 1.05;
       }
 
       .validation-report-toggle {
-        display: inline-flex;
+        display: inline-grid;
+        place-items: center;
         flex: 0 0 auto;
-        min-height: 42px;
+        min-height: 32px;
+        padding: 5px 9px;
+        font-size: clamp(0.74rem, 2.2vw, 0.88rem);
+        line-height: 1;
+        text-align: center;
         white-space: nowrap;
       }
 
@@ -2150,12 +2425,32 @@
         max-height: 0;
       }
 
+      .validation-report-body {
+        max-height: min(38dvh, 320px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
       .validation-data-pane .actions {
         align-items: stretch;
+        justify-content: center;
+        width: 100%;
+        flex: 0 0 auto;
+        padding: 8px 0;
       }
 
       .validation-data-pane .actions button {
-        flex: 1 1 160px;
+        flex: 0 1 min(560px, 100%);
+      }
+
+      .validation-start-button {
+        flex: 0 0 auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .validation-page .validation-layout {
+        width: 100%;
       }
     }
 
@@ -2216,6 +2511,26 @@
   <script>
     (() => {
       "use strict";
+
+      function applyDeviceFontClass() {
+        const root = document.documentElement;
+        const ua = (navigator.userAgent || "").toLowerCase();
+        const platform = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "").toLowerCase();
+        const isIPadOS = platform === "macintel" && navigator.maxTouchPoints > 1;
+        const isWindows = platform.includes("win") || ua.includes("windows");
+        const isApple = isIPadOS || platform.includes("mac") || platform.includes("iphone") || platform.includes("ipad") || platform.includes("ipod") || /iphone|ipad|ipod/.test(ua);
+        const isAndroid = platform.includes("android") || ua.includes("android");
+        root.classList.remove("font-windows", "font-apple", "font-android");
+        if (isWindows) {
+          root.classList.add("font-windows");
+        } else if (isApple) {
+          root.classList.add("font-apple");
+        } else if (isAndroid) {
+          root.classList.add("font-android");
+        }
+      }
+
+      applyDeviceFontClass();
 
       const STORAGE_PREFIX = "classArchiveEngine.";
       const STORE = {
@@ -3066,7 +3381,7 @@
         const page = createEl("section", "page case-lobby-page");
         page.append(renderTopbar(packageData && packageData.packageTitle ? packageData.packageTitle : "案件大厅", "待调查案件柜：请选择一宗案件查看简报。", [
           soundToggle(),
-          button("案件验证", "ghost", () => renderValidation()),
+          button("资料验证", "ghost", () => renderValidation()),
           button("更换资料", "ghost", () => renderDataLobby())
         ]));
 
@@ -3483,7 +3798,8 @@
       }
 
       function openInlineHover(holder, forceMouse = false) {
-        if (!holder || selectedCell) return;
+        if (!holder) return;
+        if (selectedCell && (selectedCell.entityId !== holder.dataset.entityId || selectedCell.categoryId !== holder.dataset.categoryId)) return;
         if (!forceMouse && !isDesktopHoverMode()) return;
         cancelInlineHoverClose(holder);
         holder.classList.add("hover-open");
@@ -3545,9 +3861,17 @@
         const timer = window.setTimeout(() => {
           inlineHoverTimers.delete(holder);
           const panel = getInlineOptionsPanel();
-          if (holder.matches(":focus-within")) return;
-          if (panel && panel.dataset.panelCell === holder.dataset.cellId && (panel.matches(":hover") || panel.contains(document.activeElement))) return;
+          const isCurrentPanel = panel && panel.dataset.panelCell === holder.dataset.cellId;
+          const isErrorPanel = isCurrentPanel && panel.classList.contains("error");
+          if (!isErrorPanel && holder.matches(":focus-within")) return;
+          if (isCurrentPanel && (panel.matches(":hover") || (!isErrorPanel && panel.contains(document.activeElement)))) return;
           holder.classList.remove("hover-open");
+          if (isErrorPanel && selectedCell && selectedCell.entityId === holder.dataset.entityId && selectedCell.categoryId === holder.dataset.categoryId) {
+            selectedCell = null;
+            removeInlineOptions(holder.dataset.cellId);
+            refreshAnswerCell(holder.dataset.entityId, holder.dataset.categoryId);
+            return;
+          }
           if (!selectedCell || selectedCell.entityId !== holder.dataset.entityId || selectedCell.categoryId !== holder.dataset.categoryId) {
             removeInlineOptions(holder.dataset.cellId);
           }
@@ -3659,11 +3983,12 @@
           const sideInset = 8;
           const minLeftViewport = isCompactArchiveMode() ? Math.min(window.innerWidth - 180, (stickyRect ? stickyRect.right : archiveRect.left) + sideInset) : sideInset;
           const maxRightViewport = Math.min(window.innerWidth - sideInset, archiveRect.right - sideInset);
+          const minWidth = isCompactArchiveMode() ? Math.min(220, Math.max(180, maxRightViewport - minLeftViewport)) : 280;
+          const availableWidth = Math.max(minWidth, maxRightViewport - minLeftViewport);
           const desiredWidth = window.innerWidth < 780
-            ? Math.min(window.innerWidth - minLeftViewport - sideInset, 360)
-            : Math.min(440, Math.max(280, Math.min(380, window.innerWidth * 0.42)));
-          const minWidth = isCompactArchiveMode() ? Math.min(220, Math.max(180, maxRightViewport - minLeftViewport)) : 220;
-          const width = Math.max(minWidth, Math.min(desiredWidth, Math.max(minWidth, maxRightViewport - minLeftViewport)));
+            ? Math.min(availableWidth, 420)
+            : Math.min(availableWidth, Math.min(620, Math.max(340, window.innerWidth * 0.56)));
+          const width = Math.max(minWidth, Math.min(desiredWidth, availableWidth));
           panel.style.setProperty("--option-width", width + "px");
           const panelHeight = Math.max(96, Math.round(panel.getBoundingClientRect().height || panel.offsetHeight || 120));
           let left = rect.left + rect.width / 2 - width / 2;
@@ -4032,9 +4357,19 @@
 
       function renderClueCard(clue) {
         const status = progress.clueStatus[clue.id] || "hidden";
-        const card = createEl("article", "clue-card " + status + (newClueIds.has(clue.id) ? " new" : ""));
-        card.append(createEl("span", "clue-text", clue.text || ""));
+        const text = clue.text || "";
+        const lengthClass = getClueLengthClass(text);
+        const card = createEl("article", "clue-card " + status + " " + lengthClass + (newClueIds.has(clue.id) ? " new" : ""));
+        card.append(createEl("span", "clue-text", text));
         return card;
+      }
+
+      function getClueLengthClass(text) {
+        const length = String(text || "").trim().length;
+        if (length <= 34) return "clue-short";
+        if (length <= 72) return "clue-medium";
+        if (length <= 124) return "clue-long";
+        return "clue-xlong";
       }
 
       function focusRelatedCells(clue) {
