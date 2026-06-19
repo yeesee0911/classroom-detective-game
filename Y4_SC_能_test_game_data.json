@@ -1,0 +1,3018 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "y4_sc_energy_test_game_data_unique_option_id",
+  "packageTitle": "Y4科学单元7能 test 课堂档案推理资料包（唯一选项ID版）",
+  "subject": "科学",
+  "level": "Year 4",
+  "contentLanguage": "zh-CN",
+  "description": "根据Y4科学单元7《能》的课程资料制作，内容涵盖能的来源、能的形式以及能的转换，供课堂档案推理游戏使用。",
+  "openingStory": "能量档案馆的中央灯塔突然一闪一闪，许多能量档案被风暴打乱。小侦探阿优收到馆长的求助：如果不能把档案的来源、形式和转换记录重新配对，能量地图就无法恢复运作。阿优带着放大镜来到档案墙前，发现每份档案都只剩下匿名编号和零散线索。第一层挑战已经启动，档案墙的灯格逐一亮起，等待玩家一起进入调查。",
+  "endingStory": "最后一份档案被正确归位后，能量档案馆的中央灯塔重新亮起。阿优确认了能的来源、形式和转换记录，混乱的能量地图恢复稳定。馆长把所有调查成果整理成学习笔记，提醒大家：能不能被创造或消灭，但能可以从一种形式转换成另一种形式。",
+  "settings": {
+    "defaultDifficulty": "medium",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 3,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "来源密室一：日常能量档案",
+      "story": "第一面档案墙记录了生活中常见的能量来源，但卡片被打乱成匿名编号。",
+      "goal": "找出每个匿名档案对应的来源说明、主要转换、用途和场景标签。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "能的来源与生活用途",
+        "opening": "阿优进入第一间来源密室，墙上有六份匿名能量档案正在闪烁。",
+        "problem": "每份档案的来源说明、转换记录和用途标签散落在不同抽屉里。",
+        "mission": "根据线索把每份匿名档案的四项记录重新配对。",
+        "completion": "六份来源档案恢复顺序，档案墙释放出第一束稳定光。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "档案墙左侧的灯格恢复亮度，新的线索卡从夹层滑出。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 12,
+          "text": "密室里的风声和水声渐渐变小，能量地图出现第一条路线。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 20,
+          "text": "最后一排抽屉打开，所有匿名记录准备进行最终核对。"
+        }
+      ],
+      "entityType": "energy_source",
+      "entityLabel": "能量来源档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "风",
+          "title": "未知档案",
+          "description": "第01号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FFE3E3",
+            "secondaryColor": "#FF8A8A",
+            "accentColor": "#7A1F1F"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "水",
+          "title": "未知档案",
+          "description": "第02号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E0F2FE",
+            "secondaryColor": "#38BDF8",
+            "accentColor": "#0F3A5B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "食物",
+          "title": "未知档案",
+          "description": "第03号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FEF3C7",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#5C3600"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "电池",
+          "title": "未知档案",
+          "description": "第04号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#DCFCE7",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "太阳",
+          "title": "未知档案",
+          "description": "第05号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#F3E8FF",
+            "secondaryColor": "#A855F7",
+            "accentColor": "#3B0764"
+          }
+        },
+        {
+          "id": "entity_006",
+          "name": "生物质",
+          "title": "未知档案",
+          "description": "第06号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "06",
+            "shape": "blob",
+            "pattern": "sparkles",
+            "primaryColor": "#E0E7FF",
+            "secondaryColor": "#6366F1",
+            "accentColor": "#111827"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "来源说明",
+          "options": [
+            {
+              "id": "case_001_category_001_option_001",
+              "label": "流动的空气形成的能量",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_001_option_002",
+              "label": "水库高处的水流到低处",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_001_option_003",
+              "label": "食物中的化学能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_001_option_004",
+              "label": "通过化学作用形成并储存在电池里",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_001_option_005",
+              "label": "地球上的主要能量来源",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_001_option_006",
+              "label": "有机废物，如农作物残渣和动物粪便",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "主要转换",
+          "options": [
+            {
+              "id": "case_001_category_002_option_001",
+              "label": "动能转换成电能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_002_option_002",
+              "label": "势能转换成动能，再推动产生电能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_002_option_003",
+              "label": "化学能转换成热能和动能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_002_option_004",
+              "label": "化学能转换成电能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_002_option_005",
+              "label": "提供光和热",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_002_option_006",
+              "label": "燃烧时把化学能转换成热能，再推动发电机产生电能",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "课本用途",
+          "options": [
+            {
+              "id": "case_001_category_003_option_001",
+              "label": "推动风车",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_003_option_002",
+              "label": "推动水轮机",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_003_option_003",
+              "label": "保持温暖及进行各种活动",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_003_option_004",
+              "label": "让储存的能转换成电能",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_003_option_005",
+              "label": "可用来发电和晒食物",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_003_option_006",
+              "label": "推动发电机产生电能",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "档案站名",
+          "options": [
+            {
+              "id": "case_001_category_004_option_001",
+              "label": "空中转动站",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_004_option_002",
+              "label": "高低水流站",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_004_option_003",
+              "label": "身体活动站",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_004_option_004",
+              "label": "小型储能站",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_004_option_005",
+              "label": "光热总站",
+              "note": ""
+            },
+            {
+              "id": "case_001_category_004_option_006",
+              "label": "有机废物站",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "case_001_category_001_option_001",
+          "category_002": "case_001_category_002_option_001",
+          "category_003": "case_001_category_003_option_001",
+          "category_004": "case_001_category_004_option_001"
+        },
+        "entity_002": {
+          "category_001": "case_001_category_001_option_002",
+          "category_002": "case_001_category_002_option_002",
+          "category_003": "case_001_category_003_option_002",
+          "category_004": "case_001_category_004_option_002"
+        },
+        "entity_003": {
+          "category_001": "case_001_category_001_option_003",
+          "category_002": "case_001_category_002_option_003",
+          "category_003": "case_001_category_003_option_003",
+          "category_004": "case_001_category_004_option_003"
+        },
+        "entity_004": {
+          "category_001": "case_001_category_001_option_004",
+          "category_002": "case_001_category_002_option_004",
+          "category_003": "case_001_category_003_option_004",
+          "category_004": "case_001_category_004_option_004"
+        },
+        "entity_005": {
+          "category_001": "case_001_category_001_option_005",
+          "category_002": "case_001_category_002_option_005",
+          "category_003": "case_001_category_003_option_005",
+          "category_004": "case_001_category_004_option_005"
+        },
+        "entity_006": {
+          "category_001": "case_001_category_001_option_006",
+          "category_002": "case_001_category_002_option_006",
+          "category_003": "case_001_category_003_option_006",
+          "category_004": "case_001_category_004_option_006"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象04的来源说明是通过化学作用形成并储存在电池里。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认一份档案的来源说明。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01的课本用途不是推动水轮机。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除一个容易混淆的用途。"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象03的主要转换会产生热能和动能。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "确认对象03的转换方向。"
+        },
+        {
+          "id": "clue_004",
+          "text": "选择‘光热总站’的档案，也对应‘地球上的主要能量来源’。",
+          "type": "cross",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_005::category_004",
+            "entity_005::category_001"
+          ],
+          "completeAfter": [
+            "entity_005::category_004",
+            "entity_005::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "把站名和来源说明连接起来。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象02的课本用途是推动水轮机。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的用途。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象06的来源说明提到有机废物。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_006::category_001"
+          ],
+          "completeAfter": [
+            "entity_006::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象06的来源材料。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象04的主要转换是化学能转换成电能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象04的转换记录。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象03的课本用途是保持温暖及进行各种活动。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象03的用途。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象01与对象02都和推动设备产生电能有关，但对象01不是高低水流站。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_001::category_003",
+            "entity_001::category_004",
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_003",
+            "entity_001::category_004",
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "比较两个相近档案，避免混淆。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象05的主要转换记录写着提供光和热。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的转换记录。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象06的主要转换会先出现热能，再推动发电机产生电能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_006::category_002"
+          ],
+          "completeAfter": [
+            "entity_006::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象06的转换过程。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象01的来源说明是流动的空气形成的能量。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_003",
+            "entity_002::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的来源说明。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象02的主要转换是势能转换成动能，再推动产生电能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象02的转换过程。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象03属于身体活动站。",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的档案站名。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象04的课本用途是让储存的能转换成电能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象04的用途。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象05的课本用途是可用来发电和晒食物。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_005::category_003"
+          ],
+          "completeAfter": [
+            "entity_005::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象05的用途。"
+        },
+        {
+          "id": "clue_017",
+          "text": "对象06属于有机废物站。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_006::category_004"
+          ],
+          "completeAfter": [
+            "entity_006::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象06的档案站名。"
+        },
+        {
+          "id": "clue_018",
+          "text": "对象01属于空中转动站，课本用途是推动风车。",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "entity_001::category_004",
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_004",
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象01的站名和用途。"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象02属于高低水流站，来源说明是水库高处的水流到低处。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "entity_002::category_004",
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_004",
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象02的来源和站名。"
+        },
+        {
+          "id": "clue_020",
+          "text": "对象05属于光热总站。",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的站名。"
+        }
+      ],
+      "knowledgeSummary": [
+        "风：流动的空气形成的能量，可推动风车，把动能转换成电能。",
+        "水：从水库高处流到低处时，势能转换成动能，推动水轮机产生电能。",
+        "食物：食物中的化学能可转换成热能和动能，让我们保持温暖及进行活动。",
+        "电池：通过化学作用形成能，储存在电池里的化学能可转换成电能。",
+        "太阳：太阳是地球上的主要能量来源，能提供光和热。",
+        "生物质：来自有机废物，燃烧时化学能转换成热能，以推动发电机产生电能。"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "来源密室二：特殊来源档案",
+      "story": "第二面档案墙只留下三份较特殊的来源档案，记录里夹着矿物、海面和地底开采的提示。",
+      "goal": "找出每个匿名档案对应的获取来源、能量特点、课本重点和补充说明。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "特殊能量来源",
+        "opening": "阿优走进较暗的第二密室，地面浮现三张匿名档案卡。",
+        "problem": "这些档案的关键词太相近，系统无法确认哪张卡属于哪一类来源。",
+        "mission": "利用线索把三份特殊来源档案重新配对。",
+        "completion": "三份档案的标签复位，能量地图出现海面、矿物和地底路线。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "密室的蓝色警示灯变弱，一张新的记录条浮现。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "档案台缓缓转动，最后几格开始等待核对。"
+        }
+      ],
+      "entityType": "energy_source",
+      "entityLabel": "特殊来源档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "核子能",
+          "title": "未知档案",
+          "description": "第01号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FFE3E3",
+            "secondaryColor": "#FF8A8A",
+            "accentColor": "#7A1F1F"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "海浪",
+          "title": "未知档案",
+          "description": "第02号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E0F2FE",
+            "secondaryColor": "#38BDF8",
+            "accentColor": "#0F3A5B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "化石燃料",
+          "title": "未知档案",
+          "description": "第03号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FEF3C7",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#5C3600"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "获取来源",
+          "options": [
+            {
+              "id": "case_002_category_001_option_001",
+              "label": "含有放射性元素的矿物",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_001_option_002",
+              "label": "海洋表面的波浪",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_001_option_003",
+              "label": "煤、石油、天然气等燃料",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "能量特点",
+          "options": [
+            {
+              "id": "case_002_category_002_option_001",
+              "label": "采自矿物的能",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_002_option_002",
+              "label": "具有很大的动能",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_002_option_003",
+              "label": "燃烧时会释放能量",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "课本重点",
+          "options": [
+            {
+              "id": "case_002_category_003_option_001",
+              "label": "与放射性元素有关",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_003_option_002",
+              "label": "浪越高，所产生的电力也越多",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_003_option_003",
+              "label": "从地底开采的石油可提炼成汽油、柴油等燃料",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "档案路线",
+          "options": [
+            {
+              "id": "case_002_category_004_option_001",
+              "label": "矿物路线",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_004_option_002",
+              "label": "海面路线",
+              "note": ""
+            },
+            {
+              "id": "case_002_category_004_option_003",
+              "label": "地底燃料路线",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "case_002_category_001_option_001",
+          "category_002": "case_002_category_002_option_001",
+          "category_003": "case_002_category_003_option_001",
+          "category_004": "case_002_category_004_option_001"
+        },
+        "entity_002": {
+          "category_001": "case_002_category_001_option_002",
+          "category_002": "case_002_category_002_option_002",
+          "category_003": "case_002_category_003_option_002",
+          "category_004": "case_002_category_004_option_002"
+        },
+        "entity_003": {
+          "category_001": "case_002_category_001_option_003",
+          "category_002": "case_002_category_002_option_003",
+          "category_003": "case_002_category_003_option_003",
+          "category_004": "case_002_category_004_option_003"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象02的能量特点是具有很大的动能。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认对象02的能量特点。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象03不是矿物路线。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除对象03的一条错误路线。"
+        },
+        {
+          "id": "clue_003",
+          "text": "与‘浪越高，所产生的电力也越多’同一份档案的路线是海面路线。",
+          "type": "cross",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "连接课本重点和档案路线。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象01的获取来源是含有放射性元素的矿物。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的获取来源。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03的课本重点提到地底开采的石油可提炼成汽油、柴油等燃料。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_004",
+            "entity_002::category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的课本重点。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象02的获取来源是海洋表面的波浪。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象02的获取来源。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象01的能量特点是采自矿物的能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象01的特点。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象03的获取来源是煤、石油、天然气等燃料。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的获取来源。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象01的课本重点与放射性元素有关，并走矿物路线。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象01的重点和路线。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象02的课本重点是浪越高，所产生的电力也越多。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象02的课本重点。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象03的能量特点是燃烧时会释放能量，路线是地底燃料路线。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_002",
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_002",
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象03的特点和路线。"
+        }
+      ],
+      "knowledgeSummary": [
+        "核子能：采自含有放射性元素的矿物。",
+        "海浪：海洋表面的波浪具有很大的动能，可以转换成电能。",
+        "海浪越高，所产生的电力也越多。",
+        "化石燃料包括煤、石油、天然气等，燃烧时会释放能量。",
+        "从地底开采的石油可提炼成汽油、柴油等燃料。"
+      ]
+    },
+    {
+      "id": "case_003",
+      "title": "形式大厅一：可观察的能",
+      "story": "形式大厅里有五份常见能量形式档案，记录了看见、听见、移动和操作等现象。",
+      "goal": "找出每个匿名档案对应的表现、作用、课本例子和感官联系。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "常见能的形式",
+        "opening": "阿优来到形式大厅，地上出现五个会发光的匿名标记。",
+        "problem": "标记中的表现和作用被交换，学生需要靠线索分辨。",
+        "mission": "把每份档案的能量表现、作用和例子配回正确位置。",
+        "completion": "形式大厅恢复清楚的分类，能量地图的第二段路线被点亮。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "大厅上方的回声减弱，新的线索卡落到桌面。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 10,
+          "text": "五个匿名标记开始稳定发光，档案台进入复核阶段。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 16,
+          "text": "档案台发出提示音，最后一组记录等待归位。"
+        }
+      ],
+      "entityType": "energy_form",
+      "entityLabel": "能量形式档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "热能",
+          "title": "未知档案",
+          "description": "第01号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FFE3E3",
+            "secondaryColor": "#FF8A8A",
+            "accentColor": "#7A1F1F"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "电能",
+          "title": "未知档案",
+          "description": "第02号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E0F2FE",
+            "secondaryColor": "#38BDF8",
+            "accentColor": "#0F3A5B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "光能",
+          "title": "未知档案",
+          "description": "第03号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FEF3C7",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#5C3600"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "声能",
+          "title": "未知档案",
+          "description": "第04号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#DCFCE7",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "动能",
+          "title": "未知档案",
+          "description": "第05号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#F3E8FF",
+            "secondaryColor": "#A855F7",
+            "accentColor": "#3B0764"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "主要表现",
+          "options": [
+            {
+              "id": "case_003_category_001_option_001",
+              "label": "让我们感觉温暖及煮熟食物",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_001_option_002",
+              "label": "所有电器都需要",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_001_option_003",
+              "label": "发光的物体都具有",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_001_option_004",
+              "label": "物体在振动时具有",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_001_option_005",
+              "label": "所有会移动的物体都具有",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "主要作用",
+          "options": [
+            {
+              "id": "case_003_category_002_option_001",
+              "label": "使食物变熟",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_002_option_002",
+              "label": "使电器操作",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_002_option_003",
+              "label": "使我们看见东西",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_002_option_004",
+              "label": "使我们听到声音",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_002_option_005",
+              "label": "使物体产生移动",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "课本例子",
+          "options": [
+            {
+              "id": "case_003_category_003_option_001",
+              "label": "锅中食物受热",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_003_option_002",
+              "label": "电器或手机运作",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_003_option_003",
+              "label": "发光物体照亮周围",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_003_option_004",
+              "label": "敲击杯子发出声音",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_003_option_005",
+              "label": "跑步的人正在移动",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "感官联系",
+          "options": [
+            {
+              "id": "case_003_category_004_option_001",
+              "label": "皮肤感觉温暖",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_004_option_002",
+              "label": "电器开始工作",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_004_option_003",
+              "label": "眼睛看见物体",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_004_option_004",
+              "label": "耳朵听到声音",
+              "note": ""
+            },
+            {
+              "id": "case_003_category_004_option_005",
+              "label": "位置发生改变",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "case_003_category_001_option_001",
+          "category_002": "case_003_category_002_option_001",
+          "category_003": "case_003_category_003_option_001",
+          "category_004": "case_003_category_004_option_001"
+        },
+        "entity_002": {
+          "category_001": "case_003_category_001_option_002",
+          "category_002": "case_003_category_002_option_002",
+          "category_003": "case_003_category_003_option_002",
+          "category_004": "case_003_category_004_option_002"
+        },
+        "entity_003": {
+          "category_001": "case_003_category_001_option_003",
+          "category_002": "case_003_category_002_option_003",
+          "category_003": "case_003_category_003_option_003",
+          "category_004": "case_003_category_004_option_003"
+        },
+        "entity_004": {
+          "category_001": "case_003_category_001_option_004",
+          "category_002": "case_003_category_002_option_004",
+          "category_003": "case_003_category_003_option_004",
+          "category_004": "case_003_category_004_option_004"
+        },
+        "entity_005": {
+          "category_001": "case_003_category_001_option_005",
+          "category_002": "case_003_category_002_option_005",
+          "category_003": "case_003_category_003_option_005",
+          "category_004": "case_003_category_004_option_005"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象04的主要表现是物体在振动时具有。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认对象04的表现。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01的主要作用不是使电器操作。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除一个错误作用。"
+        },
+        {
+          "id": "clue_003",
+          "text": "课本例子为‘跑步的人正在移动’的档案，感官联系是位置发生改变。",
+          "type": "cross",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_005::category_003",
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_003",
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "连接例子和感官联系。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象02的主要表现是所有电器都需要。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的表现。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03的主要作用是使我们看见东西。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的作用。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象01的主要表现是让我们感觉温暖及煮熟食物。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的表现。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象04的主要作用是使我们听到声音。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象04的作用。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象05的主要表现是所有会移动的物体都具有。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_005::category_001"
+          ],
+          "completeAfter": [
+            "entity_005::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的表现。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象02的主要作用是使电器操作，感官联系是电器开始工作。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_002::category_002",
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_002",
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象02的作用和联系。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象03的主要表现是发光的物体都具有。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象03的表现。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象01的课本例子是锅中食物受热，感官联系是皮肤感觉温暖。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象01的例子和联系。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象04的课本例子是敲击杯子发出声音，感官联系是耳朵听到声音。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_004::category_003",
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_003",
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象04的例子和联系。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象05的主要作用是使物体产生移动。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象05的作用。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象03的课本例子是发光物体照亮周围，感官联系是眼睛看见物体。",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_003::category_003",
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_003",
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象03的例子和联系。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象02的课本例子是电器或手机运作。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象02的课本例子。"
+        }
+      ],
+      "knowledgeSummary": [
+        "热能：让我们感觉温暖及煮熟食物。",
+        "电能：所有电器都需要电能。",
+        "光能：发光的物体都有光能，使我们看见东西。",
+        "声能：物体在振动时具有声能，使我们听到声音。",
+        "动能：所有会移动的物体都具动能，移动得越快，动能越大。"
+      ]
+    },
+    {
+      "id": "case_004",
+      "title": "形式大厅二：储存与特殊能",
+      "story": "另一侧形式大厅保存了四份较容易混淆的档案，里面出现高处、储存、太阳和原子核等记录。",
+      "goal": "找出每个匿名档案对应的来源或储存方式、例子、作用说明和关键词。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "储存型与特殊能量形式",
+        "opening": "阿优打开第二组形式抽屉，四份档案被厚厚的能量雾盖住。",
+        "problem": "每份档案只剩下半张卡，必须通过线索找回完整记录。",
+        "mission": "配对每份匿名档案的来源、例子、作用和关键词。",
+        "completion": "能量雾散开，四份较特殊的形式档案被安全归档。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "抽屉的锁扣松开，里面露出第二层记录。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 9,
+          "text": "能量雾变薄，档案边缘的编号更加清楚。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 13,
+          "text": "大厅墙上的提示灯亮起，最后的配对进入核对。"
+        }
+      ],
+      "entityType": "energy_form",
+      "entityLabel": "特殊形式档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "势能",
+          "title": "未知档案",
+          "description": "第01号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FFE3E3",
+            "secondaryColor": "#FF8A8A",
+            "accentColor": "#7A1F1F"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "化学能",
+          "title": "未知档案",
+          "description": "第02号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E0F2FE",
+            "secondaryColor": "#38BDF8",
+            "accentColor": "#0F3A5B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "太阳能",
+          "title": "未知档案",
+          "description": "第03号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FEF3C7",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#5C3600"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "核子能",
+          "title": "未知档案",
+          "description": "第04号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#DCFCE7",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "来源或储存",
+          "options": [
+            {
+              "id": "case_004_category_001_option_001",
+              "label": "被弯曲、被拉紧、被压缩或在高处",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_001_option_002",
+              "label": "储存在电池、食物和各种燃料里",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_001_option_003",
+              "label": "来自太阳的能量",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_001_option_004",
+              "label": "原子核分裂或聚合时具有",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "课本例子",
+          "options": [
+            {
+              "id": "case_004_category_002_option_001",
+              "label": "被弯曲的尺、被拉紧的橡皮筋、被压缩的弹簧、在高处的物体",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_002_option_002",
+              "label": "电池、食物和各种燃料",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_002_option_003",
+              "label": "可用来发电和晒食物",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_002_option_004",
+              "label": "广泛用于工业及军事",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "作用说明",
+          "options": [
+            {
+              "id": "case_004_category_003_option_001",
+              "label": "物体处在特定状态时具有",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_003_option_002",
+              "label": "储存后可转换成其他形式",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_003_option_003",
+              "label": "提供光和热",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_003_option_004",
+              "label": "与原子核变化有关",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "关键词",
+          "options": [
+            {
+              "id": "case_004_category_004_option_001",
+              "label": "弯曲、拉紧、压缩、高处",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_004_option_002",
+              "label": "储存",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_004_option_003",
+              "label": "光和热",
+              "note": ""
+            },
+            {
+              "id": "case_004_category_004_option_004",
+              "label": "原子核",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "case_004_category_001_option_001",
+          "category_002": "case_004_category_002_option_001",
+          "category_003": "case_004_category_003_option_001",
+          "category_004": "case_004_category_004_option_001"
+        },
+        "entity_002": {
+          "category_001": "case_004_category_001_option_002",
+          "category_002": "case_004_category_002_option_002",
+          "category_003": "case_004_category_003_option_002",
+          "category_004": "case_004_category_004_option_002"
+        },
+        "entity_003": {
+          "category_001": "case_004_category_001_option_003",
+          "category_002": "case_004_category_002_option_003",
+          "category_003": "case_004_category_003_option_003",
+          "category_004": "case_004_category_004_option_003"
+        },
+        "entity_004": {
+          "category_001": "case_004_category_001_option_004",
+          "category_002": "case_004_category_002_option_004",
+          "category_003": "case_004_category_003_option_004",
+          "category_004": "case_004_category_004_option_004"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03的作用说明是提供光和热。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认对象03的作用。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象02的关键词不是原子核。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除一个错误关键词。"
+        },
+        {
+          "id": "clue_003",
+          "text": "课本例子为‘广泛用于工业及军事’的档案，作用说明与原子核变化有关。",
+          "type": "cross",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_004::category_002",
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_002",
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "连接课本例子和作用说明。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象01的来源或储存提到被弯曲、被拉紧、被压缩或在高处。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的来源或状态。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象02的来源或储存是储存在电池、食物和各种燃料里。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的储存方式。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象04的关键词是原子核。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的关键词。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象03的来源或储存是来自太阳的能量。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象03的来源。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象01的关键词是弯曲、拉紧、压缩、高处。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象01的关键词。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象02的课本例子是电池、食物和各种燃料。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象02的例子。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象04的来源或储存是原子核分裂或聚合时具有。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象04的来源。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象03的课本例子是可用来发电和晒食物，关键词是光和热。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_002",
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_002",
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象03的例子和关键词。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象01的课本例子是被弯曲的尺、被拉紧的橡皮筋、被压缩的弹簧、在高处的物体。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象01的例子。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象02的作用说明是储存后可转换成其他形式，关键词是储存。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_003",
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象02的作用和关键词。"
+        }
+      ],
+      "knowledgeSummary": [
+        "势能：被弯曲的尺、被拉紧的橡皮筋、被压缩的弹簧、在高处的物体等都具有势能。",
+        "化学能：储存在电池、食物和各种燃料里。",
+        "太阳能：来自太阳的能量，提供光和热，可用来发电和晒食物。",
+        "核子能：原子核分裂或聚合时具有的能，资料中说明广泛用于工业及军事。"
+      ]
+    },
+    {
+      "id": "case_005",
+      "title": "转换控制室：能量路线档案",
+      "story": "最后的控制室记录了能量转换路线，但每条路线的起点、结果和观察记录都被拆开了。",
+      "goal": "找出每个匿名档案对应的初始能、转换路径、观察结果和转换特点。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "能的转换",
+        "opening": "阿优进入能量转换控制室，五条路线在屏幕上不断闪烁。",
+        "problem": "系统只知道能可以转换，却无法分辨每条路线的起点和结果。",
+        "mission": "根据线索恢复五条能量转换路线。",
+        "completion": "五条路线重新连成完整回路，中央灯塔终于恢复稳定。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "控制室的第一条回路亮起，警报声降低。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 11,
+          "text": "屏幕上的路线逐渐连成网状，新的记录被解锁。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 17,
+          "text": "最后一组能量路线开始闪烁，等待玩家完成复原。"
+        }
+      ],
+      "entityType": "energy_conversion",
+      "entityLabel": "转换路线档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "高处的球",
+          "title": "未知档案",
+          "description": "第01号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FFE3E3",
+            "secondaryColor": "#FF8A8A",
+            "accentColor": "#7A1F1F"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "点燃木炭",
+          "title": "未知档案",
+          "description": "第02号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E0F2FE",
+            "secondaryColor": "#38BDF8",
+            "accentColor": "#0F3A5B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "电池时钟",
+          "title": "未知档案",
+          "description": "第03号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FEF3C7",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#5C3600"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "吸尘器",
+          "title": "未知档案",
+          "description": "第04号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#DCFCE7",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "微波炉",
+          "title": "未知档案",
+          "description": "第05号匿名档案，记录被打散，需要根据线索确认。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "核心标签被打乱，只能先查看匿名记录。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对来源、形式或转换记录。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#F3E8FF",
+            "secondaryColor": "#A855F7",
+            "accentColor": "#3B0764"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "初始能",
+          "options": [
+            {
+              "id": "case_005_category_001_option_001",
+              "label": "高处物体的势能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_001_option_002",
+              "label": "木炭里的化学能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_001_option_003",
+              "label": "电池里的化学能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_001_option_004",
+              "label": "电器输入的电能（清洁器具）",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_001_option_005",
+              "label": "电器输入的电能（加热器具）",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "转换路径",
+          "options": [
+            {
+              "id": "case_005_category_002_option_001",
+              "label": "势能→动能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_002_option_002",
+              "label": "化学能→热能+光能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_002_option_003",
+              "label": "化学能→电能→动能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_002_option_004",
+              "label": "电能→动能+热能+声能",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_002_option_005",
+              "label": "电能→热能+光能+动能",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "观察结果",
+          "options": [
+            {
+              "id": "case_005_category_003_option_001",
+              "label": "往下掉时产生移动",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_003_option_002",
+              "label": "燃烧时发热并发光",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_003_option_003",
+              "label": "指针移动",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_003_option_004",
+              "label": "清洁时移动、发热并发声",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_003_option_005",
+              "label": "加热时发热、发光并转动",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "转换特点",
+          "options": [
+            {
+              "id": "case_005_category_004_option_001",
+              "label": "一种能转换成另一种形式",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_004_option_002",
+              "label": "一种能转换成多种形式",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_004_option_003",
+              "label": "连续多次转换",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_004_option_004",
+              "label": "电能转换成三种能（清洁场景）",
+              "note": ""
+            },
+            {
+              "id": "case_005_category_004_option_005",
+              "label": "电能转换成三种能（加热场景）",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "case_005_category_001_option_001",
+          "category_002": "case_005_category_002_option_001",
+          "category_003": "case_005_category_003_option_001",
+          "category_004": "case_005_category_004_option_001"
+        },
+        "entity_002": {
+          "category_001": "case_005_category_001_option_002",
+          "category_002": "case_005_category_002_option_002",
+          "category_003": "case_005_category_003_option_002",
+          "category_004": "case_005_category_004_option_002"
+        },
+        "entity_003": {
+          "category_001": "case_005_category_001_option_003",
+          "category_002": "case_005_category_002_option_003",
+          "category_003": "case_005_category_003_option_003",
+          "category_004": "case_005_category_004_option_003"
+        },
+        "entity_004": {
+          "category_001": "case_005_category_001_option_004",
+          "category_002": "case_005_category_002_option_004",
+          "category_003": "case_005_category_003_option_004",
+          "category_004": "case_005_category_004_option_004"
+        },
+        "entity_005": {
+          "category_001": "case_005_category_001_option_005",
+          "category_002": "case_005_category_002_option_005",
+          "category_003": "case_005_category_003_option_005",
+          "category_004": "case_005_category_004_option_005"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03的转换路径是化学能→电能→动能。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认一条连续转换路线。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01的转换特点不是一种能转换成多种形式。",
+          "type": "negative",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "排除对象01的错误特点。"
+        },
+        {
+          "id": "clue_003",
+          "text": "观察结果为‘燃烧时发热并发光’的档案，转换路径会出现热能和光能。",
+          "type": "cross",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_003",
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_003",
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "连接观察结果和转换路径。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象01的初始能是高处物体的势能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的初始能。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象04的转换路径是电能→动能+热能+声能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的转换路径。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象02的初始能是木炭里的化学能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的初始能。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象03的观察结果是指针移动。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象03的观察结果。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象05的转换路径是电能→热能+光能+动能。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的转换路径。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象01的转换路径是势能→动能，观察结果是往下掉时产生移动。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_001::category_002",
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_002",
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象01的路线和观察。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象04的观察结果是清洁时移动、发热并发声。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象04的观察结果。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象05的观察结果是加热时发热、发光并转动。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_005::category_003"
+          ],
+          "completeAfter": [
+            "entity_005::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象05的观察结果。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象02的转换特点是一种能转换成多种形式。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "补全对象02的转换特点。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象03的初始能是电池里的化学能，转换特点是连续多次转换。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_003::category_001",
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_001",
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象03的起点和特点。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象04的初始能是电器输入的电能（清洁器具），转换特点是电能转换成三种能（清洁场景）。",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_004::category_001",
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_001",
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象04的起点和特点。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象05的初始能是电器输入的电能（加热器具），转换特点是电能转换成三种能（加热场景）。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_005::category_001",
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_001",
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象05的起点和特点。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象01的转换特点是一种能转换成另一种形式。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "完成对象01的转换特点。"
+        }
+      ],
+      "knowledgeSummary": [
+        "能无法被创造或消灭。",
+        "能可以从一种形式转换成另一种形式。",
+        "一种能也可被转换成多种形式的能。",
+        "能也可以连续多次转换。",
+        "在高处的球具有势能，往下掉时势能会转换成动能。",
+        "木炭被点燃时，化学能转换成热能和光能。",
+        "电池时钟中，化学能转换成电能，电能再转换成动能，使指针移动。",
+        "吸尘器显示电能可转换成动能、热能和声能。",
+        "微波炉显示电能可转换成热能、光能和动能。"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "课程资料说明单元7《能》：能是让物体操作的原动力；生物和非生物都需要能；太阳是地球上能的主要来源；资料列出9种能的来源、9种能的形式，以及势能、化学能、电能等转换成其他形式的例子。",
+    "usedItems": [
+      "能是让物体操作的原动力。",
+      "太阳是地球上能的主要来源。",
+      "生物需要能来进行呼吸、生长、移动等生命过程。",
+      "非生物需要能来操作、移动、改变形状或产生变化。",
+      "能的来源：风、水、食物、电池、太阳、核子能、海浪、生物质、化石燃料。",
+      "能的形式：热能、电能、光能、声能、势能、动能、化学能、太阳能、核子能。",
+      "能无法被创造或消灭；能可以从一种形式转换成另一种形式；一种能也可转换成多种形式；能也可以连续多次转换。",
+      "转换例子：势能→动能、化学能→热能+光能、化学能→电能→动能、电能→动能+热能+声能、电能→热能+光能+动能。"
+    ],
+    "excludedItems": [
+      "页面中的姓名、日期、正课/功课/缺席/没带资料栏位不是课程知识，未放入游戏。",
+      "部分图片细节只作为画面辅助，不作为必须依赖图片才能推理的答案。",
+      "火柴和煤气炉都显示化学能→光能+热能，为避免同一类别重复造成多解，只在知识总结中概括，不另设为独立对象。"
+    ],
+    "warnings": [
+      "部分场景标签、感官联系和档案站名属于日常常识扩展，只用于帮助小学生理解和区分档案。",
+      "能的来源和能的形式本身具有明显定义，选项文字会使用课程描述；教师可在课堂中说明这是学习配对重点。",
+      "吸尘器、微波炉的用途说明根据课本图片和能量转换文字作课堂化表达，建议教师上课时配合图片解释。",
+      "已修正：所有 option.id 已改为全资料包全局唯一格式（case_id + category_id + option编号），并同步更新 solution 引用。"
+    ],
+    "validationPassed": true
+  }
+}
