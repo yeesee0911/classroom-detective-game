@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "packageId": "food_drinks_y3_module6",
-  "packageTitle": "Food and Drinks Detective Files",
+  "packageId": "y3_bi_food_and_drinks_module_6",
+  "packageTitle": "MODULE 6: FOOD, PLEASE! Food and Drinks 档案推理",
   "subject": "English",
   "level": "Year 3",
-  "contentLanguage": "en-zh",
-  "description": "Year 3 English Module 6 Food and Drinks vocabulary investigation package.",
-  "openingStory": "在食物档案馆里，几份重要的食物资料突然失去了标签。小侦探接到任务，要利用线索重新整理档案，找回正确资料，才能让学习地图恢复运作。带上记录板，进入档案墙开始调查吧！",
-  "endingStory": "所有遗失的档案都成功归位，食物档案馆重新恢复运作。你完成了调查任务，成为“初级档案侦探”。新的学习区域正在远方亮起灯光，等待下一次冒险。",
+  "contentLanguage": "English / Chinese",
+  "description": "根据 Year 3 BI June Module 6: Food, Please! 的 Food and Drinks 词汇页制作的课堂档案推理游戏资料包，用于复习英文食物与饮料词汇及中文意思。",
+  "openingStory": "食物词汇库原本把 Food and Drinks 的档案排得整整齐齐。一天，标签机突然冒出一团彩色纸雾，许多词汇卡、中文意思和拼写提示全部被打乱。小小档案侦探收到紧急任务：在词汇库关闭前，把每份匿名档案重新配对。第一层挑战是进入档案墙，只能根据线索一步一步修复资料。侦探拿起放大镜，准备进入第一宗案件。",
+  "endingStory": "全部案件完成后，食物词汇库的灯一盏盏亮起。onions、lettuce、chocolate、biscuits、sugar、juice、flour、tomatoes、carrots、potatoes、chicken、omelette、peas、pancake、pineapple、peppers、coconut 和 cheese 都回到正确档案中。小小档案侦探获得“Food and Drinks Vocabulary Keeper”称号。词汇库暂时恢复安全，但角落里又亮起下一单元的微光，新的学习任务正在等待。",
   "settings": {
     "defaultDifficulty": "easy",
     "timerEnabled": false,
@@ -18,41 +18,50 @@
   "cases": [
     {
       "id": "case_001",
-      "title": "失踪的食物标签",
-      "story": "几份食物档案失去了对应资料。",
-      "goal": "找出每个匿名档案对应的正确属性。",
+      "title": "案件一：蔬菜标签档案室",
+      "story": "档案室里一排蔬菜标签突然错位，匿名档案只剩编号和碎片线索。",
+      "goal": "找出每个匿名档案对应的教材中文意思、英文拼写提示、常见类别与常见形态或用途。",
       "difficulty": "easy",
       "narrative": {
-        "theme": "档案整理",
-        "opening": "主角来到档案墙前。",
-        "problem": "几份资料标签混乱。",
-        "mission": "根据线索完成配对。",
-        "completion": "档案恢复整齐排列。"
+        "theme": "蔬菜词汇标签修复",
+        "opening": "主角走进第一间档案室，柜子上的蔬菜标签像小纸片一样散落在桌上。",
+        "problem": "每张档案卡都被盖住真实名称，只留下编号、颜色标记和几条可调查线索。",
+        "mission": "请根据线索，把每个匿名档案的教材词义、拼写提示和日常特征配对回去。",
+        "completion": "蔬菜档案重新排好，资料灯亮起，下一扇小门慢慢打开。"
       },
       "storyEvents": [
         {
           "id": "event_001",
-          "triggerAfterCorrectCells": 3,
-          "text": "一排档案灯缓缓亮起。"
+          "triggerAfterCorrectCells": 5,
+          "text": "第一排档案灯亮起，散落的纸片开始自动归位。"
         },
         {
           "id": "event_002",
-          "triggerAfterCorrectCells": 8,
-          "text": "资料柜发出完成提示音。"
+          "triggerAfterCorrectCells": 12,
+          "text": "档案墙的锁声变轻，更多编号卡片浮现出来。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 19,
+          "text": "最后一排柜子打开，结案章准备盖下。"
         }
       ],
-      "entityType": "food",
-      "entityLabel": "Food Files",
+      "entityType": "food_vocabulary",
+      "entityLabel": "蔬菜词汇档案",
       "entities": [
         {
           "id": "entity_001",
           "name": "onions",
-          "title": "未知档案01",
-          "description": "等待确认的食物档案",
+          "title": "待确认档案 01",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
           "records": [
             {
-              "label": "记录",
-              "text": "来自失去标签的资料柜"
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
             }
           ],
           "iconSpec": {
@@ -60,150 +69,278 @@
             "symbol": "01",
             "shape": "circle",
             "pattern": "dots",
-            "primaryColor": "#F4E7C5",
-            "secondaryColor": "#C79A4B",
-            "accentColor": "#17233C"
+            "primaryColor": "#FDE68A",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#111827"
           }
         },
         {
           "id": "entity_002",
-          "name": "carrots",
-          "title": "未知档案02",
-          "description": "等待确认的食物档案",
+          "name": "lettuce",
+          "title": "待确认档案 02",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
           "records": [
             {
-              "label": "记录",
-              "text": "来自失去标签的资料柜"
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
             }
           ],
           "iconSpec": {
             "mode": "generated",
             "symbol": "02",
-            "shape": "hexagon",
-            "pattern": "grid",
-            "primaryColor": "#FFD9A8",
-            "secondaryColor": "#D97706",
-            "accentColor": "#1F2937"
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#BBF7D0",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
           }
         },
         {
           "id": "entity_003",
-          "name": "pineapple",
-          "title": "未知档案03",
-          "description": "等待确认的食物档案",
+          "name": "tomatoes",
+          "title": "待确认档案 03",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
           "records": [
             {
-              "label": "记录",
-              "text": "来自失去标签的资料柜"
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
             }
           ],
           "iconSpec": {
             "mode": "generated",
             "symbol": "03",
-            "shape": "shield",
-            "pattern": "waves",
-            "primaryColor": "#FEF08A",
-            "secondaryColor": "#CA8A04",
-            "accentColor": "#111827"
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FBCFE8",
+            "secondaryColor": "#EC4899",
+            "accentColor": "#831843"
           }
         },
         {
           "id": "entity_004",
-          "name": "chicken",
-          "title": "未知档案04",
-          "description": "等待确认的食物档案",
+          "name": "carrots",
+          "title": "待确认档案 04",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
           "records": [
             {
-              "label": "记录",
-              "text": "来自失去标签的资料柜"
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
             }
           ],
           "iconSpec": {
             "mode": "generated",
             "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#BFDBFE",
+            "secondaryColor": "#3B82F6",
+            "accentColor": "#1E3A8A"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "potatoes",
+          "title": "待确认档案 05",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#DDD6FE",
+            "secondaryColor": "#8B5CF6",
+            "accentColor": "#312E81"
+          }
+        },
+        {
+          "id": "entity_006",
+          "name": "peppers",
+          "title": "待确认档案 06",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "06",
             "shape": "blob",
-            "pattern": "rings",
+            "pattern": "rays",
             "primaryColor": "#FECACA",
-            "secondaryColor": "#DC2626",
-            "accentColor": "#1F2937"
+            "secondaryColor": "#EF4444",
+            "accentColor": "#7F1D1D"
           }
         }
       ],
       "categories": [
         {
           "id": "category_001",
-          "label": "中文名称",
+          "label": "教材中文意思",
           "options": [
             {
-              "id": "option_001",
+              "id": "option_001_001",
               "label": "洋葱",
               "note": ""
             },
             {
-              "id": "option_002",
+              "id": "option_001_002",
+              "label": "生菜",
+              "note": ""
+            },
+            {
+              "id": "option_001_003",
+              "label": "番茄",
+              "note": ""
+            },
+            {
+              "id": "option_001_004",
               "label": "萝卜",
               "note": ""
             },
             {
-              "id": "option_003",
-              "label": "黄梨",
+              "id": "option_001_005",
+              "label": "马铃薯",
               "note": ""
             },
             {
-              "id": "option_004",
-              "label": "鸡肉",
+              "id": "option_001_006",
+              "label": "胡椒 / 甜椒",
               "note": ""
             }
           ]
         },
         {
           "id": "category_002",
-          "label": "词汇长度",
+          "label": "英文拼写提示",
           "options": [
             {
-              "id": "option_005",
-              "label": "5个字母",
+              "id": "option_002_001",
+              "label": "o 开头，6 个字母",
               "note": ""
             },
             {
-              "id": "option_006",
-              "label": "6个字母",
+              "id": "option_002_002",
+              "label": "l 开头，7 个字母",
               "note": ""
             },
             {
-              "id": "option_007",
-              "label": "7个字母",
+              "id": "option_002_003",
+              "label": "t 开头，8 个字母",
               "note": ""
             },
             {
-              "id": "option_008",
-              "label": "9个字母",
+              "id": "option_002_004",
+              "label": "c 开头，7 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_005",
+              "label": "p 开头，8 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_006",
+              "label": "p 开头，7 个字母",
               "note": ""
             }
           ]
         },
         {
           "id": "category_003",
-          "label": "开头字母",
+          "label": "常见类别",
           "options": [
             {
-              "id": "option_009",
-              "label": "O",
+              "id": "option_003_001",
+              "label": "调味蔬菜",
               "note": ""
             },
             {
-              "id": "option_010",
-              "label": "C",
+              "id": "option_003_002",
+              "label": "叶菜",
               "note": ""
             },
             {
-              "id": "option_011",
-              "label": "P",
+              "id": "option_003_003",
+              "label": "多汁蔬果",
               "note": ""
             },
             {
-              "id": "option_012",
-              "label": "另一个C",
+              "id": "option_003_004",
+              "label": "根类蔬菜",
+              "note": ""
+            },
+            {
+              "id": "option_003_005",
+              "label": "块茎类食物",
+              "note": ""
+            },
+            {
+              "id": "option_003_006",
+              "label": "彩色椒类蔬菜",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "常见形态或用途",
+          "options": [
+            {
+              "id": "option_004_001",
+              "label": "常见一层层，通常会被切片炒香",
+              "note": ""
+            },
+            {
+              "id": "option_004_002",
+              "label": "常见绿叶，通常可以放进沙拉",
+              "note": ""
+            },
+            {
+              "id": "option_004_003",
+              "label": "常见红色圆形，通常可以切片",
+              "note": ""
+            },
+            {
+              "id": "option_004_004",
+              "label": "常见橙色长条，资料中提示对眼睛好",
+              "note": ""
+            },
+            {
+              "id": "option_004_005",
+              "label": "常见黄褐外皮，通常可以煮或炸",
+              "note": ""
+            },
+            {
+              "id": "option_004_006",
+              "label": "常见红黄绿颜色，通常可以切圈",
               "note": ""
             }
           ]
@@ -211,122 +348,2797 @@
       ],
       "solution": {
         "entity_001": {
-          "category_001": "option_001",
-          "category_002": "option_006",
-          "category_003": "option_009"
+          "category_001": "option_001_001",
+          "category_002": "option_002_001",
+          "category_003": "option_003_001",
+          "category_004": "option_004_001"
         },
         "entity_002": {
-          "category_001": "option_002",
-          "category_002": "option_007",
-          "category_003": "option_010"
+          "category_001": "option_001_002",
+          "category_002": "option_002_002",
+          "category_003": "option_003_002",
+          "category_004": "option_004_002"
         },
         "entity_003": {
-          "category_001": "option_003",
-          "category_002": "option_008",
-          "category_003": "option_011"
+          "category_001": "option_001_003",
+          "category_002": "option_002_003",
+          "category_003": "option_003_003",
+          "category_004": "option_004_003"
         },
         "entity_004": {
-          "category_001": "option_004",
-          "category_002": "option_005",
-          "category_003": "option_012"
+          "category_001": "option_001_004",
+          "category_002": "option_002_004",
+          "category_003": "option_003_004",
+          "category_004": "option_004_004"
+        },
+        "entity_005": {
+          "category_001": "option_001_005",
+          "category_002": "option_002_005",
+          "category_003": "option_003_005",
+          "category_004": "option_004_005"
+        },
+        "entity_006": {
+          "category_001": "option_001_006",
+          "category_002": "option_002_006",
+          "category_003": "option_003_006",
+          "category_004": "option_004_006"
         }
       },
       "clues": [
         {
           "id": "clue_001",
-          "text": "对象01的中文名称是洋葱。",
+          "text": "对象03 的【英文拼写提示】是“t 开头，8 个字母”。",
           "type": "direct",
           "initial": true,
           "priority": 1,
           "relatedCells": [
-            "entity_001::category_001"
+            "entity_003::category_002"
           ],
           "completeAfter": [
-            "entity_001::category_001"
+            "entity_003::category_002"
           ],
           "completeMode": "all",
           "unlockAfter": [],
           "unlockMode": "any",
-          "explanation": "确认一个配对。"
+          "explanation": "这条线索可以直接确认一个格子。"
         },
         {
           "id": "clue_002",
-          "text": "对象03对应最长的英文单词。",
-          "type": "feature",
+          "text": "对象01 的【教材中文意思】是“洋葱”。",
+          "type": "direct",
           "initial": true,
           "priority": 2,
           "relatedCells": [
-            "entity_003::category_002"
+            "entity_001::category_001"
           ],
           "completeAfter": [
-            "entity_003::category_002"
+            "entity_001::category_001"
           ],
           "completeMode": "all",
           "unlockAfter": [],
           "unlockMode": "any",
-          "explanation": "利用长度判断。"
+          "explanation": "这条线索可以直接确认一个格子。"
         },
         {
           "id": "clue_003",
-          "text": "对象04不是黄梨。",
+          "text": "对象02 的【常见类别】不是“多汁蔬果”。",
           "type": "negative",
           "initial": true,
           "priority": 3,
           "relatedCells": [
-            "entity_004::category_001"
+            "entity_002::category_003"
           ],
-          "completeAfter": [],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
           "completeMode": "all",
           "unlockAfter": [],
           "unlockMode": "any",
-          "explanation": "排除错误选项。"
+          "explanation": "这条线索只能排除一个错误选项。"
         },
         {
           "id": "clue_004",
-          "text": "对象02和萝卜档案属于同一份资料。",
-          "type": "direct",
+          "text": "对象02 和对象04 的拼写提示都不是同一个开头字母。",
+          "type": "relation",
           "initial": false,
           "priority": 4,
           "relatedCells": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索提供两个档案之间的拼写关系。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03 的日常特征线索和饮用动作无关。",
+          "type": "feature",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索帮助缩小日常特征范围。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象05 的中文意思字数较多，且它的拼写提示不是 7 个字母。",
+          "type": "cross",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_005::category_001",
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_001",
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索需要同时查看中文意思和拼写提示。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象03 的【常见形态或用途】是“常见红色圆形，通常可以切片”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象04 的【常见形态或用途】是“常见橙色长条，资料中提示对眼睛好”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象05 的【常见形态或用途】是“常见黄褐外皮，通常可以煮或炸”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象06 的【常见形态或用途】是“常见红黄绿颜色，通常可以切圈”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_006::category_004"
+          ],
+          "completeAfter": [
+            "entity_006::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象01 的【常见形态或用途】是“常见一层层，通常会被切片炒香”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象02 的【常见形态或用途】是“常见绿叶，通常可以放进沙拉”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象03 的【教材中文意思】是“番茄”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象04 的【英文拼写提示】不是“p 开头，8 个字母”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象04 的【教材中文意思】是“萝卜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象05 的【教材中文意思】是“马铃薯”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_005::category_001"
+          ],
+          "completeAfter": [
+            "entity_005::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_017",
+          "text": "对象06 的【教材中文意思】是“胡椒 / 甜椒”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_006::category_001"
+          ],
+          "completeAfter": [
+            "entity_006::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_018",
+          "text": "对象02 的【教材中文意思】是“生菜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
             "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象03 的【常见类别】是“多汁蔬果”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_020",
+          "text": "对象04 的【常见类别】是“根类蔬菜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_021",
+          "text": "对象05 的【常见形态或用途】不是“常见红黄绿颜色，通常可以切圈”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 21,
+          "relatedCells": [
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_022",
+          "text": "对象05 的【常见类别】是“块茎类食物”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 22,
+          "relatedCells": [
+            "entity_005::category_003"
+          ],
+          "completeAfter": [
+            "entity_005::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_023",
+          "text": "对象06 的【常见类别】是“彩色椒类蔬菜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 23,
+          "relatedCells": [
+            "entity_006::category_003"
+          ],
+          "completeAfter": [
+            "entity_006::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_024",
+          "text": "对象01 的【常见类别】是“调味蔬菜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 24,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_025",
+          "text": "对象02 的【常见类别】是“叶菜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 25,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_026",
+          "text": "对象04 的【英文拼写提示】是“c 开头，7 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 26,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_027",
+          "text": "对象05 的【英文拼写提示】是“p 开头，8 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 27,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_028",
+          "text": "对象06 的【常见类别】不是“调味蔬菜”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 28,
+          "relatedCells": [
+            "entity_006::category_003"
+          ],
+          "completeAfter": [
+            "entity_006::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_029",
+          "text": "对象06 的【英文拼写提示】是“p 开头，7 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 29,
+          "relatedCells": [
+            "entity_006::category_002"
+          ],
+          "completeAfter": [
+            "entity_006::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_030",
+          "text": "对象01 的【英文拼写提示】是“o 开头，6 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 30,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_031",
+          "text": "对象02 的【英文拼写提示】是“l 开头，7 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 31,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        }
+      ],
+      "knowledgeSummary": [
+        "onions = 洋葱。",
+        "lettuce = 生菜。",
+        "tomatoes = 番茄。",
+        "carrots = 萝卜。",
+        "potatoes = 马铃薯。",
+        "peppers = 胡椒 / 甜椒。",
+        "英文拼写提示用于帮助学生观察首字母和字母数量。",
+        "常见类别、形态或用途属于课堂推理辅助，教师可按学生程度讲解。"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "案件二：点心材料柜",
+      "story": "点心材料柜的词卡被小风吹乱，甜味、粉末和奶香标签混在一起。",
+      "goal": "找出每个匿名档案对应的教材中文意思、英文拼写提示、常见类别与常见形态或用途。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "点心与材料词汇配对",
+        "opening": "主角来到点心材料柜，柜门上贴着许多被打乱的编号贴纸。",
+        "problem": "有些档案看起来像零食，有些像烘焙材料，但真正的词汇标签全被隐藏。",
+        "mission": "请整理匿名档案，把每个词汇的教材词义和辅助特征配对正确。",
+        "completion": "材料柜恢复整齐，空气里像飘出淡淡香气，第二份结案记录完成。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "柜子里的小灯亮起，第一批标签停止晃动。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 10,
+          "text": "档案夹自动翻页，新的线索纸条滑到桌面。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 16,
+          "text": "材料柜的编号全部变清楚，结案印章出现。"
+        }
+      ],
+      "entityType": "food_vocabulary",
+      "entityLabel": "点心材料词汇档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "chocolate",
+          "title": "待确认档案 01",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FDE68A",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#111827"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "biscuits",
+          "title": "待确认档案 02",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#BBF7D0",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "sugar",
+          "title": "待确认档案 03",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FBCFE8",
+            "secondaryColor": "#EC4899",
+            "accentColor": "#831843"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "flour",
+          "title": "待确认档案 04",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#BFDBFE",
+            "secondaryColor": "#3B82F6",
+            "accentColor": "#1E3A8A"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "cheese",
+          "title": "待确认档案 05",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#DDD6FE",
+            "secondaryColor": "#8B5CF6",
+            "accentColor": "#312E81"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "教材中文意思",
+          "options": [
+            {
+              "id": "option_001_001",
+              "label": "巧克力",
+              "note": ""
+            },
+            {
+              "id": "option_001_002",
+              "label": "饼干",
+              "note": ""
+            },
+            {
+              "id": "option_001_003",
+              "label": "糖",
+              "note": ""
+            },
+            {
+              "id": "option_001_004",
+              "label": "面粉",
+              "note": ""
+            },
+            {
+              "id": "option_001_005",
+              "label": "乳酪",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "英文拼写提示",
+          "options": [
+            {
+              "id": "option_002_001",
+              "label": "c 开头，9 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_002",
+              "label": "b 开头，8 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_003",
+              "label": "s 开头，5 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_004",
+              "label": "f 开头，5 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_005",
+              "label": "c 开头，6 个字母",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "常见类别",
+          "options": [
+            {
+              "id": "option_003_001",
+              "label": "甜食",
+              "note": ""
+            },
+            {
+              "id": "option_003_002",
+              "label": "烘焙零食",
+              "note": ""
+            },
+            {
+              "id": "option_003_003",
+              "label": "甜味调料",
+              "note": ""
+            },
+            {
+              "id": "option_003_004",
+              "label": "烘焙材料",
+              "note": ""
+            },
+            {
+              "id": "option_003_005",
+              "label": "奶制品",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "常见形态或用途",
+          "options": [
+            {
+              "id": "option_004_001",
+              "label": "常见块状，味道通常偏甜",
+              "note": ""
+            },
+            {
+              "id": "option_004_002",
+              "label": "常见一片片，口感通常偏脆",
+              "note": ""
+            },
+            {
+              "id": "option_004_003",
+              "label": "常见白色颗粒，通常用来调甜",
+              "note": ""
+            },
+            {
+              "id": "option_004_004",
+              "label": "常见粉末状，通常可做面糊",
+              "note": ""
+            },
+            {
+              "id": "option_004_005",
+              "label": "常见片状或块状，味道通常较浓",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001_001",
+          "category_002": "option_002_001",
+          "category_003": "option_003_001",
+          "category_004": "option_004_001"
+        },
+        "entity_002": {
+          "category_001": "option_001_002",
+          "category_002": "option_002_002",
+          "category_003": "option_003_002",
+          "category_004": "option_004_002"
+        },
+        "entity_003": {
+          "category_001": "option_001_003",
+          "category_002": "option_002_003",
+          "category_003": "option_003_003",
+          "category_004": "option_004_003"
+        },
+        "entity_004": {
+          "category_001": "option_001_004",
+          "category_002": "option_002_004",
+          "category_003": "option_003_004",
+          "category_004": "option_004_004"
+        },
+        "entity_005": {
+          "category_001": "option_001_005",
+          "category_002": "option_002_005",
+          "category_003": "option_003_005",
+          "category_004": "option_004_005"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03 的【英文拼写提示】是“s 开头，5 个字母”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01 的【教材中文意思】是“巧克力”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_001"
           ],
           "completeAfter": [
             "entity_001::category_001"
           ],
           "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象02 的【常见类别】不是“甜味调料”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象02 和对象04 的拼写提示都不是同一个开头字母。",
+          "type": "relation",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
           "unlockAfter": [
+            "entity_003::category_002",
             "entity_001::category_001"
           ],
           "unlockMode": "any",
-          "explanation": "解锁后确认。"
+          "explanation": "这条线索提供两个档案之间的拼写关系。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03 的日常特征线索和饮用动作无关。",
+          "type": "feature",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索帮助缩小日常特征范围。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象05 的中文意思字数较多，且它的拼写提示不是 7 个字母。",
+          "type": "cross",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_005::category_001",
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_001",
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索需要同时查看中文意思和拼写提示。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象03 的【常见形态或用途】是“常见白色颗粒，通常用来调甜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象04 的【常见形态或用途】是“常见粉末状，通常可做面糊”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象05 的【常见形态或用途】是“常见片状或块状，味道通常较浓”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象01 的【常见形态或用途】是“常见块状，味道通常偏甜”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象02 的【常见形态或用途】是“常见一片片，口感通常偏脆”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象03 的【教材中文意思】是“糖”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象04 的【教材中文意思】是“面粉”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象05 的【英文拼写提示】不是“c 开头，9 个字母”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象05 的【教材中文意思】是“乳酪”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_005::category_001"
+          ],
+          "completeAfter": [
+            "entity_005::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象02 的【教材中文意思】是“饼干”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_017",
+          "text": "对象03 的【常见类别】是“甜味调料”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_018",
+          "text": "对象04 的【常见类别】是“烘焙材料”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象05 的【常见类别】是“奶制品”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "entity_005::category_003"
+          ],
+          "completeAfter": [
+            "entity_005::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_020",
+          "text": "对象01 的【常见类别】是“甜食”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_021",
+          "text": "对象02 的【常见形态或用途】不是“常见白色颗粒，通常用来调甜”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 21,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_022",
+          "text": "对象02 的【常见类别】是“烘焙零食”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 22,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_023",
+          "text": "对象04 的【英文拼写提示】是“f 开头，5 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 23,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_024",
+          "text": "对象05 的【英文拼写提示】是“c 开头，6 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 24,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_025",
+          "text": "对象01 的【英文拼写提示】是“c 开头，9 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 25,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_026",
+          "text": "对象02 的【英文拼写提示】是“b 开头，8 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 26,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
         }
       ],
       "knowledgeSummary": [
-        "onions = 洋葱",
-        "carrots = 萝卜",
-        "pineapple = 黄梨",
-        "chicken = 鸡肉",
-        "词汇来自 Year 3 Module 6 Food, Please!"
+        "chocolate = 巧克力。",
+        "biscuits = 饼干。",
+        "sugar = 糖。",
+        "flour = 面粉。",
+        "cheese = 乳酪。",
+        "英文拼写提示用于帮助学生观察首字母和字母数量。",
+        "常见类别、形态或用途属于课堂推理辅助，教师可按学生程度讲解。"
+      ]
+    },
+    {
+      "id": "case_003",
+      "title": "案件三：餐盘线索区",
+      "story": "餐盘线索区的食物卡片被混进同一个托盘，编号和描述需要重新核对。",
+      "goal": "找出每个匿名档案对应的教材中文意思、英文拼写提示、常见类别与常见形态或用途。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "餐盘食物词汇整理",
+        "opening": "主角来到一张大餐盘前，餐盘旁边排列着几份匿名档案。",
+        "problem": "每份档案只显示编号，真实词汇和中文意思都被收进锁住的小格子。",
+        "mission": "请根据线索完成配对，让餐盘档案恢复正确顺序。",
+        "completion": "餐盘区的档案完成修复，中央屏幕显示：继续前进。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "餐盘边缘的光圈亮起，资料墙出现新的编号。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "小格子发出轻响，更多线索可以读取。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 13,
+          "text": "餐盘线索区稳定下来，通往果园站的门打开了。"
+        }
+      ],
+      "entityType": "food_vocabulary",
+      "entityLabel": "餐盘词汇档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "chicken",
+          "title": "待确认档案 01",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FDE68A",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#111827"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "omelette",
+          "title": "待确认档案 02",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#BBF7D0",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "peas",
+          "title": "待确认档案 03",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FBCFE8",
+            "secondaryColor": "#EC4899",
+            "accentColor": "#831843"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "pancake",
+          "title": "待确认档案 04",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#BFDBFE",
+            "secondaryColor": "#3B82F6",
+            "accentColor": "#1E3A8A"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "教材中文意思",
+          "options": [
+            {
+              "id": "option_001_001",
+              "label": "鸡肉",
+              "note": ""
+            },
+            {
+              "id": "option_001_002",
+              "label": "煎蛋饼",
+              "note": ""
+            },
+            {
+              "id": "option_001_003",
+              "label": "豌豆",
+              "note": ""
+            },
+            {
+              "id": "option_001_004",
+              "label": "薄煎饼",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "英文拼写提示",
+          "options": [
+            {
+              "id": "option_002_001",
+              "label": "c 开头，7 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_002",
+              "label": "o 开头，8 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_003",
+              "label": "p 开头，4 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_004",
+              "label": "p 开头，7 个字母",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "常见类别",
+          "options": [
+            {
+              "id": "option_003_001",
+              "label": "肉类",
+              "note": ""
+            },
+            {
+              "id": "option_003_002",
+              "label": "蛋类熟食",
+              "note": ""
+            },
+            {
+              "id": "option_003_003",
+              "label": "豆类",
+              "note": ""
+            },
+            {
+              "id": "option_003_004",
+              "label": "面糊熟食",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "常见形态或用途",
+          "options": [
+            {
+              "id": "option_004_001",
+              "label": "资料中提示它是来自农场动物的肉",
+              "note": ""
+            },
+            {
+              "id": "option_004_002",
+              "label": "通常用蛋煎成，常见扁圆形",
+              "note": ""
+            },
+            {
+              "id": "option_004_003",
+              "label": "常见小小圆粒，通常是绿色",
+              "note": ""
+            },
+            {
+              "id": "option_004_004",
+              "label": "常见圆形叠起来，可当早餐",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001_001",
+          "category_002": "option_002_001",
+          "category_003": "option_003_001",
+          "category_004": "option_004_001"
+        },
+        "entity_002": {
+          "category_001": "option_001_002",
+          "category_002": "option_002_002",
+          "category_003": "option_003_002",
+          "category_004": "option_004_002"
+        },
+        "entity_003": {
+          "category_001": "option_001_003",
+          "category_002": "option_002_003",
+          "category_003": "option_003_003",
+          "category_004": "option_004_003"
+        },
+        "entity_004": {
+          "category_001": "option_001_004",
+          "category_002": "option_002_004",
+          "category_003": "option_003_004",
+          "category_004": "option_004_004"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03 的【英文拼写提示】是“p 开头，4 个字母”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01 的【教材中文意思】是“鸡肉”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象02 的【常见类别】不是“豆类”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象02 和对象04 的拼写提示都不是同一个开头字母。",
+          "type": "relation",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002",
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索提供两个档案之间的拼写关系。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03 的日常特征线索和饮用动作无关。",
+          "type": "feature",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索帮助缩小日常特征范围。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象03 的【常见形态或用途】是“常见小小圆粒，通常是绿色”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象04 的【教材中文意思】不是“鸡肉”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象04 的【常见形态或用途】是“常见圆形叠起来，可当早餐”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象01 的【常见形态或用途】是“资料中提示它是来自农场动物的肉”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象02 的【常见形态或用途】是“通常用蛋煎成，常见扁圆形”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象03 的【教材中文意思】是“豌豆”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象04 的【教材中文意思】是“薄煎饼”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象02 的【教材中文意思】是“煎蛋饼”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象03 的【英文拼写提示】不是“p 开头，7 个字母”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象03 的【常见类别】是“豆类”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象04 的【常见类别】是“面糊熟食”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_017",
+          "text": "对象01 的【常见类别】是“肉类”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_018",
+          "text": "对象02 的【常见类别】是“蛋类熟食”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象04 的【英文拼写提示】是“p 开头，7 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_020",
+          "text": "对象01 的【英文拼写提示】是“c 开头，7 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_021",
+          "text": "对象02 的【常见类别】不是“豆类”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 21,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_022",
+          "text": "对象02 的【英文拼写提示】是“o 开头，8 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 22,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        }
+      ],
+      "knowledgeSummary": [
+        "chicken = 鸡肉。",
+        "omelette = 煎蛋饼。",
+        "peas = 豌豆。",
+        "pancake = 薄煎饼。",
+        "英文拼写提示用于帮助学生观察首字母和字母数量。",
+        "常见类别、形态或用途属于课堂推理辅助，教师可按学生程度讲解。"
+      ]
+    },
+    {
+      "id": "case_004",
+      "title": "案件四：饮品与果园站",
+      "story": "最后的果园站里，饮品和果实的词汇卡被雾气盖住。",
+      "goal": "找出每个匿名档案对应的教材中文意思、英文拼写提示、常见类别与常见形态或用途。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "饮品与果实词汇归档",
+        "opening": "主角进入果园站，桌面上放着三份需要修复的匿名档案。",
+        "problem": "站内的标签机卡住了，只能靠已出现的线索逐步配对。",
+        "mission": "请完成最后一组词汇档案，让食物词汇库恢复正常。",
+        "completion": "果园站的雾气散开，全部档案回到正确位置，总结报告正式生成。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "果园站的雾气变淡，第一盏提示灯亮起。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 7,
+          "text": "标签机重新转动，编号卡片排成一列。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 10,
+          "text": "最后的档案锁打开，结案报告开始打印。"
+        }
+      ],
+      "entityType": "food_vocabulary",
+      "entityLabel": "饮品果实词汇档案",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "juice",
+          "title": "待确认档案 01",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FDE68A",
+            "secondaryColor": "#F59E0B",
+            "accentColor": "#111827"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "pineapple",
+          "title": "待确认档案 02",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#BBF7D0",
+            "secondaryColor": "#22C55E",
+            "accentColor": "#064E3B"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "coconut",
+          "title": "待确认档案 03",
+          "description": "资料标签被打乱，真实名称暂时隐藏。",
+          "records": [
+            {
+              "label": "档案状态",
+              "text": "匿名编号等待核对。"
+            },
+            {
+              "label": "调查提示",
+              "text": "请根据线索配对教材词义、拼写提示、常见类别与日常特征。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#FBCFE8",
+            "secondaryColor": "#EC4899",
+            "accentColor": "#831843"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "教材中文意思",
+          "options": [
+            {
+              "id": "option_001_001",
+              "label": "果汁",
+              "note": ""
+            },
+            {
+              "id": "option_001_002",
+              "label": "黄梨",
+              "note": ""
+            },
+            {
+              "id": "option_001_003",
+              "label": "椰子",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "英文拼写提示",
+          "options": [
+            {
+              "id": "option_002_001",
+              "label": "j 开头，5 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_002",
+              "label": "p 开头，9 个字母",
+              "note": ""
+            },
+            {
+              "id": "option_002_003",
+              "label": "c 开头，7 个字母",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "常见类别",
+          "options": [
+            {
+              "id": "option_003_001",
+              "label": "饮料",
+              "note": ""
+            },
+            {
+              "id": "option_003_002",
+              "label": "水果",
+              "note": ""
+            },
+            {
+              "id": "option_003_003",
+              "label": "热带果实",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "常见形态或用途",
+          "options": [
+            {
+              "id": "option_004_001",
+              "label": "常见杯装或盒装，可以喝",
+              "note": ""
+            },
+            {
+              "id": "option_004_002",
+              "label": "资料中提示它多汁又健康，可吃也可榨汁",
+              "note": ""
+            },
+            {
+              "id": "option_004_003",
+              "label": "常见硬壳，里面有水和白色果肉",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001_001",
+          "category_002": "option_002_001",
+          "category_003": "option_003_001",
+          "category_004": "option_004_001"
+        },
+        "entity_002": {
+          "category_001": "option_001_002",
+          "category_002": "option_002_002",
+          "category_003": "option_003_002",
+          "category_004": "option_004_002"
+        },
+        "entity_003": {
+          "category_001": "option_001_003",
+          "category_002": "option_002_003",
+          "category_003": "option_003_003",
+          "category_004": "option_004_003"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03 的【英文拼写提示】是“c 开头，7 个字母”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象01 的【教材中文意思】是“果汁”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象02 的【常见类别】不是“热带果实”。",
+          "type": "negative",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象03 的日常特征线索和饮用动作无关。",
+          "type": "feature",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索帮助缩小日常特征范围。"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象03 的【常见形态或用途】是“常见硬壳，里面有水和白色果肉”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象01 的【常见形态或用途】是“常见杯装或盒装，可以喝”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象02 的【教材中文意思】不是“椰子”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象02 的【常见形态或用途】是“资料中提示它多汁又健康，可吃也可榨汁”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象03 的【教材中文意思】是“椰子”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象02 的【教材中文意思】是“黄梨”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象03 的【常见类别】是“热带果实”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象01 的【常见类别】是“饮料”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象02 的【常见类别】是“水果”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象03 的【常见形态或用途】不是“常见杯装或盒装，可以喝”。",
+          "type": "negative",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索只能排除一个错误选项。"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象01 的【英文拼写提示】是“j 开头，5 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象02 的【英文拼写提示】是“p 开头，9 个字母”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002",
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "这条线索可以直接确认一个格子。"
+        }
+      ],
+      "knowledgeSummary": [
+        "juice = 果汁。",
+        "pineapple = 黄梨。",
+        "coconut = 椰子。",
+        "英文拼写提示用于帮助学生观察首字母和字母数量。",
+        "常见类别、形态或用途属于课堂推理辅助，教师可按学生程度讲解。"
       ]
     }
   ],
   "audit": {
-    "sourceSummary": "Year 3 English Food and Drinks vocabulary list.",
+    "sourceSummary": "课程资料为 Year 3 BI June Module 6: Food, Please!，第1页提供 Food and Drinks 词汇与中文意思；第2页为 SJK(C) SIN HWA 2024 NOV 考题页面，包含根据图片和描述拼写食物词汇的练习。",
     "usedItems": [
-      "onions",
-      "carrots",
-      "pineapple",
-      "chicken",
-      "洋葱",
-      "萝卜",
-      "黄梨",
-      "鸡肉"
+      "onions=洋葱",
+      "lettuce=生菜",
+      "chocolate=巧克力",
+      "biscuits=饼干",
+      "sugar=糖",
+      "juice=果汁",
+      "flour=面粉",
+      "tomatoes=番茄",
+      "carrots=萝卜",
+      "potatoes=马铃薯",
+      "chicken=鸡肉",
+      "omelette=煎蛋饼",
+      "peas=豌豆",
+      "pancake=薄煎饼",
+      "pineapple=黄梨",
+      "peppers=胡椒 / 甜椒",
+      "coconut=椰子",
+      "cheese=乳酪",
+      "第2页描述：chicken 是来自农场动物的肉。",
+      "第2页描述：pineapple 多汁又健康，可吃也可喝果汁。",
+      "第2页描述：carrots 对眼睛好。"
     ],
     "excludedItems": [
-      "其余词汇未使用，因为单一案件已足够完成活动。"
+      "姓名、日期、正课、功课、缺席、没带资料等课堂记录栏不属于课程知识，未作为推理内容。",
+      "第2页版面标题、题号、分数和空格不属于课程知识，未作为推理属性。",
+      "第2页 milk 题目只在考试图与首字母提示中出现，未列入第1页词汇宝库，因此不作为档案对象。"
     ],
     "warnings": [
-      "词汇长度与开头字母属于辅助常识属性扩展。"
+      "常见类别、常见形态或用途为日常常识扩展，只用于辅助推理，教师可按学生程度调整。",
+      "英文拼写提示由教材英文词汇整理而来，属于课堂复习辅助。",
+      "中文意思来自教材词汇表；由于双语词汇本身具有提示性，课堂使用时可强调先完成线索配对再揭示名称。",
+      "所有图标均为生成式编号图标，不含外部图片、品牌或身份图案。",
+      "已检查每宗案件的实体数、类别数、option 数量、solution 引用、线索 relatedCells、unlockAfter 和 66% 名称揭示流程。"
     ],
     "validationPassed": true
   }
