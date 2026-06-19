@@ -125,6 +125,17 @@
       animation: pageIn 240ms ease;
     }
 
+    .validation-page {
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+      --validation-center-nudge: 0px;
+    }
+
+    .validation-page > .topbar {
+      width: 100%;
+      justify-self: stretch;
+    }
+
     @keyframes pageIn {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
@@ -606,8 +617,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .validation-page .shell {
+      width: 100%;
+      max-width: 1180px;
+      justify-self: center;
+      margin-inline: auto;
+    }
+
     .validation-page .panel.stack {
-      width: min(1180px, 100%);
+      width: 100%;
+      max-width: 1180px;
+      justify-self: center;
       margin-inline: auto;
       grid-template-rows: auto auto;
       height: 100%;
@@ -618,13 +638,14 @@
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
-      scrollbar-gutter: stable;
+      scrollbar-gutter: stable both-edges;
     }
 
     .validation-layout {
       width: min(1120px, calc(100% - 16px));
       justify-self: center;
       margin-inline: auto;
+      transform: translateX(var(--validation-center-nudge));
       box-sizing: border-box;
       min-height: max-content;
       height: auto;
@@ -634,6 +655,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    @media (min-width: 1025px) {
+      .validation-page {
+        --validation-center-nudge: 12px;
+      }
     }
 
     .validation-check-pane,
@@ -2151,8 +2178,19 @@
       }
 
       .validation-page .panel.stack {
+        width: 100%;
+        max-width: 1180px;
+        justify-self: center;
+        margin-inline: auto;
         overflow-y: auto;
         overflow-x: hidden;
+      }
+
+      .validation-page .shell {
+        width: 100%;
+        max-width: 1180px;
+        justify-self: center;
+        margin-inline: auto;
       }
 
       .validation-page .validation-layout {
@@ -2429,6 +2467,10 @@
       }
 
       .validation-page .panel.stack {
+        width: 100%;
+        max-width: 1180px;
+        justify-self: center;
+        margin-inline: auto;
         grid-template-rows: auto auto;
         align-content: start;
         justify-items: center;
@@ -2436,7 +2478,14 @@
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
-        scrollbar-gutter: stable;
+        scrollbar-gutter: stable both-edges;
+      }
+
+      .validation-page .shell {
+        width: 100%;
+        max-width: 1180px;
+        justify-self: center;
+        margin-inline: auto;
       }
 
       .validation-page .two-col.validation-layout {
