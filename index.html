@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>课堂档案推理游戏引擎｜侦探调查局版</title>
+  <title>课堂推理游戏引擎｜侦探调查局</title>
   <style>
     @font-face {
       font-family: "GameRounded";
@@ -128,7 +128,6 @@
     .validation-page {
       grid-template-columns: minmax(0, 1fr);
       justify-items: center;
-      --validation-center-nudge: 0px;
     }
 
     .validation-page > .topbar {
@@ -618,7 +617,7 @@
     }
 
     .validation-page .shell {
-      width: 100%;
+      width: min(1180px, 100%);
       max-width: 1180px;
       justify-self: center;
       margin-inline: auto;
@@ -637,15 +636,38 @@
       padding-bottom: clamp(28px, 5dvh, 56px);
       overflow-y: auto;
       overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
-      scrollbar-gutter: stable both-edges;
+      scrollbar-gutter: auto;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(199, 154, 75, 0.88) 0 3px, rgba(140, 59, 74, 0.88) 3px 6px, transparent 6px),
+        linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(244, 231, 197, 0.9)),
+        repeating-linear-gradient(0deg, rgba(70, 61, 56, 0.04) 0 1px, transparent 1px 22px);
+    }
+
+    .validation-page .panel.stack::before {
+      inset-block: 0;
+      left: 0;
+      right: auto;
+      width: 6px;
+      margin: 0;
+      transform: none;
+      z-index: 0;
+    }
+
+    .validation-page .panel.stack > * {
+      position: relative;
+      z-index: 1;
     }
 
     .validation-layout {
-      width: min(1120px, calc(100% - 16px));
+      width: 100%;
+      max-width: 1120px;
       justify-self: center;
       margin-inline: auto;
-      transform: translateX(var(--validation-center-nudge));
+      transform: none;
       box-sizing: border-box;
       min-height: max-content;
       height: auto;
@@ -655,12 +677,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    @media (min-width: 1025px) {
-      .validation-page {
-        --validation-center-nudge: 12px;
-      }
     }
 
     .validation-check-pane,
@@ -691,6 +707,26 @@
     .validation-data-pane .notice {
       flex: 0 0 auto;
       flex-shrink: 0;
+    }
+
+    .validation-data-pane > .notice {
+      display: grid;
+      place-items: center;
+      min-height: 54px;
+      text-align: center;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    @media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+      .validation-page .panel.stack {
+        --validation-scrollbar-gutter: 17px;
+        scrollbar-gutter: stable both-edges;
+      }
+
+      .validation-page .panel.stack::before {
+        left: calc(-1 * var(--validation-scrollbar-gutter));
+      }
     }
 
     .validation-data-pane .actions {
@@ -1779,7 +1815,8 @@
     }
 
     .validation-layout {
-      width: min(1120px, calc(100% - 16px));
+      width: 100%;
+      max-width: 1120px;
       justify-self: center;
       margin-inline: auto;
       display: flex;
@@ -2170,6 +2207,94 @@
         grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
       }
 
+      .completion-page .topbar {
+        min-height: 46px;
+        padding: 6px 8px;
+        gap: 6px;
+      }
+
+      .completion-page .topbar h1 {
+        font-size: clamp(1.55rem, 4vw, 2.15rem);
+        line-height: 1.02;
+      }
+
+      .completion-page .topbar .subtle {
+        font-size: clamp(0.78rem, 1.75vw, 0.94rem);
+        line-height: 1.08;
+      }
+
+      .completion-page .topbar .actions.end {
+        gap: 6px;
+      }
+
+      .completion-page .topbar .actions.end button {
+        min-height: 34px;
+        padding: 5px 8px;
+        font-size: clamp(0.84rem, 1.8vw, 0.98rem);
+      }
+
+      .completion-hero {
+        grid-template-columns: minmax(62px, 82px) minmax(0, 1fr);
+        align-items: stretch;
+        overflow: hidden;
+      }
+
+      .completion-hero .completion-stamp {
+        width: clamp(60px, 7vw, 80px);
+        min-height: 60px;
+        align-self: center;
+        font-size: clamp(0.68rem, 1.5vw, 0.82rem);
+        border-width: 3px;
+      }
+
+      .completion-hero-main {
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .completion-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: start;
+      }
+
+      .completion-hero-main .result-cell {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 4px;
+        min-height: 30px;
+        padding: 3px 5px;
+      }
+
+      .completion-hero-main .result-label,
+      .completion-hero-main .result-value {
+        line-height: 1.08;
+      }
+
+      .completion-note-cell {
+        height: auto;
+        min-height: 30px;
+        overflow: visible;
+      }
+
+      .completion-section h2 {
+        font-size: clamp(1rem, 2.2vw, 1.18rem);
+        line-height: 1.12;
+      }
+
+      .completion-section .result-label {
+        font-size: clamp(0.72rem, 1.55vw, 0.84rem);
+      }
+
+      .completion-section .result-value,
+      .summary-line {
+        font-size: clamp(0.82rem, 1.85vw, 0.96rem);
+        line-height: 1.18;
+      }
+
       .validation-page .panel.stack,
       .case-lobby-page .panel.stack,
       .intro-page .panel.stack {
@@ -2184,10 +2309,12 @@
         margin-inline: auto;
         overflow-y: auto;
         overflow-x: hidden;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
       }
 
       .validation-page .shell {
-        width: 100%;
+        width: min(1180px, 100%);
         max-width: 1180px;
         justify-self: center;
         margin-inline: auto;
@@ -2327,25 +2454,25 @@
       }
 
       .clue-text {
-        font-size: clamp(1.1rem, 2.55vw, 1.32rem);
+        font-size: clamp(1.02rem, 2.25vw, 1.2rem);
         line-height: 1.16;
       }
 
       .clue-card.clue-short .clue-text {
-        font-size: clamp(1.2rem, 2.95vw, 1.46rem);
+        font-size: clamp(1.1rem, 2.55vw, 1.3rem);
       }
 
       .clue-card.clue-medium .clue-text {
-        font-size: clamp(1.06rem, 2.42vw, 1.26rem);
+        font-size: clamp(0.98rem, 2.15vw, 1.16rem);
       }
 
       .clue-card.clue-long .clue-text {
-        font-size: clamp(0.9rem, 2.02vw, 1.06rem);
+        font-size: clamp(0.82rem, 1.78vw, 0.96rem);
         line-height: 1.1;
       }
 
       .clue-card.clue-xlong .clue-text {
-        font-size: clamp(0.64rem, 1.5vw, 0.78rem);
+        font-size: clamp(0.58rem, 1.25vw, 0.7rem);
         line-height: 1.04;
       }
 
@@ -2459,7 +2586,7 @@
       }
 
       .completion-hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(56px, 70px) minmax(0, 1fr);
       }
 
       .completion-stats-grid {
@@ -2478,11 +2605,11 @@
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior: contain;
-        scrollbar-gutter: stable both-edges;
+        scrollbar-gutter: auto;
       }
 
       .validation-page .shell {
-        width: 100%;
+        width: min(1180px, 100%);
         max-width: 1180px;
         justify-self: center;
         margin-inline: auto;
@@ -2496,7 +2623,8 @@
       }
 
       .validation-page .validation-layout {
-        width: min(1120px, calc(100% - 16px));
+        width: 100%;
+        max-width: 1120px;
         margin-inline: auto;
         display: block;
         height: auto;
@@ -2961,7 +3089,7 @@
       function renderTopbar(title, subtitle, actions) {
         const top = createEl("header", "topbar");
         const titleBox = createEl("div", "top-title");
-        titleBox.append(createEl("h1", "", title || "课堂档案推理游戏引擎"));
+        titleBox.append(createEl("h1", "", title || "课堂推理游戏引擎"));
         if (subtitle) titleBox.append(createEl("p", "subtle", subtitle));
         const actionBox = createEl("div", "actions end");
         (actions || []).forEach((node) => actionBox.append(node));
@@ -2978,7 +3106,6 @@
 
         panel.append(createEl("span", "pill new", "侦探调查局入口"));
         panel.append(createEl("h1", "", "请上传游戏资料包"));
-        panel.append(createEl("p", "subtle", "导入案件资料包后，系统会先生成案件资料鉴定报告。"));
         if (safeMessage) panel.append(createEl("div", "notice warn", safeMessage));
         if (parseError) panel.append(createEl("div", "notice error", parseError));
 
@@ -2991,7 +3118,7 @@
         fileInput.accept = ".json,application/json";
         fileInput.id = "jsonFileInput";
         fileInput.addEventListener("change", handleFileImport);
-        const fileLabel = button("导入案件资料", "primary", openSourceChooser);
+        const fileLabel = button("导入资料包", "primary", openSourceChooser);
 
         left.append(fileInput, fileLabel);
         left.append(button("继续上次调查", "secondary", continueSavedPackage, { disabled: !packageData || !validation }));
@@ -3000,7 +3127,7 @@
 
         const paste = createEl("textarea");
         paste.value = dataInputText;
-        paste.placeholder = "在这里粘贴 JSON 案件资料包";
+        paste.placeholder = "在这里粘贴 JSON 资料包";
         paste.setAttribute("aria-label", "粘贴 JSON 游戏资料包");
         paste.addEventListener("input", () => {
           dataInputText = paste.value;
@@ -3012,7 +3139,7 @@
         panel.append(two);
 
         const foot = createEl("div", "notice");
-        foot.append(createEl("span", "", "资料导入后会先进入“案件资料鉴定报告”，检查通过后才可开始调查。"));
+        foot.append(createEl("span", "", "资料导入后会先进入“资料包鉴定报告”，检查通过后才可开始调查。"));
         panel.append(foot);
 
         shell.append(panel);
@@ -3029,7 +3156,6 @@
         const head = createEl("div", "modal-head");
         const title = createEl("div", "stack");
         title.append(createEl("h2", "", "选择资料来源"));
-        title.append(createEl("p", "subtle", "可以上传本地 JSON，也可以从 GitHub 课程库读取。"));
         head.append(title, button("关闭", "icon-button ghost", closeModal, { ariaLabel: "关闭资料来源选择" }));
         const actions = createEl("div", "actions");
         actions.append(button("从本地设备上传", "primary", () => {
@@ -3537,7 +3663,7 @@
         setPage("validation");
         const page = createEl("section", "page validation-page");
         const title = packageData && packageData.packageTitle ? packageData.packageTitle : "资料检查";
-        page.append(renderTopbar(title, "导入后必须先检查资料结构，检查通过后才可开始调查。", [
+        page.append(renderTopbar(title, "", [
           button("更换资料包", "ghost", () => renderDataLobby()),
           button("移除资料包", "danger", removeCurrentPackage)
         ]));
@@ -3545,7 +3671,7 @@
         const shell = createEl("div", "shell");
         const panel = createEl("div", "panel stack");
         const status = createEl("div", validation && !validation.errors.length ? "notice success" : "notice error");
-        status.textContent = validation && !validation.errors.length ? "✓ 案件资料验证完成，可以开始调查。" : "⚠ 案件资料存在问题，请修正资料包后重新导入。";
+        status.textContent = validation && !validation.errors.length ? "✓ 资料包验证完成，可以开始调查。" : "⚠ 资料包存在问题，请修正后重新导入。";
         panel.append(status);
 
         const lists = createEl("div", "validation-layout");
@@ -3553,7 +3679,7 @@
         const showValidationReport = validationReportExpanded === true;
         if (!showValidationReport) left.classList.add("validation-collapsed");
         const reportHead = createEl("div", "validation-report-head");
-        reportHead.append(createEl("h2", "", "案件资料鉴定报告"));
+        reportHead.append(createEl("h2", "", "资料包鉴定报告"));
         const reportToggle = button(validationReportExpanded ? "收起报告" : "展开报告", "tiny ghost validation-report-toggle", () => {
           validationReportExpanded = !validationReportExpanded;
           updateValidationReportPanel(left, reportToggle);
@@ -3704,18 +3830,12 @@
         const page = createEl("section", "page package-story-page ending-story-page");
         page.append(renderTopbar(packageData.packageTitle || "尾声剧情", "所有案件已处理完毕，请阅读尾声剧情。", [
           soundToggle(),
-          button("资料验证", "ghost", () => renderValidation())
+          button("调查局入口", "ghost", () => renderDataLobby())
         ]));
 
         const shell = createEl("div", "shell");
         const panel = createEl("div", "panel stack");
         panel.append(createEl("h2", "", "尾声剧情"));
-
-        const meta = createEl("div", "result-grid intro-meta-compact");
-        meta.append(labeledText("科目", packageData.subject || "未填写"));
-        meta.append(labeledText("年级", packageData.level || "未填写"));
-        meta.append(labeledText("案件数量", packageData && Array.isArray(packageData.cases) ? String(packageData.cases.length) : "0"));
-        meta.append(labeledText("完成状态", "全部案件已处理"));
 
         const storyCard = createEl("div", "item-card package-story-card");
         const labels = createEl("div", "intro-card-labels");
@@ -3725,8 +3845,8 @@
         storyCard.append(createEl("p", "subtle package-story-text", getEndingStoryText()));
 
         const actions = createEl("div", "actions");
-        actions.append(button("进入资料验证", "primary package-story-start", () => renderValidation()));
-        panel.append(meta, storyCard, actions);
+        actions.append(button("回到调查局入口", "primary package-story-start", () => renderDataLobby()));
+        panel.append(storyCard, actions);
         shell.append(panel);
         page.append(shell);
         app.replaceChildren(page);
@@ -5067,10 +5187,7 @@
         const completionText = currentCase.narrative && currentCase.narrative.completion ? currentCase.narrative.completion : "";
         if (completionText) stats.append(labeledText("结案说明", completionText));
         if (completionText && stats.lastElementChild) stats.lastElementChild.classList.add("completion-note-cell");
-        const completionNote = completionText ? stats.lastElementChild : null;
-        if (completionNote) completionNote.remove();
         heroMain.append(stats);
-        if (completionNote) heroMain.append(completionNote);
         hero.append(heroMain);
         panel.append(hero);
 
@@ -5263,7 +5380,7 @@
 
       function getEntityDisplayName(entity, index) {
         if (isEntityNameRevealed(entity.id)) return entity.name || entity.id;
-        return getEntityLabel(currentCase) + "档案 " + String(index + 1).padStart(2, "0");
+        return getEntityLabel(currentCase) + String(index + 1).padStart(2, "0");
       }
 
       function getCardPageSize() {
@@ -5775,8 +5892,9 @@
       }
 
       function getMaxHints() {
-        const value = packageData && packageData.settings ? Number(packageData.settings.maxHints) : 3;
-        return Number.isFinite(value) && value >= 0 ? value : 3;
+        const hasSetting = packageData && packageData.settings && Object.prototype.hasOwnProperty.call(packageData.settings, "maxHints");
+        const value = hasSetting ? Number(packageData.settings.maxHints) : 5;
+        return Number.isFinite(value) && value >= 0 ? value : 5;
       }
 
       function getNextCase() {
