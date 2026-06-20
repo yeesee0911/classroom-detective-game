@@ -258,19 +258,16 @@
       padding: 12px;
       overflow: hidden;
       background:
+        linear-gradient(180deg, rgba(199, 154, 75, 0.88), rgba(140, 59, 74, 0.88)) left top / 6px 100% no-repeat,
         linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(244, 231, 197, 0.9)),
         repeating-linear-gradient(0deg, rgba(70, 61, 56, 0.04) 0 1px, transparent 1px 22px);
+      background-attachment: local, local, local;
       position: relative;
     }
 
     .panel::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 6px;
-      background: linear-gradient(var(--brass), var(--wine));
-      opacity: 0.88;
-      pointer-events: none;
+      content: none;
+      display: none;
     }
 
     .stack {
@@ -640,26 +637,6 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       scrollbar-gutter: auto;
-      isolation: isolate;
-      background:
-        linear-gradient(90deg, rgba(199, 154, 75, 0.88) 0 3px, rgba(140, 59, 74, 0.88) 3px 6px, transparent 6px),
-        linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(244, 231, 197, 0.9)),
-        repeating-linear-gradient(0deg, rgba(70, 61, 56, 0.04) 0 1px, transparent 1px 22px);
-    }
-
-    .validation-page .panel.stack::before {
-      inset-block: 0;
-      left: 0;
-      right: auto;
-      width: 6px;
-      margin: 0;
-      transform: none;
-      z-index: 0;
-    }
-
-    .validation-page .panel.stack > * {
-      position: relative;
-      z-index: 1;
     }
 
     .validation-layout {
@@ -716,17 +693,6 @@
       text-align: center;
       line-height: 1.35;
       overflow-wrap: anywhere;
-    }
-
-    @media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
-      .validation-page .panel.stack {
-        --validation-scrollbar-gutter: 17px;
-        scrollbar-gutter: stable both-edges;
-      }
-
-      .validation-page .panel.stack::before {
-        left: calc(-1 * var(--validation-scrollbar-gutter));
-      }
     }
 
     .validation-data-pane .actions {
