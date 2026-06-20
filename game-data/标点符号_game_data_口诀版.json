@@ -1,0 +1,1464 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "punctuation_oral_clue_game_001",
+  "packageTitle": "标点符号口诀推理包",
+  "subject": "华文",
+  "level": "default",
+  "contentLanguage": "中文",
+  "description": "根据上传的标点符号笔记制作的课堂档案推理资料包，用于练习标点符号的用法、常见位置、记忆关键和口语口诀。",
+  "openingStory": "夜晚的梦境城市突然乱成一团。小朋友说话时，有的句子一直停不下来，有的问题听起来不像问题，有的书名也找不到边界。主角收到一枚会发光的语言罗盘，罗盘告诉他：十张符号卡的名字被梦雾盖住了，只有把每张卡的用法、位置和小口诀配对正确，城市里的话才会重新变顺。主角带着罗盘进入第一座梦境小门，准备一张一张找回正确的符号规则。",
+  "endingStory": "全部符号卡都被修复后，梦境城市的句子终于恢复节奏：该停的时候停，该问的时候问，该表达感情的时候更有力。主角也记住了每个标点符号的用法。句号用在陈述句末尾，逗号用在句子中间，问号用在疑问句末尾，感叹号表达强烈感情，顿号分开并列词语；括号用来解释说明，间隔号用来分隔特定名称或日期，冒号常放在说、答、问后面，引号标示原话，书名号标示作品题目。语言罗盘亮起最后一道光，梦境城市平安了。",
+  "settings": {
+    "defaultDifficulty": "easy",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 5,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "第一关：停顿小符号",
+      "story": "梦境城市的第一道小门里，五张常用停顿卡都失去名字。句子有时停太久，有时不停，有时问题也变得不清楚。",
+      "goal": "找出每张匿名符号卡对应的口语口诀、用法、常见位置和记忆关键。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "梦境城市的说话节奏",
+        "opening": "主角走进一条会说话的小路。小路上的句子一会儿卡住，一会儿冲太快，还有一些句子想表达情绪却不够有力。",
+        "problem": "五张符号卡的名字被梦雾盖住，只留下零散的小口诀和用法碎片。",
+        "mission": "根据线索，把每张匿名卡的放法、用法、位置和关键记忆配对正确，让句子重新有节奏。",
+        "completion": "五张符号卡亮起来，小路上的句子开始停得刚刚好，梦境城市的第一段语言节奏恢复了。"
+      },
+      "storyEvents": [
+        {
+          "id": "c1_event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "语言罗盘闪了一下，路边的字雾变淡，更多小卡片露出轮廓。"
+        },
+        {
+          "id": "c1_event_002",
+          "triggerAfterCorrectCells": 10,
+          "text": "会说话的小路不再乱跳，句子开始慢慢排成整齐的队伍。"
+        },
+        {
+          "id": "c1_event_003",
+          "triggerAfterCorrectCells": 17,
+          "text": "第一道梦境小门快要打开，只差最后几张配对卡回到正确位置。"
+        }
+      ],
+      "entityType": "符号卡",
+      "entityLabel": "匿名符号",
+      "entities": [
+        {
+          "id": "c1_entity_001",
+          "name": "句号",
+          "title": "未知符号卡01",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FDE2E4",
+            "secondaryColor": "#E63946",
+            "accentColor": "#1D3557"
+          }
+        },
+        {
+          "id": "c1_entity_002",
+          "name": "逗号",
+          "title": "未知符号卡02",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E2F0CB",
+            "secondaryColor": "#4CAF50",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c1_entity_003",
+          "name": "问号",
+          "title": "未知符号卡03",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#CDE7F0",
+            "secondaryColor": "#168AAD",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c1_entity_004",
+          "name": "感叹号",
+          "title": "未知符号卡04",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#FFF1C1",
+            "secondaryColor": "#F4A261",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c1_entity_005",
+          "name": "顿号",
+          "title": "未知符号卡05",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "sparkles",
+            "primaryColor": "#EADCF8",
+            "secondaryColor": "#7B2CBF",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "c1_category_001",
+          "label": "口诀",
+          "options": [
+            {
+              "id": "c1_option_001",
+              "label": "说完放__",
+              "note": ""
+            },
+            {
+              "id": "c1_option_002",
+              "label": "说一半放__",
+              "note": ""
+            },
+            {
+              "id": "c1_option_003",
+              "label": "问问题放__",
+              "note": ""
+            },
+            {
+              "id": "c1_option_004",
+              "label": "语气很强放__",
+              "note": ""
+            },
+            {
+              "id": "c1_option_005",
+              "label": "同类排排站，中间放__",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c1_category_002",
+          "label": "用法",
+          "options": [
+            {
+              "id": "c1_option_006",
+              "label": "陈述句结束后停一下",
+              "note": ""
+            },
+            {
+              "id": "c1_option_007",
+              "label": "句子中间先停一下",
+              "note": ""
+            },
+            {
+              "id": "c1_option_008",
+              "label": "疑问句末尾停一下",
+              "note": ""
+            },
+            {
+              "id": "c1_option_009",
+              "label": "表示很强的感情",
+              "note": ""
+            },
+            {
+              "id": "c1_option_010",
+              "label": "并列词语中间停一下",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c1_category_003",
+          "label": "常见位置",
+          "options": [
+            {
+              "id": "c1_option_011",
+              "label": "陈述句末尾",
+              "note": ""
+            },
+            {
+              "id": "c1_option_012",
+              "label": "句子中间",
+              "note": ""
+            },
+            {
+              "id": "c1_option_013",
+              "label": "疑问句末尾",
+              "note": ""
+            },
+            {
+              "id": "c1_option_014",
+              "label": "感情强的句子末尾",
+              "note": ""
+            },
+            {
+              "id": "c1_option_015",
+              "label": "同类词语之间",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c1_category_004",
+          "label": "记忆关键",
+          "options": [
+            {
+              "id": "c1_option_016",
+              "label": "结束",
+              "note": ""
+            },
+            {
+              "id": "c1_option_017",
+              "label": "中间",
+              "note": ""
+            },
+            {
+              "id": "c1_option_018",
+              "label": "问问题",
+              "note": ""
+            },
+            {
+              "id": "c1_option_019",
+              "label": "啊、呀、吧、哇",
+              "note": ""
+            },
+            {
+              "id": "c1_option_020",
+              "label": "同类",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "c1_entity_001": {
+          "c1_category_001": "c1_option_001",
+          "c1_category_002": "c1_option_006",
+          "c1_category_003": "c1_option_011",
+          "c1_category_004": "c1_option_016"
+        },
+        "c1_entity_002": {
+          "c1_category_001": "c1_option_002",
+          "c1_category_002": "c1_option_007",
+          "c1_category_003": "c1_option_012",
+          "c1_category_004": "c1_option_017"
+        },
+        "c1_entity_003": {
+          "c1_category_001": "c1_option_003",
+          "c1_category_002": "c1_option_008",
+          "c1_category_003": "c1_option_013",
+          "c1_category_004": "c1_option_018"
+        },
+        "c1_entity_004": {
+          "c1_category_001": "c1_option_004",
+          "c1_category_002": "c1_option_009",
+          "c1_category_003": "c1_option_014",
+          "c1_category_004": "c1_option_019"
+        },
+        "c1_entity_005": {
+          "c1_category_001": "c1_option_005",
+          "c1_category_002": "c1_option_010",
+          "c1_category_003": "c1_option_015",
+          "c1_category_004": "c1_option_020"
+        }
+      },
+      "clues": [
+        {
+          "id": "c1_clue_001",
+          "text": "对象02这张卡的话还没讲完，只是先停一下；口诀是“说一半放__”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "c1_entity_002::c1_category_001"
+          ],
+          "completeAfter": [
+            "c1_entity_002::c1_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "先确认对象02的口诀。"
+        },
+        {
+          "id": "c1_clue_002",
+          "text": "对象04最容易记：看到“啊、呀、吧、哇”这类语气词，就想到它。",
+          "type": "feature",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "c1_entity_004::c1_category_004"
+          ],
+          "completeAfter": [
+            "c1_entity_004::c1_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "用语气词判断对象04的记忆关键。"
+        },
+        {
+          "id": "c1_clue_003",
+          "text": "“问问题”的关键，和“疑问句末尾停一下”的用法，要放在同一张对象卡。",
+          "type": "relation",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "c1_entity_003::c1_category_004",
+            "c1_entity_003::c1_category_002"
+          ],
+          "completeAfter": [
+            "c1_entity_003::c1_category_004",
+            "c1_entity_003::c1_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "把问问题和疑问句末尾这两个信息连在一起。"
+        },
+        {
+          "id": "c1_clue_004",
+          "text": "对象01是把一句话说完才放的那张；口诀选“说完放__”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "c1_entity_001::c1_category_001"
+          ],
+          "completeAfter": [
+            "c1_entity_001::c1_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_001",
+            "c1_entity_004::c1_category_004",
+            "c1_entity_003::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的口诀。"
+        },
+        {
+          "id": "c1_clue_005",
+          "text": "口诀是“说完放__”的那张，常见位置在“陈述句末尾”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "c1_entity_001::c1_category_001",
+            "c1_entity_001::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_001::c1_category_001",
+            "c1_entity_001::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_001::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "由口诀连接到常见位置。"
+        },
+        {
+          "id": "c1_clue_006",
+          "text": "对象05的记忆关键很简单，就是“同类”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "c1_entity_005::c1_category_004"
+          ],
+          "completeAfter": [
+            "c1_entity_005::c1_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_001",
+            "c1_entity_004::c1_category_004",
+            "c1_entity_003::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的记忆关键。"
+        },
+        {
+          "id": "c1_clue_007",
+          "text": "“同类排排站，中间放__”和“并列词语中间停一下”是同一张卡的内容。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "c1_entity_005::c1_category_001",
+            "c1_entity_005::c1_category_002"
+          ],
+          "completeAfter": [
+            "c1_entity_005::c1_category_001",
+            "c1_entity_005::c1_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_005::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "把同类词的口诀与用法配在一起。"
+        },
+        {
+          "id": "c1_clue_008",
+          "text": "对象02不是放在“陈述句末尾”的那一张。",
+          "type": "negative",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "c1_entity_002::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_002::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "先排除一个错误位置，再配合其他线索。"
+        },
+        {
+          "id": "c1_clue_009",
+          "text": "口诀是“说一半放__”的那张，用法是“句子中间先停一下”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "c1_entity_002::c1_category_001",
+            "c1_entity_002::c1_category_002"
+          ],
+          "completeAfter": [
+            "c1_entity_002::c1_category_001",
+            "c1_entity_002::c1_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "由对象02的口诀推出用法。"
+        },
+        {
+          "id": "c1_clue_010",
+          "text": "对象03的口诀很像在提醒你：问问题放__",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "c1_entity_003::c1_category_001"
+          ],
+          "completeAfter": [
+            "c1_entity_003::c1_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_003::c1_category_004",
+            "c1_entity_003::c1_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的口诀。"
+        },
+        {
+          "id": "c1_clue_011",
+          "text": "对象03的常见位置是“疑问句末尾”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "c1_entity_003::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_003::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_003::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的位置。"
+        },
+        {
+          "id": "c1_clue_012",
+          "text": "对象04语气很强，口诀选“语气很强放__”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "c1_entity_004::c1_category_001"
+          ],
+          "completeAfter": [
+            "c1_entity_004::c1_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_004::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的口诀。"
+        },
+        {
+          "id": "c1_clue_013",
+          "text": "记忆关键有“啊、呀、吧、哇”的那张，用法是“表示很强的感情”。",
+          "type": "cross",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "c1_entity_004::c1_category_004",
+            "c1_entity_004::c1_category_002"
+          ],
+          "completeAfter": [
+            "c1_entity_004::c1_category_004",
+            "c1_entity_004::c1_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_004::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "由关键字连接到用法。"
+        },
+        {
+          "id": "c1_clue_014",
+          "text": "对象04常常出现在“感情强的句子末尾”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "c1_entity_004::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_004::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_004::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的位置。"
+        },
+        {
+          "id": "c1_clue_015",
+          "text": "对象01的记忆关键是“结束”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "c1_entity_001::c1_category_004"
+          ],
+          "completeAfter": [
+            "c1_entity_001::c1_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_001::c1_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "用“结束”帮助记住对象01。"
+        },
+        {
+          "id": "c1_clue_016",
+          "text": "对象01的用法是“陈述句结束后停一下”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "c1_entity_001::c1_category_002"
+          ],
+          "completeAfter": [
+            "c1_entity_001::c1_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_001::c1_category_003",
+            "c1_entity_001::c1_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的正式用法。"
+        },
+        {
+          "id": "c1_clue_017",
+          "text": "对象02的常见位置就是“句子中间”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "c1_entity_002::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_002::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的位置。"
+        },
+        {
+          "id": "c1_clue_018",
+          "text": "常见位置在“句子中间”的那张，记忆关键也是“中间”。",
+          "type": "relation",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "c1_entity_002::c1_category_003",
+            "c1_entity_002::c1_category_004"
+          ],
+          "completeAfter": [
+            "c1_entity_002::c1_category_003",
+            "c1_entity_002::c1_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_002::c1_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "把位置和关键字连在一起。"
+        },
+        {
+          "id": "c1_clue_019",
+          "text": "对象05常见位置在“同类词语之间”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "c1_entity_005::c1_category_003"
+          ],
+          "completeAfter": [
+            "c1_entity_005::c1_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c1_entity_005::c1_category_001",
+            "c1_entity_005::c1_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的位置。"
+        }
+      ],
+      "knowledgeSummary": [
+        "句号：用于陈述句的末尾，表示结束句子后的停顿。口诀：说完放。",
+        "逗号：表示一个句子中间的停顿。口诀：说一半放，",
+        "问号：表示疑问句末尾的停顿。口诀：问问题放？",
+        "感叹号：表示强烈的感情。常见关键字：啊、呀、吧、哇。口诀：语气很强放！",
+        "顿号：表示句子中并列词语之间的停顿。关键：同类。口诀：同类排排站，中间放、"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "第二关：说明与名称小符号",
+      "story": "第二道梦境小门里，说明、原话、作品题目和分隔信息全混在一起。大家说话时不知道哪里开始，书名也不知道哪里结束。",
+      "goal": "找出每张匿名符号卡对应的口语口诀、用法、常见搭配和位置特征。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "梦境城市的说明与标示规则",
+        "opening": "主角来到梦境图书街。这里的说明文字到处乱跑，人物原话和作品题目也被挤在一起。",
+        "problem": "五张负责说明、分隔、对话和题目的符号卡失去名字，图书街的句子变得难读。",
+        "mission": "根据线索，把每张匿名卡的口语口诀、用法、常见搭配和位置特征配好。",
+        "completion": "图书街的文字重新分清楚，说明归说明，原话归原话，作品题目也被好好标出来。"
+      },
+      "storyEvents": [
+        {
+          "id": "c2_event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "图书街的灯牌亮了一排，散开的说明文字开始慢慢靠近正确位置。"
+        },
+        {
+          "id": "c2_event_002",
+          "triggerAfterCorrectCells": 10,
+          "text": "语言罗盘发出轻响，人物对话和作品题目的边界变清楚了。"
+        },
+        {
+          "id": "c2_event_003",
+          "triggerAfterCorrectCells": 17,
+          "text": "第二道梦境小门的锁孔亮起，最后几张符号卡准备归位。"
+        }
+      ],
+      "entityType": "符号卡",
+      "entityLabel": "匿名符号",
+      "entities": [
+        {
+          "id": "c2_entity_001",
+          "name": "括号",
+          "title": "未知符号卡01",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#FDE2E4",
+            "secondaryColor": "#E63946",
+            "accentColor": "#1D3557"
+          }
+        },
+        {
+          "id": "c2_entity_002",
+          "name": "间隔号",
+          "title": "未知符号卡02",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#E2F0CB",
+            "secondaryColor": "#4CAF50",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c2_entity_003",
+          "name": "冒号",
+          "title": "未知符号卡03",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#CDE7F0",
+            "secondaryColor": "#168AAD",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c2_entity_004",
+          "name": "引号",
+          "title": "未知符号卡04",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#FFF1C1",
+            "secondaryColor": "#F4A261",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "c2_entity_005",
+          "name": "书名号",
+          "title": "未知符号卡05",
+          "description": "这张符号卡被梦雾盖住名字了。先看线索，把它的口语口诀、用法、位置和关键记忆配好。",
+          "records": [
+            {
+              "label": "调查提醒",
+              "text": "不要先猜名字，先看它什么时候放、放在哪里、记住什么关键。"
+            },
+            {
+              "label": "学习方式",
+              "text": "用口语小口诀帮助记忆，再对照正式用法。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "sparkles",
+            "primaryColor": "#EADCF8",
+            "secondaryColor": "#7B2CBF",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "c2_category_001",
+          "label": "口诀",
+          "options": [
+            {
+              "id": "c2_option_001",
+              "label": "补充说明，包起来__",
+              "note": ""
+            },
+            {
+              "id": "c2_option_002",
+              "label": "两个名字或日期，中间放__",
+              "note": ""
+            },
+            {
+              "id": "c2_option_003",
+              "label": "要开始说明或说话，先放__",
+              "note": ""
+            },
+            {
+              "id": "c2_option_004",
+              "label": "原话说出来，用__包起来",
+              "note": ""
+            },
+            {
+              "id": "c2_option_005",
+              "label": "书名作品，包起来__",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c2_category_002",
+          "label": "用法",
+          "options": [
+            {
+              "id": "c2_option_006",
+              "label": "句子中加解释或说明的部分",
+              "note": ""
+            },
+            {
+              "id": "c2_option_007",
+              "label": "分隔民族人名、书名与篇名、月份和日期",
+              "note": ""
+            },
+            {
+              "id": "c2_option_008",
+              "label": "常放在某某说、某某答、某某问后面",
+              "note": ""
+            },
+            {
+              "id": "c2_option_009",
+              "label": "标示人物所说的原话",
+              "note": ""
+            },
+            {
+              "id": "c2_option_010",
+              "label": "标示书名、报刊名、曲名、文章、电影、剧名等题目",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c2_category_003",
+          "label": "常见搭配",
+          "options": [
+            {
+              "id": "c2_option_011",
+              "label": "日期、英文、解释",
+              "note": ""
+            },
+            {
+              "id": "c2_option_012",
+              "label": "民族人名、书名篇名、月份日期",
+              "note": ""
+            },
+            {
+              "id": "c2_option_013",
+              "label": "某某说、某某答、某某问",
+              "note": ""
+            },
+            {
+              "id": "c2_option_014",
+              "label": "直接引用的原话",
+              "note": ""
+            },
+            {
+              "id": "c2_option_015",
+              "label": "书名、戏名、诗名",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "c2_category_004",
+          "label": "位置特征",
+          "options": [
+            {
+              "id": "c2_option_016",
+              "label": "把说明夹在句子里",
+              "note": ""
+            },
+            {
+              "id": "c2_option_017",
+              "label": "放在要分隔的词中间",
+              "note": ""
+            },
+            {
+              "id": "c2_option_018",
+              "label": "放在说话提示语后面",
+              "note": ""
+            },
+            {
+              "id": "c2_option_019",
+              "label": "把原话圈起来",
+              "note": ""
+            },
+            {
+              "id": "c2_option_020",
+              "label": "把作品题目圈起来",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "c2_entity_001": {
+          "c2_category_001": "c2_option_001",
+          "c2_category_002": "c2_option_006",
+          "c2_category_003": "c2_option_011",
+          "c2_category_004": "c2_option_016"
+        },
+        "c2_entity_002": {
+          "c2_category_001": "c2_option_002",
+          "c2_category_002": "c2_option_007",
+          "c2_category_003": "c2_option_012",
+          "c2_category_004": "c2_option_017"
+        },
+        "c2_entity_003": {
+          "c2_category_001": "c2_option_003",
+          "c2_category_002": "c2_option_008",
+          "c2_category_003": "c2_option_013",
+          "c2_category_004": "c2_option_018"
+        },
+        "c2_entity_004": {
+          "c2_category_001": "c2_option_004",
+          "c2_category_002": "c2_option_009",
+          "c2_category_003": "c2_option_014",
+          "c2_category_004": "c2_option_019"
+        },
+        "c2_entity_005": {
+          "c2_category_001": "c2_option_005",
+          "c2_category_002": "c2_option_010",
+          "c2_category_003": "c2_option_015",
+          "c2_category_004": "c2_option_020"
+        }
+      },
+      "clues": [
+        {
+          "id": "c2_clue_001",
+          "text": "“要开始说明或说话，先放__”和“某某说、某某答、某某问”要放在同一张对象卡。",
+          "type": "relation",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "c2_entity_003::c2_category_001",
+            "c2_entity_003::c2_category_003"
+          ],
+          "completeAfter": [
+            "c2_entity_003::c2_category_001",
+            "c2_entity_003::c2_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "把说话提示和口诀连起来。"
+        },
+        {
+          "id": "c2_clue_002",
+          "text": "对象04的口诀是：原话说出来，用__包起来。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "c2_entity_004::c2_category_001"
+          ],
+          "completeAfter": [
+            "c2_entity_004::c2_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "确认对象04的口诀。"
+        },
+        {
+          "id": "c2_clue_003",
+          "text": "对象01常常跟“日期、英文、解释”这些内容一起出现。",
+          "type": "feature",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "c2_entity_001::c2_category_003"
+          ],
+          "completeAfter": [
+            "c2_entity_001::c2_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any",
+          "explanation": "用常见搭配判断对象01。"
+        },
+        {
+          "id": "c2_clue_004",
+          "text": "对象02的口诀是“两个名字或日期，中间放__”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "c2_entity_002::c2_category_001"
+          ],
+          "completeAfter": [
+            "c2_entity_002::c2_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_003::c2_category_001",
+            "c2_entity_004::c2_category_001",
+            "c2_entity_001::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的口诀。"
+        },
+        {
+          "id": "c2_clue_005",
+          "text": "口诀是“两个名字或日期，中间放__”的那张，用来分隔民族人名、书名与篇名、月份和日期。",
+          "type": "cross",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "c2_entity_002::c2_category_001",
+            "c2_entity_002::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_002::c2_category_001",
+            "c2_entity_002::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_002::c2_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "由口诀连接到正式用法。"
+        },
+        {
+          "id": "c2_clue_006",
+          "text": "对象05常见搭配是“书名、戏名、诗名”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "c2_entity_005::c2_category_003"
+          ],
+          "completeAfter": [
+            "c2_entity_005::c2_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_003::c2_category_001",
+            "c2_entity_004::c2_category_001",
+            "c2_entity_001::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的常见搭配。"
+        },
+        {
+          "id": "c2_clue_007",
+          "text": "“书名、戏名、诗名”和“把作品题目圈起来”是同一张卡的内容。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "c2_entity_005::c2_category_003",
+            "c2_entity_005::c2_category_004"
+          ],
+          "completeAfter": [
+            "c2_entity_005::c2_category_003",
+            "c2_entity_005::c2_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_005::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "把作品题目的搭配和位置特征连起来。"
+        },
+        {
+          "id": "c2_clue_008",
+          "text": "对象03的位置特征是“放在说话提示语后面”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "c2_entity_003::c2_category_004"
+          ],
+          "completeAfter": [
+            "c2_entity_003::c2_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_003::c2_category_001",
+            "c2_entity_003::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的位置特征。"
+        },
+        {
+          "id": "c2_clue_009",
+          "text": "对象03负责的说话提示，常常会和对象04负责的原话一起出现。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "c2_entity_003::c2_category_003",
+            "c2_entity_004::c2_category_003"
+          ],
+          "completeAfter": [
+            "c2_entity_003::c2_category_003",
+            "c2_entity_004::c2_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_003::c2_category_003",
+            "c2_entity_004::c2_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "理解说话提示和原话的配合关系。"
+        },
+        {
+          "id": "c2_clue_010",
+          "text": "对象01的口诀是“补充说明，包起来__”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "c2_entity_001::c2_category_001"
+          ],
+          "completeAfter": [
+            "c2_entity_001::c2_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_001::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的口诀。"
+        },
+        {
+          "id": "c2_clue_011",
+          "text": "对象04的用法是“标示人物所说的原话”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "c2_entity_004::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_004::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_004::c2_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的正式用法。"
+        },
+        {
+          "id": "c2_clue_012",
+          "text": "对象05不是“句子中加解释或说明的部分”这一种用法。",
+          "type": "negative",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "c2_entity_005::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_005::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_005::c2_category_003"
+          ],
+          "unlockMode": "any",
+          "explanation": "排除一个错误用法，配合其他线索判断。"
+        },
+        {
+          "id": "c2_clue_013",
+          "text": "对象03的用法是“常放在某某说、某某答、某某问后面”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "c2_entity_003::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_003::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_003::c2_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象03的正式用法。"
+        },
+        {
+          "id": "c2_clue_014",
+          "text": "对象01的用法是“句子中加解释或说明的部分”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "c2_entity_001::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_001::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_001::c2_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的正式用法。"
+        },
+        {
+          "id": "c2_clue_015",
+          "text": "对象02的位置特征是“放在要分隔的词中间”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "c2_entity_002::c2_category_004"
+          ],
+          "completeAfter": [
+            "c2_entity_002::c2_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_002::c2_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的位置特征。"
+        },
+        {
+          "id": "c2_clue_016",
+          "text": "对象05的口诀是“书名作品，包起来__”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "c2_entity_005::c2_category_001"
+          ],
+          "completeAfter": [
+            "c2_entity_005::c2_category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_005::c2_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的口诀。"
+        },
+        {
+          "id": "c2_clue_017",
+          "text": "对象04的位置特征是“把原话圈起来”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "c2_entity_004::c2_category_004"
+          ],
+          "completeAfter": [
+            "c2_entity_004::c2_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_004::c2_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象04的位置特征。"
+        },
+        {
+          "id": "c2_clue_018",
+          "text": "对象01的位置特征是“把说明夹在句子里”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "c2_entity_001::c2_category_004"
+          ],
+          "completeAfter": [
+            "c2_entity_001::c2_category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_001::c2_category_002"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象01的位置特征。"
+        },
+        {
+          "id": "c2_clue_019",
+          "text": "对象02常见搭配是“民族人名、书名篇名、月份日期”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "c2_entity_002::c2_category_003"
+          ],
+          "completeAfter": [
+            "c2_entity_002::c2_category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_002::c2_category_004"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象02的常见搭配。"
+        },
+        {
+          "id": "c2_clue_020",
+          "text": "对象05的用法是“标示书名、报刊名、曲名、文章、电影、剧名等题目”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "c2_entity_005::c2_category_002"
+          ],
+          "completeAfter": [
+            "c2_entity_005::c2_category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "c2_entity_005::c2_category_001"
+          ],
+          "unlockMode": "any",
+          "explanation": "确认对象05的正式用法。"
+        }
+      ],
+      "knowledgeSummary": [
+        "括号：用于句子中加以解释、说明的部分。口诀：补充说明，包起来（）。",
+        "间隔号：用于民族人名之间、书名与篇名之间、月份和日期之间的分隔。口诀：两个名字或日期，中间放·。",
+        "冒号：常用于对话或回答，一般在某某说、某某答、某某问的后面，并可与引号配合运用。口诀：要开始说明或说话，先放：。",
+        "引号：在表示说话或直接引用时，用于标示人物所说的原话。口诀：原话说出来，用“ ”包起来。",
+        "书名号：用于书名、报刊名、曲名、文章、电影、剧名、文艺作品等的题目。口诀：书名作品，包起来《》。"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "上传资料为两页标点符号笔记，内容包括句号、逗号、问号、感叹号、顿号、括号、间隔号、冒号、引号、书名号的用法和部分关键记忆词。",
+    "usedItems": [
+      "句号：用于陈述句的末尾，表示结束句子后的停顿。",
+      "逗号：表示一个句子中间的停顿。",
+      "问号：表示疑问句末尾的停顿；关键为问问题。",
+      "感叹号：表示强烈的感情；关键字包括啊、呀、吧、哇。",
+      "顿号：表示句子中并列词语之间的停顿；关键为同类。",
+      "括号：用于句子中加以解释、说明的部分；关键为日期、英文、解释。",
+      "间隔号：用于民族人名之间、书名与篇名之间、月份和日期之间的分隔。",
+      "冒号：常用于对话或回答，一般在某某说、某某答、某某问的后面，与引号配合运用。",
+      "引号：表示说话或直接引用时，通常用于标示人物所说的原话。",
+      "书名号：用于书名、报刊名、曲名、文章、电影、剧名、文艺作品等的题目；关键为书名、戏名、诗名。"
+    ],
+    "excludedItems": [
+      "图片中的田字格书写位置图没有作为主要推理属性，因为游戏需要能只靠文字完成，不依赖图片位置。",
+      "图片装饰元素没有纳入课程知识。"
+    ],
+    "warnings": [
+      "已按教师要求把描述改得更口语化，例如“说完放。”、“说一半放，”、“问问题放？”等。",
+      "线索文字只使用对象编号，不在名称揭示前写出真实名称。",
+      "口语口诀属于教学表达改写，课程正式用法仍保留在用法和知识总结中。",
+      "间隔号资料中“民族人名”文字以常见教学写法整理，建议教师最终检查。",
+      "已把第一类题目名称改为“口诀”，第二类题目名称改为“用法”。",
+      "“口诀”选项中的标点符号答案已改成“__”，避免学生在名称揭示前直接看到符号答案。"
+    ],
+    "validationPassed": true
+  }
+}
