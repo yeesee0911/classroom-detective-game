@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
   "packageId": "kata_tanya_game_data",
-  "packageTitle": "Kata Tanya 问句词推理游戏",
+  "packageTitle": "Kata Tanya 推理游戏",
   "subject": "Bahasa Melayu",
   "level": "default",
   "contentLanguage": "中文 + 马来文",
-  "description": "根据Kata Tanya问句词资料制作，帮助学生用简单中文理解用法、例句、口诀和中文意思。",
-  "openingStory": "梦境城市里的句子钟乱了。大家想问问题，却找不到正确的问句词。小调查员拿到一张发光地图，要根据线索找回每张匿名问句卡的名字。",
-  "endingStory": "所有问句卡都回到正确位置。句子钟恢复正常，大家又能清楚地问：什么、谁、哪里、多少、怎样、什么时候和为什么。",
+  "description": "根据Kata Tanya资料制作，帮助学生用简单中文理解用法、例句、口诀和中文意思。",
+  "openingStory": "梦境城市里的句子钟乱了。大家想问问题，却找不到正确的Kata Tanya。小调查员拿到一张发光地图，要根据线索找回每张Kata Tanya卡的名字。",
+  "endingStory": "所有Kata Tanya卡都回到正确位置。句子钟恢复正常，大家又能清楚地问：什么、谁、哪里、多少、怎样、什么时候和为什么了。",
   "settings": {
     "defaultDifficulty": "easy",
     "timerEnabled": false,
@@ -18,8 +18,8 @@
   "cases": [
     {
       "id": "case_001",
-      "title": "第一关：基础问句卡",
-      "story": "五张问句卡的名字被雾盖住了，只留下简单资料。",
+      "title": "第一关：基础Kata Tanya",
+      "story": "五张Kata Tanya卡的名字被雾盖住了，只留下简单资料。",
       "goal": "配对每张卡的用法、例句、口诀和中文意思。",
       "difficulty": "easy",
       "narrative": {
@@ -42,12 +42,12 @@
         }
       ],
       "entityType": "question_word",
-      "entityLabel": "问句卡",
+      "entityLabel": "Kata Tanya",
       "entities": [
         {
           "id": "entity_001",
           "name": "Apa",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -68,7 +68,7 @@
         {
           "id": "entity_002",
           "name": "Berapa",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -89,7 +89,7 @@
         {
           "id": "entity_003",
           "name": "Mana",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -110,7 +110,7 @@
         {
           "id": "entity_004",
           "name": "Siapa",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -131,7 +131,7 @@
         {
           "id": "entity_005",
           "name": "Bagaimana",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -696,12 +696,12 @@
     },
     {
       "id": "case_002",
-      "title": "第二关：时间与原因问句卡",
+      "title": "第二关：时间与原因的Kata Tanya",
       "story": "三张卡负责问时间和原因，但名字也被遮住了。",
       "goal": "配对每张卡的用法、例句、口诀和中文意思。",
       "difficulty": "easy",
       "narrative": {
-        "theme": "时间与原因问句卡",
+        "theme": "时间与原因Kata Tanya卡",
         "opening": "小调查员来到梦境城市的钟楼。",
         "problem": "钟楼里的三张卡混在一起，大家不知道该问时间还是原因。",
         "mission": "根据线索把三张卡整理好。",
@@ -720,12 +720,12 @@
         }
       ],
       "entityType": "question_word",
-      "entityLabel": "问句卡",
+      "entityLabel": "Kata Tanya卡",
       "entities": [
         {
           "id": "entity_006",
           "name": "Bila",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -746,7 +746,7 @@
         {
           "id": "entity_007",
           "name": "Mengapa",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -767,7 +767,7 @@
         {
           "id": "entity_008",
           "name": "Kenapa",
-          "title": "匿名问句卡",
+          "title": "Kata Tanya",
           "description": "名字被隐藏，请根据用法、例句、口诀和中文意思来配对。",
           "records": [
             {
@@ -840,12 +840,12 @@
             },
             {
               "id": "option_028",
-              "label": "问吵架原因，找 __。",
+              "label": "问原因，找 __。",
               "note": ""
             },
             {
               "id": "option_029",
-              "label": "问考试原因，找 __。",
+              "label": "（口语）问原因，找 __。",
               "note": ""
             }
           ]
@@ -861,12 +861,12 @@
             },
             {
               "id": "option_031",
-              "label": "为什么（问他们吵架）",
+              "label": "为什么",
               "note": ""
             },
             {
               "id": "option_032",
-              "label": "为什么（问你考试失败）",
+              "label": "为什么（口语）",
               "note": ""
             }
           ]
@@ -912,7 +912,7 @@
         },
         {
           "id": "clue_202",
-          "text": "例句有“mereka bergaduh”的卡，口诀是“问吵架原因，找 __。”",
+          "text": "例句有“mereka bergaduh”的卡，口诀是“问原因，___。”",
           "type": "relation",
           "initial": true,
           "priority": 2,
@@ -967,7 +967,7 @@
         },
         {
           "id": "clue_205",
-          "text": "对象01的口诀是“问时间，找 __。”",
+          "text": "对象01的口诀是“问时间，一定是__。”",
           "type": "direct",
           "initial": false,
           "priority": 5,
@@ -1005,7 +1005,7 @@
         },
         {
           "id": "clue_207",
-          "text": "对象02的中文意思是“为什么（问他们吵架）”。",
+          "text": "对象02的中文意思是“为什么”。",
           "type": "direct",
           "initial": false,
           "priority": 7,
@@ -1024,7 +1024,7 @@
         },
         {
           "id": "clue_208",
-          "text": "对象02的用法是询问原因：为什么会吵架。",
+          "text": "对象02的用法是询问原因：为什么。",
           "type": "direct",
           "initial": false,
           "priority": 8,
@@ -1062,7 +1062,7 @@
         },
         {
           "id": "clue_210",
-          "text": "对象03的口诀是“问考试原因，找 __。”",
+          "text": "对象03的口诀是“（口语）问原因，___。”",
           "type": "direct",
           "initial": false,
           "priority": 10,
@@ -1081,7 +1081,7 @@
         },
         {
           "id": "clue_211",
-          "text": "对象03的中文意思是“为什么（问你考试失败）”。",
+          "text": "对象03的中文意思是“为什么（口语）”。",
           "type": "direct",
           "initial": false,
           "priority": 11,
@@ -1100,7 +1100,7 @@
         },
         {
           "id": "clue_212",
-          "text": "对象03的用法是询问原因：为什么会考试失败。",
+          "text": "对象03的用法是询问原因：为什么（口语）。",
           "type": "direct",
           "initial": false,
           "priority": 12,
