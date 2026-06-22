@@ -3092,8 +3092,8 @@
       // 注意：这是 HTML 引擎实际读取并下载的空白模板。
       // category 必须使用 label，不要使用 title。
       // option 必须使用 label，不要使用 text。
-      // 档案对象补充资料必须使用 records[].label / records[].text。
       // iconSpec 必须使用 primaryColor / secondaryColor / accentColor，不要使用 colors 数组。
+      // entity.description、records 和 clue.explanation 属于旧资料包兼容扩展，空白模板不再主动生成。
       const blankTemplate = {
         schemaVersion: "1.0",
         packageId: "",
@@ -3139,13 +3139,6 @@
                 id: "entity_001",
                 name: "",
                 title: "",
-                description: "",
-                records: [
-                  {
-                    label: "",
-                    text: ""
-                  }
-                ],
                 iconSpec: {
                   mode: "generated",
                   symbol: "01",
@@ -3190,8 +3183,7 @@
                 ],
                 completeMode: "all",
                 unlockAfter: [],
-                unlockMode: "any",
-                explanation: ""
+                unlockMode: "any"
               }
             ],
             knowledgeSummary: []
@@ -3846,6 +3838,31 @@
 
           const validCells = new Set();
           entities.forEach((entity) => categories.forEach((category) => validCells.add(cellId(entity.id, category.id))));
+          const parseCellRef = (id) => {
+            if (typeof id !== "string") return null;
+            const parts = id.split("::");
+            return parts.length === 2 && parts[0] && parts[1] ? { entityId: parts[0], categoryId: parts[1] } : null;
+          };
+          const countSameCategoryUnlocks = (unlockAfter, categoryId) => {
+            if (!Array.isArray(unlockAfter) || !categoryId) return 0;
+            return unlockAfter.filter((id) => {
+              const ref = parseCellRef(id);
+              return ref && ref.categoryId === categoryId;
+            }).length;
+          };
+          const getRelatedCategoryIds = (clue) => {
+            const ids = new Set();
+            (Array.isArray(clue && clue.relatedCells) ? clue.relatedCells : []).forEach((id) => {
+              const ref = parseCellRef(id);
+              if (ref && ref.categoryId) ids.add(ref.categoryId);
+            });
+            return ids;
+          };
+          const hasUnlockRelatedCell = (clue) => {
+            const related = new Set(Array.isArray(clue && clue.relatedCells) ? clue.relatedCells : []);
+            const unlock = Array.isArray(clue && clue.unlockAfter) ? clue.unlockAfter : [];
+            return unlock.some((id) => related.has(id));
+          };
 
           const clueIds = new Set();
           clues.forEach((clue) => {
@@ -3863,6 +3880,30 @@
             }
             if (clue && clue.completeMode && !["all", "any"].includes(clue.completeMode)) fail(label + "线索 completeMode 只支持 all 或 any。");
             if (clue && clue.unlockMode && !["all", "any"].includes(clue.unlockMode)) fail(label + "线索 unlockMode 只支持 all 或 any。");
+            if (clue && ["feature", "relation", "cross"].includes(clue.type)) {
+              if (clue.initial === true) warn(label + "的间接/关联线索不建议设为 initial:true：" + safeLabel(clue.text, clue.id));
+              if (!Array.isArray(clue.unlockAfter) || clue.unlockAfter.length === 0) warn(label + "的间接/关联线索建议在至少一条相关格子确认后出现：" + safeLabel(clue.text, clue.id));
+              if (clue.unlockMode !== "any") warn(label + "的间接/关联线索建议使用 unlockMode:\"any\"：" + safeLabel(clue.text, clue.id));
+              if (Array.isArray(clue.unlockAfter) && clue.unlockAfter.length && Array.isArray(clue.relatedCells) && clue.relatedCells.length && !hasUnlockRelatedCell(clue)) {
+                warn(label + "的间接/关联线索 unlockAfter 建议至少包含一个 relatedCells 中的相关格子：" + safeLabel(clue.text, clue.id));
+              }
+            }
+            if (clue && clue.type === "negative") {
+              const unlock = Array.isArray(clue.unlockAfter) ? clue.unlockAfter : [];
+              if (clue.initial === true) warn(label + "的否定线索不建议设为 initial:true：" + safeLabel(clue.text, clue.id));
+              if (clue.unlockMode !== "all") warn(label + "的否定线索建议使用 unlockMode:\"all\"：" + safeLabel(clue.text, clue.id));
+              const relatedCategoryIds = getRelatedCategoryIds(clue);
+              if (relatedCategoryIds.size !== 1) {
+                warn(label + "的否定线索应通过 relatedCells 指向唯一类别，方便判断是否只剩最后两个候选：" + safeLabel(clue.text, clue.id));
+              } else {
+                const categoryId = [...relatedCategoryIds][0];
+                const required = Math.max(0, entities.length - 2);
+                const actual = countSameCategoryUnlocks(unlock, categoryId);
+                if (actual < required) {
+                  warn(label + "的否定线索建议在类别“" + safeLabel(categoryId, "未知类别") + "”只剩最后两个候选时出现；当前同类别 unlockAfter 为 " + actual + "/" + required + "：" + safeLabel(clue.text, clue.id));
+                }
+              }
+            }
           });
           clueIds.size === clues.length && clues.length ? ok(label + "线索 ID 唯一。") : null;
           clues.some((clue) => clue && clue.initial === true) ? ok(label + "至少有一条初始线索。") : fail(label + "必须至少有一条 initial 为 true 的初始线索。");
