@@ -745,7 +745,7 @@
     }
 
     .validation-layout {
-      width: 100%;
+      width: min(1120px, 100%);
       max-width: 1120px;
       justify-self: center;
       margin-inline: auto;
@@ -756,9 +756,9 @@
       overflow: visible;
       align-content: start;
       gap: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: stretch;
     }
 
     .validation-check-pane,
@@ -2012,18 +2012,7 @@
       justify-items: center;
     }
 
-    .validation-layout {
-      width: 100%;
-      max-width: 1120px;
-      justify-self: center;
-      margin-inline: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-items: stretch;
-    }
-
-    .validation-check-pane,
+   k-pane,
     .validation-data-pane {
       width: 100%;
       max-width: 100%;
@@ -2831,7 +2820,8 @@
       }
 
       .validation-page .two-col.validation-layout {
-        display: block;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
         height: auto;
         min-height: 0;
         overflow: visible;
@@ -2944,41 +2934,104 @@
       }
     }
 
-    /* 资料验证页最终居中规则：外层满宽，页面框和内容轨道居中。 */
-    .validation-page > .shell {
-      width: 100%;
-      max-width: none;
-      justify-self: stretch;
-      margin-inline: 0;
-      display: grid;
-      justify-items: center;
-    }
+/* 资料验证页最终规则：居中 + 只滚到进入案件按钮 */
+.validation-page {
+  min-height: 0;
+  justify-items: stretch;
+  overflow: hidden;
+}
 
-    .validation-page > .shell > .panel.stack {
-      width: min(1180px, 100%);
-      max-width: 1180px;
-      justify-self: center;
-      justify-items: center;
-      margin-inline: auto;
-    }
+.validation-page > .shell {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  justify-self: stretch;
+  margin-inline: 0;
 
-    .validation-page .validation-layout {
-      width: min(1120px, 100%);
-      max-width: 1120px;
-      justify-self: center;
-      margin-inline: auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      justify-items: stretch;
-      align-content: start;
-    }
+  display: grid;
+  justify-items: center;
 
-    .validation-page .validation-check-pane,
-    .validation-page .validation-data-pane {
-      width: 100%;
-      max-width: 100%;
-      justify-self: center;
-    }
+  overflow: hidden;
+}
+
+.validation-page > .shell > .panel.stack {
+  width: min(1180px, 100%);
+  max-width: 1180px;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+
+  justify-self: center;
+  margin-inline: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+
+  padding-bottom: clamp(20px, 4dvh, 42px);
+}
+
+.validation-page .validation-layout {
+  width: min(1120px, 100%);
+  max-width: 1120px;
+  min-height: auto;
+  height: auto;
+
+  flex: 0 0 auto;
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+
+  justify-items: stretch;
+  align-content: start;
+
+  overflow: visible;
+}
+
+.validation-page .two-col.validation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.validation-page .validation-check-pane,
+.validation-page .validation-data-pane {
+  width: 100%;
+  max-width: 100%;
+  min-height: auto;
+  height: auto;
+  flex: 0 0 auto;
+  justify-self: center;
+  overflow: visible;
+  contain: none;
+}
+
+/* 重点：报告不要无限撑开，只给它一个固定高度 */
+.validation-page .validation-report-body {
+  max-height: min(34dvh, 300px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  contain: layout paint;
+}
+
+.validation-page .validation-report-body-inner {
+  overflow: visible;
+}
+
+.validation-page .validation-start-button {
+  scroll-margin-bottom: 24px;
+}
 
     @media (prefers-reduced-motion: reduce) {
       *,
