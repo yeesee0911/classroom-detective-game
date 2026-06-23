@@ -1,0 +1,1165 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "kata_tanya_game_data",
+  "packageTitle": "Kata Tanya 问句词推理游戏",
+  "subject": "Bahasa Melayu",
+  "level": "default",
+  "contentLanguage": "中文 + 马来文",
+  "description": "根据Kata Tanya问句词资料制作的课堂档案推理游戏，帮助学生用简单中文理解问句词的用法、中文意思、例句和回答方向。",
+  "openingStory": "梦境城市里有一座会说话的句子钟。今天，句子钟突然乱了：有人想问东西，却问不出来；有人想问地点，却找不到正确的词。小调查员收到一张发光地图，上面有几张匿名问句卡。每张卡的名字都被梦雾遮住了，只剩下一些用法、例句和小提示。你的任务是慢慢配对，找回每张问句卡的正确身份，让梦境城市重新会问问题。",
+  "endingStory": "所有匿名问句卡都被成功找回了。句子钟再次转动，梦境城市的人们又能清楚地问：什么、谁、哪里、多少、怎样、什么时候和为什么。小调查员把Kata Tanya整理成一本小手册，提醒大家：问句词可以在句首、句中或句尾出现；如果放在句首，常常会加上“kah”。城市恢复安静，新的学习任务也准备开始了。",
+  "settings": {
+    "defaultDifficulty": "easy",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 5,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "第一关：基础问句卡",
+      "story": "梦境城市的入口处有五张匿名问句卡。它们都能帮人提出问题，可是名字被梦雾盖住了。",
+      "goal": "根据简单中文提示，找出每张匿名问句卡的用法、中文意思、例句和口诀。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "梦境城市入口的问句卡",
+        "opening": "小调查员来到句子钟的入口，看到五张卡片在空中打转。每张卡都想回到自己的位置。",
+        "problem": "卡片的名字被盖住了，只留下用法、例句和几句容易记的口诀。",
+        "mission": "把每张匿名卡的四项资料配对正确，让句子钟重新听懂问题。",
+        "completion": "五张问句卡亮了起来，入口的雾慢慢散开，城市里的人终于能问出清楚的问题。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 4,
+          "text": "句子钟响了一下，入口处的雾变淡了。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 11,
+          "text": "几张卡片开始发光，地图出现了下一段路。"
+        },
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 17,
+          "text": "最后的梦雾松开了，所有卡片快要归位了。"
+        }
+      ],
+      "entityType": "question_word",
+      "entityLabel": "问句卡",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "Apa",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和口诀来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，只能先看线索配对。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "不要急着猜名字，先找最容易确认的用法或例句。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#F4E7C5",
+            "secondaryColor": "#C79A4B",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "Berapa",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和口诀来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，只能先看线索配对。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "不要急着猜名字，先找最容易确认的用法或例句。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "waves",
+            "primaryColor": "#DFF3EF",
+            "secondaryColor": "#3C8D87",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "Mana",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和口诀来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，只能先看线索配对。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "不要急着猜名字，先找最容易确认的用法或例句。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "stripes",
+            "primaryColor": "#FFE9DF",
+            "secondaryColor": "#B64242",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_004",
+          "name": "Siapa",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和口诀来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，只能先看线索配对。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "不要急着猜名字，先找最容易确认的用法或例句。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "shield",
+            "pattern": "sparkles",
+            "primaryColor": "#E9E4FF",
+            "secondaryColor": "#7060A8",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "Bagaimana",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和口诀来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，只能先看线索配对。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "不要急着猜名字，先找最容易确认的用法或例句。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#FFF0C9",
+            "secondaryColor": "#C79A4B",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "用法",
+          "options": [
+            {
+              "id": "option_001",
+              "label": "询问东西或动物的名称",
+              "note": ""
+            },
+            {
+              "id": "option_002",
+              "label": "询问数量或价格",
+              "note": ""
+            },
+            {
+              "id": "option_003",
+              "label": "询问人、动物、东西或地点在哪里",
+              "note": ""
+            },
+            {
+              "id": "option_004",
+              "label": "询问人是谁",
+              "note": ""
+            },
+            {
+              "id": "option_005",
+              "label": "询问方法或情况",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "例句",
+          "options": [
+            {
+              "id": "option_006",
+              "label": "Ini __? Ini bakul.",
+              "note": ""
+            },
+            {
+              "id": "option_007",
+              "label": "Anak itik itu __ ekor? Anak itik itu tiga ekor.",
+              "note": ""
+            },
+            {
+              "id": "option_008",
+              "label": "Maria di __? Maria di bilik.",
+              "note": ""
+            },
+            {
+              "id": "option_009",
+              "label": "Itu __? Itu adik saya.",
+              "note": ""
+            },
+            {
+              "id": "option_010",
+              "label": "Datuk kamu __? Datuk saya sihat.",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "口诀",
+          "options": [
+            {
+              "id": "option_011",
+              "label": "问东西，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_012",
+              "label": "问数量，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_013",
+              "label": "问地点，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_014",
+              "label": "问人物，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_015",
+              "label": "问方法情况，找 __。",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "中文意思",
+          "options": [
+            {
+              "id": "option_016",
+              "label": "什么",
+              "note": ""
+            },
+            {
+              "id": "option_017",
+              "label": "多少 / 几",
+              "note": ""
+            },
+            {
+              "id": "option_018",
+              "label": "哪里",
+              "note": ""
+            },
+            {
+              "id": "option_019",
+              "label": "谁",
+              "note": ""
+            },
+            {
+              "id": "option_020",
+              "label": "怎样 / 如何",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001",
+          "category_004": "option_016",
+          "category_002": "option_006",
+          "category_003": "option_011"
+        },
+        "entity_002": {
+          "category_001": "option_002",
+          "category_004": "option_017",
+          "category_002": "option_007",
+          "category_003": "option_012"
+        },
+        "entity_003": {
+          "category_001": "option_003",
+          "category_004": "option_018",
+          "category_002": "option_008",
+          "category_003": "option_013"
+        },
+        "entity_004": {
+          "category_001": "option_004",
+          "category_004": "option_019",
+          "category_002": "option_009",
+          "category_003": "option_014"
+        },
+        "entity_005": {
+          "category_001": "option_005",
+          "category_004": "option_020",
+          "category_002": "option_010",
+          "category_003": "option_015"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象03的例句是“Maria di __? Maria di bilik.”",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象04的中文意思是“谁”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_004::category_004"
+          ],
+          "completeAfter": [
+            "entity_004::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象02的用法是询问数量或价格。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_004",
+          "text": "对象01的用法是询问东西或动物的名称。",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_005",
+          "text": "对象05的中文意思是“怎样 / 如何”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_005::category_004"
+          ],
+          "completeAfter": [
+            "entity_005::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_006",
+          "text": "对象03的口诀是“问地点，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_007",
+          "text": "对象04的用法是询问人是谁。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_004::category_001"
+          ],
+          "completeAfter": [
+            "entity_004::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_008",
+          "text": "对象02的例句是“Anak itik itu __ ekor? Anak itik itu tiga ekor.”",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_009",
+          "text": "对象01的例句是“Ini __? Ini bakul.”",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_010",
+          "text": "对象05的例句是“Datuk kamu __? Datuk saya sihat.”",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_005::category_002"
+          ],
+          "completeAfter": [
+            "entity_005::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_011",
+          "text": "对象03的中文意思是“哪里”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_003"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_012",
+          "text": "对象04的例句是“Itu __? Itu adik saya.”",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_004::category_002"
+          ],
+          "completeAfter": [
+            "entity_004::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_013",
+          "text": "对象02的中文意思是“多少 / 几”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象01的口诀是“问东西，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象05的用法是询问方法或情况。",
+          "type": "direct",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_005::category_001"
+          ],
+          "completeAfter": [
+            "entity_005::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_016",
+          "text": "对象03的用法是询问人、动物、东西或地点在哪里。",
+          "type": "direct",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_017",
+          "text": "对象04的口诀是“问人物，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 17,
+          "relatedCells": [
+            "entity_004::category_003"
+          ],
+          "completeAfter": [
+            "entity_004::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_018",
+          "text": "对象02的口诀是“问数量，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 18,
+          "relatedCells": [
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象01的中文意思是“什么”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 19,
+          "relatedCells": [
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_003"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_020",
+          "text": "对象05的口诀是“问方法情况，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 20,
+          "relatedCells": [
+            "entity_005::category_003"
+          ],
+          "completeAfter": [
+            "entity_005::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_001"
+          ],
+          "unlockMode": "any"
+        }
+      ],
+      "knowledgeSummary": [
+        "Apa：询问东西或动物的名称，中文可记作“什么”。例句：Ini apa? Ini bakul.",
+        "Berapa：询问数量或价格，中文可记作“多少 / 几”。例句：Anak itik itu berapa ekor?",
+        "Mana：询问人、动物、东西或地点，中文可记作“哪里”。例句：Maria di mana?",
+        "Siapa：询问人，中文可记作“谁”。例句：Itu siapa?",
+        "Bagaimana：询问方法或情况，中文可记作“怎样 / 如何”。例句：Datuk kamu bagaimana?",
+        "问句词如果放在句首，常常会加上“kah”，例如 Apakah、Siapakah、Bagaimanakah。"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "第二关：时间与原因问句卡",
+      "story": "梦境城市的第二段路只剩三张卡。它们看起来很像，但问的方向不一样。",
+      "goal": "根据用法、中文意思、例句和回答内容，找出三张匿名问句卡的正确配对。",
+      "difficulty": "easy",
+      "narrative": {
+        "theme": "梦境城市深处的追问卡",
+        "opening": "小调查员走进一条发光小路。路边有三张问句卡，一张在问时间，两张在问原因。",
+        "problem": "两张问原因的卡很容易混在一起，必须看清楚例句和回答内容。",
+        "mission": "把每张卡的用法、中文意思、例句和回答内容配好，让小路继续打开。",
+        "completion": "三张卡回到原位，小路尽头的门打开了，梦境城市的问句系统完全修复。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_004",
+          "triggerAfterCorrectCells": 3,
+          "text": "小路上的灯亮起一排，卡片的轮廓更清楚了。"
+        },
+        {
+          "id": "event_005",
+          "triggerAfterCorrectCells": 7,
+          "text": "梦雾退到路边，最后几张卡片开始靠近正确位置。"
+        }
+      ],
+      "entityType": "question_word",
+      "entityLabel": "问句卡",
+      "entities": [
+        {
+          "id": "entity_006",
+          "name": "Bila",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和回答内容来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，先从线索判断问的是时间还是原因。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "看到“kah”不用怕，先看句子想问什么。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "rings",
+            "primaryColor": "#DFF3EF",
+            "secondaryColor": "#3C8D87",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_007",
+          "name": "Mengapa",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和回答内容来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，先从线索判断问的是时间还是原因。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "看到“kah”不用怕，先看句子想问什么。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "rays",
+            "primaryColor": "#FFE9DF",
+            "secondaryColor": "#B64242",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_008",
+          "name": "Kenapa",
+          "title": "匿名问句卡",
+          "description": "这张卡的名字被梦雾盖住了，需要根据用法、中文意思、例句和回答内容来确认。",
+          "records": [
+            {
+              "label": "资料状态",
+              "text": "名称暂时隐藏，先从线索判断问的是时间还是原因。"
+            },
+            {
+              "label": "调查提醒",
+              "text": "看到“kah”不用怕，先看句子想问什么。"
+            }
+          ],
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "bubbles",
+            "primaryColor": "#E9E4FF",
+            "secondaryColor": "#7060A8",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_005",
+          "label": "用法",
+          "options": [
+            {
+              "id": "option_021",
+              "label": "询问时间",
+              "note": ""
+            },
+            {
+              "id": "option_022",
+              "label": "询问原因：为什么会吵架",
+              "note": ""
+            },
+            {
+              "id": "option_023",
+              "label": "询问原因：为什么会考试失败",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_006",
+          "label": "例句",
+          "options": [
+            {
+              "id": "option_024",
+              "label": "__kah kamu sampai?",
+              "note": ""
+            },
+            {
+              "id": "option_025",
+              "label": "__kah mereka bergaduh?",
+              "note": ""
+            },
+            {
+              "id": "option_026",
+              "label": "__kah kamu gagal dalam ujian?",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_007",
+          "label": "回答内容",
+          "options": [
+            {
+              "id": "option_027",
+              "label": "问时间，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_028",
+              "label": "问原因，找 __。",
+              "note": ""
+            },
+            {
+              "id": "option_029",
+              "label": "口语问原因，找 __。",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_008",
+          "label": "中文意思",
+          "options": [
+            {
+              "id": "option_030",
+              "label": "什么时候",
+              "note": ""
+            },
+            {
+              "id": "option_031",
+              "label": "为什么（较正式）",
+              "note": ""
+            },
+            {
+              "id": "option_032",
+              "label": "为什么（较口语）",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_006": {
+          "category_005": "option_021",
+          "category_008": "option_030",
+          "category_006": "option_024",
+          "category_007": "option_027"
+        },
+        "entity_007": {
+          "category_005": "option_022",
+          "category_008": "option_031",
+          "category_006": "option_025",
+          "category_007": "option_028"
+        },
+        "entity_008": {
+          "category_005": "option_023",
+          "category_008": "option_032",
+          "category_006": "option_026",
+          "category_007": "option_029"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_201",
+          "text": "对象01的用法是询问时间。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_006::category_005"
+          ],
+          "completeAfter": [
+            "entity_006::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_202",
+          "text": "对象02的例句是“__kah mereka bergaduh?”",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_007::category_006"
+          ],
+          "completeAfter": [
+            "entity_007::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_203",
+          "text": "对象03的中文意思是“为什么（较口语）”。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_008::category_008"
+          ],
+          "completeAfter": [
+            "entity_008::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_204",
+          "text": "对象01的例句是“__kah kamu sampai?”",
+          "type": "direct",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_006::category_006"
+          ],
+          "completeAfter": [
+            "entity_006::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_005"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_205",
+          "text": "对象02的口诀是“问原因，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_007::category_007"
+          ],
+          "completeAfter": [
+            "entity_007::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_206",
+          "text": "对象03的例句是“__kah kamu gagal dalam ujian?”",
+          "type": "direct",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_008::category_006"
+          ],
+          "completeAfter": [
+            "entity_008::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_008"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_207",
+          "text": "对象01的口诀是“问时间，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_006::category_007"
+          ],
+          "completeAfter": [
+            "entity_006::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_208",
+          "text": "对象02的中文意思是“为什么（较正式）”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_007::category_008"
+          ],
+          "completeAfter": [
+            "entity_007::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_007"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_209",
+          "text": "对象03的口诀是“口语问原因，找 __。”",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_008::category_007"
+          ],
+          "completeAfter": [
+            "entity_008::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_210",
+          "text": "对象01的中文意思是“什么时候”。",
+          "type": "direct",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_006::category_008"
+          ],
+          "completeAfter": [
+            "entity_006::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_007"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_211",
+          "text": "对象02的用法是询问原因：为什么会吵架。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_007::category_005"
+          ],
+          "completeAfter": [
+            "entity_007::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_008"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_212",
+          "text": "对象03的用法是询问原因：为什么会考试失败。",
+          "type": "direct",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_008::category_005"
+          ],
+          "completeAfter": [
+            "entity_008::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_007"
+          ],
+          "unlockMode": "any"
+        }
+      ],
+      "knowledgeSummary": [
+        "Bila：询问时间，中文可记作“什么时候”。例句：Bilakah kamu sampai?",
+        "Mengapa：询问原因，中文可记作“为什么”。例句：Mengapakah mereka bergaduh?",
+        "Kenapa：询问原因，中文也可记作“为什么”。例句：Kenapakah kamu gagal dalam ujian?",
+        "Mengapa和Kenapa都可以问原因，课堂上要根据老师给的例句来练习使用。",
+        "Kata Tanya放在句首时常常加“kah”，例如 Bilakah、Mengapakah、Kenapakah。"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "资料说明Kata Tanya用于构成问句，句首使用时通常加partikel“kah”，可出现在句首、句中或句尾；资料列出Apa、Berapa、Mana、Siapa、Bagaimana、Bila、Mengapa、Kenapa的用法和例句，并提供一页填空练习。",
+    "usedItems": [
+      "Kata Tanya用于构成问句。",
+      "句首使用Kata Tanya时通常加partikel“kah”。",
+      "Kata Tanya可出现在句首、句中或句尾。",
+      "Apa用于询问东西或动物的名称。",
+      "Berapa用于询问数量。",
+      "Mana用于询问人、动物、东西或地点。",
+      "Siapa用于询问人。",
+      "Bagaimana用于询问方法或情况。",
+      "Bila用于询问时间。",
+      "Mengapa用于询问原因。",
+      "Kenapa用于询问原因。",
+      "练习例句：Ini __? Ini bakul.",
+      "练习例句：Itu __? Itu adik saya.",
+      "练习例句：Maria di __? Maria di bilik.",
+      "练习例句：Anak itik itu __ ekor? Anak itik itu tiga ekor.",
+      "练习例句：Datuk kamu __? Datuk saya sihat."
+    ],
+    "excludedItems": [
+      "图片中的卡通人物和版面位置没有作为推理属性，因为游戏不能依赖图片或页面位置作答。",
+      "部分原句中的真实问句词在“例句”类别里用“__”替换，避免选项直接泄露答案。",
+      "Mengapa和Kenapa都表示询问原因，课程资料中的基本用法相同；游戏中用不同例句和回答内容辅助区分。"
+    ],
+    "warnings": [
+      "口诀是教师化的简单中文记忆句，中文答案已用__隐藏。",
+      "Mengapa和Kenapa都可问原因，本资料包用不同例句和较正式/较口语说明区分。",
+      "已按新prompt检查：entity、category、option、clue、storyEvents ID均为全局不重复。",
+      "已按新prompt移除clue中的explanation字段，并把开局线索全部设为direct。"
+    ],
+    "validationPassed": true
+  }
+}
