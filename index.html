@@ -2934,7 +2934,7 @@
       }
     }
 
-/* 资料验证页最终规则：居中 + 只滚到进入案件按钮 */
+/* 资料验证页最终规则：居中 + 可滚到进入案件 + 保留展开/收起动画 + 减少闪黑 */
 .validation-page {
   min-height: 0;
   justify-items: stretch;
@@ -2951,6 +2951,8 @@
 
   display: grid;
   justify-items: center;
+  align-items: start;
+  align-content: start;
 
   overflow: hidden;
 }
@@ -2958,10 +2960,13 @@
 .validation-page > .shell > .panel.stack {
   width: min(1180px, 100%);
   max-width: 1180px;
-  height: 100%;
+
+  /* 重点：不要撑满整页，让背景跟着内容高度走 */
+  height: auto;
   max-height: 100%;
   min-height: 0;
 
+  align-self: start;
   justify-self: center;
   margin-inline: auto;
 
@@ -2971,13 +2976,21 @@
   justify-content: flex-start;
   gap: 10px;
 
+  /* 内容真的超过屏幕时，才在白色框里面滚动 */
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
 
-  padding-bottom: clamp(20px, 4dvh, 42px);
+  /* 底部留一点点空间，不要留太大 */
+  padding-bottom: clamp(10px, 2dvh, 18px);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background:
+    linear-gradient(180deg, rgba(199, 154, 75, 0.88), rgba(140, 59, 74, 0.88)) left top / 6px 100% no-repeat,
+    linear-gradient(180deg, #fff9ed, #f4e7c5);
 }
 
 .validation-page .validation-layout {
@@ -3016,17 +3029,61 @@
   contain: none;
 }
 
-/* 重点：报告不要无限撑开，只给它一个固定高度 */
+/* 外层只负责开合动画，不负责滚动 */
 .validation-page .validation-report-body {
+  display: block;
+  max-height: min(34dvh, 300px);
+  margin-top: 7px;
+
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  background: #fff9ed;
+  border-radius: 8px;
+
+  transition:
+    max-height 240ms ease,
+    margin-top 220ms ease,
+    opacity 180ms ease;
+
+  will-change: max-height, margin-top, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  contain: layout;
+  overscroll-behavior: contain;
+}
+
+/* 里面才负责滚动报告内容 */
+.validation-page .validation-report-body-inner {
   max-height: min(34dvh, 300px);
   overflow-y: auto;
   overflow-x: hidden;
-  overscroll-behavior: contain;
-  contain: layout paint;
+  -webkit-overflow-scrolling: touch;
+
+  background: #fff9ed;
+  opacity: 1;
+  transform: translateY(0);
+
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease;
 }
 
-.validation-page .validation-report-body-inner {
-  overflow: visible;
+/* 收起时不要 display:none，也不要 visibility:hidden，否则动画会断或闪 */
+.validation-page .validation-check-pane.validation-collapsed .validation-report-body {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+}
+
+.validation-page .validation-check-pane.validation-collapsed .validation-report-body-inner {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 .validation-page .validation-start-button {
