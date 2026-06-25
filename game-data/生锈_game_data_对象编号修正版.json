@@ -1,0 +1,1529 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "y5_sc_rust_game_data",
+  "packageTitle": "单元7 生锈：材料防护推理任务",
+  "subject": "科学",
+  "level": "Year 5",
+  "contentLanguage": "中文",
+  "description": "根据Y5科学单元7《生锈》资料制作的课堂档案推理游戏，内容涵盖生锈特征、生锈因素、防锈方法和防锈好处。",
+  "openingStory": "未来星舰“晨光号”穿过一片红褐色星尘后，船身上的材料记录突然混乱。维修机器人只知道有些铁制物品会出现锈迹，却无法判断原因和防护方法。主角收到舰长任务，带着材料扫描器进入三个区域：实验舱、维修工坊和安全警报塔。只有把匿名卡片重新配对，星舰才能继续前进。",
+  "endingStory": "全部任务完成后，晨光号的材料系统重新启动。主角确认了铁制品生锈的条件，也整理了防锈方法和防锈的好处。红褐色星尘警报解除，星舰安全驶向下一站，学生们也掌握了保护铁制品的重要知识。",
+  "settings": {
+    "defaultDifficulty": "medium",
+    "timerEnabled": false,
+    "timeLimitSeconds": 0,
+    "maxHints": 5,
+    "soundEnabled": true
+  },
+  "cases": [
+    {
+      "id": "case_001",
+      "title": "锈迹实验舱",
+      "story": "三枚匿名铁钉被送进不同的实验舱，观察记录被星尘干扰，必须重新配对。",
+      "goal": "找出每枚匿名铁钉的试管设置、接触情况、观察结果和推断重点。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "太空实验舱的锈迹谜题",
+        "opening": "主角来到星舰的材料实验舱，三枚铁钉的观察记录闪烁不定，只剩下匿名卡片。",
+        "problem": "实验舱的记录板把试管设置、观察结果和推断重点打乱，机器人无法判断哪一枚铁钉真的发生了变化。",
+        "mission": "根据线索把每枚匿名铁钉的实验设置、接触情况、观察结果和推断重点重新配对。",
+        "completion": "实验舱恢复正常，机器人重新确认铁制品在特定条件下才会出现锈迹。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_001",
+          "triggerAfterCorrectCells": 3,
+          "text": "第一排记录灯亮起，实验舱的湿度警报开始下降。"
+        },
+        {
+          "id": "event_002",
+          "triggerAfterCorrectCells": 8,
+          "text": "试管扫描器恢复一半，墙上的匿名卡片变得更清楚。"
+        }
+      ],
+      "entityType": "experiment_item",
+      "entityLabel": "匿名铁钉",
+      "entities": [
+        {
+          "id": "entity_001",
+          "name": "X铁钉",
+          "title": "匿名实验档案01",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "circle",
+            "pattern": "dots",
+            "primaryColor": "#F9D5E5",
+            "secondaryColor": "#C44569",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_002",
+          "name": "Y铁钉",
+          "title": "匿名实验档案02",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "rounded-square",
+            "pattern": "stripes",
+            "primaryColor": "#D6EAF8",
+            "secondaryColor": "#2E86C1",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_003",
+          "name": "Z铁钉",
+          "title": "匿名实验档案03",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "hexagon",
+            "pattern": "rings",
+            "primaryColor": "#D5F5E3",
+            "secondaryColor": "#239B56",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_001",
+          "label": "试管设置",
+          "options": [
+            {
+              "id": "option_001",
+              "label": "自来水",
+              "note": ""
+            },
+            {
+              "id": "option_002",
+              "label": "沸水和油层",
+              "note": ""
+            },
+            {
+              "id": "option_003",
+              "label": "干氯化钙",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_002",
+          "label": "接触情况",
+          "options": [
+            {
+              "id": "option_004",
+              "label": "接触到水和空气",
+              "note": ""
+            },
+            {
+              "id": "option_005",
+              "label": "接触到水，但没有空气",
+              "note": ""
+            },
+            {
+              "id": "option_006",
+              "label": "接触到空气，但没有水",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_003",
+          "label": "一星期后观察",
+          "options": [
+            {
+              "id": "option_007",
+              "label": "生锈了",
+              "note": ""
+            },
+            {
+              "id": "option_008",
+              "label": "没有生锈，因为没有空气",
+              "note": ""
+            },
+            {
+              "id": "option_009",
+              "label": "没有生锈，因为没有水",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_004",
+          "label": "推断重点",
+          "options": [
+            {
+              "id": "option_010",
+              "label": "水和空气同时存在，铁钉会生锈",
+              "note": ""
+            },
+            {
+              "id": "option_011",
+              "label": "油层阻止空气进入沸水里",
+              "note": ""
+            },
+            {
+              "id": "option_012",
+              "label": "干氯化钙吸收试管里的水分",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_001": {
+          "category_001": "option_001",
+          "category_002": "option_004",
+          "category_003": "option_007",
+          "category_004": "option_010"
+        },
+        "entity_002": {
+          "category_001": "option_002",
+          "category_002": "option_005",
+          "category_003": "option_008",
+          "category_004": "option_011"
+        },
+        "entity_003": {
+          "category_001": "option_003",
+          "category_002": "option_006",
+          "category_003": "option_009",
+          "category_004": "option_012"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_001",
+          "text": "对象01的试管设置是自来水。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_001::category_001"
+          ],
+          "completeAfter": [
+            "entity_001::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_002",
+          "text": "对象02的试管设置是沸水和油层。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_002::category_001"
+          ],
+          "completeAfter": [
+            "entity_002::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_003",
+          "text": "对象03的推断重点是干氯化钙吸收试管里的水分。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_003::category_004"
+          ],
+          "completeAfter": [
+            "entity_003::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_004",
+          "text": "试管设置是“自来水”的卡，和接触情况“接触到水和空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_001::category_001",
+            "entity_001::category_002"
+          ],
+          "completeAfter": [
+            "entity_001::category_001",
+            "entity_001::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_005",
+          "text": "接触情况是“接触到水和空气”的卡，和观察结果“生锈了”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_001::category_002",
+            "entity_001::category_003"
+          ],
+          "completeAfter": [
+            "entity_001::category_002",
+            "entity_001::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_006",
+          "text": "观察结果是“生锈了”的卡，和推断重点“水和空气同时存在，铁钉会生锈”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeAfter": [
+            "entity_001::category_003",
+            "entity_001::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_001::category_003"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_007",
+          "text": "试管设置是“沸水和油层”的卡，和推断重点“油层阻止空气进入沸水里”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_002::category_001",
+            "entity_002::category_004"
+          ],
+          "completeAfter": [
+            "entity_002::category_001",
+            "entity_002::category_004"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_008",
+          "text": "推断重点是“油层阻止空气进入沸水里”的卡，和接触情况“接触到水，但没有空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_002::category_004",
+            "entity_002::category_002"
+          ],
+          "completeAfter": [
+            "entity_002::category_004",
+            "entity_002::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_009",
+          "text": "接触情况是“接触到水，但没有空气”的卡，和观察结果“没有生锈，因为没有空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_002::category_002",
+            "entity_002::category_003"
+          ],
+          "completeAfter": [
+            "entity_002::category_002",
+            "entity_002::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_002::category_002"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_010",
+          "text": "推断重点是“干氯化钙吸收试管里的水分”的卡，和试管设置“干氯化钙”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_003::category_004",
+            "entity_003::category_001"
+          ],
+          "completeAfter": [
+            "entity_003::category_004",
+            "entity_003::category_001"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_004"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_011",
+          "text": "试管设置是“干氯化钙”的卡，和接触情况“接触到空气，但没有水”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_003::category_001",
+            "entity_003::category_002"
+          ],
+          "completeAfter": [
+            "entity_003::category_001",
+            "entity_003::category_002"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_001"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_012",
+          "text": "接触情况是“接触到空气，但没有水”的卡，和观察结果“没有生锈，因为没有水”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_003::category_002",
+            "entity_003::category_003"
+          ],
+          "completeAfter": [
+            "entity_003::category_002",
+            "entity_003::category_003"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_003::category_002"
+          ],
+          "unlockMode": "any"
+        }
+      ],
+      "knowledgeSummary": [
+        "铁钉接触到水和空气会生锈。",
+        "X铁钉在自来水中接触到水和空气，所以生锈了。",
+        "Y铁钉在沸水和油层中没有接触到空气，所以没有生锈。",
+        "Z铁钉旁有干氯化钙，水分被吸收，所以没有生锈。",
+        "油层可以阻止周围的空气进入沸水里。",
+        "干氯化钙可以吸收试管里的水分。"
+      ]
+    },
+    {
+      "id": "case_002",
+      "title": "防护涂层工坊",
+      "story": "星舰维修工坊里的防护方案被打乱，四张匿名方法卡等待重新修复。",
+      "goal": "找出每种匿名防护方法的常见例子、保护层特征、动作关键词和防锈原理。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "维修工坊的防锈保护层",
+        "opening": "主角进入维修工坊时，机械门上的铁片正在发出红色警报，防护方案被分散成四组匿名卡。",
+        "problem": "工坊系统只记得各种方法都要避免铁制品接触水和空气，却忘了每种方法对应的例子和保护层。",
+        "mission": "根据线索把每张匿名方法卡的例子、特征、动作和原理配对起来。",
+        "completion": "维修工坊的防护层重新启动，星舰的铁制零件暂时远离锈迹危机。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_003",
+          "triggerAfterCorrectCells": 4,
+          "text": "工坊灯光从红色转为橙色，第一批保护方案恢复显示。"
+        },
+        {
+          "id": "event_004",
+          "triggerAfterCorrectCells": 11,
+          "text": "维修机械臂重新开始工作，剩余匿名卡的边框亮了起来。"
+        }
+      ],
+      "entityType": "protection_method",
+      "entityLabel": "匿名防护方法",
+      "entities": [
+        {
+          "id": "entity_004",
+          "name": "油漆",
+          "title": "匿名防护方法01",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "shield",
+            "pattern": "waves",
+            "primaryColor": "#FCF3CF",
+            "secondaryColor": "#D4AC0D",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_005",
+          "name": "包裹塑料",
+          "title": "匿名防护方法02",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "ticket",
+            "pattern": "grid",
+            "primaryColor": "#E8DAEF",
+            "secondaryColor": "#7D3C98",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_006",
+          "name": "镀不锈金属",
+          "title": "匿名防护方法03",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "blob",
+            "pattern": "rays",
+            "primaryColor": "#FADBD8",
+            "secondaryColor": "#CB4335",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_007",
+          "name": "涂上一层油",
+          "title": "匿名防护方法04",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "circle",
+            "pattern": "bubbles",
+            "primaryColor": "#F9D5E5",
+            "secondaryColor": "#C44569",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_005",
+          "label": "常见例子",
+          "options": [
+            {
+              "id": "option_013",
+              "label": "篱笆、椅子、汽车",
+              "note": ""
+            },
+            {
+              "id": "option_014",
+              "label": "回形针、衣架、栅栏",
+              "note": ""
+            },
+            {
+              "id": "option_015",
+              "label": "罐子、锁头、水龙头",
+              "note": ""
+            },
+            {
+              "id": "option_016",
+              "label": "铁链、铁片、铁钉",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_006",
+          "label": "保护层特征",
+          "options": [
+            {
+              "id": "option_017",
+              "label": "有一层类似颜料的外层",
+              "note": ""
+            },
+            {
+              "id": "option_018",
+              "label": "外面包着塑料层",
+              "note": ""
+            },
+            {
+              "id": "option_019",
+              "label": "外层是较不容易生锈的金属",
+              "note": ""
+            },
+            {
+              "id": "option_020",
+              "label": "表面有一层油膜",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_007",
+          "label": "动作关键词",
+          "options": [
+            {
+              "id": "option_021",
+              "label": "刷上一层保护层",
+              "note": ""
+            },
+            {
+              "id": "option_022",
+              "label": "包住铁制品表面",
+              "note": ""
+            },
+            {
+              "id": "option_023",
+              "label": "镀上一层其他金属",
+              "note": ""
+            },
+            {
+              "id": "option_024",
+              "label": "涂抹油层",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_008",
+          "label": "防锈原理说明",
+          "options": [
+            {
+              "id": "option_025",
+              "label": "用涂层隔开水和空气",
+              "note": ""
+            },
+            {
+              "id": "option_026",
+              "label": "用塑料隔开水和空气",
+              "note": ""
+            },
+            {
+              "id": "option_027",
+              "label": "用不锈金属隔开水和空气",
+              "note": ""
+            },
+            {
+              "id": "option_028",
+              "label": "用油层隔开水和空气",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_004": {
+          "category_005": "option_013",
+          "category_006": "option_017",
+          "category_007": "option_021",
+          "category_008": "option_025"
+        },
+        "entity_005": {
+          "category_005": "option_014",
+          "category_006": "option_018",
+          "category_007": "option_022",
+          "category_008": "option_026"
+        },
+        "entity_006": {
+          "category_005": "option_015",
+          "category_006": "option_019",
+          "category_007": "option_023",
+          "category_008": "option_027"
+        },
+        "entity_007": {
+          "category_005": "option_016",
+          "category_006": "option_020",
+          "category_007": "option_024",
+          "category_008": "option_028"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_013",
+          "text": "对象01的常见例子是篱笆、椅子、汽车。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_004::category_005"
+          ],
+          "completeAfter": [
+            "entity_004::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_014",
+          "text": "对象02的保护层特征是外面包着塑料层。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_005::category_006"
+          ],
+          "completeAfter": [
+            "entity_005::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_015",
+          "text": "对象04的动作关键词是涂抹油层。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_007::category_007"
+          ],
+          "completeAfter": [
+            "entity_007::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_016",
+          "text": "常见例子是“篱笆、椅子、汽车”的卡，和保护层特征“有一层类似颜料的外层”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_004::category_005",
+            "entity_004::category_006"
+          ],
+          "completeAfter": [
+            "entity_004::category_005",
+            "entity_004::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_005"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_017",
+          "text": "保护层特征是“外面包着塑料层”的卡，和动作关键词“包住铁制品表面”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_005::category_006",
+            "entity_005::category_007"
+          ],
+          "completeAfter": [
+            "entity_005::category_006",
+            "entity_005::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_018",
+          "text": "动作关键词是“涂抹油层”的卡，和保护层特征“表面有一层油膜”属于同一张卡。",
+          "type": "feature",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_007::category_007",
+            "entity_007::category_006"
+          ],
+          "completeAfter": [
+            "entity_007::category_007",
+            "entity_007::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_007"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_019",
+          "text": "对象03的防锈原理说明是用不锈金属隔开水和空气。",
+          "type": "direct",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_006::category_008"
+          ],
+          "completeAfter": [
+            "entity_006::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_020",
+          "text": "保护层特征是“有一层类似颜料的外层”的卡，和动作关键词“刷上一层保护层”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_004::category_006",
+            "entity_004::category_007"
+          ],
+          "completeAfter": [
+            "entity_004::category_006",
+            "entity_004::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_021",
+          "text": "动作关键词是“包住铁制品表面”的卡，和常见例子“回形针、衣架、栅栏”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_005::category_007",
+            "entity_005::category_005"
+          ],
+          "completeAfter": [
+            "entity_005::category_007",
+            "entity_005::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_007"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_022",
+          "text": "防锈原理说明是“用不锈金属隔开水和空气”的卡，和保护层特征“外层是较不容易生锈的金属”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_006::category_008",
+            "entity_006::category_006"
+          ],
+          "completeAfter": [
+            "entity_006::category_008",
+            "entity_006::category_006"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_008"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_023",
+          "text": "保护层特征是“表面有一层油膜”的卡，和防锈原理说明“用油层隔开水和空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_007::category_006",
+            "entity_007::category_008"
+          ],
+          "completeAfter": [
+            "entity_007::category_006",
+            "entity_007::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_024",
+          "text": "对象03的动作关键词不是包住铁制品表面。",
+          "type": "negative",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_006::category_007"
+          ],
+          "completeAfter": [
+            "entity_006::category_007"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_007",
+            "entity_007::category_007"
+          ],
+          "unlockMode": "all"
+        },
+        {
+          "id": "clue_025",
+          "text": "保护层特征是“外层是较不容易生锈的金属”的卡，和常见例子“罐子、锁头、水龙头”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_006::category_006",
+            "entity_006::category_005"
+          ],
+          "completeAfter": [
+            "entity_006::category_006",
+            "entity_006::category_005"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_006::category_006"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_026",
+          "text": "常见例子是“铁链、铁片、铁钉”的卡，和防锈原理说明“用油层隔开水和空气”属于同一张卡。",
+          "type": "cross",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_007::category_005",
+            "entity_007::category_008"
+          ],
+          "completeAfter": [
+            "entity_007::category_005",
+            "entity_007::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_007::category_008"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_027",
+          "text": "动作关键词是“刷上一层保护层”的卡，和防锈原理说明“用涂层隔开水和空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_004::category_007",
+            "entity_004::category_008"
+          ],
+          "completeAfter": [
+            "entity_004::category_007",
+            "entity_004::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_004::category_007"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_028",
+          "text": "动作关键词是“包住铁制品表面”的卡，和防锈原理说明“用塑料隔开水和空气”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_005::category_007",
+            "entity_005::category_008"
+          ],
+          "completeAfter": [
+            "entity_005::category_007",
+            "entity_005::category_008"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_005::category_007"
+          ],
+          "unlockMode": "any"
+        }
+      ],
+      "knowledgeSummary": [
+        "只要能够避免铁制品与水和空气接触，铁制品就不会生锈。",
+        "防锈的方法包括油漆、包裹塑料、镀不锈金属和涂上一层油。",
+        "油漆常见于篱笆、椅子和汽车，可用涂层隔开水和空气。",
+        "包裹塑料常见于回形针、衣架和栅栏，可用塑料隔开水和空气。",
+        "镀不锈金属常见于罐子、锁头和水龙头，可用不锈金属隔开水和空气。",
+        "涂上一层油常见于铁链、铁片和铁钉，可用油层隔开水和空气。"
+      ]
+    },
+    {
+      "id": "case_003",
+      "title": "安全警报塔",
+      "story": "未来城市的安全警报塔记录了生锈带来的影响，却把对应的防锈好处弄乱。",
+      "goal": "找出每张匿名好处卡对应的生锈影响、关注重点和课堂提醒。",
+      "difficulty": "medium",
+      "narrative": {
+        "theme": "未来城市的防锈安全提醒",
+        "opening": "主角抵达未来城市的警报塔，屏幕上闪过许多关于铁制品的风险提醒。",
+        "problem": "警报塔把影响、关注重点和提醒内容分开显示，市民无法知道每个提醒真正要保护什么。",
+        "mission": "根据线索把每张匿名好处卡的影响、重点和提醒重新连起来。",
+        "completion": "警报塔恢复清晰提示，城市居民知道防锈可以让物品更安全、更耐用。"
+      },
+      "storyEvents": [
+        {
+          "id": "event_005",
+          "triggerAfterCorrectCells": 4,
+          "text": "警报声变小，塔顶出现第一圈蓝色光环。"
+        },
+        {
+          "id": "event_006",
+          "triggerAfterCorrectCells": 10,
+          "text": "城市广播恢复稳定，最后几张匿名提醒卡开始发光。"
+        }
+      ],
+      "entityType": "benefit_card",
+      "entityLabel": "匿名好处卡",
+      "entities": [
+        {
+          "id": "entity_008",
+          "name": "保持美观",
+          "title": "匿名好处档案01",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "01",
+            "shape": "rounded-square",
+            "pattern": "sparkles",
+            "primaryColor": "#D6EAF8",
+            "secondaryColor": "#2E86C1",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_009",
+          "name": "确保安全使用",
+          "title": "匿名好处档案02",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "02",
+            "shape": "hexagon",
+            "pattern": "checker",
+            "primaryColor": "#D5F5E3",
+            "secondaryColor": "#239B56",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_010",
+          "name": "避免危害健康",
+          "title": "匿名好处档案03",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "03",
+            "shape": "shield",
+            "pattern": "diagonal",
+            "primaryColor": "#FCF3CF",
+            "secondaryColor": "#D4AC0D",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_011",
+          "name": "延长使用期",
+          "title": "匿名好处档案04",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "04",
+            "shape": "ticket",
+            "pattern": "dots",
+            "primaryColor": "#E8DAEF",
+            "secondaryColor": "#7D3C98",
+            "accentColor": "#17233C"
+          }
+        },
+        {
+          "id": "entity_012",
+          "name": "节省维修费和时间",
+          "title": "匿名好处档案05",
+          "iconSpec": {
+            "mode": "generated",
+            "symbol": "05",
+            "shape": "blob",
+            "pattern": "stripes",
+            "primaryColor": "#FADBD8",
+            "secondaryColor": "#CB4335",
+            "accentColor": "#17233C"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "id": "category_009",
+          "label": "生锈影响",
+          "options": [
+            {
+              "id": "option_029",
+              "label": "失去光泽，变得不美观",
+              "note": ""
+            },
+            {
+              "id": "option_030",
+              "label": "变得破损，容易被割伤",
+              "note": ""
+            },
+            {
+              "id": "option_031",
+              "label": "割伤可能感染破伤风，误食被锈污染的食物可能造成食物中毒",
+              "note": ""
+            },
+            {
+              "id": "option_032",
+              "label": "渐渐腐朽而脆弱，失去原有功能",
+              "note": ""
+            },
+            {
+              "id": "option_033",
+              "label": "需要花费金钱和时间维修",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_010",
+          "label": "关注重点",
+          "options": [
+            {
+              "id": "option_034",
+              "label": "外观",
+              "note": ""
+            },
+            {
+              "id": "option_035",
+              "label": "使用安全",
+              "note": ""
+            },
+            {
+              "id": "option_036",
+              "label": "身体健康",
+              "note": ""
+            },
+            {
+              "id": "option_037",
+              "label": "原有功能",
+              "note": ""
+            },
+            {
+              "id": "option_038",
+              "label": "维修成本",
+              "note": ""
+            }
+          ]
+        },
+        {
+          "id": "category_011",
+          "label": "课堂提醒",
+          "options": [
+            {
+              "id": "option_039",
+              "label": "让物品看起来整洁漂亮",
+              "note": ""
+            },
+            {
+              "id": "option_040",
+              "label": "使用时减少割伤风险",
+              "note": ""
+            },
+            {
+              "id": "option_041",
+              "label": "避免破伤风或食物中毒的危险",
+              "note": ""
+            },
+            {
+              "id": "option_042",
+              "label": "让物品继续发挥原本作用",
+              "note": ""
+            },
+            {
+              "id": "option_043",
+              "label": "少花钱和时间去维修",
+              "note": ""
+            }
+          ]
+        }
+      ],
+      "solution": {
+        "entity_008": {
+          "category_009": "option_029",
+          "category_010": "option_034",
+          "category_011": "option_039"
+        },
+        "entity_009": {
+          "category_009": "option_030",
+          "category_010": "option_035",
+          "category_011": "option_040"
+        },
+        "entity_010": {
+          "category_009": "option_031",
+          "category_010": "option_036",
+          "category_011": "option_041"
+        },
+        "entity_011": {
+          "category_009": "option_032",
+          "category_010": "option_037",
+          "category_011": "option_042"
+        },
+        "entity_012": {
+          "category_009": "option_033",
+          "category_010": "option_038",
+          "category_011": "option_043"
+        }
+      },
+      "clues": [
+        {
+          "id": "clue_029",
+          "text": "对象01的生锈影响是失去光泽，变得不美观。",
+          "type": "direct",
+          "initial": true,
+          "priority": 1,
+          "relatedCells": [
+            "entity_008::category_009"
+          ],
+          "completeAfter": [
+            "entity_008::category_009"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_030",
+          "text": "对象02的关注重点是使用安全。",
+          "type": "direct",
+          "initial": true,
+          "priority": 2,
+          "relatedCells": [
+            "entity_009::category_010"
+          ],
+          "completeAfter": [
+            "entity_009::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_031",
+          "text": "对象04的生锈影响是渐渐腐朽而脆弱，失去原有功能。",
+          "type": "direct",
+          "initial": true,
+          "priority": 3,
+          "relatedCells": [
+            "entity_011::category_009"
+          ],
+          "completeAfter": [
+            "entity_011::category_009"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_032",
+          "text": "生锈影响是“失去光泽，变得不美观”的卡，和关注重点“外观”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 4,
+          "relatedCells": [
+            "entity_008::category_009",
+            "entity_008::category_010"
+          ],
+          "completeAfter": [
+            "entity_008::category_009",
+            "entity_008::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_009"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_033",
+          "text": "关注重点是“使用安全”的卡，和课堂提醒“使用时减少割伤风险”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 5,
+          "relatedCells": [
+            "entity_009::category_010",
+            "entity_009::category_011"
+          ],
+          "completeAfter": [
+            "entity_009::category_010",
+            "entity_009::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_009::category_010"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_034",
+          "text": "生锈影响提到“容易被割伤”的卡，和关注重点“使用安全”属于同一张卡。",
+          "type": "feature",
+          "initial": false,
+          "priority": 6,
+          "relatedCells": [
+            "entity_009::category_009",
+            "entity_009::category_010"
+          ],
+          "completeAfter": [
+            "entity_009::category_009",
+            "entity_009::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_009::category_010"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_035",
+          "text": "生锈影响是“渐渐腐朽而脆弱，失去原有功能”的卡，和关注重点“原有功能”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 7,
+          "relatedCells": [
+            "entity_011::category_009",
+            "entity_011::category_010"
+          ],
+          "completeAfter": [
+            "entity_011::category_009",
+            "entity_011::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_011::category_009"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_036",
+          "text": "关注重点是“原有功能”的卡，和课堂提醒“让物品继续发挥原本作用”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 8,
+          "relatedCells": [
+            "entity_011::category_010",
+            "entity_011::category_011"
+          ],
+          "completeAfter": [
+            "entity_011::category_010",
+            "entity_011::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_011::category_010"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_037",
+          "text": "对象05的生锈影响是需要花费金钱和时间维修。",
+          "type": "direct",
+          "initial": false,
+          "priority": 9,
+          "relatedCells": [
+            "entity_012::category_009"
+          ],
+          "completeAfter": [
+            "entity_012::category_009"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_011::category_010"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_038",
+          "text": "生锈影响是“需要花费金钱和时间维修”的卡，和课堂提醒“少花钱和时间去维修”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 10,
+          "relatedCells": [
+            "entity_012::category_009",
+            "entity_012::category_011"
+          ],
+          "completeAfter": [
+            "entity_012::category_009",
+            "entity_012::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_012::category_009"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_039",
+          "text": "对象03的课堂提醒是避免破伤风或食物中毒的危险。",
+          "type": "direct",
+          "initial": false,
+          "priority": 11,
+          "relatedCells": [
+            "entity_010::category_011"
+          ],
+          "completeAfter": [
+            "entity_010::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_009::category_009"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_040",
+          "text": "课堂提醒是“避免破伤风或食物中毒的危险”的卡，和关注重点“身体健康”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 12,
+          "relatedCells": [
+            "entity_010::category_011",
+            "entity_010::category_010"
+          ],
+          "completeAfter": [
+            "entity_010::category_011",
+            "entity_010::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_010::category_011"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_041",
+          "text": "对象05的关注重点不是身体健康。",
+          "type": "negative",
+          "initial": false,
+          "priority": 13,
+          "relatedCells": [
+            "entity_012::category_010"
+          ],
+          "completeAfter": [
+            "entity_012::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_010",
+            "entity_009::category_010",
+            "entity_011::category_010"
+          ],
+          "unlockMode": "all"
+        },
+        {
+          "id": "clue_042",
+          "text": "关注重点是“外观”的卡，和课堂提醒“让物品看起来整洁漂亮”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 14,
+          "relatedCells": [
+            "entity_008::category_010",
+            "entity_008::category_011"
+          ],
+          "completeAfter": [
+            "entity_008::category_010",
+            "entity_008::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_008::category_010"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_043",
+          "text": "课堂提醒是“少花钱和时间去维修”的卡，和关注重点“维修成本”属于同一张卡。",
+          "type": "cross",
+          "initial": false,
+          "priority": 15,
+          "relatedCells": [
+            "entity_012::category_011",
+            "entity_012::category_010"
+          ],
+          "completeAfter": [
+            "entity_012::category_011",
+            "entity_012::category_010"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_012::category_011"
+          ],
+          "unlockMode": "any"
+        },
+        {
+          "id": "clue_044",
+          "text": "生锈影响提到“破伤风”和“食物中毒”的卡，和课堂提醒“避免破伤风或食物中毒的危险”属于同一张卡。",
+          "type": "relation",
+          "initial": false,
+          "priority": 16,
+          "relatedCells": [
+            "entity_010::category_009",
+            "entity_010::category_011"
+          ],
+          "completeAfter": [
+            "entity_010::category_009",
+            "entity_010::category_011"
+          ],
+          "completeMode": "all",
+          "unlockAfter": [
+            "entity_010::category_011"
+          ],
+          "unlockMode": "any"
+        }
+      ],
+      "knowledgeSummary": [
+        "防锈可以让物品保持美观。",
+        "防锈可以确保安全使用，减少因破损而被割伤的风险。",
+        "防锈可以避免危害健康，例如降低破伤风和食物中毒的风险。",
+        "防锈可以延长使用期，让物品保留原有功能。",
+        "防锈可以节省维修费和时间。"
+      ]
+    }
+  ],
+  "audit": {
+    "sourceSummary": "课程资料说明：生锈物品的特征包括红褐色表层、粗糙表面和易脆；铁制品接触到水和空气会生锈；防锈方法包括油漆、包裹塑料、镀不锈金属、涂上一层油；防锈好处包括保持美观、确保安全使用、避免危害健康、延长使用期、节省维修费和时间。",
+    "usedItems": [
+      "生锈物品表面会出现红褐色粉末或碎片。",
+      "生锈物品的特征：有红褐色表层、粗糙表面、易脆。",
+      "铁制成的物品会生锈。",
+      "X铁钉接触到水和空气后生锈。",
+      "Y铁钉因没有接触空气而没有生锈。",
+      "Z铁钉因没有接触水而没有生锈。",
+      "油层可以阻止空气进入沸水。",
+      "干氯化钙可以吸收试管里的水分。",
+      "防锈方法：油漆、包裹塑料、镀不锈金属、涂上一层油。",
+      "防锈好处：保持美观、确保安全使用、避免危害健康、延长使用期、节省维修费和时间。"
+    ],
+    "excludedItems": [
+      "第5页出现的滑轮应用内容与本资料包主题“生锈”不一致，因此没有纳入游戏。"
+    ],
+    "warnings": [
+      "防锈方法案件中的保护层特征、动作关键词和原理说明根据资料中的方法与例图整理成适合小学生理解的配对属性。",
+      "部分例子来自资料图示，如篱笆、椅子、汽车、回形针、衣架、栅栏、罐子、锁头、水龙头、铁链、铁片和铁钉。",
+      "所有实体名称在游戏开始时由HTML隐藏，线索使用对象编号呈现。",
+      "间接线索比例已超过60%，并包含relation、feature、cross和negative类型。"
+    ],
+    "validationPassed": true
+  }
+}
