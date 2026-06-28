@@ -560,14 +560,18 @@
     .case-lobby-page .card-grid {
       min-height: 0;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-      grid-auto-rows: auto;
+      grid-auto-rows: minmax(0, var(--case-lobby-card-height));
       align-items: stretch;
       gap: 12px;
     }
 
+    .case-lobby-pager-slot {
+      min-height: 44px;
+    }
+
     .case-lobby-page .item-card {
       min-height: 0;
-      height: auto;
+      height: 100%;
       gap: 10px;
       padding: 15px;
       overflow: hidden;
@@ -585,25 +589,24 @@
       line-height: 1.18;
     }
 
-.case-lobby-page .item-card:not(.manual-book-card) .subtle {
-  font-size: clamp(1rem, 1.45vw, 1.18rem);
-  line-height: 1.38;
-  min-height: auto;
-  overflow: visible;
-  overscroll-behavior: contain;
-}
+    .case-lobby-page .item-card:not(.manual-book-card) .subtle {
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      line-height: 1.38;
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .case-lobby-page .item-card .notice {
       font-size: clamp(1rem, 1.45vw, 1.18rem);
       line-height: 1.28;
-    
       min-height: 42px;
       height: auto;
       padding: 7px 10px;
-    
       display: flex;
       align-items: center;
-    
-      overflow: visible;
+      overflow: hidden;
       overscroll-behavior: contain;
     }
 
@@ -620,7 +623,8 @@
 
     .manual-book-card {
       isolation: isolate;
-      min-height: 100%;
+      min-height: 0;
+      height: 100%;
       align-self: stretch;
       grid-template-rows: 1fr;
       cursor: pointer;
@@ -2283,13 +2287,13 @@
         gap: 12px;
         padding-right: 6px;
         grid-template-columns: 1fr;
-        grid-auto-rows:auto;
+        grid-auto-rows: minmax(0, var(--case-lobby-card-height));
         align-items: stretch;
       }
 
       .case-lobby-page .item-card:not(.manual-book-card) {
         min-height: 0;
-        height: auto;
+        height: 100%;
         padding: 14px;
         gap: 10px;
       }
@@ -2501,14 +2505,14 @@
 
       .case-lobby-page .card-grid {
         min-height: 0;
-        grid-auto-rows: auto;
+        grid-auto-rows: minmax(0, var(--case-lobby-card-height));
         overflow: auto;
         align-items: stretch;
       }
 
       .case-lobby-page .item-card {
         min-height: 0;
-        height: auto;
+        height: 100%;
         padding: 13px;
       }
 
@@ -3052,6 +3056,7 @@
       window.addEventListener("resize", () => {
         fitPagesToViewport();
         if (view === "game") renderGame();
+        else if (view === "cases") renderCaseLobby();
       });
       document.addEventListener("visibilitychange", () => {
         particles.paused = document.hidden;
@@ -3224,6 +3229,7 @@
         shell.append(panel);
         page.append(shell);
         app.replaceChildren(page);
+
       }
 
       function openSourceChooser() {
@@ -3999,18 +4005,21 @@
         const panel = createEl("div", "panel stack");
         panel.append(createEl("h2", "", "案件档案墙"));
 
-        const perPage = getCardPageSize();
-        const totalPages = getCaseLobbyTotalPages(cases.length, perPage);
-        casePage = clamp(casePage, 0, totalPages - 1);
         const grid = createEl("div", "card-grid case-lobby-grid");
-        renderCaseLobbyCards(grid, cases, perPage);
-        panel.append(grid, renderPager(casePage, totalPages, "页", (next) => {
-          casePage = next;
-          updateCaseLobbyAfterPageChange(grid, cases, perPage);
-        }));
+        const pagerSlot = createEl("div", "case-lobby-pager-slot");
+        panel.append(grid, pagerSlot);
         shell.append(panel);
         page.append(shell);
         app.replaceChildren(page);
+
+        const perPage = getCardPageSize(grid);
+        const totalPages = getCaseLobbyTotalPages(cases.length, perPage);
+        casePage = clamp(casePage, 0, totalPages - 1);
+        renderCaseLobbyCards(grid, cases, perPage);
+        pagerSlot.replaceWith(renderPager(casePage, totalPages, "页", (next) => {
+          casePage = next;
+          updateCaseLobbyAfterPageChange(grid, cases, perPage);
+        }));
       }
 
       function updateCaseLobbyAfterPageChange(grid, cases, perPage) {
@@ -4047,13 +4056,13 @@
       }
 
       function getCaseLobbyTotalPages(totalCases, perPage) {
-        const firstPageCases = Math.max(1, perPage - 1);
+        const firstPageCases = Math.max(0, perPage - 1);
         if (totalCases <= firstPageCases) return 1;
         return 1 + Math.ceil((totalCases - firstPageCases) / perPage);
       }
 
       function getCaseLobbySliceRange(pageIndex, totalCases, perPage) {
-        const firstPageCases = Math.max(1, perPage - 1);
+        const firstPageCases = Math.max(0, perPage - 1);
         if (pageIndex <= 0) return { start: 0, end: Math.min(totalCases, firstPageCases) };
         const start = firstPageCases + (pageIndex - 1) * perPage;
         return { start, end: Math.min(totalCases, start + perPage) };
@@ -5606,13 +5615,19 @@
         return getEntityLabel(currentCase) + String(index + 1).padStart(2, "0");
       }
 
-      function getCardPageSize() {
+      function getCardPageSize(grid) {
         const w = window.innerWidth;
-        const h = window.innerHeight;
-        if (w < 520) return 1;
-        if (w < 700 || h < 650) return 2;
-        if (w < 1100) return h < 850 ? 2 : 3;
-        return 6;
+        const narrow = w < 760;
+        const gap = 12;
+        const gridWidth = Math.max(1, Math.floor(grid && grid.clientWidth ? grid.clientWidth : w));
+        const gridHeight = Math.max(1, Math.floor(grid && grid.clientHeight ? grid.clientHeight : window.innerHeight * 0.48));
+        const minColumn = narrow ? gridWidth : 280;
+        const columns = Math.max(1, Math.floor((gridWidth + gap) / (minColumn + gap)));
+        const preferredHeight = clamp(Math.round(window.innerHeight * (narrow ? 0.34 : 0.28)), narrow ? 230 : 220, narrow ? 320 : 300);
+        const rows = Math.max(1, Math.floor((gridHeight + gap) / (preferredHeight + gap)));
+        const cardHeight = Math.max(190, Math.floor((gridHeight - gap * (rows - 1)) / rows));
+        if (grid) grid.style.setProperty("--case-lobby-card-height", cardHeight + "px");
+        return Math.max(1, columns * rows);
       }
 
       function getCluePageSize() {
