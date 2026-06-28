@@ -736,8 +736,14 @@
     .validation-page .shell {
       width: min(1180px, 100%);
       max-width: 1180px;
+      height: 100%;
+      min-height: 0;
       justify-self: center;
       margin-inline: auto;
+      display: grid;
+      justify-items: center;
+      align-items: start;
+      align-content: start;
     }
 
     .validation-page .panel.stack {
@@ -745,9 +751,14 @@
       max-width: 1180px;
       justify-self: center;
       margin-inline: auto;
-      grid-template-rows: auto auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
       height: 100%;
       max-height: 100%;
+      min-height: 0;
       align-content: start;
       justify-items: center;
       padding-bottom: clamp(28px, 5dvh, 56px);
@@ -764,6 +775,7 @@
       max-width: 1120px;
       justify-self: center;
       margin-inline: auto;
+      flex: 0 0 auto;
       transform: none;
       box-sizing: border-box;
       min-height: max-content;
@@ -798,6 +810,7 @@
       grid-template-columns: minmax(0, 1fr);
       align-content: start;
       gap: 10px;
+      text-align: center;
     }
 
     .validation-data-pane .item-card,
@@ -821,6 +834,15 @@
       width: 100%;
       flex: 0 0 auto;
       padding: 8px 0;
+    }
+
+    .validation-start-button {
+      width: min(560px, 100%);
+      min-height: 62px;
+      flex: 0 0 auto;
+      font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+      font-weight: 1000;
+      scroll-margin-bottom: 24px;
     }
 
     .validation-data-pane .item-card {
@@ -941,9 +963,19 @@
       gap: 6px;
     }
 
+    .intro-meta-compact {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .intro-page .result-cell {
       min-height: 74px;
       padding: 7px;
+    }
+
+    .intro-meta-compact .result-cell {
+      min-height: 48px;
+      padding: 5px;
+      text-align: center;
     }
 
     .intro-page .result-label {
@@ -954,9 +986,37 @@
       font-size: clamp(1.2rem, 1.7vw, 1.42rem);
     }
 
+    .intro-card-labels {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .intro-card-labels .pill {
+      min-height: 28px;
+      padding: 3px 7px;
+      font-size: clamp(0.9rem, 1.25vw, 1.08rem);
+      line-height: 1.08;
+    }
+
+    .intro-narrative-text {
+      font-size: clamp(1.2rem, 1.9vw, 1.48rem);
+      line-height: 1.42;
+    }
+
+    .package-story-page .intro-narrative-text {
+      font-size: clamp(1.26rem, 2.08vw, 1.62rem);
+      line-height: 1.46;
+    }
+
     .intro-page .actions button {
       min-height: 50px;
       font-size: clamp(0.98rem, 1.45vw, 1.16rem);
+    }
+
+    .intro-pager .page-label {
+      min-width: 84px;
     }
 
     .pager {
@@ -2021,91 +2081,6 @@
       width: 100%;
     }
 
-    .validation-page .panel.stack {
-      justify-content: start;
-      align-content: start;
-      justify-items: center;
-    }
-
-   k-pane,
-    .validation-data-pane {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    .validation-check-pane.validation-collapsed .validation-report-body {
-      max-height: 0;
-    }
-
-    .validation-list {
-      max-height: none;
-      overflow: visible;
-      overscroll-behavior: contain;
-    }
-
-    .validation-data-pane {
-      text-align: center;
-    }
-
-    .validation-data-pane .actions {
-      justify-content: center;
-      width: 100%;
-    }
-
-    .validation-start-button {
-      width: min(560px, 100%);
-      min-height: 62px;
-      flex: 0 0 auto;
-      font-size: clamp(1.08rem, 2.2vw, 1.45rem);
-      font-weight: 1000;
-    }
-
-    .intro-meta-compact {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .package-story-page .intro-meta-compact {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .package-story-page .intro-description-cell {
-      grid-column: 1 / -1;
-    }
-
-    .intro-meta-compact .result-cell {
-      min-height: 48px;
-      padding: 5px;
-      text-align: center;
-    }
-
-    .intro-card-labels {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .intro-card-labels .pill {
-      min-height: 28px;
-      padding: 3px 7px;
-      font-size: clamp(0.9rem, 1.25vw, 1.08rem);
-      line-height: 1.08;
-    }
-
-    .intro-narrative-text {
-      font-size: clamp(1.2rem, 1.9vw, 1.48rem) !important;
-      line-height: 1.42 !important;
-    }
-
-    .package-story-page .intro-narrative-text {
-      font-size: clamp(1.26rem, 2.08vw, 1.62rem) !important;
-      line-height: 1.46 !important;
-    }
-
-    .intro-pager .page-label {
-      min-width: 84px;
-    }
-
     .failure-card {
       width: min(560px, 100%);
       justify-self: center;
@@ -2514,60 +2489,14 @@
         line-height: 1.18;
       }
 
-      .validation-page .panel.stack,
       .case-lobby-page .panel.stack,
       .intro-page .panel.stack {
         min-height: 0;
         overflow: hidden;
       }
 
-      .validation-page .panel.stack {
-        width: 100%;
-        max-width: 1180px;
-        justify-self: center;
-        margin-inline: auto;
-        overflow-y: auto;
-        overflow-x: hidden;
-        touch-action: pan-y;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .validation-page .shell {
-        width: min(1180px, 100%);
-        max-width: 1180px;
-        justify-self: center;
-        margin-inline: auto;
-      }
-
-      .validation-page .validation-layout {
-        height: auto;
-        min-height: 0;
-        overflow: visible;
-      }
-
-      .validation-page .two-col {
-        min-height: 0;
-        overflow: hidden;
-      }
-
-      .validation-check-pane,
-      .validation-data-pane {
-        min-height: 0;
-        padding-bottom: 8px;
-      }
-
-      .validation-check-pane {
-        overflow: hidden;
-      }
-
-      .validation-data-pane {
-        overflow: visible;
-      }
-
       .validation-report-body {
         max-height: min(36dvh, 330px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
       }
 
       .case-lobby-page .card-grid {
@@ -2812,59 +2741,9 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .validation-page .panel.stack {
-        width: 100%;
-        max-width: 1180px;
-        justify-self: center;
-        margin-inline: auto;
-        grid-template-rows: auto auto;
-        align-content: start;
-        justify-items: center;
-        padding-bottom: clamp(28px, 5dvh, 56px);
-        overflow-x: hidden;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        scrollbar-gutter: auto;
-      }
-
-      .validation-page .shell {
-        width: min(1180px, 100%);
-        max-width: 1180px;
-        justify-self: center;
-        margin-inline: auto;
-      }
-
-      .validation-page .two-col.validation-layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        height: auto;
-        min-height: 0;
-        overflow: visible;
-      }
-
       .validation-page .validation-layout {
         width: 100%;
-        max-width: 1120px;
-        margin-inline: auto;
         display: block;
-        height: auto;
-        min-height: max-content;
-        overflow: visible;
-      }
-
-      .validation-check-pane,
-      .validation-data-pane {
-        position: relative;
-        z-index: auto;
-        padding-bottom: 0;
-      }
-
-      .validation-check-pane {
-        overflow: hidden;
-      }
-
-      .validation-data-pane {
-        overflow: visible;
       }
 
       .validation-check-pane {
@@ -2900,16 +2779,10 @@
 
       .validation-report-body {
         max-height: min(38dvh, 320px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
       }
 
       .validation-data-pane .actions {
         align-items: stretch;
-        justify-content: center;
-        width: 100%;
-        flex: 0 0 auto;
-        padding: 8px 0;
       }
 
       .validation-data-pane .actions button {
@@ -2918,12 +2791,6 @@
 
       .validation-start-button {
         flex: 0 0 auto;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .validation-page .validation-layout {
-        width: 100%;
       }
     }
 
@@ -2948,162 +2815,6 @@
         min-height: 38px;
       }
     }
-
-/* 资料验证页最终规则：居中 + 可滚到进入案件 + 保留展开/收起动画 + 减少闪黑 */
-.validation-page {
-  min-height: 0;
-  justify-items: stretch;
-  overflow: hidden;
-}
-
-.validation-page > .shell {
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  min-height: 0;
-  justify-self: stretch;
-  margin-inline: 0;
-
-  display: grid;
-  justify-items: center;
-  align-items: start;
-  align-content: start;
-
-  overflow: hidden;
-}
-
-.validation-page > .shell > .panel.stack {
-  width: min(1180px, 100%);
-  max-width: 1180px;
-
-  /* 重点：不要撑满整页，让背景跟着内容高度走 */
-  height: auto;
-  max-height: 100%;
-  min-height: 0;
-
-  align-self: start;
-  justify-self: center;
-  margin-inline: auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-
-  /* 内容真的超过屏幕时，才在白色框里面滚动 */
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-
-  /* 底部留一点点空间，不要留太大 */
-  padding-bottom: clamp(10px, 2dvh, 18px);
-
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  background:
-    linear-gradient(180deg, rgba(199, 154, 75, 0.88), rgba(140, 59, 74, 0.88)) left top / 6px 100% no-repeat,
-    linear-gradient(180deg, #fff9ed, #f4e7c5);
-}
-
-.validation-page .validation-layout {
-  width: min(1120px, 100%);
-  max-width: 1120px;
-  min-height: auto;
-  height: auto;
-
-  flex: 0 0 auto;
-  margin-inline: auto;
-
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 12px;
-
-  justify-items: stretch;
-  align-content: start;
-
-  overflow: visible;
-}
-
-.validation-page .two-col.validation-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.validation-page .validation-check-pane,
-.validation-page .validation-data-pane {
-  width: 100%;
-  max-width: 100%;
-  min-height: auto;
-  height: auto;
-  flex: 0 0 auto;
-  justify-self: center;
-  overflow: visible;
-  contain: none;
-}
-
-/* 外层只负责开合动画，不负责滚动 */
-.validation-page .validation-report-body {
-  display: block;
-  max-height: min(34dvh, 300px);
-  margin-top: 7px;
-
-  overflow: hidden;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-
-  background: #fff9ed;
-  border-radius: 8px;
-
-  transition:
-    max-height 240ms ease,
-    margin-top 220ms ease,
-    opacity 180ms ease;
-
-  will-change: max-height, margin-top, opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-
-  contain: layout;
-  overscroll-behavior: contain;
-}
-
-/* 里面才负责滚动报告内容 */
-.validation-page .validation-report-body-inner {
-  max-height: min(34dvh, 300px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-
-  background: #fff9ed;
-  opacity: 1;
-  transform: translateY(0);
-
-  transition:
-    opacity 180ms ease,
-    transform 220ms ease;
-}
-
-/* 收起时不要 display:none，也不要 visibility:hidden，否则动画会断或闪 */
-.validation-page .validation-check-pane.validation-collapsed .validation-report-body {
-  max-height: 0;
-  margin-top: 0;
-  opacity: 0;
-  visibility: visible;
-  pointer-events: none;
-}
-
-.validation-page .validation-check-pane.validation-collapsed .validation-report-body-inner {
-  opacity: 0;
-  transform: translateY(-6px);
-}
-
-.validation-page .validation-start-button {
-  scroll-margin-bottom: 24px;
-}
 
     @media (prefers-reduced-motion: reduce) {
       *,
