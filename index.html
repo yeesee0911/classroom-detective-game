@@ -1144,6 +1144,10 @@
       word-break: break-word;
     }
 
+    .game-page {
+      grid-template-rows: minmax(0, 1fr);
+    }
+
     .game-layout {
       height: 100%;
       min-height: 0;
@@ -1169,6 +1173,57 @@
       gap: 8px;
       overflow: auto;
       overscroll-behavior: contain;
+    }
+
+    .archive-game-head {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.65fr) auto;
+      gap: 8px;
+      align-items: center;
+      min-height: 36px;
+      margin-bottom: 0;
+    }
+
+    .archive-title-block {
+      min-width: 0;
+      display: grid;
+      gap: 1px;
+      align-content: center;
+    }
+
+    .archive-case-title {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1rem, 1.45vw, 1.28rem);
+      line-height: 1.08;
+      font-weight: 950;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .archive-game-status {
+      min-width: 0;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: clamp(0.72rem, 0.95vw, 0.88rem);
+      line-height: 1.16;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .archive-game-actions {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .archive-game-actions button {
+      min-height: 34px;
+      padding: 5px 9px;
+      line-height: 1.08;
+      white-space: nowrap;
     }
 
     .archive-grid {
@@ -1358,6 +1413,17 @@
       position: relative;
       overflow: hidden;
       z-index: 4;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    .archive-panel .section-head {
+      margin-bottom: 0;
+    }
+
+    .archive-panel .table-wrap {
+      height: 100%;
     }
 
     .answer-cell-wrap {
@@ -2338,34 +2404,35 @@
         padding: 5px;
       }
 
-      .game-page .topbar {
+      .archive-game-head {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
         min-height: 0;
-        padding: 6px 8px;
-        gap: 5px;
       }
 
-      .game-page .topbar h1 {
-        font-size: clamp(1.28rem, 4.8vw, 1.72rem);
-        line-height: 1.08;
+      .archive-title-block {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .game-page .topbar .subtle {
-        font-size: clamp(0.78rem, 2.6vw, 0.95rem);
-        line-height: 1.18;
+      .archive-case-title {
+        font-size: clamp(1.05rem, 3.4vw, 1.36rem);
       }
 
-      .game-page .topbar .actions.end {
+      .archive-game-status {
+        font-size: clamp(0.72rem, 2.35vw, 0.9rem);
+      }
+
+      .archive-game-actions {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
+        gap: 5px;
         justify-content: stretch;
       }
 
-      .game-page .topbar .actions.end button {
-        min-height: 34px;
-        padding: 5px 6px;
+      .archive-game-actions button {
+        min-height: 32px;
+        padding: 4px 5px;
         line-height: 1.08;
-        flex: 0 1 auto;
       }
 
       .clue-panel .section-head {
@@ -2645,6 +2712,32 @@
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
+      }
+    }
+
+    @media (min-width: 761px) and (max-width: 1024px) {
+      .archive-game-head {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.1fr) auto;
+        gap: 6px;
+        min-height: 34px;
+      }
+
+      .archive-case-title {
+        font-size: clamp(1rem, 2.2vw, 1.26rem);
+      }
+
+      .archive-game-status {
+        font-size: clamp(0.7rem, 1.45vw, 0.88rem);
+        line-height: 1.12;
+      }
+
+      .archive-game-actions {
+        gap: 5px;
+      }
+
+      .archive-game-actions button {
+        min-height: 32px;
+        padding: 4px 7px;
       }
     }
 
@@ -4432,15 +4525,6 @@
           return;
         }
         const page = createEl("section", "page game-page");
-        page.append(renderTopbar(currentCase.title || "调查中", getGameSubtitle(), [
-          button("提示", "secondary", useHint, { disabled: progress.completed || progress.failed }),
-          soundToggle(),
-          button("案件大厅", "ghost", () => {
-            saveProgress();
-            renderCaseLobby();
-          })
-        ]));
-
         const shell = createEl("div", "shell");
         const layout = createEl("div", "game-layout");
         layout.append(renderArchiveTable(), renderClueArea());
@@ -4478,8 +4562,8 @@
       }
 
       function updateGameTopbar() {
-        const top = app.querySelector(".topbar .subtle");
-        if (top) top.textContent = getGameSubtitle();
+        const status = app.querySelector(".archive-game-status");
+        if (status) status.textContent = getGameSubtitle();
       }
 
       function captureClueScroll() {
@@ -4739,10 +4823,7 @@
         clearInterval(timerHandle);
         timerHandle = window.setInterval(() => {
           if (view === "game" && currentCase && progress && !progress.completed && !progress.failed) {
-            const top = app.querySelector(".topbar .subtle");
-            if (top) {
-              top.textContent = getGameSubtitle();
-            }
+            updateGameTopbar();
           }
         }, 1000);
       }
@@ -4751,9 +4832,20 @@
         const compactArchive = isCompactArchiveMode();
         const panel = createEl("div", compactArchive ? "panel archive-panel archive-scroll-mode" : "panel archive-panel");
         const entityLabel = getEntityLabel(currentCase);
-        const head = createEl("div", "section-head");
-        head.append(createEl("h2", "", "调查记录板：" + entityLabel + "档案"));
-        head.append(createEl("div", "actions end"));
+        const head = createEl("div", "section-head archive-game-head");
+        const titleBlock = createEl("div", "archive-title-block");
+        titleBlock.append(createEl("h2", "archive-case-title", currentCase.title || "调查中"));
+        const status = createEl("p", "archive-game-status", getGameSubtitle());
+        const actions = createEl("div", "actions end archive-game-actions");
+        actions.append(
+          button("提示", "secondary", useHint, { disabled: progress.completed || progress.failed }),
+          soundToggle(),
+          button("案件大厅", "ghost", () => {
+            saveProgress();
+            renderCaseLobby();
+          })
+        );
+        head.append(titleBlock, status, actions);
 
         const tableWrap = createEl("div", "table-wrap");
         tableWrap.addEventListener("scroll", () => requestAnimationFrame(positionInlinePanels));
